@@ -22,7 +22,7 @@ public class DbApplicationTests
     @Rollback
     public void findByName() throws Exception
     {
-        testMapper.insert("BBB", 12);
+        // testMapper.insert("BBB", 12);
         com.pyteam.db.entity.Test u = testMapper.findByName("BBB");
         Assert.assertEquals(12, u.getAge().intValue());
     }

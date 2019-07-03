@@ -1,5 +1,6 @@
 package com.pyteam.db.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -9,7 +10,11 @@ import lombok.Data;
 @Data
 public class Test
 {
-    private Integer id;
+    private Integer aab01;
+
+    @ApiModelProperty(value = "姓名")
     private String name;
+
+    @ApiModelProperty(value = "年龄")
     private Integer age;
 }
