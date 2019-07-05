@@ -103,7 +103,7 @@ easy-trade
 
 3.**大括号风格**
 
-![1561965449440](./document/img/1561965449440.png)
+![](./document/img/1561965449440.png)
 
 ctrl + alt + L 格式化
 
