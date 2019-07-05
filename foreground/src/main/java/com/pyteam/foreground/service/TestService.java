@@ -1,7 +1,5 @@
 package com.pyteam.foreground.service;
 
-import com.pyteam.db.entity.Test;
-import com.pyteam.db.mapper.TestMapper;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,17 +9,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class TestService
 {
-    private final TestMapper testMapper;
-
-    public TestService(TestMapper testMapper)
-    {
-        this.testMapper = testMapper;
-    }
-
-    /**
-     * 根据名字查找
-     */
-    public Test selectByName(String name) {
-        return testMapper.findByName(name);
-    }
+    // private final TestMapper testMapper;
+    //
+    // public TestService(TestMapper testMapper)
+    // {
+    //     this.testMapper = testMapper;
+    // }
+    //
+    // /**
+    //  * 根据名字查找
+    //  */
+    // public Test selectByName(String name) {
+    //     return testMapper.findByName(name);
+    // }
 }

@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = {"com.pyteam.db"})
-@MapperScan("com.pyteam.db.mapper")
+@MapperScan({"com.pyteam.db.mapper", "com.pyteam.db.mbg.mapper"})
 public class DbApplication
 {
     public static void main(String[] args)

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pyteam.db.mbg.mapper.Ad06Mapper">
+  <resultMap id="BaseResultMap" type="com.pyteam.db.mbg.entity.Ad06">
+    <id column="aad601" jdbcType="INTEGER" property="aad601" />
+    <result column="aad201" jdbcType="INTEGER" property="aad201" />
+    <result column="aab101" jdbcType="INTEGER" property="aab101" />
+    <result column="aad602" jdbcType="DECIMAL" property="aad602" />
+    <result column="aad603" jdbcType="CHAR" property="aad603" />
+    <result column="aad604" jdbcType="TIMESTAMP" property="aad604" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    aad601, aad201, aab101, aad602, aad603, aad604
+  </sql>
+  <select id="selectByExample" parameterType="com.pyteam.db.mbg.entity.Ad06Example" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ad06
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ad06
+    where aad601 = #{aad601,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ad06
+    where aad601 = #{aad601,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pyteam.db.mbg.entity.Ad06Example">
+    delete from ad06
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pyteam.db.mbg.entity.Ad06">
+    <selectKey keyProperty="aad601" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ad06 (aad201, aab101, aad602, 
+      aad603, aad604)
+    values (#{aad201,jdbcType=INTEGER}, #{aab101,jdbcType=INTEGER}, #{aad602,jdbcType=DECIMAL}, 
+      #{aad603,jdbcType=CHAR}, #{aad604,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pyteam.db.mbg.entity.Ad06">
+    <selectKey keyProperty="aad601" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ad06
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aad201 != null">
+        aad201,
+      </if>
+      <if test="aab101 != null">
+        aab101,
+      </if>
+      <if test="aad602 != null">
+        aad602,
+      </if>
+      <if test="aad603 != null">
+        aad603,
+      </if>
+      <if test="aad604 != null">
+        aad604,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aad201 != null">
+        #{aad201,jdbcType=INTEGER},
+      </if>
+      <if test="aab101 != null">
+        #{aab101,jdbcType=INTEGER},
+      </if>
+      <if test="aad602 != null">
+        #{aad602,jdbcType=DECIMAL},
+      </if>
+      <if test="aad603 != null">
+        #{aad603,jdbcType=CHAR},
+      </if>
+      <if test="aad604 != null">
+        #{aad604,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pyteam.db.mbg.entity.Ad06Example" resultType="java.lang.Integer">
+    select count(*) from ad06
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ad06
+    <set>
+      <if test="record.aad601 != null">
+        aad601 = #{record.aad601,jdbcType=INTEGER},
+      </if>
+      <if test="record.aad201 != null">
+        aad201 = #{record.aad201,jdbcType=INTEGER},
+      </if>
+      <if test="record.aab101 != null">
+        aab101 = #{record.aab101,jdbcType=INTEGER},
+      </if>
+      <if test="record.aad602 != null">
+        aad602 = #{record.aad602,jdbcType=DECIMAL},
+      </if>
+      <if test="record.aad603 != null">
+        aad603 = #{record.aad603,jdbcType=CHAR},
+      </if>
+      <if test="record.aad604 != null">
+        aad604 = #{record.aad604,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ad06
+    set aad601 = #{record.aad601,jdbcType=INTEGER},
+      aad201 = #{record.aad201,jdbcType=INTEGER},
+      aab101 = #{record.aab101,jdbcType=INTEGER},
+      aad602 = #{record.aad602,jdbcType=DECIMAL},
+      aad603 = #{record.aad603,jdbcType=CHAR},
+      aad604 = #{record.aad604,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pyteam.db.mbg.entity.Ad06">
+    update ad06
+    <set>
+      <if test="aad201 != null">
+        aad201 = #{aad201,jdbcType=INTEGER},
+      </if>
+      <if test="aab101 != null">
+        aab101 = #{aab101,jdbcType=INTEGER},
+      </if>
+      <if test="aad602 != null">
+        aad602 = #{aad602,jdbcType=DECIMAL},
+      </if>
+      <if test="aad603 != null">
+        aad603 = #{aad603,jdbcType=CHAR},
+      </if>
+      <if test="aad604 != null">
+        aad604 = #{aad604,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where aad601 = #{aad601,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pyteam.db.mbg.entity.Ad06">
+    update ad06
+    set aad201 = #{aad201,jdbcType=INTEGER},
+      aab101 = #{aab101,jdbcType=INTEGER},
+      aad602 = #{aad602,jdbcType=DECIMAL},
+      aad603 = #{aad603,jdbcType=CHAR},
+      aad604 = #{aad604,jdbcType=TIMESTAMP}
+    where aad601 = #{aad601,jdbcType=INTEGER}
+  </update>
+</mapper>

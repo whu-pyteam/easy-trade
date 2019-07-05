@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pyteam.db.mbg.mapper.Ab06Mapper">
+  <resultMap id="BaseResultMap" type="com.pyteam.db.mbg.entity.Ab06">
+    <id column="aab601" jdbcType="INTEGER" property="aab601" />
+    <result column="baab101" jdbcType="INTEGER" property="baab101" />
+    <result column="eaab101" jdbcType="INTEGER" property="eaab101" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    aab601, baab101, eaab101
+  </sql>
+  <select id="selectByExample" parameterType="com.pyteam.db.mbg.entity.Ab06Example" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ab06
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ab06
+    where aab601 = #{aab601,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ab06
+    where aab601 = #{aab601,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pyteam.db.mbg.entity.Ab06Example">
+    delete from ab06
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pyteam.db.mbg.entity.Ab06">
+    <selectKey keyProperty="aab601" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ab06 (baab101, eaab101)
+    values (#{baab101,jdbcType=INTEGER}, #{eaab101,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pyteam.db.mbg.entity.Ab06">
+    <selectKey keyProperty="aab601" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ab06
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="baab101 != null">
+        baab101,
+      </if>
+      <if test="eaab101 != null">
+        eaab101,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="baab101 != null">
+        #{baab101,jdbcType=INTEGER},
+      </if>
+      <if test="eaab101 != null">
+        #{eaab101,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pyteam.db.mbg.entity.Ab06Example" resultType="java.lang.Integer">
+    select count(*) from ab06
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ab06
+    <set>
+      <if test="record.aab601 != null">
+        aab601 = #{record.aab601,jdbcType=INTEGER},
+      </if>
+      <if test="record.baab101 != null">
+        baab101 = #{record.baab101,jdbcType=INTEGER},
+      </if>
+      <if test="record.eaab101 != null">
+        eaab101 = #{record.eaab101,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ab06
+    set aab601 = #{record.aab601,jdbcType=INTEGER},
+      baab101 = #{record.baab101,jdbcType=INTEGER},
+      eaab101 = #{record.eaab101,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pyteam.db.mbg.entity.Ab06">
+    update ab06
+    <set>
+      <if test="baab101 != null">
+        baab101 = #{baab101,jdbcType=INTEGER},
+      </if>
+      <if test="eaab101 != null">
+        eaab101 = #{eaab101,jdbcType=INTEGER},
+      </if>
+    </set>
+    where aab601 = #{aab601,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pyteam.db.mbg.entity.Ab06">
+    update ab06
+    set baab101 = #{baab101,jdbcType=INTEGER},
+      eaab101 = #{eaab101,jdbcType=INTEGER}
+    where aab601 = #{aab601,jdbcType=INTEGER}
+  </update>
+</mapper>

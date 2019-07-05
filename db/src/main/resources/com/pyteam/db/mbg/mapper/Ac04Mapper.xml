@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pyteam.db.mbg.mapper.Ac04Mapper">
+  <resultMap id="BaseResultMap" type="com.pyteam.db.mbg.entity.Ac04">
+    <id column="aac401" jdbcType="INTEGER" property="aac401" />
+    <result column="aac301" jdbcType="INTEGER" property="aac301" />
+    <result column="aac101" jdbcType="INTEGER" property="aac101" />
+    <result column="aac402" jdbcType="TIMESTAMP" property="aac402" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    aac401, aac301, aac101, aac402
+  </sql>
+  <select id="selectByExample" parameterType="com.pyteam.db.mbg.entity.Ac04Example" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ac04
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ac04
+    where aac401 = #{aac401,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ac04
+    where aac401 = #{aac401,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pyteam.db.mbg.entity.Ac04Example">
+    delete from ac04
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pyteam.db.mbg.entity.Ac04">
+    <selectKey keyProperty="aac401" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ac04 (aac301, aac101, aac402
+      )
+    values (#{aac301,jdbcType=INTEGER}, #{aac101,jdbcType=INTEGER}, #{aac402,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pyteam.db.mbg.entity.Ac04">
+    <selectKey keyProperty="aac401" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ac04
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aac301 != null">
+        aac301,
+      </if>
+      <if test="aac101 != null">
+        aac101,
+      </if>
+      <if test="aac402 != null">
+        aac402,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aac301 != null">
+        #{aac301,jdbcType=INTEGER},
+      </if>
+      <if test="aac101 != null">
+        #{aac101,jdbcType=INTEGER},
+      </if>
+      <if test="aac402 != null">
+        #{aac402,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pyteam.db.mbg.entity.Ac04Example" resultType="java.lang.Integer">
+    select count(*) from ac04
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ac04
+    <set>
+      <if test="record.aac401 != null">
+        aac401 = #{record.aac401,jdbcType=INTEGER},
+      </if>
+      <if test="record.aac301 != null">
+        aac301 = #{record.aac301,jdbcType=INTEGER},
+      </if>
+      <if test="record.aac101 != null">
+        aac101 = #{record.aac101,jdbcType=INTEGER},
+      </if>
+      <if test="record.aac402 != null">
+        aac402 = #{record.aac402,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ac04
+    set aac401 = #{record.aac401,jdbcType=INTEGER},
+      aac301 = #{record.aac301,jdbcType=INTEGER},
+      aac101 = #{record.aac101,jdbcType=INTEGER},
+      aac402 = #{record.aac402,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pyteam.db.mbg.entity.Ac04">
+    update ac04
+    <set>
+      <if test="aac301 != null">
+        aac301 = #{aac301,jdbcType=INTEGER},
+      </if>
+      <if test="aac101 != null">
+        aac101 = #{aac101,jdbcType=INTEGER},
+      </if>
+      <if test="aac402 != null">
+        aac402 = #{aac402,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where aac401 = #{aac401,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pyteam.db.mbg.entity.Ac04">
+    update ac04
+    set aac301 = #{aac301,jdbcType=INTEGER},
+      aac101 = #{aac101,jdbcType=INTEGER},
+      aac402 = #{aac402,jdbcType=TIMESTAMP}
+    where aac401 = #{aac401,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,6 +1,5 @@
 package com.pyteam.db.mbg.entity;
 
-import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 public class Test implements Serializable {

@@ -13,7 +13,7 @@
 
 - [x] 整合 Swagger
     文档api地址: 
-    - http://localhost:9527/doc.html 
+    - http://localhost:8080/doc.html 
     - http://localhost:9527/doc.html
 
 
@@ -31,8 +31,11 @@ easy-trade
   |- background  			// 后台管理业务处理模块
   |- db					   
   |   |_com.pyteam.db
-  |   |            |_service
-  |   |            |_dao
+  |   |            |_entity             //自定义实体类
+  |   |            |_mapper             //自定义mapper接口
+  |   |            |_mbg
+  |   |               |_entity          //mbg生成的实体类
+  |   |               |_mapper          //mbg生成的mapper接口
   |   |_resource
   |         |_com.pyteam.db.mbg.mapper      //mybatis generator生成的xml映射文件
   |         |_mapper
@@ -62,6 +65,7 @@ easy-trade
 ### 前端主要技术
 
 前台: 未定
+
 后台: vue
 
 
@@ -111,3 +115,10 @@ ctrl + alt + L 格式化
 - Free Mybatis plugin    mybatis辅助插件
 - Lombok
 - gitToolBox 
+
+
+###F&Q
+>问题描述：IDEA(eclipse没有)代码service实现层中@autowired 注入dao层的时候，标红报错，但不影响编译使用
+
+>解决方式：在dao层加入@Repository注解。
+>原理：intellij比eclipse对代码的检查更为严格，导致此处不通过，然而并不影响使用。要想不报错，直接按照严格的spring注解方式来就可以，intellij是无辜的。

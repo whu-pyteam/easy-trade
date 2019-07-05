@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pyteam.db.mbg.mapper.Af06Mapper">
+  <resultMap id="BaseResultMap" type="com.pyteam.db.mbg.entity.Af06">
+    <id column="aaf601" jdbcType="INTEGER" property="aaf601" />
+    <result column="aaf602" jdbcType="VARCHAR" property="aaf602" />
+    <result column="aaf603" jdbcType="INTEGER" property="aaf603" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    aaf601, aaf602, aaf603
+  </sql>
+  <select id="selectByExample" parameterType="com.pyteam.db.mbg.entity.Af06Example" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from af06
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from af06
+    where aaf601 = #{aaf601,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from af06
+    where aaf601 = #{aaf601,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pyteam.db.mbg.entity.Af06Example">
+    delete from af06
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pyteam.db.mbg.entity.Af06">
+    <selectKey keyProperty="aaf601" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into af06 (aaf602, aaf603)
+    values (#{aaf602,jdbcType=VARCHAR}, #{aaf603,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pyteam.db.mbg.entity.Af06">
+    <selectKey keyProperty="aaf601" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into af06
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aaf602 != null">
+        aaf602,
+      </if>
+      <if test="aaf603 != null">
+        aaf603,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aaf602 != null">
+        #{aaf602,jdbcType=VARCHAR},
+      </if>
+      <if test="aaf603 != null">
+        #{aaf603,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pyteam.db.mbg.entity.Af06Example" resultType="java.lang.Integer">
+    select count(*) from af06
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update af06
+    <set>
+      <if test="record.aaf601 != null">
+        aaf601 = #{record.aaf601,jdbcType=INTEGER},
+      </if>
+      <if test="record.aaf602 != null">
+        aaf602 = #{record.aaf602,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aaf603 != null">
+        aaf603 = #{record.aaf603,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update af06
+    set aaf601 = #{record.aaf601,jdbcType=INTEGER},
+      aaf602 = #{record.aaf602,jdbcType=VARCHAR},
+      aaf603 = #{record.aaf603,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pyteam.db.mbg.entity.Af06">
+    update af06
+    <set>
+      <if test="aaf602 != null">
+        aaf602 = #{aaf602,jdbcType=VARCHAR},
+      </if>
+      <if test="aaf603 != null">
+        aaf603 = #{aaf603,jdbcType=INTEGER},
+      </if>
+    </set>
+    where aaf601 = #{aaf601,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pyteam.db.mbg.entity.Af06">
+    update af06
+    set aaf602 = #{aaf602,jdbcType=VARCHAR},
+      aaf603 = #{aaf603,jdbcType=INTEGER}
+    where aaf601 = #{aaf601,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pyteam.db.mbg.mapper.Ab04Mapper">
+  <resultMap id="BaseResultMap" type="com.pyteam.db.mbg.entity.Ab04">
+    <id column="aab401" jdbcType="INTEGER" property="aab401" />
+    <result column="saab101" jdbcType="INTEGER" property="saab101" />
+    <result column="raab101" jdbcType="INTEGER" property="raab101" />
+    <result column="aab402" jdbcType="VARCHAR" property="aab402" />
+    <result column="aab403" jdbcType="TIMESTAMP" property="aab403" />
+    <result column="aab404" jdbcType="CHAR" property="aab404" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    aab401, saab101, raab101, aab402, aab403, aab404
+  </sql>
+  <select id="selectByExample" parameterType="com.pyteam.db.mbg.entity.Ab04Example" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ab04
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ab04
+    where aab401 = #{aab401,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ab04
+    where aab401 = #{aab401,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pyteam.db.mbg.entity.Ab04Example">
+    delete from ab04
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pyteam.db.mbg.entity.Ab04">
+    <selectKey keyProperty="aab401" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ab04 (saab101, raab101, aab402, 
+      aab403, aab404)
+    values (#{saab101,jdbcType=INTEGER}, #{raab101,jdbcType=INTEGER}, #{aab402,jdbcType=VARCHAR}, 
+      #{aab403,jdbcType=TIMESTAMP}, #{aab404,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pyteam.db.mbg.entity.Ab04">
+    <selectKey keyProperty="aab401" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ab04
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="saab101 != null">
+        saab101,
+      </if>
+      <if test="raab101 != null">
+        raab101,
+      </if>
+      <if test="aab402 != null">
+        aab402,
+      </if>
+      <if test="aab403 != null">
+        aab403,
+      </if>
+      <if test="aab404 != null">
+        aab404,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="saab101 != null">
+        #{saab101,jdbcType=INTEGER},
+      </if>
+      <if test="raab101 != null">
+        #{raab101,jdbcType=INTEGER},
+      </if>
+      <if test="aab402 != null">
+        #{aab402,jdbcType=VARCHAR},
+      </if>
+      <if test="aab403 != null">
+        #{aab403,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aab404 != null">
+        #{aab404,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pyteam.db.mbg.entity.Ab04Example" resultType="java.lang.Integer">
+    select count(*) from ab04
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ab04
+    <set>
+      <if test="record.aab401 != null">
+        aab401 = #{record.aab401,jdbcType=INTEGER},
+      </if>
+      <if test="record.saab101 != null">
+        saab101 = #{record.saab101,jdbcType=INTEGER},
+      </if>
+      <if test="record.raab101 != null">
+        raab101 = #{record.raab101,jdbcType=INTEGER},
+      </if>
+      <if test="record.aab402 != null">
+        aab402 = #{record.aab402,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aab403 != null">
+        aab403 = #{record.aab403,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.aab404 != null">
+        aab404 = #{record.aab404,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ab04
+    set aab401 = #{record.aab401,jdbcType=INTEGER},
+      saab101 = #{record.saab101,jdbcType=INTEGER},
+      raab101 = #{record.raab101,jdbcType=INTEGER},
+      aab402 = #{record.aab402,jdbcType=VARCHAR},
+      aab403 = #{record.aab403,jdbcType=TIMESTAMP},
+      aab404 = #{record.aab404,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pyteam.db.mbg.entity.Ab04">
+    update ab04
+    <set>
+      <if test="saab101 != null">
+        saab101 = #{saab101,jdbcType=INTEGER},
+      </if>
+      <if test="raab101 != null">
+        raab101 = #{raab101,jdbcType=INTEGER},
+      </if>
+      <if test="aab402 != null">
+        aab402 = #{aab402,jdbcType=VARCHAR},
+      </if>
+      <if test="aab403 != null">
+        aab403 = #{aab403,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aab404 != null">
+        aab404 = #{aab404,jdbcType=CHAR},
+      </if>
+    </set>
+    where aab401 = #{aab401,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pyteam.db.mbg.entity.Ab04">
+    update ab04
+    set saab101 = #{saab101,jdbcType=INTEGER},
+      raab101 = #{raab101,jdbcType=INTEGER},
+      aab402 = #{aab402,jdbcType=VARCHAR},
+      aab403 = #{aab403,jdbcType=TIMESTAMP},
+      aab404 = #{aab404,jdbcType=CHAR}
+    where aab401 = #{aab401,jdbcType=INTEGER}
+  </update>
+</mapper>
