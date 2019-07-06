@@ -76,7 +76,7 @@ easy-trade
 
 |   键      |    值        |
 | -------- | ------------ |
-| address  | 149.28.57.38 |
+| address  | 39.107.32.126 |
 | port     | 3306         |
 | username | root         |
 | password | 123456       |
