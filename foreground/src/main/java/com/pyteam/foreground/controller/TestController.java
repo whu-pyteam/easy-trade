@@ -1,7 +1,7 @@
 package com.pyteam.foreground.controller;
 
 import com.pyteam.foreground.service.TestService;
-import com.pyteam.db.mbg.entity.Test;
+//import com.pyteam.db.mbg.entity.Test;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
