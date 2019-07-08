@@ -141,6 +141,12 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- thymeleaf模板引擎包 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
         <!-- 热部署模块 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

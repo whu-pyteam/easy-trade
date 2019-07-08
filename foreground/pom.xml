@@ -22,8 +22,6 @@
             <artifactId>db</artifactId>
         </dependency>
 
-
-
         <!-- TODO   add security and JWT-->
     </dependencies>
 
