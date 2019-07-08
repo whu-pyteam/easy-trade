@@ -14,8 +14,9 @@ spring:
         login-username: druid
         login-password: druid
 
+
 mybatis:
   mapper-locations:
-    -classpath:mapper/**/*.xml
-    -classpath:com/**/mapper/*.xml
+    - classpath*:mapper/*.xml
+    - classpath:com/**/mapper/*.xml
 

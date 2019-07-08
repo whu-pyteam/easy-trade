@@ -16,6 +16,8 @@ public class Af02 implements Serializable {
 
     private Date aaf206;
 
+    private Integer aaf207;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getAaf201() {
@@ -66,6 +68,14 @@ public class Af02 implements Serializable {
         this.aaf206 = aaf206;
     }
 
+    public Integer getAaf207() {
+        return aaf207;
+    }
+
+    public void setAaf207(Integer aaf207) {
+        this.aaf207 = aaf207;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -78,6 +88,7 @@ public class Af02 implements Serializable {
         sb.append(", aaf204=").append(aaf204);
         sb.append(", aaf205=").append(aaf205);
         sb.append(", aaf206=").append(aaf206);
+        sb.append(", aaf207=").append(aaf207);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

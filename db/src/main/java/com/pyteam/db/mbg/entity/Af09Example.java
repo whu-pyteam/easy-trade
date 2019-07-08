@@ -303,6 +303,76 @@ public class Af09Example {
             addCriterion("aaf903 not between", value1, value2, "aaf903");
             return (Criteria) this;
         }
+
+        public Criteria andAaf904IsNull() {
+            addCriterion("aaf904 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf904IsNotNull() {
+            addCriterion("aaf904 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf904EqualTo(String value) {
+            addCriterion("aaf904 =", value, "aaf904");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf904NotEqualTo(String value) {
+            addCriterion("aaf904 <>", value, "aaf904");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf904GreaterThan(String value) {
+            addCriterion("aaf904 >", value, "aaf904");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf904GreaterThanOrEqualTo(String value) {
+            addCriterion("aaf904 >=", value, "aaf904");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf904LessThan(String value) {
+            addCriterion("aaf904 <", value, "aaf904");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf904LessThanOrEqualTo(String value) {
+            addCriterion("aaf904 <=", value, "aaf904");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf904Like(String value) {
+            addCriterion("aaf904 like", value, "aaf904");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf904NotLike(String value) {
+            addCriterion("aaf904 not like", value, "aaf904");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf904In(List<String> values) {
+            addCriterion("aaf904 in", values, "aaf904");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf904NotIn(List<String> values) {
+            addCriterion("aaf904 not in", values, "aaf904");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf904Between(String value1, String value2) {
+            addCriterion("aaf904 between", value1, value2, "aaf904");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf904NotBetween(String value1, String value2) {
+            addCriterion("aaf904 not between", value1, value2, "aaf904");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
