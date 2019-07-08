@@ -494,6 +494,66 @@ public class Af02Example {
             addCriterion("aaf206 not between", value1, value2, "aaf206");
             return (Criteria) this;
         }
+
+        public Criteria andAaf207IsNull() {
+            addCriterion("aaf207 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf207IsNotNull() {
+            addCriterion("aaf207 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf207EqualTo(Integer value) {
+            addCriterion("aaf207 =", value, "aaf207");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf207NotEqualTo(Integer value) {
+            addCriterion("aaf207 <>", value, "aaf207");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf207GreaterThan(Integer value) {
+            addCriterion("aaf207 >", value, "aaf207");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf207GreaterThanOrEqualTo(Integer value) {
+            addCriterion("aaf207 >=", value, "aaf207");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf207LessThan(Integer value) {
+            addCriterion("aaf207 <", value, "aaf207");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf207LessThanOrEqualTo(Integer value) {
+            addCriterion("aaf207 <=", value, "aaf207");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf207In(List<Integer> values) {
+            addCriterion("aaf207 in", values, "aaf207");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf207NotIn(List<Integer> values) {
+            addCriterion("aaf207 not in", values, "aaf207");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf207Between(Integer value1, Integer value2) {
+            addCriterion("aaf207 between", value1, value2, "aaf207");
+            return (Criteria) this;
+        }
+
+        public Criteria andAaf207NotBetween(Integer value1, Integer value2) {
+            addCriterion("aaf207 not between", value1, value2, "aaf207");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

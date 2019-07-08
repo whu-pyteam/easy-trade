@@ -9,6 +9,8 @@ public class Af09 implements Serializable {
 
     private String aaf903;
 
+    private String aaf904;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getAaf901() {
@@ -35,6 +37,14 @@ public class Af09 implements Serializable {
         this.aaf903 = aaf903;
     }
 
+    public String getAaf904() {
+        return aaf904;
+    }
+
+    public void setAaf904(String aaf904) {
+        this.aaf904 = aaf904;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -44,6 +54,7 @@ public class Af09 implements Serializable {
         sb.append(", aaf901=").append(aaf901);
         sb.append(", aaf902=").append(aaf902);
         sb.append(", aaf903=").append(aaf903);
+        sb.append(", aaf904=").append(aaf904);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

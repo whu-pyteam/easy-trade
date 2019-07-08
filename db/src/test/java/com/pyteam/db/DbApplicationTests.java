@@ -25,4 +25,7 @@ public class DbApplicationTests
         com.pyteam.db.entity.Test u = testMapper.findByName("BBB");
         Assert.assertEquals(12, u.getAge().intValue());
     }
+
+
+
 }
