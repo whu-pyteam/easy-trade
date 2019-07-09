@@ -1,30 +1,24 @@
-package com.pyteam.db;
+package com.pyteam.foreground.service;
 
-import com.pyteam.db.mapper.TestMapper;
 import com.pyteam.db.mbg.entity.Ab01;
 import com.pyteam.db.mbg.mapper.Ab01Mapper;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class DbApplicationTests
+/**
+ * 用户表ab01
+ */
+@Service
+public class Ab01Service
 {
-
     @Autowired
     private Ab01Mapper ab01Mapper;
 
-    @Test
-    @Rollback
-    public void findByName() throws Exception
+    public boolean addAb01() throws Exception
     {
         Ab01 ab01 = new Ab01();
         ab01.setAab102("会员001");
@@ -42,8 +36,6 @@ public class DbApplicationTests
         ab01.setAab114(new Date());
         Integer res = ab01Mapper.insert(ab01);
         System.out.println(res);
+        return res.intValue() > 0;
     }
-
-
-
 }
