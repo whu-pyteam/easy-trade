@@ -16,6 +16,6 @@ public class Ad02ServiceTest
     @Test
     public void test() throws Exception
     {
-            service.addAd02();
+ //           service.addAd02();
     }
 }
