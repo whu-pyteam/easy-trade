@@ -135,7 +135,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.pyteam.db.mbg.entity.Af05Example" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.pyteam.db.mbg.entity.Af05Example" resultType="java.lang.Long">
     select count(*) from af05
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

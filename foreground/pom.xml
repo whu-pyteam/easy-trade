@@ -21,7 +21,6 @@
             <groupId>com.pyteam</groupId>
             <artifactId>db</artifactId>
         </dependency>
-
         <!-- TODO   add security and JWT-->
     </dependencies>
 

@@ -21,10 +21,10 @@ public class BackgroundApplicationTests
     @Rollback
     public void register() throws Exception
     {
-        StaffLoginParam loginParam = new StaffLoginParam();
-        loginParam.setPassword("123456");
-        loginParam.setUsername("admin");
-        af02Service.register(loginParam);
+        // StaffLoginParam loginParam = new StaffLoginParam();
+        // loginParam.setPassword("123456");
+        // loginParam.setUsername("admin");
+        // af02Service.register(loginParam);
     }
 
 }

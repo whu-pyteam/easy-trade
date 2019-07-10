@@ -12,8 +12,10 @@ import com.qiniu.util.Auth;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 
 
 /**
@@ -39,13 +41,15 @@ public class QiniuUtil
 
     /**
      * 将图片上传到七牛云
-     * @param file
+     * @param multipartFile
      * @param key 保存在空间中的名字，如果为空会使用文件的hash值为文件名
      * @return
      */
-    public  String uploadImg(FileInputStream file, String key) {
+    public String uploadImg(MultipartFile multipartFile, String key) throws IOException
+    {
+        FileInputStream file = (FileInputStream) multipartFile.getInputStream();
         //构造一个带指定Zone对象的配置类
-        Configuration cfg = new Configuration(Zone.huadong());
+        Configuration cfg = new Configuration(Zone.zone0());
         //...其他参数参考类注释
         UploadManager uploadManager = new UploadManager(cfg);
         //默认不指定key的情况下，以文件内容的hash值作为文件名
@@ -57,7 +61,7 @@ public class QiniuUtil
                 //解析上传成功的结果
                 DefaultPutRet putRet = JSON.parseObject(response.bodyString(), DefaultPutRet.class);
 
-                String returnPath = path+"/"+putRet.key;
+                String returnPath = "http://" + path+"/"+putRet.key;
                 log.info("图片链接: " + returnPath);
                 return returnPath;
             } catch (QiniuException ex) {
@@ -73,6 +77,21 @@ public class QiniuUtil
             e.printStackTrace();
         }
         return "";
+    }
+
+
+    /**
+     * @param multipartFile
+     * @return
+     * @throws IOException
+     */
+    public String uploadImg(MultipartFile multipartFile) throws IOException
+    {
+        String fileName = multipartFile.getOriginalFilename();
+        log.info("图片名: " + fileName);
+
+        assert fileName != null;
+        return  this.uploadImg(multipartFile, System.currentTimeMillis() + fileName.substring(fileName.lastIndexOf(".")));
     }
 
 }

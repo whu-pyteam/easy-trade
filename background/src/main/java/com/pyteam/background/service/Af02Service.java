@@ -1,7 +1,9 @@
 package com.pyteam.background.service;
 
 import com.pyteam.background.dto.StaffLoginParam;
+import com.pyteam.background.dto.StaffQueryParam;
 import com.pyteam.db.mbg.entity.Af02;
+import com.pyteam.db.mbg.entity.Af06;
 import com.pyteam.db.mbg.entity.Af09;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +19,10 @@ public interface Af02Service
 {
     /**
      * 根据用户名或昵称分页查询用户
-     * @param name
-     * @param pageSize
-     * @param pageNum
+     * @param
      * @return
      */
-    List<Af02> list(String name, Integer pageSize, Integer pageNum);
+    List<Af02> list(StaffQueryParam queryParam);
 
 
     /**
@@ -30,7 +30,7 @@ public interface Af02Service
      * @param loginParam
      * @return
      */
-    Af02 register(StaffLoginParam loginParam);
+    boolean register(StaffLoginParam loginParam);
 
     /**
      * 通过用户名获取员工
@@ -54,4 +54,17 @@ public interface Af02Service
      */
     List<Af09> getPermissionList(Integer aaf201);
 
+    /**
+     * 更新用户信息
+     * @param af02
+     * @return
+     */
+    int updateInfo(Af02 af02);
+
+    /**
+     * 查询特定用户的角色列表
+     * @param aaf201
+     * @return
+     */
+    List<Af06> getRoleList(Integer aaf201);
 }

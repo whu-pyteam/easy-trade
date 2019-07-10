@@ -5,11 +5,10 @@ import com.pyteam.db.mbg.entity.Af02Example;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Repository
 public interface Af02Mapper {
-    int countByExample(Af02Example example);
+    long countByExample(Af02Example example);
 
     int deleteByExample(Af02Example example);
 

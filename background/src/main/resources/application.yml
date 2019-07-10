@@ -10,4 +10,5 @@ jwt:
   tokenHead: Bearer  #JWT负载中拿到开头
 
 
-
+server:
+  port: 8080

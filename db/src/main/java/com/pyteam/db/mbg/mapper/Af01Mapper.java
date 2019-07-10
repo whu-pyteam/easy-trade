@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface Af01Mapper {
-    int countByExample(Af01Example example);
+    long countByExample(Af01Example example);
 
     int deleteByExample(Af01Example example);
 

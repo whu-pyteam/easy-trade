@@ -1,0 +1,129 @@
+<template>
+  <div class="app-container" style="text-align: center; justify-content: center;">
+
+    <el-card class="page-card"  shadow="hover">
+      <el-form :inline="true" :model="condition" class="demo-form-inline">
+        <el-form-item label="员工名称">
+          <el-input v-model="condition.aaf202"></el-input>
+        </el-form-item>
+        <el-form-item label="员工昵称">
+          <el-input v-model="condition.aaf204"></el-input>
+        </el-form-item>
+        <el-form-item label="员工状态">
+          <el-input v-model="condition.aaf207"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="onSubmit">查询</el-button>
+        </el-form-item>
+      </el-form>
+    </el-card>
+    <el-card class="page-card"  shadow="hover">
+
+      <el-table
+        :data="tableData"
+        style="width: 100%">
+        <el-table-column
+          prop="aaf202"
+          label="员工名称"
+          width="200">
+        </el-table-column>
+        <el-table-column
+          prop="aaf204"
+          label="员工昵称"
+          width="200">
+        </el-table-column>
+        <el-table-column
+          label="员工状态"
+          width="200">
+          <template slot-scope="scope">
+            <el-switch
+              v-model="scope.row.aaf207 === 1? true : false"
+              active-text="启用"
+              inactive-text="禁用"
+              disabled>
+            </el-switch>
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="roles"
+          label="员工角色"
+          width="200">
+        </el-table-column>
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-button
+              icon="el-icon-edit-outline"
+              @click="handleEdit(scope.$index, scope.row)">编辑
+            </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-card>
+
+    <el-card class="page-card"  shadow="hover">
+      <el-pagination
+        background
+        layout="total, prev, pager, next, sizes"
+        :page-sizes="[10, 20, 50, 100]"
+        :page-size="pageInfo.pageSize"
+        :total="pageInfo.total"
+        :current-page="pageInfo.pageNum">
+      </el-pagination>
+    </el-card>
+
+  </div>
+</template>
+
+<script>
+  import {queryStaffList} from "@/api/staff";
+
+  export default {
+    name: 'staff-list',
+    data() {
+      return {
+        condition: {
+          aaf202: '',
+          aaf204: '',
+          aaf207: ''
+        },
+        tableData: [],
+        pageInfo: {
+          total: 100,
+          pageNum: 1,
+          pageSize: 10
+        }
+      }
+    },
+    created() {
+      this.fetchStaffList()
+    },
+    methods: {
+      fetchStaffList() {
+        let params = {
+          ...this.condition,
+          pageNum: this.pageInfo.pageNum,
+          pageSize: this.pageInfo.pageSize
+        }
+        console.log(params)
+        queryStaffList(params).then(res =>{
+          console.log(res)
+          this.pageInfo.total = res.data.total
+          this.tableData = res.data.list
+        })
+      },
+      onSubmit() {
+        this.fetchStaffList()
+      },
+      handleEdit(index, rowData) {
+
+      }
+    }
+  }
+</script>
+
+<style lang="scss" scoped>
+  .page-card {
+    margin-bottom: 50px;;
+    width: 1200px;
+  }
+</style>
