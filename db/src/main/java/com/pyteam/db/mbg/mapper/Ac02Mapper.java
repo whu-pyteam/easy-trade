@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface Ac02Mapper {
-    int countByExample(Ac02Example example);
+    long countByExample(Ac02Example example);
 
     int deleteByExample(Ac02Example example);
 

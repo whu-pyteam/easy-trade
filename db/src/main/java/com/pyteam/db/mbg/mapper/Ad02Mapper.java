@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface Ad02Mapper {
-    int countByExample(Ad02Example example);
+    long countByExample(Ad02Example example);
 
     int deleteByExample(Ad02Example example);
 
