@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan({"com.pyteam.db.mapper", "com.pyteam.background.mapper"})
 public class BackgroundApplication
 {
-
     public static void main(String[] args)
     {
         SpringApplication.run(BackgroundApplication.class, args);

@@ -36,6 +36,7 @@
             <artifactId>mybatis-generator-core</artifactId>
         </dependency>
 
+
     </dependencies>
 
 </project>
