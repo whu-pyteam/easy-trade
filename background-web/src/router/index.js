@@ -22,15 +22,45 @@ export const constantRouterMap = [
   {path: '/login', component: () => import('@/views/login/index'), hidden: true},
   {path: '/404', component: () => import('@/views/404'), hidden: true},
   {
-    path: '/',
+    path: '',
     component: Layout,
-    redirect: '/home',
+    redirect: '/info',
     children: [{
       path: 'home',
       name: 'home',
       component: () => import('@/views/home/index'),
       meta: {title: '首页', icon: 'home'}
     }]
+  },
+  {
+    path: '/info',
+    component: Layout,
+    redirect: '/info/detail',
+    children: [{
+      path: 'detail',
+      name: 'info',
+      component: () => import('@/views/info/Info'),
+      meta: { title: "个人中心", icon: 'user'}
+    }]
+  },
+  {
+    path: '/staff',
+    component: Layout,
+    redirect: "/staff/list",
+    meta: { title: "员工管理", icon: 'staff-manager'},
+    children: [{
+      path: 'list',
+      name: 'staff-manager',
+      component: () => import('@/views/staff/staff-list'),
+      meta: { title: "员工列表", icon: 'd'},
+    },
+    {
+      path: 'add',
+      name: 'staff-add',
+      component: () => import('@/views/staff/staff-update'),
+      meta: { title: "员工修改", icon: 'd'},
+    }
+    ]
   },
   {path: '*', redirect: '/404', hidden: true}
 ]

@@ -12,7 +12,7 @@ const service = axios.create({
 // request拦截器
 service.interceptors.request.use(config => {
   if (store.getters.token) {
-    config.headers['Authorization'] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
+    config.headers['Authorization'] = getToken() // 让每个请求携带自定义token
   }
   return config
 }, error => {
@@ -34,7 +34,6 @@ service.interceptors.response.use(
         type: 'error',
         duration: 3 * 1000
       })
-
       // 401:未登录;
       if (res.code === 401||res.code === 403) {
         MessageBox.confirm('你已被登出，可以取消继续留在该页面，或者重新登录', '确定登出', {

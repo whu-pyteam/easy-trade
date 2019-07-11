@@ -19,7 +19,7 @@
 
 - [x] 整合mybatis-generator 和 pagehelper
 
-- [ ] 整合 Spring Security 和 JWT
+- [x] 整合 Spring Security 和 JWT
 
 
 
@@ -101,7 +101,7 @@ easy-trade
 
 
 
-3.**大括号风格**
+**3.大括号风格**
 
 ![](./document/img/1561965449440.png)
 
@@ -114,10 +114,10 @@ ctrl + alt + L 格式化
 - Alibaba Java Coding Guidelines  代码规范
 - Free Mybatis plugin    mybatis辅助插件
 - Lombok
-- gitToolBox 
+- gitToolBox   
 
 
-###F&Q
+### 常见问题
 >问题描述：IDEA(eclipse没有)代码service实现层中@autowired 注入dao层的时候，标红报错，但不影响编译使用
 
 >解决方式：在dao层加入@Repository注解。

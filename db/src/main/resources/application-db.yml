@@ -20,3 +20,10 @@ mybatis:
     - classpath*:mapper/*.xml
     - classpath:com/**/mapper/*.xml
 
+
+qiniu:
+  accessKey: 3LmQRdvwD0LWf3YFagACm4OdrCecFhO3o-kqz2Kt
+  secretKey: mYSVqbwL-8x1A85iN_sgyosUxSOgCrWoyxz8F_t3
+  bucket: pyteam
+  path: pucoi8y6m.bkt.clouddn.com
+

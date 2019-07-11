@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = {"com.pyteam.db", "com.pyteam.foreground"})
-@MapperScan("com.pyteam.db.mapper")
+@MapperScan({"com.pyteam.db.mbg.mapper", "com.pyteam.db.mapper"})
 public class ForegroundApplication
 {
 

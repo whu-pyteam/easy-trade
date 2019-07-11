@@ -4,7 +4,7 @@
     <el-card class="login-form-layout">
       <el-form autoComplete="on"
                :model="loginForm"
-               :rules="loginRules"
+               :rules="loginRule"
                ref="loginForm"
                label-position="left">
         <h2 class="login-title">后台管理登录</h2>
@@ -34,9 +34,14 @@
           </span>
           </el-input>
         </el-form-item>
-        <el-form-item style="margin-bottom: 60px">
+        <el-form-item style="margin-bottom: 20px">
           <el-button style="width: 100%" type="primary" :loading="loading" @click.native.prevent="handleLogin">
             登录
+          </el-button>
+        </el-form-item>
+        <el-form-item>
+          <el-button style="width: 100%" type="primary" :loading="loading" @click.native.prevent="handleRegister">
+            注册
           </el-button>
         </el-form-item>
       </el-form>
@@ -45,9 +50,9 @@
 </template>
 
 <script>
-  import {isvalidUsername} from '@/utils/validate';
-  import {setSupport,getSupport,SupportUrl} from '@/utils/support';
-  import login_center_bg from '@/assets/images/login_center_bg.png'
+  import {isvalidUsername} from '@/utils/validate'
+  import {regsiterStaff} from "@/api/login"
+  import {setSupport,getSupport,SupportUrl} from '@/utils/support'
 
   export default {
     name: 'login',
@@ -109,6 +114,9 @@
             return false
           }
         })
+      },
+      handleRegister() {
+        regsiterStaff(this.loginForm.username, this.loginForm.password).then(() => this.$message.success("注册成功"))
       }
     }
   }

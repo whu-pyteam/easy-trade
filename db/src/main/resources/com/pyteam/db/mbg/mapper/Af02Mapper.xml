@@ -9,6 +9,7 @@
     <result column="aaf205" jdbcType="TIMESTAMP" property="aaf205" />
     <result column="aaf206" jdbcType="TIMESTAMP" property="aaf206" />
     <result column="aaf207" jdbcType="INTEGER" property="aaf207" />
+    <result column="aaf208" jdbcType="VARCHAR" property="aaf208" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    aaf201, aaf202, aaf203, aaf204, aaf205, aaf206, aaf207
+    aaf201, aaf202, aaf203, aaf204, aaf205, aaf206, aaf207, aaf208
   </sql>
   <select id="selectByExample" parameterType="com.pyteam.db.mbg.entity.Af02Example" resultMap="BaseResultMap">
     select
@@ -106,11 +107,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into af02 (aaf202, aaf203, aaf204, 
-      aaf205, aaf206, aaf207
-      )
+      aaf205, aaf206, aaf207, 
+      aaf208)
     values (#{aaf202,jdbcType=VARCHAR}, #{aaf203,jdbcType=VARCHAR}, #{aaf204,jdbcType=VARCHAR}, 
-      #{aaf205,jdbcType=TIMESTAMP}, #{aaf206,jdbcType=TIMESTAMP}, #{aaf207,jdbcType=INTEGER}
-      )
+      #{aaf205,jdbcType=TIMESTAMP}, #{aaf206,jdbcType=TIMESTAMP}, #{aaf207,jdbcType=INTEGER}, 
+      #{aaf208,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.pyteam.db.mbg.entity.Af02">
     <selectKey keyProperty="aaf201" order="AFTER" resultType="java.lang.Integer">
@@ -136,6 +137,9 @@
       <if test="aaf207 != null">
         aaf207,
       </if>
+      <if test="aaf208 != null">
+        aaf208,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="aaf202 != null">
@@ -156,9 +160,12 @@
       <if test="aaf207 != null">
         #{aaf207,jdbcType=INTEGER},
       </if>
+      <if test="aaf208 != null">
+        #{aaf208,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.pyteam.db.mbg.entity.Af02Example" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.pyteam.db.mbg.entity.Af02Example" resultType="java.lang.Long">
     select count(*) from af02
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -188,6 +195,9 @@
       <if test="record.aaf207 != null">
         aaf207 = #{record.aaf207,jdbcType=INTEGER},
       </if>
+      <if test="record.aaf208 != null">
+        aaf208 = #{record.aaf208,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -201,7 +211,8 @@
       aaf204 = #{record.aaf204,jdbcType=VARCHAR},
       aaf205 = #{record.aaf205,jdbcType=TIMESTAMP},
       aaf206 = #{record.aaf206,jdbcType=TIMESTAMP},
-      aaf207 = #{record.aaf207,jdbcType=INTEGER}
+      aaf207 = #{record.aaf207,jdbcType=INTEGER},
+      aaf208 = #{record.aaf208,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +238,9 @@
       <if test="aaf207 != null">
         aaf207 = #{aaf207,jdbcType=INTEGER},
       </if>
+      <if test="aaf208 != null">
+        aaf208 = #{aaf208,jdbcType=VARCHAR},
+      </if>
     </set>
     where aaf201 = #{aaf201,jdbcType=INTEGER}
   </update>
@@ -237,7 +251,8 @@
       aaf204 = #{aaf204,jdbcType=VARCHAR},
       aaf205 = #{aaf205,jdbcType=TIMESTAMP},
       aaf206 = #{aaf206,jdbcType=TIMESTAMP},
-      aaf207 = #{aaf207,jdbcType=INTEGER}
+      aaf207 = #{aaf207,jdbcType=INTEGER},
+      aaf208 = #{aaf208,jdbcType=VARCHAR}
     where aaf201 = #{aaf201,jdbcType=INTEGER}
   </update>
 </mapper>
