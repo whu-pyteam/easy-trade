@@ -604,6 +604,76 @@ public class Ad01Example {
             addCriterion("aac107 not between", value1, value2, "aac107");
             return (Criteria) this;
         }
+
+        public Criteria andAad105IsNull() {
+            addCriterion("aad105 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad105IsNotNull() {
+            addCriterion("aad105 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad105EqualTo(String value) {
+            addCriterion("aad105 =", value, "aad105");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad105NotEqualTo(String value) {
+            addCriterion("aad105 <>", value, "aad105");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad105GreaterThan(String value) {
+            addCriterion("aad105 >", value, "aad105");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad105GreaterThanOrEqualTo(String value) {
+            addCriterion("aad105 >=", value, "aad105");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad105LessThan(String value) {
+            addCriterion("aad105 <", value, "aad105");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad105LessThanOrEqualTo(String value) {
+            addCriterion("aad105 <=", value, "aad105");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad105Like(String value) {
+            addCriterion("aad105 like", value, "aad105");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad105NotLike(String value) {
+            addCriterion("aad105 not like", value, "aad105");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad105In(List<String> values) {
+            addCriterion("aad105 in", values, "aad105");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad105NotIn(List<String> values) {
+            addCriterion("aad105 not in", values, "aad105");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad105Between(String value1, String value2) {
+            addCriterion("aad105 between", value1, value2, "aad105");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad105NotBetween(String value1, String value2) {
+            addCriterion("aad105 not between", value1, value2, "aad105");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

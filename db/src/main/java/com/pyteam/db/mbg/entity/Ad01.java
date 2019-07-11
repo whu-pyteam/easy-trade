@@ -20,6 +20,8 @@ public class Ad01 implements Serializable {
 
     private Date aac107;
 
+    private String aad105;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getAad101() {
@@ -86,6 +88,14 @@ public class Ad01 implements Serializable {
         this.aac107 = aac107;
     }
 
+    public String getAad105() {
+        return aad105;
+    }
+
+    public void setAad105(String aad105) {
+        this.aad105 = aad105;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -100,6 +110,7 @@ public class Ad01 implements Serializable {
         sb.append(", aac105=").append(aac105);
         sb.append(", aac106=").append(aac106);
         sb.append(", aac107=").append(aac107);
+        sb.append(", aad105=").append(aad105);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -17,17 +17,19 @@ public class Ad02 implements Serializable {
 
     private String aad204;
 
-    private BigDecimal aad205;
+    private String aad205;
 
     private BigDecimal aad206;
 
     private BigDecimal aad207;
 
-    private String aad208;
+    private BigDecimal aad208;
 
-    private Date aad209;
+    private String aad209;
 
     private Date aad210;
+
+    private Date aad211;
 
     private static final long serialVersionUID = 1L;
 
@@ -79,11 +81,11 @@ public class Ad02 implements Serializable {
         this.aad204 = aad204;
     }
 
-    public BigDecimal getAad205() {
+    public String getAad205() {
         return aad205;
     }
 
-    public void setAad205(BigDecimal aad205) {
+    public void setAad205(String aad205) {
         this.aad205 = aad205;
     }
 
@@ -103,19 +105,19 @@ public class Ad02 implements Serializable {
         this.aad207 = aad207;
     }
 
-    public String getAad208() {
+    public BigDecimal getAad208() {
         return aad208;
     }
 
-    public void setAad208(String aad208) {
+    public void setAad208(BigDecimal aad208) {
         this.aad208 = aad208;
     }
 
-    public Date getAad209() {
+    public String getAad209() {
         return aad209;
     }
 
-    public void setAad209(Date aad209) {
+    public void setAad209(String aad209) {
         this.aad209 = aad209;
     }
 
@@ -125,6 +127,14 @@ public class Ad02 implements Serializable {
 
     public void setAad210(Date aad210) {
         this.aad210 = aad210;
+    }
+
+    public Date getAad211() {
+        return aad211;
+    }
+
+    public void setAad211(Date aad211) {
+        this.aad211 = aad211;
     }
 
     @Override
@@ -145,6 +155,7 @@ public class Ad02 implements Serializable {
         sb.append(", aad208=").append(aad208);
         sb.append(", aad209=").append(aad209);
         sb.append(", aad210=").append(aad210);
+        sb.append(", aad211=").append(aad211);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -506,52 +506,62 @@ public class Ad02Example {
             return (Criteria) this;
         }
 
-        public Criteria andAad205EqualTo(BigDecimal value) {
+        public Criteria andAad205EqualTo(String value) {
             addCriterion("aad205 =", value, "aad205");
             return (Criteria) this;
         }
 
-        public Criteria andAad205NotEqualTo(BigDecimal value) {
+        public Criteria andAad205NotEqualTo(String value) {
             addCriterion("aad205 <>", value, "aad205");
             return (Criteria) this;
         }
 
-        public Criteria andAad205GreaterThan(BigDecimal value) {
+        public Criteria andAad205GreaterThan(String value) {
             addCriterion("aad205 >", value, "aad205");
             return (Criteria) this;
         }
 
-        public Criteria andAad205GreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andAad205GreaterThanOrEqualTo(String value) {
             addCriterion("aad205 >=", value, "aad205");
             return (Criteria) this;
         }
 
-        public Criteria andAad205LessThan(BigDecimal value) {
+        public Criteria andAad205LessThan(String value) {
             addCriterion("aad205 <", value, "aad205");
             return (Criteria) this;
         }
 
-        public Criteria andAad205LessThanOrEqualTo(BigDecimal value) {
+        public Criteria andAad205LessThanOrEqualTo(String value) {
             addCriterion("aad205 <=", value, "aad205");
             return (Criteria) this;
         }
 
-        public Criteria andAad205In(List<BigDecimal> values) {
+        public Criteria andAad205Like(String value) {
+            addCriterion("aad205 like", value, "aad205");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad205NotLike(String value) {
+            addCriterion("aad205 not like", value, "aad205");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad205In(List<String> values) {
             addCriterion("aad205 in", values, "aad205");
             return (Criteria) this;
         }
 
-        public Criteria andAad205NotIn(List<BigDecimal> values) {
+        public Criteria andAad205NotIn(List<String> values) {
             addCriterion("aad205 not in", values, "aad205");
             return (Criteria) this;
         }
 
-        public Criteria andAad205Between(BigDecimal value1, BigDecimal value2) {
+        public Criteria andAad205Between(String value1, String value2) {
             addCriterion("aad205 between", value1, value2, "aad205");
             return (Criteria) this;
         }
 
-        public Criteria andAad205NotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andAad205NotBetween(String value1, String value2) {
             addCriterion("aad205 not between", value1, value2, "aad205");
             return (Criteria) this;
         }
@@ -686,62 +696,52 @@ public class Ad02Example {
             return (Criteria) this;
         }
 
-        public Criteria andAad208EqualTo(String value) {
+        public Criteria andAad208EqualTo(BigDecimal value) {
             addCriterion("aad208 =", value, "aad208");
             return (Criteria) this;
         }
 
-        public Criteria andAad208NotEqualTo(String value) {
+        public Criteria andAad208NotEqualTo(BigDecimal value) {
             addCriterion("aad208 <>", value, "aad208");
             return (Criteria) this;
         }
 
-        public Criteria andAad208GreaterThan(String value) {
+        public Criteria andAad208GreaterThan(BigDecimal value) {
             addCriterion("aad208 >", value, "aad208");
             return (Criteria) this;
         }
 
-        public Criteria andAad208GreaterThanOrEqualTo(String value) {
+        public Criteria andAad208GreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("aad208 >=", value, "aad208");
             return (Criteria) this;
         }
 
-        public Criteria andAad208LessThan(String value) {
+        public Criteria andAad208LessThan(BigDecimal value) {
             addCriterion("aad208 <", value, "aad208");
             return (Criteria) this;
         }
 
-        public Criteria andAad208LessThanOrEqualTo(String value) {
+        public Criteria andAad208LessThanOrEqualTo(BigDecimal value) {
             addCriterion("aad208 <=", value, "aad208");
             return (Criteria) this;
         }
 
-        public Criteria andAad208Like(String value) {
-            addCriterion("aad208 like", value, "aad208");
-            return (Criteria) this;
-        }
-
-        public Criteria andAad208NotLike(String value) {
-            addCriterion("aad208 not like", value, "aad208");
-            return (Criteria) this;
-        }
-
-        public Criteria andAad208In(List<String> values) {
+        public Criteria andAad208In(List<BigDecimal> values) {
             addCriterion("aad208 in", values, "aad208");
             return (Criteria) this;
         }
 
-        public Criteria andAad208NotIn(List<String> values) {
+        public Criteria andAad208NotIn(List<BigDecimal> values) {
             addCriterion("aad208 not in", values, "aad208");
             return (Criteria) this;
         }
 
-        public Criteria andAad208Between(String value1, String value2) {
+        public Criteria andAad208Between(BigDecimal value1, BigDecimal value2) {
             addCriterion("aad208 between", value1, value2, "aad208");
             return (Criteria) this;
         }
 
-        public Criteria andAad208NotBetween(String value1, String value2) {
+        public Criteria andAad208NotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("aad208 not between", value1, value2, "aad208");
             return (Criteria) this;
         }
@@ -756,52 +756,62 @@ public class Ad02Example {
             return (Criteria) this;
         }
 
-        public Criteria andAad209EqualTo(Date value) {
+        public Criteria andAad209EqualTo(String value) {
             addCriterion("aad209 =", value, "aad209");
             return (Criteria) this;
         }
 
-        public Criteria andAad209NotEqualTo(Date value) {
+        public Criteria andAad209NotEqualTo(String value) {
             addCriterion("aad209 <>", value, "aad209");
             return (Criteria) this;
         }
 
-        public Criteria andAad209GreaterThan(Date value) {
+        public Criteria andAad209GreaterThan(String value) {
             addCriterion("aad209 >", value, "aad209");
             return (Criteria) this;
         }
 
-        public Criteria andAad209GreaterThanOrEqualTo(Date value) {
+        public Criteria andAad209GreaterThanOrEqualTo(String value) {
             addCriterion("aad209 >=", value, "aad209");
             return (Criteria) this;
         }
 
-        public Criteria andAad209LessThan(Date value) {
+        public Criteria andAad209LessThan(String value) {
             addCriterion("aad209 <", value, "aad209");
             return (Criteria) this;
         }
 
-        public Criteria andAad209LessThanOrEqualTo(Date value) {
+        public Criteria andAad209LessThanOrEqualTo(String value) {
             addCriterion("aad209 <=", value, "aad209");
             return (Criteria) this;
         }
 
-        public Criteria andAad209In(List<Date> values) {
+        public Criteria andAad209Like(String value) {
+            addCriterion("aad209 like", value, "aad209");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad209NotLike(String value) {
+            addCriterion("aad209 not like", value, "aad209");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad209In(List<String> values) {
             addCriterion("aad209 in", values, "aad209");
             return (Criteria) this;
         }
 
-        public Criteria andAad209NotIn(List<Date> values) {
+        public Criteria andAad209NotIn(List<String> values) {
             addCriterion("aad209 not in", values, "aad209");
             return (Criteria) this;
         }
 
-        public Criteria andAad209Between(Date value1, Date value2) {
+        public Criteria andAad209Between(String value1, String value2) {
             addCriterion("aad209 between", value1, value2, "aad209");
             return (Criteria) this;
         }
 
-        public Criteria andAad209NotBetween(Date value1, Date value2) {
+        public Criteria andAad209NotBetween(String value1, String value2) {
             addCriterion("aad209 not between", value1, value2, "aad209");
             return (Criteria) this;
         }
@@ -863,6 +873,66 @@ public class Ad02Example {
 
         public Criteria andAad210NotBetween(Date value1, Date value2) {
             addCriterion("aad210 not between", value1, value2, "aad210");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad211IsNull() {
+            addCriterion("aad211 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad211IsNotNull() {
+            addCriterion("aad211 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad211EqualTo(Date value) {
+            addCriterion("aad211 =", value, "aad211");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad211NotEqualTo(Date value) {
+            addCriterion("aad211 <>", value, "aad211");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad211GreaterThan(Date value) {
+            addCriterion("aad211 >", value, "aad211");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad211GreaterThanOrEqualTo(Date value) {
+            addCriterion("aad211 >=", value, "aad211");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad211LessThan(Date value) {
+            addCriterion("aad211 <", value, "aad211");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad211LessThanOrEqualTo(Date value) {
+            addCriterion("aad211 <=", value, "aad211");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad211In(List<Date> values) {
+            addCriterion("aad211 in", values, "aad211");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad211NotIn(List<Date> values) {
+            addCriterion("aad211 not in", values, "aad211");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad211Between(Date value1, Date value2) {
+            addCriterion("aad211 between", value1, value2, "aad211");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad211NotBetween(Date value1, Date value2) {
+            addCriterion("aad211 not between", value1, value2, "aad211");
             return (Criteria) this;
         }
     }
