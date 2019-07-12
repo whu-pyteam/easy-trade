@@ -26,6 +26,13 @@ public class Ad02Service
     @Autowired
     private QiniuUtil qiniuUtil;
 
+
+
+    public Ad02 findById(int id) throws Exception
+    {
+        return ad02Mapper.selectByPrimaryKey(id);
+    }
+
     /**
      * 添加拍卖商品信息
      * @return 添加是否成功
@@ -61,13 +68,13 @@ public class Ad02Service
         return ad02List;
     }
 
-//    public List<Ad02> searchByValue(String value) throws Exception
-//    {
-//        Ad02Example example = new Ad02Example();
-//        Criteria criteria = example.createCriteria();
-//        criteria.andAab101EqualTo(2);
-//        List<Ad02> ad02List = ad02Mapper.selectByExample(example);
-//        return ad02List;
-//    }
+    public List<Ad02> searchByValue(String value) throws Exception
+    {
+        Ad02Example example = new Ad02Example();
+        Criteria criteria = example.createCriteria();
+        criteria.andAad202Like("%" + value + "%");
+        List<Ad02> ad02List = ad02Mapper.selectByExample(example);
+        return ad02List;
+    }
 
 }

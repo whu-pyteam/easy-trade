@@ -98,7 +98,7 @@
                             <a href="#">悬赏</a>
                         </li>
                         <li>
-                            <a href="launchAuction.html">发起拍卖</a>
+                            <a href="auctionLaunch.html">发起拍卖</a>
                         </li>
                     </ul>
                 </li>
@@ -147,7 +147,7 @@
             </div>
         </div>
         <div class="col-lg-8">
-            <form class="navbar-form navbar-right" role="search" action="/searchAuction.html" method="post">
+            <form class="navbar-form navbar-right" role="search" action="auctionSearch.html" method="post">
                 <div class="form-group">
                     <input type="text" class="form-control" name="searchValue" placeholder="Search">
                     <button type="submit" class="btn btn-default">搜索</button>
@@ -270,7 +270,7 @@
 
             <div class="col-lg-3 col-md-4 col-sm-6" th:each="ad02:${ad02List}">
                 <div class="thumbnail">
-                    <a href="#">
+                    <a th:href="@{'auctionShow.html?id=' + ${ad02.aad201}}">
                         <img th:src="${ad02.aad203}" style="height: 150px; width: 100%; overflow: hidden" alt="拍卖物品图片">
                     </a>
                     <div class="caption">
