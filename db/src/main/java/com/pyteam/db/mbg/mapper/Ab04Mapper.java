@@ -4,7 +4,9 @@ import com.pyteam.db.mbg.entity.Ab04;
 import com.pyteam.db.mbg.entity.Ab04Example;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface Ab04Mapper {
     long countByExample(Ab04Example example);
 

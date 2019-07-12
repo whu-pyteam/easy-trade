@@ -2,6 +2,7 @@ import axios from 'axios'
 import { Message, MessageBox } from 'element-ui'
 import store from '../store'
 import { getToken } from '@/utils/auth'
+import router from '@/router'
 
 // 创建axios实例
 const service = axios.create({
@@ -34,8 +35,12 @@ service.interceptors.response.use(
         type: 'error',
         duration: 3 * 1000
       })
+      // 403 没有权限, 回退一步
+      if (res.code === 403) {
+        router.go(-1)
+      }
       // 401:未登录;
-      if (res.code === 401||res.code === 403) {
+      if (res.code === 401) {
         MessageBox.confirm('你已被登出，可以取消继续留在该页面，或者重新登录', '确定登出', {
           confirmButtonText: '重新登录',
           cancelButtonText: '取消',

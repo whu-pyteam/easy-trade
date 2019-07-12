@@ -1,16 +1,16 @@
 <template>
   <div class="app-container" style="text-align: center; justify-content: center;">
 
-    <el-card class="page-card"  shadow="hover">
-      <el-form :inline="true" :model="condition" class="demo-form-inline">
+    <el-card class="page-card"  shadow="hover" >
+      <el-form :inline="true" :model="condition" :rules="rules" class="demo-form-inline">
         <el-form-item label="员工名称">
-          <el-input v-model="condition.aaf202"></el-input>
+          <el-input v-model="condition.aaf202" clearable></el-input>
         </el-form-item>
         <el-form-item label="员工昵称">
-          <el-input v-model="condition.aaf204"></el-input>
+          <el-input v-model="condition.aaf204" clearable></el-input>
         </el-form-item>
-        <el-form-item label="员工状态">
-          <el-input v-model="condition.aaf207"></el-input>
+        <el-form-item label="员工状态" prop="aaf207">
+          <el-input v-model="condition.aaf207" clearable placeholder = "0为禁用, 1为启用"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">查询</el-button>
@@ -20,21 +20,29 @@
     <el-card class="page-card"  shadow="hover">
 
       <el-table
+        align="center"
         :data="tableData"
         style="width: 100%">
         <el-table-column
+          label="序号"
+          width="150">
+          <template slot-scope="scope">
+            {{scope.$index}}
+          </template>
+        </el-table-column>
+        <el-table-column
           prop="aaf202"
           label="员工名称"
-          width="200">
+          width="250">
         </el-table-column>
         <el-table-column
           prop="aaf204"
           label="员工昵称"
-          width="200">
+          width="250">
         </el-table-column>
         <el-table-column
           label="员工状态"
-          width="200">
+          width="250">
           <template slot-scope="scope">
             <el-switch
               v-model="scope.row.aaf207 === 1? true : false"
@@ -44,11 +52,11 @@
             </el-switch>
           </template>
         </el-table-column>
-        <el-table-column
-          prop="roles"
-          label="员工角色"
-          width="200">
-        </el-table-column>
+<!--        <el-table-column-->
+<!--          prop="roles"-->
+<!--          label="员工角色"-->
+<!--          width="200">-->
+<!--        </el-table-column>-->
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
@@ -63,8 +71,7 @@
     <el-card class="page-card"  shadow="hover">
       <el-pagination
         background
-        layout="total, prev, pager, next, sizes"
-        :page-sizes="[10, 20, 50, 100]"
+        layout="total, prev, pager, next"
         :page-size="pageInfo.pageSize"
         :total="pageInfo.total"
         :current-page="pageInfo.pageNum">
@@ -91,6 +98,14 @@
           total: 100,
           pageNum: 1,
           pageSize: 10
+        },
+        rules: {
+          aaf207: {
+            type: 'enum',
+            enum: ['0', '1'],
+            trigger: blur,
+            massage: "输入错误!"
+      }
         }
       }
     },
@@ -115,7 +130,7 @@
         this.fetchStaffList()
       },
       handleEdit(index, rowData) {
-
+        this.$router.push("/staff/" + rowData.aaf202)
       }
     }
   }

@@ -26,6 +26,11 @@ public interface Af02Service
 
 
     /**
+     * @param id
+     * @return
+     */
+    Af02 getAf02ById(Integer id);
+    /**
      * 注册
      * @param loginParam
      * @return

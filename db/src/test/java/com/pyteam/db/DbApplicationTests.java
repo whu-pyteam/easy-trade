@@ -1,9 +1,7 @@
 package com.pyteam.db;
 
-import com.pyteam.db.mapper.TestMapper;
 import com.pyteam.db.mbg.entity.Ab01;
 import com.pyteam.db.mbg.mapper.Ab01Mapper;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

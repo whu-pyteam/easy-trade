@@ -4,7 +4,9 @@ import com.pyteam.db.mbg.entity.Ae07;
 import com.pyteam.db.mbg.entity.Ae07Example;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface Ae07Mapper {
     long countByExample(Ae07Example example);
 

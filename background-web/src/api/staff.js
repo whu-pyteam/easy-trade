@@ -15,3 +15,32 @@ export function addStaff(data) {
     data
   })
 }
+
+export function getRoleList() {
+  return request({
+    url: '/admin/role',
+    method: 'get'
+  })
+}
+
+export function getSingleStaff(username) {
+  return request({
+    url: '/staff/' + username,
+    method: 'get'
+  })
+}
+
+export function updateStaff(data) {
+  return request({
+    url: '/staff/role',
+    method: 'post',
+    data: data
+  })
+}
+
+export function getStaffRoles(id) {
+  return request({
+    url: '/staff/role/' + id,
+    method: 'get'
+  })
+}

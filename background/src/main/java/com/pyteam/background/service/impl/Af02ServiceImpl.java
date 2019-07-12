@@ -12,11 +12,7 @@ import com.pyteam.db.mbg.entity.Af02Example;
 import com.pyteam.db.mbg.entity.Af06;
 import com.pyteam.db.mbg.entity.Af09;
 import com.pyteam.db.mbg.mapper.Af02Mapper;
-import lombok.Data;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -125,6 +121,12 @@ public class Af02ServiceImpl implements Af02Service
             return adminList.get(0);
         }
         return null;
+    }
+
+    @Override
+    public Af02 getAf02ById(Integer id)
+    {
+        return af02Mapper.selectByPrimaryKey(id);
     }
 
 
