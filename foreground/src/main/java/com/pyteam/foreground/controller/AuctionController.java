@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -29,5 +30,14 @@ public class AuctionController
             e.printStackTrace();
             return "snow";
         }
+    }
+
+    @RequestMapping(value = "/searchAuction.html", method = RequestMethod.POST)
+    public String searchByValue(@RequestParam(value = "searchValue") String value)
+    {
+
+
+
+        return "searchAuction";
     }
 }
