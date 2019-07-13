@@ -425,183 +425,183 @@ public class Ad01Example {
             return (Criteria) this;
         }
 
-        public Criteria andAac105IsNull() {
-            addCriterion("aac105 is null");
+        public Criteria andAad106IsNull() {
+            addCriterion("aad106 is null");
             return (Criteria) this;
         }
 
-        public Criteria andAac105IsNotNull() {
-            addCriterion("aac105 is not null");
+        public Criteria andAad106IsNotNull() {
+            addCriterion("aad106 is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAac105EqualTo(Integer value) {
-            addCriterion("aac105 =", value, "aac105");
+        public Criteria andAad106EqualTo(Integer value) {
+            addCriterion("aad106 =", value, "aad106");
             return (Criteria) this;
         }
 
-        public Criteria andAac105NotEqualTo(Integer value) {
-            addCriterion("aac105 <>", value, "aac105");
+        public Criteria andAad106NotEqualTo(Integer value) {
+            addCriterion("aad106 <>", value, "aad106");
             return (Criteria) this;
         }
 
-        public Criteria andAac105GreaterThan(Integer value) {
-            addCriterion("aac105 >", value, "aac105");
+        public Criteria andAad106GreaterThan(Integer value) {
+            addCriterion("aad106 >", value, "aad106");
             return (Criteria) this;
         }
 
-        public Criteria andAac105GreaterThanOrEqualTo(Integer value) {
-            addCriterion("aac105 >=", value, "aac105");
+        public Criteria andAad106GreaterThanOrEqualTo(Integer value) {
+            addCriterion("aad106 >=", value, "aad106");
             return (Criteria) this;
         }
 
-        public Criteria andAac105LessThan(Integer value) {
-            addCriterion("aac105 <", value, "aac105");
+        public Criteria andAad106LessThan(Integer value) {
+            addCriterion("aad106 <", value, "aad106");
             return (Criteria) this;
         }
 
-        public Criteria andAac105LessThanOrEqualTo(Integer value) {
-            addCriterion("aac105 <=", value, "aac105");
+        public Criteria andAad106LessThanOrEqualTo(Integer value) {
+            addCriterion("aad106 <=", value, "aad106");
             return (Criteria) this;
         }
 
-        public Criteria andAac105In(List<Integer> values) {
-            addCriterion("aac105 in", values, "aac105");
+        public Criteria andAad106In(List<Integer> values) {
+            addCriterion("aad106 in", values, "aad106");
             return (Criteria) this;
         }
 
-        public Criteria andAac105NotIn(List<Integer> values) {
-            addCriterion("aac105 not in", values, "aac105");
+        public Criteria andAad106NotIn(List<Integer> values) {
+            addCriterion("aad106 not in", values, "aad106");
             return (Criteria) this;
         }
 
-        public Criteria andAac105Between(Integer value1, Integer value2) {
-            addCriterion("aac105 between", value1, value2, "aac105");
+        public Criteria andAad106Between(Integer value1, Integer value2) {
+            addCriterion("aad106 between", value1, value2, "aad106");
             return (Criteria) this;
         }
 
-        public Criteria andAac105NotBetween(Integer value1, Integer value2) {
-            addCriterion("aac105 not between", value1, value2, "aac105");
+        public Criteria andAad106NotBetween(Integer value1, Integer value2) {
+            addCriterion("aad106 not between", value1, value2, "aad106");
             return (Criteria) this;
         }
 
-        public Criteria andAac106IsNull() {
-            addCriterion("aac106 is null");
+        public Criteria andAad107IsNull() {
+            addCriterion("aad107 is null");
             return (Criteria) this;
         }
 
-        public Criteria andAac106IsNotNull() {
-            addCriterion("aac106 is not null");
+        public Criteria andAad107IsNotNull() {
+            addCriterion("aad107 is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAac106EqualTo(Date value) {
-            addCriterion("aac106 =", value, "aac106");
+        public Criteria andAad107EqualTo(Date value) {
+            addCriterion("aad107 =", value, "aad107");
             return (Criteria) this;
         }
 
-        public Criteria andAac106NotEqualTo(Date value) {
-            addCriterion("aac106 <>", value, "aac106");
+        public Criteria andAad107NotEqualTo(Date value) {
+            addCriterion("aad107 <>", value, "aad107");
             return (Criteria) this;
         }
 
-        public Criteria andAac106GreaterThan(Date value) {
-            addCriterion("aac106 >", value, "aac106");
+        public Criteria andAad107GreaterThan(Date value) {
+            addCriterion("aad107 >", value, "aad107");
             return (Criteria) this;
         }
 
-        public Criteria andAac106GreaterThanOrEqualTo(Date value) {
-            addCriterion("aac106 >=", value, "aac106");
+        public Criteria andAad107GreaterThanOrEqualTo(Date value) {
+            addCriterion("aad107 >=", value, "aad107");
             return (Criteria) this;
         }
 
-        public Criteria andAac106LessThan(Date value) {
-            addCriterion("aac106 <", value, "aac106");
+        public Criteria andAad107LessThan(Date value) {
+            addCriterion("aad107 <", value, "aad107");
             return (Criteria) this;
         }
 
-        public Criteria andAac106LessThanOrEqualTo(Date value) {
-            addCriterion("aac106 <=", value, "aac106");
+        public Criteria andAad107LessThanOrEqualTo(Date value) {
+            addCriterion("aad107 <=", value, "aad107");
             return (Criteria) this;
         }
 
-        public Criteria andAac106In(List<Date> values) {
-            addCriterion("aac106 in", values, "aac106");
+        public Criteria andAad107In(List<Date> values) {
+            addCriterion("aad107 in", values, "aad107");
             return (Criteria) this;
         }
 
-        public Criteria andAac106NotIn(List<Date> values) {
-            addCriterion("aac106 not in", values, "aac106");
+        public Criteria andAad107NotIn(List<Date> values) {
+            addCriterion("aad107 not in", values, "aad107");
             return (Criteria) this;
         }
 
-        public Criteria andAac106Between(Date value1, Date value2) {
-            addCriterion("aac106 between", value1, value2, "aac106");
+        public Criteria andAad107Between(Date value1, Date value2) {
+            addCriterion("aad107 between", value1, value2, "aad107");
             return (Criteria) this;
         }
 
-        public Criteria andAac106NotBetween(Date value1, Date value2) {
-            addCriterion("aac106 not between", value1, value2, "aac106");
+        public Criteria andAad107NotBetween(Date value1, Date value2) {
+            addCriterion("aad107 not between", value1, value2, "aad107");
             return (Criteria) this;
         }
 
-        public Criteria andAac107IsNull() {
-            addCriterion("aac107 is null");
+        public Criteria andAad108IsNull() {
+            addCriterion("aad108 is null");
             return (Criteria) this;
         }
 
-        public Criteria andAac107IsNotNull() {
-            addCriterion("aac107 is not null");
+        public Criteria andAad108IsNotNull() {
+            addCriterion("aad108 is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAac107EqualTo(Date value) {
-            addCriterion("aac107 =", value, "aac107");
+        public Criteria andAad108EqualTo(Date value) {
+            addCriterion("aad108 =", value, "aad108");
             return (Criteria) this;
         }
 
-        public Criteria andAac107NotEqualTo(Date value) {
-            addCriterion("aac107 <>", value, "aac107");
+        public Criteria andAad108NotEqualTo(Date value) {
+            addCriterion("aad108 <>", value, "aad108");
             return (Criteria) this;
         }
 
-        public Criteria andAac107GreaterThan(Date value) {
-            addCriterion("aac107 >", value, "aac107");
+        public Criteria andAad108GreaterThan(Date value) {
+            addCriterion("aad108 >", value, "aad108");
             return (Criteria) this;
         }
 
-        public Criteria andAac107GreaterThanOrEqualTo(Date value) {
-            addCriterion("aac107 >=", value, "aac107");
+        public Criteria andAad108GreaterThanOrEqualTo(Date value) {
+            addCriterion("aad108 >=", value, "aad108");
             return (Criteria) this;
         }
 
-        public Criteria andAac107LessThan(Date value) {
-            addCriterion("aac107 <", value, "aac107");
+        public Criteria andAad108LessThan(Date value) {
+            addCriterion("aad108 <", value, "aad108");
             return (Criteria) this;
         }
 
-        public Criteria andAac107LessThanOrEqualTo(Date value) {
-            addCriterion("aac107 <=", value, "aac107");
+        public Criteria andAad108LessThanOrEqualTo(Date value) {
+            addCriterion("aad108 <=", value, "aad108");
             return (Criteria) this;
         }
 
-        public Criteria andAac107In(List<Date> values) {
-            addCriterion("aac107 in", values, "aac107");
+        public Criteria andAad108In(List<Date> values) {
+            addCriterion("aad108 in", values, "aad108");
             return (Criteria) this;
         }
 
-        public Criteria andAac107NotIn(List<Date> values) {
-            addCriterion("aac107 not in", values, "aac107");
+        public Criteria andAad108NotIn(List<Date> values) {
+            addCriterion("aad108 not in", values, "aad108");
             return (Criteria) this;
         }
 
-        public Criteria andAac107Between(Date value1, Date value2) {
-            addCriterion("aac107 between", value1, value2, "aac107");
+        public Criteria andAad108Between(Date value1, Date value2) {
+            addCriterion("aad108 between", value1, value2, "aad108");
             return (Criteria) this;
         }
 
-        public Criteria andAac107NotBetween(Date value1, Date value2) {
-            addCriterion("aac107 not between", value1, value2, "aac107");
+        public Criteria andAad108NotBetween(Date value1, Date value2) {
+            addCriterion("aad108 not between", value1, value2, "aad108");
             return (Criteria) this;
         }
 
