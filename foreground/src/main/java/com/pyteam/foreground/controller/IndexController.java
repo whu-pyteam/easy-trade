@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController
 {
     @RequestMapping("/index.html")
-    public String index(){
+    public String index(Model model){
+        model.addAttribute("type", 1);
         return "index";
     }
 }
