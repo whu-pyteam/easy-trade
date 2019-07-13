@@ -52,7 +52,7 @@ public class Ad02Service
         ad02.setAad208(BigDecimal.valueOf(2400));
         ad02.setAad209("0");  //未审核
         ad02.setAad210(new Date());
-        ad02.setAad211(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2019-08-30 12:00:00"));
+        ad02.setAad211(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dto.getAad211()));
         System.out.println(ad02);
         int res = ad02Mapper.insert(ad02);
         System.out.println(res);

@@ -15,23 +15,30 @@ public class LaunchAuctionController
     private Ad02Service services;
 
     @RequestMapping(value = "/auctionLaunch.html", method = RequestMethod.GET)
-    public String wel(Model model) throws Exception
+    public String insert(Ad02Dto dto, Model model) throws Exception
     {
-        model.addAttribute("msg","");
         return "auctionLaunch";
     }
 
     @RequestMapping(value = "/auctionLaunch", method = RequestMethod.POST)
     public String add(Ad02Dto dto, Model model) throws Exception
     {
-//        System.out.println(dto);
+        try
+        {
+            //        System.out.println(dto);
 //        System.out.println(dto.getAad203().getSize());
 
-        boolean res = services.addAd02(dto);
+            services.addAd02(dto);
 
-        String msg = "hello";
-        model.addAttribute("msg",msg);
-        return "auctionLaunch";
+            return "auctionLaunch";
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return "error/404";
+        }
+
+
     }
 
 }
