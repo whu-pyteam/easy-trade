@@ -33,5 +33,5 @@ public class Ad02Dto
 
     private Date aad210;
 
-    private Date aad211;
+    private String aad211;
 }
