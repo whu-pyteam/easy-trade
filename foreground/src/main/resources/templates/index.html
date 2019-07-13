@@ -221,8 +221,8 @@
 
                 <div class="col-lg-3 col-md-4 col-sm-6" th:each="ac01:${ac01List}">
                     <div class="thumbnail">
-                        <a th:href="@{'auctionShow.html?id=' + ${ac01.aac101}}">
-                            <img th:src="${ac01.aac106}" style="height: 150px; width: 100%; overflow: hidden" alt="拍卖物品图片">
+                        <a th:href="@{'goodShow.html?id=' + ${ac01.aac101}}">
+                            <img th:src="${ac01.aac106}" style="height: 150px; width: 100%; overflow: hidden" alt="商品图片">
                         </a>
                         <div class="caption">
                             <h3 th:text="${ac01.aac102}"></h3>
