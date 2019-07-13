@@ -11,7 +11,16 @@
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/login-register.css" rel="stylesheet">
 		<style type="text/css">
+			.navbar-nav>li>a {
+				padding-top: 4px;
+				padding-bottom: 0;
+				height: 30px;
+			}
 
+			.navbar-right>li>a,
+			.dropdown-menu>li>a {
+				font-size: 12px;
+			}
 
 			.navbar {
 				min-height: 20px;
@@ -36,8 +45,9 @@
     	描述：导航栏
         -->
 <!--      引入头部  -->
-        <div th:include="header :: header"></div>
+<!--        <div th:include="header :: header"></div>-->
 
+		<div th:replace="header :: header"></div>
 		<!--
         	作者：2361991194@qq.com
         	时间：2019-07-10
