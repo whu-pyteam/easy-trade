@@ -20,6 +20,7 @@ public class IndexController
         try
         {
             model.addAttribute("ac01", ac01Service.findById(id));
+            model.addAttribute("type", 1);
             return "goodShow";
         }
         catch (Exception e)
@@ -34,6 +35,7 @@ public class IndexController
     {
         try
         {
+            model.addAttribute("type", 1);
             model.addAttribute("ac01List", ac01Service.selectById());
             return "index";
         }
@@ -47,14 +49,13 @@ public class IndexController
     @RequestMapping(value = "/goodLaunch.html", method = RequestMethod.GET)
     public String add(Model model) throws Exception
     {
-        System.out.println("get Here");
         return "goodLaunch";
     }
 
     @RequestMapping(value = "/goodLaunch.html", method = RequestMethod.POST)
     public String add(Ac01Dto dto, Model model) throws Exception
     {
-        System.out.println("controller here");
+        model.addAttribute("type","1");
         boolean res = ac01Service.addAc01(dto);
         return "goodLaunch";
     }

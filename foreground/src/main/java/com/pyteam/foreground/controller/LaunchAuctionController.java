@@ -31,6 +31,7 @@ public class LaunchAuctionController
 
         String msg = "hello";
         model.addAttribute("msg",msg);
+        model.addAttribute("type", 3);
         return "auctionLaunch";
     }
 

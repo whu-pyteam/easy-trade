@@ -9,6 +9,7 @@ import java.util.Date;
 @Data
 public class Ac01Dto
 {
+
     /**
      * 商品流水号
      */

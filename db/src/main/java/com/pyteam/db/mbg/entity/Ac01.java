@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Ac01 implements Serializable {
+
     private Integer aac101;
 
     private Integer aab101;

@@ -37,8 +37,8 @@
 
 <body>
 
-<div th:replace="header :: header"></div>
-s
+<div th:replace="header::header(${type})"></div>
+
 <div class="ssl">
     <div class="container">
         <div class="col-lg-4">
@@ -68,7 +68,7 @@ s
                     <h3 th:text="${ac01.aac102}"></h3>
                     <p th:text="${ac01.aac103}"></p>
                     <p>
-                        <a href="#" class="btn btn-primary" role="button">收藏</a>
+                        <a href="#" class="btn btn-primary" role="button">加入购物车</a>
                         <a href="#" class="btn btn-default" role="button">购买</a>
                     </p>
                 </div>

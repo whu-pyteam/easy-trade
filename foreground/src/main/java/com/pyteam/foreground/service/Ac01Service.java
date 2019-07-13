@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.pyteam.db.utils.QiniuUtil;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -57,9 +58,7 @@ public class Ac01Service
         ac01.setAac106(qiniuUtil.uploadImg(ac01Dto.getAac106()));
         ac01.setAac107(new Date());
 
-        System.out.println(ac01);
         int res = ac01Mapper.insert(ac01);
-        System.out.println(res);
         return res > 0;
     }
 }
