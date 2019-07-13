@@ -14,11 +14,11 @@ public class Ad01 implements Serializable {
 
     private Long aad104;
 
-    private Integer aac105;
+    private Integer aad106;
 
-    private Date aac106;
+    private Date aad107;
 
-    private Date aac107;
+    private Date aad108;
 
     private String aad105;
 
@@ -64,28 +64,28 @@ public class Ad01 implements Serializable {
         this.aad104 = aad104;
     }
 
-    public Integer getAac105() {
-        return aac105;
+    public Integer getAad106() {
+        return aad106;
     }
 
-    public void setAac105(Integer aac105) {
-        this.aac105 = aac105;
+    public void setAad106(Integer aad106) {
+        this.aad106 = aad106;
     }
 
-    public Date getAac106() {
-        return aac106;
+    public Date getAad107() {
+        return aad107;
     }
 
-    public void setAac106(Date aac106) {
-        this.aac106 = aac106;
+    public void setAad107(Date aad107) {
+        this.aad107 = aad107;
     }
 
-    public Date getAac107() {
-        return aac107;
+    public Date getAad108() {
+        return aad108;
     }
 
-    public void setAac107(Date aac107) {
-        this.aac107 = aac107;
+    public void setAad108(Date aad108) {
+        this.aad108 = aad108;
     }
 
     public String getAad105() {
@@ -107,9 +107,9 @@ public class Ad01 implements Serializable {
         sb.append(", aad102=").append(aad102);
         sb.append(", aad103=").append(aad103);
         sb.append(", aad104=").append(aad104);
-        sb.append(", aac105=").append(aac105);
-        sb.append(", aac106=").append(aac106);
-        sb.append(", aac107=").append(aac107);
+        sb.append(", aad106=").append(aad106);
+        sb.append(", aad107=").append(aad107);
+        sb.append(", aad108=").append(aad108);
         sb.append(", aad105=").append(aad105);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
