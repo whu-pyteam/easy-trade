@@ -181,124 +181,22 @@
 						</p>
 					</div>
 
+					<div class="col-lg-3 col-md-4 col-sm-6" th:each="ac01:${ac01List}">
+						<div class="thumbnail">
+							<a th:href="@{'goodShow.html?id=' + ${ac01.aac101}}">
+								<img th:src="${ac01.aac106}" style="height: 150px; width: 100%; overflow: hidden" alt="商品图片">
+							</a>
+							<div class="caption">
+								<h3 th:text="${ac01.aac102}"></h3>
+								<p th:text="${ac01.aac103}"></p>
+								<p>
+									<a href="#" class="btn btn-primary" role="button">收藏</a>
+									<a href="#" class="btn btn-default" role="button">购买</a>
+								</p>
+							</div>
+						</div>
+					</div>
 
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<div class="thumbnail">
-							<img src="https://cdn.jsdelivr.net/npm/@bootcss/www.bootcss.com@0.0.2/dist/img/expo.png" alt="...">
-							<div class="caption">
-								<h3>商品名称</h3>
-								<p>商品信息</p>
-								<p>
-									<a href="#" class="btn btn-primary" role="button">收藏</a>
-									<a href="#" class="btn btn-default" role="button">购买</a>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<div class="thumbnail">
-							<img src="https://cdn.jsdelivr.net/npm/@bootcss/www.bootcss.com@0.0.2/dist/img/expo.png" alt="...">
-							<div class="caption">
-								<h3>商品名称</h3>
-								<p>商品信息</p>
-								<p>
-									<a href="#" class="btn btn-primary" role="button">收藏</a>
-									<a href="#" class="btn btn-default" role="button">购买</a>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<div class="thumbnail">
-							<img src="https://cdn.jsdelivr.net/npm/@bootcss/www.bootcss.com@0.0.2/dist/img/expo.png" alt="...">
-							<div class="caption">
-								<h3>商品名称</h3>
-								<p>商品信息</p>
-								<p>
-									<a href="#" class="btn btn-primary" role="button">收藏</a>
-									<a href="#" class="btn btn-default" role="button">购买</a>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<div class="thumbnail">
-							<img src="https://cdn.jsdelivr.net/npm/@bootcss/www.bootcss.com@0.0.2/dist/img/expo.png" alt="...">
-							<div class="caption">
-								<h3>商品名称</h3>
-								<p>商品信息</p>
-								<p>
-									<a href="#" class="btn btn-primary" role="button">收藏</a>
-									<a href="#" class="btn btn-default" role="button">购买</a>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<div class="thumbnail">
-							<img src="https://cdn.jsdelivr.net/npm/@bootcss/www.bootcss.com@0.0.2/dist/img/expo.png" alt="...">
-							<div class="caption">
-								<h3>商品名称</h3>
-								<p>商品信息</p>
-								<p>
-									<a href="#" class="btn btn-primary" role="button">收藏</a>
-									<a href="#" class="btn btn-default" role="button">购买</a>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<div class="thumbnail">
-							<img src="https://cdn.jsdelivr.net/npm/@bootcss/www.bootcss.com@0.0.2/dist/img/expo.png" alt="...">
-							<div class="caption">
-								<h3>商品名称</h3>
-								<p>商品信息</p>
-								<p>
-									<a href="#" class="btn btn-primary" role="button">收藏</a>
-									<a href="#" class="btn btn-default" role="button">购买</a>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<div class="thumbnail">
-							<img src="https://cdn.jsdelivr.net/npm/@bootcss/www.bootcss.com@0.0.2/dist/img/expo.png" alt="...">
-							<div class="caption">
-								<h3>商品名称</h3>
-								<p>商品信息</p>
-								<p>
-									<a href="#" class="btn btn-primary" role="button">收藏</a>
-									<a href="#" class="btn btn-default" role="button">购买</a>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<div class="thumbnail">
-							<img src="https://cdn.jsdelivr.net/npm/@bootcss/www.bootcss.com@0.0.2/dist/img/expo.png" alt="...">
-							<div class="caption">
-								<h3>商品名称</h3>
-								<p>商品信息</p>
-								<p>
-									<a href="#" class="btn btn-primary" role="button">收藏</a>
-									<a href="#" class="btn btn-default" role="button">购买</a>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<div class="thumbnail">
-							<img src="https://cdn.jsdelivr.net/npm/@bootcss/www.bootcss.com@0.0.2/dist/img/expo.png" alt="...">
-							<div class="caption">
-								<h3>商品名称</h3>
-								<p>商品信息</p>
-								<p>
-									<a href="#" class="btn btn-primary" role="button">收藏</a>
-									<a href="#" class="btn btn-default" role="button">购买</a>
-								</p>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
