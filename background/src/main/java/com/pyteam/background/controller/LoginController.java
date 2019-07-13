@@ -69,7 +69,7 @@ public class LoginController
         Map<String, Object> info = new HashMap<>();
         info.put("username", af02.getAaf202());
         info.put("nickname", af02.getAaf204());
-        info.put("roles", af02Service.getPermissionList(af02.getAaf201()));
+        info.put("roles", af02Service.getRoleList(af02.getAaf201()));
         info.put("status", af02.getAaf207());
         info.put("avatarUrl", af02.getAaf208());
         log.info("当前用户信息: " + info);

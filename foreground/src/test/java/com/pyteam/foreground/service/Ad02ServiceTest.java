@@ -17,5 +17,6 @@ public class Ad02ServiceTest
     public void test() throws Exception
     {
  //           service.addAd02();
+        System.out.println(service.selectById());
     }
 }

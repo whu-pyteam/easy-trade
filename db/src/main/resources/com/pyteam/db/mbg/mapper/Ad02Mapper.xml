@@ -7,13 +7,14 @@
     <result column="aac201" jdbcType="INTEGER" property="aac201" />
     <result column="aad202" jdbcType="VARCHAR" property="aad202" />
     <result column="aad203" jdbcType="VARCHAR" property="aad203" />
-    <result column="aad204" jdbcType="CHAR" property="aad204" />
-    <result column="aad205" jdbcType="DECIMAL" property="aad205" />
+    <result column="aad204" jdbcType="VARCHAR" property="aad204" />
+    <result column="aad205" jdbcType="CHAR" property="aad205" />
     <result column="aad206" jdbcType="DECIMAL" property="aad206" />
     <result column="aad207" jdbcType="DECIMAL" property="aad207" />
-    <result column="aad208" jdbcType="CHAR" property="aad208" />
-    <result column="aad209" jdbcType="TIMESTAMP" property="aad209" />
+    <result column="aad208" jdbcType="DECIMAL" property="aad208" />
+    <result column="aad209" jdbcType="CHAR" property="aad209" />
     <result column="aad210" jdbcType="TIMESTAMP" property="aad210" />
+    <result column="aad211" jdbcType="TIMESTAMP" property="aad211" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -75,7 +76,7 @@
   </sql>
   <sql id="Base_Column_List">
     aad201, aab101, aac201, aad202, aad203, aad204, aad205, aad206, aad207, aad208, aad209, 
-    aad210
+    aad210, aad211
   </sql>
   <select id="selectByExample" parameterType="com.pyteam.db.mbg.entity.Ad02Example" resultMap="BaseResultMap">
     select
@@ -114,11 +115,13 @@
     insert into ad02 (aab101, aac201, aad202, 
       aad203, aad204, aad205, 
       aad206, aad207, aad208, 
-      aad209, aad210)
+      aad209, aad210, aad211
+      )
     values (#{aab101,jdbcType=INTEGER}, #{aac201,jdbcType=INTEGER}, #{aad202,jdbcType=VARCHAR}, 
-      #{aad203,jdbcType=VARCHAR}, #{aad204,jdbcType=CHAR}, #{aad205,jdbcType=DECIMAL}, 
-      #{aad206,jdbcType=DECIMAL}, #{aad207,jdbcType=DECIMAL}, #{aad208,jdbcType=CHAR}, 
-      #{aad209,jdbcType=TIMESTAMP}, #{aad210,jdbcType=TIMESTAMP})
+      #{aad203,jdbcType=VARCHAR}, #{aad204,jdbcType=VARCHAR}, #{aad205,jdbcType=CHAR}, 
+      #{aad206,jdbcType=DECIMAL}, #{aad207,jdbcType=DECIMAL}, #{aad208,jdbcType=DECIMAL}, 
+      #{aad209,jdbcType=CHAR}, #{aad210,jdbcType=TIMESTAMP}, #{aad211,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.pyteam.db.mbg.entity.Ad02">
     <selectKey keyProperty="aad201" order="AFTER" resultType="java.lang.Integer">
@@ -159,6 +162,9 @@
       <if test="aad210 != null">
         aad210,
       </if>
+      <if test="aad211 != null">
+        aad211,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="aab101 != null">
@@ -174,10 +180,10 @@
         #{aad203,jdbcType=VARCHAR},
       </if>
       <if test="aad204 != null">
-        #{aad204,jdbcType=CHAR},
+        #{aad204,jdbcType=VARCHAR},
       </if>
       <if test="aad205 != null">
-        #{aad205,jdbcType=DECIMAL},
+        #{aad205,jdbcType=CHAR},
       </if>
       <if test="aad206 != null">
         #{aad206,jdbcType=DECIMAL},
@@ -186,17 +192,20 @@
         #{aad207,jdbcType=DECIMAL},
       </if>
       <if test="aad208 != null">
-        #{aad208,jdbcType=CHAR},
+        #{aad208,jdbcType=DECIMAL},
       </if>
       <if test="aad209 != null">
-        #{aad209,jdbcType=TIMESTAMP},
+        #{aad209,jdbcType=CHAR},
       </if>
       <if test="aad210 != null">
         #{aad210,jdbcType=TIMESTAMP},
       </if>
+      <if test="aad211 != null">
+        #{aad211,jdbcType=TIMESTAMP},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.pyteam.db.mbg.entity.Ad02Example" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.pyteam.db.mbg.entity.Ad02Example" resultType="java.lang.Long">
     select count(*) from ad02
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -221,10 +230,10 @@
         aad203 = #{record.aad203,jdbcType=VARCHAR},
       </if>
       <if test="record.aad204 != null">
-        aad204 = #{record.aad204,jdbcType=CHAR},
+        aad204 = #{record.aad204,jdbcType=VARCHAR},
       </if>
       <if test="record.aad205 != null">
-        aad205 = #{record.aad205,jdbcType=DECIMAL},
+        aad205 = #{record.aad205,jdbcType=CHAR},
       </if>
       <if test="record.aad206 != null">
         aad206 = #{record.aad206,jdbcType=DECIMAL},
@@ -233,13 +242,16 @@
         aad207 = #{record.aad207,jdbcType=DECIMAL},
       </if>
       <if test="record.aad208 != null">
-        aad208 = #{record.aad208,jdbcType=CHAR},
+        aad208 = #{record.aad208,jdbcType=DECIMAL},
       </if>
       <if test="record.aad209 != null">
-        aad209 = #{record.aad209,jdbcType=TIMESTAMP},
+        aad209 = #{record.aad209,jdbcType=CHAR},
       </if>
       <if test="record.aad210 != null">
         aad210 = #{record.aad210,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.aad211 != null">
+        aad211 = #{record.aad211,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -253,13 +265,14 @@
       aac201 = #{record.aac201,jdbcType=INTEGER},
       aad202 = #{record.aad202,jdbcType=VARCHAR},
       aad203 = #{record.aad203,jdbcType=VARCHAR},
-      aad204 = #{record.aad204,jdbcType=CHAR},
-      aad205 = #{record.aad205,jdbcType=DECIMAL},
+      aad204 = #{record.aad204,jdbcType=VARCHAR},
+      aad205 = #{record.aad205,jdbcType=CHAR},
       aad206 = #{record.aad206,jdbcType=DECIMAL},
       aad207 = #{record.aad207,jdbcType=DECIMAL},
-      aad208 = #{record.aad208,jdbcType=CHAR},
-      aad209 = #{record.aad209,jdbcType=TIMESTAMP},
-      aad210 = #{record.aad210,jdbcType=TIMESTAMP}
+      aad208 = #{record.aad208,jdbcType=DECIMAL},
+      aad209 = #{record.aad209,jdbcType=CHAR},
+      aad210 = #{record.aad210,jdbcType=TIMESTAMP},
+      aad211 = #{record.aad211,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -280,10 +293,10 @@
         aad203 = #{aad203,jdbcType=VARCHAR},
       </if>
       <if test="aad204 != null">
-        aad204 = #{aad204,jdbcType=CHAR},
+        aad204 = #{aad204,jdbcType=VARCHAR},
       </if>
       <if test="aad205 != null">
-        aad205 = #{aad205,jdbcType=DECIMAL},
+        aad205 = #{aad205,jdbcType=CHAR},
       </if>
       <if test="aad206 != null">
         aad206 = #{aad206,jdbcType=DECIMAL},
@@ -292,13 +305,16 @@
         aad207 = #{aad207,jdbcType=DECIMAL},
       </if>
       <if test="aad208 != null">
-        aad208 = #{aad208,jdbcType=CHAR},
+        aad208 = #{aad208,jdbcType=DECIMAL},
       </if>
       <if test="aad209 != null">
-        aad209 = #{aad209,jdbcType=TIMESTAMP},
+        aad209 = #{aad209,jdbcType=CHAR},
       </if>
       <if test="aad210 != null">
         aad210 = #{aad210,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aad211 != null">
+        aad211 = #{aad211,jdbcType=TIMESTAMP},
       </if>
     </set>
     where aad201 = #{aad201,jdbcType=INTEGER}
@@ -309,13 +325,14 @@
       aac201 = #{aac201,jdbcType=INTEGER},
       aad202 = #{aad202,jdbcType=VARCHAR},
       aad203 = #{aad203,jdbcType=VARCHAR},
-      aad204 = #{aad204,jdbcType=CHAR},
-      aad205 = #{aad205,jdbcType=DECIMAL},
+      aad204 = #{aad204,jdbcType=VARCHAR},
+      aad205 = #{aad205,jdbcType=CHAR},
       aad206 = #{aad206,jdbcType=DECIMAL},
       aad207 = #{aad207,jdbcType=DECIMAL},
-      aad208 = #{aad208,jdbcType=CHAR},
-      aad209 = #{aad209,jdbcType=TIMESTAMP},
-      aad210 = #{aad210,jdbcType=TIMESTAMP}
+      aad208 = #{aad208,jdbcType=DECIMAL},
+      aad209 = #{aad209,jdbcType=CHAR},
+      aad210 = #{aad210,jdbcType=TIMESTAMP},
+      aad211 = #{aad211,jdbcType=TIMESTAMP}
     where aad201 = #{aad201,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -4,9 +4,11 @@ import com.pyteam.db.mbg.entity.Ae09;
 import com.pyteam.db.mbg.entity.Ae09Example;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface Ae09Mapper {
-    int countByExample(Ae09Example example);
+    long countByExample(Ae09Example example);
 
     int deleteByExample(Ae09Example example);
 
