@@ -21,6 +21,7 @@ public class AuctionController
         {
             System.out.println(id);
             model.addAttribute("ad02", service.findById(id));
+            model.addAttribute("type", 3);
             return "auctionShow";
         }
         catch (Exception e)
@@ -36,6 +37,7 @@ public class AuctionController
         try
         {
             model.addAttribute("searchList", service.searchByValue(value));
+            model.addAttribute("type", 3);
             return "auctionSearch";
         }
         catch (Exception e)
@@ -51,6 +53,7 @@ public class AuctionController
         try
         {
             model.addAttribute("ad02List", service.selectById());
+            model.addAttribute("type", 3);
             return "auction";
         }
         catch (Exception e)

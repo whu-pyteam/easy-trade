@@ -4,7 +4,9 @@ import com.pyteam.db.mbg.entity.Ac02;
 import com.pyteam.db.mbg.entity.Ac02Example;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface Ac02Mapper {
     long countByExample(Ac02Example example);
 
