@@ -19,8 +19,8 @@
                 <li th:class="(${type} == 1) ? 'active':''">
                     <a href="index.html">首页<span class="sr-only">(current)</span></a>
                 </li>
-                <li>
-                    <a href="#">悬赏</a>
+                <li th:class="(${type} == 2) ? 'active':''">
+                    <a href="ad01list.html">悬赏</a>
                 </li>
                 <li th:class="(${type} == 3) ? 'active':''">
                     <a href="auction.html">拍卖</a>
@@ -32,7 +32,7 @@
                        aria-expanded="false">收藏夹<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#">收藏的悬赏</a>
+                            <a href="/ad01/forklist">收藏的悬赏</a>
                         </li>
                         <li>
                             <a href="#">收藏的拍卖</a>
@@ -50,7 +50,7 @@
                             <a href="goodLaunch.html">出售</a>
                         </li>
                         <li>
-                            <a href="#">悬赏</a>
+                            <a href="/ad01/add">添加悬赏</a>
                         </li>
                         <li>
                             <a href="auctionLaunch.html">发起拍卖</a>
