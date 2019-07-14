@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<!-- 新 Bootstrap4 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+<script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+
+<!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        table{border-collapse:collapse;}
+        table,th, td{border: 1px solid black;padding: 5px;text-align: center;}
+    </style>
+</head>
+<body>
+<br/>
+<br/>
+<a href="/ad01/add">添加</a>
+<a href="/ad01/edit">修改</a>
+<br/>
+<br/>
+<table>
+    <div class="container">
+    <thead>
+    <th width="10%">悬赏号</th>
+    <th width="10%">用户号</th>
+    <th width="10%">金额</th>
+    <th width="10%">数量</th>
+    <th width="10%">标题</th>
+    <th width="10%">描述</th>
+    <th width="10%">开始时间</th>
+    <th width="10%">结束时间</th>
+    <th width="20%">操作</th>
+    </thead>
+    <tbody>
+    <div class="container">
+    <tr th:each="ad01:${ad01}">
+        <td th:text="${ad01.aad101}"></td>
+        <td th:text="${ad01.aab101}"></td>
+        <td th:text="${ad01.aad104}"></td>
+        <td th:text="${ad01.aad106}"></td>
+        <td th:text="${ad01.aad105}"></td>
+        <td th:text="${ad01.aad103}"></td>
+        <td th:text="${#dates.format(ad01.aad107,'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${#dates.format(ad01.aad108,'yyyy-MM-dd HH:mm:ss')}"></td>
+
+        <td>
+            <a th:href="@{/ad01/edit(aad101=${ad01.aad101})}">编辑</a> &nbsp;&nbsp;
+            <a th:href="@{/ad01/del/(aad101=${ad01.aad101})}">删除</a>
+        </td>
+
+    </tr>
+    </div>
+    </tbody>
+    </div>
+</table>
+
+
+</body>
+</html>
