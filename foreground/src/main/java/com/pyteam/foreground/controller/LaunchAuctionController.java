@@ -17,6 +17,7 @@ public class LaunchAuctionController
     @RequestMapping(value = "/auctionLaunch.html", method = RequestMethod.GET)
     public String insert(Ad02Dto dto, Model model) throws Exception
     {
+        model.addAttribute("type", 3);
         return "auctionLaunch";
     }
 
@@ -25,8 +26,7 @@ public class LaunchAuctionController
     {
         try
         {
-            //        System.out.println(dto);
-//        System.out.println(dto.getAad203().getSize());
+            model.addAttribute("type", 3);
 
             services.addAd02(dto);
 

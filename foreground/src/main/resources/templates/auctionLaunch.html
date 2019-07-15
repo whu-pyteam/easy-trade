@@ -20,6 +20,8 @@
 </head>
 
 <body>
+<div th:replace="header::header(${type})"></div>
+
 <div class="container">
     <div class="row">
         <div class="col-lg-3"></div>
@@ -30,7 +32,7 @@
                         <label for="01">物品名称:</label>
                     </div>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" name="aad202" id="01">
+                        <input type="text" class="form-control" name="aad202" id="01" required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -38,7 +40,7 @@
                         <label for="kv-explorer">物品图片:</label>
                     </div>
                     <div class="col-lg-10">
-                        <input id="kv-explorer" type="file" name="aad203" multiple>
+                        <input id="kv-explorer" type="file" name="aad203" multiple required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -46,7 +48,7 @@
                         <label for="02">物品介绍:</label>
                     </div>
                     <div class="col-lg-10">
-                        <textarea class="form-control" rows="5" name="aad204" id="02"></textarea>
+                        <textarea class="form-control" rows="5" name="aad204" id="02" required></textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -59,7 +61,7 @@
                         <label for="03">交易底价:</label>
                     </div>
                     <div class="col-lg-10">
-                        <input type="number" class="form-control" step="0.01" name="aad206" id="03">
+                        <input type="number" class="form-control" step="0.01" name="aad206" id="03" required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -67,7 +69,7 @@
                         <label for="04">加价金额:</label>
                     </div>
                     <div class="col-lg-10">
-                        <input type="number" class="form-control" step="0.01" name="aad207" id="04">
+                        <input type="number" class="form-control" step="0.01" name="aad207" id="04" required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -105,20 +107,23 @@
         uploadUrl: '#',
         language: 'zh',
         showUpload: false,
-//			showPreview: false,
         allowedFileExtensions: ['jpg', 'png', 'gif'],
+        dropZoneEnabled: false,
+        maxFileCount: 1,
         fileActionSettings: {
             showUpload: false, // will be always false for resumable uploads
             showZoom: false,
         }
     });
-    var date = new Date();
+    var sDate = new Date();
+    var eDate = new Date(date.getTime() + 1000*60*60*24*30);
     $('.form_date').datetimepicker({
         language: 'zh-CN',
         autoclose: true, //自动关闭
         todayHighlight: 1, //高亮今日日期
         startView: 2, //从日期视图开始
-        startDate: date,
+        startDate: sDate,
+        endDate: eDate,
         forceParse: 0
 
     });
