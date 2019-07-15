@@ -2,9 +2,12 @@ package com.pyteam.foreground.service;
 
 import com.pyteam.db.mbg.entity.Ad05;
 import com.pyteam.foreground.mapper.Ad05NewMapper;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author wjm
@@ -35,5 +38,23 @@ public class Ad05ServicesImpl implements Ad05Service
     public Ad05 aad501(Ad05 ad05)
     {
          return ad05NewMapper.aad501(ad05);
+    }
+
+    @Override
+    public List<Ad05> selectbyaab101(int id)
+    {
+        return ad05NewMapper.slect(id);
+    }
+
+    @Override
+    public int count (int aab101)
+    {
+        return ad05NewMapper.count(aab101);
+    }
+
+    @Override
+    public void delete(int aad101,int aab101)
+    {
+        ad05NewMapper.delete(aad101,aab101);
     }
 }

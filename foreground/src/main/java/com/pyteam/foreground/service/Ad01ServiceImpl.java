@@ -7,7 +7,9 @@ import com.pyteam.foreground.mapper.Ad01NewMapper;
 import io.swagger.annotations.Example;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -15,6 +17,7 @@ import java.util.List;
  * @date2019/7/9 13:23
  */
 @Service
+@Transactional
 public class Ad01ServiceImpl implements Ad01Service
 {
     @Autowired

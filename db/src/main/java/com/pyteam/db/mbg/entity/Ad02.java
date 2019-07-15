@@ -31,6 +31,8 @@ public class Ad02 implements Serializable {
 
     private Date aad211;
 
+    private Date aad212;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getAad201() {
@@ -137,6 +139,14 @@ public class Ad02 implements Serializable {
         this.aad211 = aad211;
     }
 
+    public Date getAad212() {
+        return aad212;
+    }
+
+    public void setAad212(Date aad212) {
+        this.aad212 = aad212;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -156,6 +166,7 @@ public class Ad02 implements Serializable {
         sb.append(", aad209=").append(aad209);
         sb.append(", aad210=").append(aad210);
         sb.append(", aad211=").append(aad211);
+        sb.append(", aad212=").append(aad212);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

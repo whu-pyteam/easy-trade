@@ -37,63 +37,40 @@ public class Ad04Controller
     @GetMapping("ad01list.html")
     public String Show(Model m)
     {
-        m.addAttribute("ad01",ad01Service.listByAll());
+        m.addAttribute("ad01", ad01Service.listByAll());
         return "ad01list";
+    }
+
+    @GetMapping("ad01/list")
+    public String viewad01list(@RequestParam(value = "aad101",required = false)Integer aad101,@RequestParam(value = "aab101",required = false)Integer aab101)
+    {
+        List<Ad04> ad04s=ad04Service.query(aab101);
+        Ad01 ad01=new Ad01();
+        ad01.setAab101(aab101);
+        ad01.setAad101(aad101);
+        if(ad04s.size()==0)
+        {
+            ad04Service.add(ad01);
+        }
+        Ad04 ad04= ad04s.get(0);
+        Ae04 ae04=new Ae04();
+        ae04.setAad101(ad01.getAad101());
+        ae04.setAad401(ad04.getAad401());
+        Ae04 testae04=ae04Service.select(ae04);
+        System.out.println(testae04);
+        if(testae04==null)
+        {
+            ae04Service.add(ae04);
+            return "ad01/list";
+        }
+        return"ad01/listone";
     }
 
     @GetMapping("ad01list")
-    public String Showagain(Model m)
+    public String showad01list(Model m)
     {
         m.addAttribute("ad01",ad01Service.listByAll());
         return "ad01list";
-    }
-
-    @PostMapping("ad01list")
-    public void viewad01list(@RequestParam(value = "aad101",required = false)int aad101,@RequestParam(value = "aab101",required = false)int aab101)
-    {
-        List<Ad04> ad04s=ad04Service.query(aab101);
-        Ad01 ad01=new Ad01();
-        ad01.setAab101(aab101);
-        ad01.setAad101(aad101);
-        if(ad04s.size()==0)
-        {
-            ad04Service.add(ad01);
-        }
-        Ad04 ad04= ad04s.get(0);
-        System.out.println(ad04);
-        Ae04 ae04=new Ae04();
-        ae04.setAad101(ad01.getAad101());
-        ae04.setAad401(ad04.getAad401());
-        Ae04 testae04=ae04Service.select(ae04);
-        if(testae04==null)
-        {
-            ae04Service.add(ae04);
-        }
-
-    }
-    @ResponseBody
-    @RequestMapping(value = "ad01/fork" ,method =RequestMethod.GET)
-    public void view(@RequestParam(value = "aad101",required = false)int aad101,@RequestParam(value = "aab101",required = false)int aab101)
-    {
-        List<Ad04> ad04s=ad04Service.query(aab101);
-        Ad01 ad01=new Ad01();
-        ad01.setAab101(aab101);
-        ad01.setAad101(aad101);
-        if(ad04s.size()==0)
-        {
-            ad04Service.add(ad01);
-        }
-        Ad04 ad04= ad04s.get(0);
-        System.out.println(ad04);
-        Ae04 ae04=new Ae04();
-        ae04.setAad101(ad01.getAad101());
-        ae04.setAad401(ad04.getAad401());
-        Ae04 testae04=ae04Service.select(ae04);
-        if(testae04==null)
-        {
-            ae04Service.add(ae04);
-        }
-
     }
 
     @GetMapping("ad01/forklist")

@@ -10,7 +10,11 @@ import com.pyteam.foreground.service.Ad05Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author wjm
@@ -60,6 +64,33 @@ public class Ad05Controller
 
         }
         return "ad01/select";
+    }
+
+
+    @GetMapping("ad01/ad01Accept")
+    public String show(Model m, Session session)
+    {
+        int id=2;
+        List<Ad05> ad05List=new ArrayList<>();
+        List<Ad01> ad01List=new ArrayList<>();
+        ad05List=ad05Service.selectbyaab101(id);
+        int count =ad05Service.count(id);
+        for(int i=0;i<count;i++)
+        {
+            int aad101=ad05List.get(i).getAad101();
+            ad01List.add(ad01Service.findbyaad101(aad101));
+        }
+
+        m.addAttribute("ad01",ad01List);
+        return "ad01/ad01Accept";
+    }
+
+    @PostMapping("ad01/ad01Accept")
+    public String show(@RequestParam(value = "aad101")int aad101)
+    {
+        int aab101=2;
+        ad05Service.delete(aad101,aab101);
+        return "ad01/ad01Accept";
     }
 
 }

@@ -23,12 +23,6 @@ public class Ad01Controller
 {
     @Autowired
     private Ad01Service ad01Service;
-    @GetMapping("list")
-    public String list(Model m)
-    {
-        m.addAttribute("ad01",ad01Service.listByAll());
-        return "ad01/list";
-    }
     @GetMapping("edit")
     public String edit(Model m)
     {
@@ -76,7 +70,7 @@ public class Ad01Controller
         System.out.println(id);
         int aid=Integer.parseInt(id);
         ad01Service.deleteById(aid);
-        return "ad01/del";
+        return "ad01/edit";
     }
     @GetMapping("del")
     public String showdel(Model m)
@@ -84,6 +78,14 @@ public class Ad01Controller
         m.addAttribute("ad01",ad01Service.findById(1));
         return "ad01/del";
     }
+    @RequestMapping("/delad01")
+    public String delete(@RequestParam(value = "aad101",required = false) int id)
+    {
+        System.out.println(id);
+        ad01Service.deleteById(id);
+        return "ad01/edit";
+    }
+
     @RequestMapping("cxk")
     public String showList(@RequestParam(value = "notsure",required=false)String id,Model m)
     {
@@ -108,7 +110,7 @@ public class Ad01Controller
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
         //true:允许为空, false:不允许为空
