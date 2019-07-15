@@ -1,5 +1,6 @@
 package com.pyteam.foreground.controller;
 
+import com.pyteam.foreground.dto.Ad02Dto;
 import com.pyteam.foreground.service.Ad02Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,12 +48,36 @@ public class AuctionController
         }
     }
 
+    @RequestMapping(value = "/auctionLaunch.html", method = RequestMethod.GET)
+    public String insert(Ad02Dto dto, Model model)
+    {
+        model.addAttribute("type", 3);
+        return "auctionLaunch";
+    }
+
+    @RequestMapping(value = "/auctionLaunch.html", method = RequestMethod.POST)
+    public String add(Ad02Dto dto, Model model)
+    {
+        try
+        {
+            model.addAttribute("type", 3);
+            service.addAd02(dto);
+            return "auctionLaunch";
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return "error/404";
+        }
+    }
+
+
     @RequestMapping(value = "/auction.html", method = RequestMethod.GET)
     public String wel(Model model)
     {
         try
         {
-            model.addAttribute("ad02List", service.selectById());
+            model.addAttribute("ad02List", service.selectAll());
             model.addAttribute("type", 3);
             return "auction";
         }
