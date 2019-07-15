@@ -1,6 +1,7 @@
 package com.pyteam.db.mbg.entity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Ab05Example {
@@ -291,6 +292,206 @@ public class Ab05Example {
 
         public Criteria andAab502NotBetween(String value1, String value2) {
             addCriterion("aab502 not between", value1, value2, "aab502");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab503IsNull() {
+            addCriterion("aab503 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab503IsNotNull() {
+            addCriterion("aab503 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab503EqualTo(String value) {
+            addCriterion("aab503 =", value, "aab503");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab503NotEqualTo(String value) {
+            addCriterion("aab503 <>", value, "aab503");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab503GreaterThan(String value) {
+            addCriterion("aab503 >", value, "aab503");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab503GreaterThanOrEqualTo(String value) {
+            addCriterion("aab503 >=", value, "aab503");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab503LessThan(String value) {
+            addCriterion("aab503 <", value, "aab503");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab503LessThanOrEqualTo(String value) {
+            addCriterion("aab503 <=", value, "aab503");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab503Like(String value) {
+            addCriterion("aab503 like", value, "aab503");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab503NotLike(String value) {
+            addCriterion("aab503 not like", value, "aab503");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab503In(List<String> values) {
+            addCriterion("aab503 in", values, "aab503");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab503NotIn(List<String> values) {
+            addCriterion("aab503 not in", values, "aab503");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab503Between(String value1, String value2) {
+            addCriterion("aab503 between", value1, value2, "aab503");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab503NotBetween(String value1, String value2) {
+            addCriterion("aab503 not between", value1, value2, "aab503");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab504IsNull() {
+            addCriterion("aab504 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab504IsNotNull() {
+            addCriterion("aab504 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab504EqualTo(String value) {
+            addCriterion("aab504 =", value, "aab504");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab504NotEqualTo(String value) {
+            addCriterion("aab504 <>", value, "aab504");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab504GreaterThan(String value) {
+            addCriterion("aab504 >", value, "aab504");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab504GreaterThanOrEqualTo(String value) {
+            addCriterion("aab504 >=", value, "aab504");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab504LessThan(String value) {
+            addCriterion("aab504 <", value, "aab504");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab504LessThanOrEqualTo(String value) {
+            addCriterion("aab504 <=", value, "aab504");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab504Like(String value) {
+            addCriterion("aab504 like", value, "aab504");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab504NotLike(String value) {
+            addCriterion("aab504 not like", value, "aab504");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab504In(List<String> values) {
+            addCriterion("aab504 in", values, "aab504");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab504NotIn(List<String> values) {
+            addCriterion("aab504 not in", values, "aab504");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab504Between(String value1, String value2) {
+            addCriterion("aab504 between", value1, value2, "aab504");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab504NotBetween(String value1, String value2) {
+            addCriterion("aab504 not between", value1, value2, "aab504");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab505IsNull() {
+            addCriterion("aab505 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab505IsNotNull() {
+            addCriterion("aab505 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab505EqualTo(Date value) {
+            addCriterion("aab505 =", value, "aab505");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab505NotEqualTo(Date value) {
+            addCriterion("aab505 <>", value, "aab505");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab505GreaterThan(Date value) {
+            addCriterion("aab505 >", value, "aab505");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab505GreaterThanOrEqualTo(Date value) {
+            addCriterion("aab505 >=", value, "aab505");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab505LessThan(Date value) {
+            addCriterion("aab505 <", value, "aab505");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab505LessThanOrEqualTo(Date value) {
+            addCriterion("aab505 <=", value, "aab505");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab505In(List<Date> values) {
+            addCriterion("aab505 in", values, "aab505");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab505NotIn(List<Date> values) {
+            addCriterion("aab505 not in", values, "aab505");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab505Between(Date value1, Date value2) {
+            addCriterion("aab505 between", value1, value2, "aab505");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab505NotBetween(Date value1, Date value2) {
+            addCriterion("aab505 not between", value1, value2, "aab505");
             return (Criteria) this;
         }
     }
