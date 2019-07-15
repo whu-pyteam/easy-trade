@@ -42,114 +42,111 @@
         <!--指定生成mapper接口的的路径-->
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.pyteam.db.mbg.mapper"
                              targetProject="db\src\main\java"/>
-        <!--&lt;!&ndash;                生成全部表tableName设为%&ndash;&gt;-->
-        <!--        <table tableName="test">-->
-        <!--            <generatedKey column="aab01" sqlStatement="MySql" identity="true"/>-->
-        <!--        </table>-->
-        <table tableName="ab01">
-            <generatedKey column="aab101" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ab02">
-            <generatedKey column="aab201" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ab03">
-            <generatedKey column="aab301" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ab04">
-            <generatedKey column="aab401" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ab05">
-            <generatedKey column="aab501" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ab06">
-            <generatedKey column="aab601" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ac01">
-            <generatedKey column="aac101" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ac02">
-            <generatedKey column="aac201" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ac03">
-            <generatedKey column="aac301" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ac04">
-            <generatedKey column="aac401" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ac05">
-            <generatedKey column="aac501" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ad01">
-            <generatedKey column="aad101" sqlStatement="MySql" identity="true"/>
-        </table>
+
+<!--        <table tableName="ab01">-->
+<!--            <generatedKey column="aab101" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ab02">-->
+<!--            <generatedKey column="aab201" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ab03">-->
+<!--            <generatedKey column="aab301" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ab04">-->
+<!--            <generatedKey column="aab401" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ab05">-->
+<!--            <generatedKey column="aab501" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ab06">-->
+<!--            <generatedKey column="aab601" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ac01">-->
+<!--            <generatedKey column="aac101" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ac02">-->
+<!--            <generatedKey column="aac201" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ac03">-->
+<!--            <generatedKey column="aac301" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ac04">-->
+<!--            <generatedKey column="aac401" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ac05">-->
+<!--            <generatedKey column="aac501" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ad01">-->
+<!--            <generatedKey column="aad101" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
         <table tableName="ad02">
             <generatedKey column="aad201" sqlStatement="MySql" identity="true"/>
         </table>
-        <table tableName="ad03">
-            <generatedKey column="aad301" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ad04">
-            <generatedKey column="aad401" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ad05">
-            <generatedKey column="aad501" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ad06">
-            <generatedKey column="aad601" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ae01">
-            <generatedKey column="aae101" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ae02">
-            <generatedKey column="aae201" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ae03">
-            <generatedKey column="aae301" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ae04">
-            <generatedKey column="aae401" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ae05">
-            <generatedKey column="aae501" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ae06">
-            <generatedKey column="aae601" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ae07">
-            <generatedKey column="aae701" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ae08">
-            <generatedKey column="aae801" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="ae09">
-            <generatedKey column="aae901" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="af01">
-            <generatedKey column="aaf101" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="af02">
-            <generatedKey column="aaf201" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="af03">
-            <generatedKey column="aaf301" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="af04">
-            <generatedKey column="aaf401" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="af05">
-            <generatedKey column="aaf501" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="af06">
-            <generatedKey column="aaf601" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="af07">
-            <generatedKey column="aaf701" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="af08">
-            <generatedKey column="aaf801" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="af09">
-            <generatedKey column="aaf901" sqlStatement="MySql" identity="true"/>
-        </table>
+<!--        <table tableName="ad03">-->
+<!--            <generatedKey column="aad301" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ad04">-->
+<!--            <generatedKey column="aad401" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ad05">-->
+<!--            <generatedKey column="aad501" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ad06">-->
+<!--            <generatedKey column="aad601" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ae01">-->
+<!--            <generatedKey column="aae101" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ae02">-->
+<!--            <generatedKey column="aae201" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ae03">-->
+<!--            <generatedKey column="aae301" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ae04">-->
+<!--            <generatedKey column="aae401" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ae05">-->
+<!--            <generatedKey column="aae501" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ae06">-->
+<!--            <generatedKey column="aae601" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ae07">-->
+<!--            <generatedKey column="aae701" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ae08">-->
+<!--            <generatedKey column="aae801" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="ae09">-->
+<!--            <generatedKey column="aae901" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="af01">-->
+<!--            <generatedKey column="aaf101" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="af02">-->
+<!--            <generatedKey column="aaf201" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="af03">-->
+<!--            <generatedKey column="aaf301" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="af04">-->
+<!--            <generatedKey column="aaf401" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="af05">-->
+<!--            <generatedKey column="aaf501" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="af06">-->
+<!--            <generatedKey column="aaf601" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="af07">-->
+<!--            <generatedKey column="aaf701" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="af08">-->
+<!--            <generatedKey column="aaf801" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="af09">-->
+<!--            <generatedKey column="aaf901" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
     </context>
 </generatorConfiguration>
