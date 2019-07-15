@@ -1,12 +1,17 @@
 package com.pyteam.foreground.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.pyteam.foreground.dto.Ac01Dto;
 import com.pyteam.foreground.service.Ac01Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+
+import static com.pyteam.foreground.controller.LoginController.isLogin;
+import static com.pyteam.foreground.controller.LoginController.getCookies;
 
 @Controller
 public class IndexController
@@ -47,9 +52,15 @@ public class IndexController
     }
 
     @RequestMapping(value = "/goodLaunch.html", method = RequestMethod.GET)
-    public String add(Model model) throws Exception
+    public String add(HttpServletRequest request) throws Exception
     {
-        return "goodLaunch";
+        if (isLogin(request))
+        {
+            return "goodLaunch";
+        } else
+        {
+            return "error/relogin";
+        }
     }
 
     @RequestMapping(value = "/goodLaunch.html", method = RequestMethod.POST)
