@@ -19,6 +19,23 @@ public class IndexController
     @Autowired
     private Ac01Service ac01Service;
 
+    @RequestMapping(value = "/index.html", method = RequestMethod.GET)
+    public String wel(Model model)
+    {
+        try
+        {
+            model.addAttribute("type", 1);
+            model.addAttribute("ac01List", ac01Service.selectById());
+            return "index";
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return "error/404";
+        }
+    }
+
+
     @RequestMapping(value="goodShow.html",method=RequestMethod.GET)
     public String searchById(int id, Model model)
     {
@@ -35,14 +52,15 @@ public class IndexController
         }
     }
 
-    @RequestMapping(value = "/index.html", method = RequestMethod.GET)
-    public String wel(Model model)
+    @RequestMapping(value = "/goodSearch.html", method = RequestMethod.POST)
+    public String searchByValue(@RequestParam(value = "searchValue") String value, Model model)
     {
+        System.out.println(value);
         try
         {
+            model.addAttribute("searchList", ac01Service.searchByValue(value));
             model.addAttribute("type", 1);
-            model.addAttribute("ac01List", ac01Service.selectById());
-            return "index";
+            return "goodSearch";
         }
         catch (Exception e)
         {
@@ -50,6 +68,7 @@ public class IndexController
             return "error/404";
         }
     }
+
 
     @RequestMapping(value = "/goodLaunch.html", method = RequestMethod.GET)
     public String add(HttpServletRequest request) throws Exception

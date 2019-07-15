@@ -64,9 +64,9 @@
 
         </div>
         <div class="col-sm-8">
-            <form class="navbar-form navbar-right" role="search">
+            <form class="navbar-form navbar-right" role="search" action="/goodSearch.html" method="post">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" class="form-control" placeholder="Search" name="searchValue">
                     <button type="submit" class="btn btn-default">搜索</button>
                 </div>
             </form>
@@ -228,7 +228,7 @@
                             <h3 th:text="${ac01.aac102}"></h3>
                             <p th:text="${ac01.aac103}"></p>
                             <p>
-                                <a href="#" class="btn btn-primary" role="button">收藏</a>
+                                <a href="#" class="btn btn-primary" role="button">加入购物车</a>
                                 <a href="#" class="btn btn-default" role="button">购买</a>
                             </p>
                         </div>
