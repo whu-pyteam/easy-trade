@@ -935,6 +935,66 @@ public class Ad02Example {
             addCriterion("aad211 not between", value1, value2, "aad211");
             return (Criteria) this;
         }
+
+        public Criteria andAad212IsNull() {
+            addCriterion("aad212 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad212IsNotNull() {
+            addCriterion("aad212 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad212EqualTo(Date value) {
+            addCriterion("aad212 =", value, "aad212");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad212NotEqualTo(Date value) {
+            addCriterion("aad212 <>", value, "aad212");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad212GreaterThan(Date value) {
+            addCriterion("aad212 >", value, "aad212");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad212GreaterThanOrEqualTo(Date value) {
+            addCriterion("aad212 >=", value, "aad212");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad212LessThan(Date value) {
+            addCriterion("aad212 <", value, "aad212");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad212LessThanOrEqualTo(Date value) {
+            addCriterion("aad212 <=", value, "aad212");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad212In(List<Date> values) {
+            addCriterion("aad212 in", values, "aad212");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad212NotIn(List<Date> values) {
+            addCriterion("aad212 not in", values, "aad212");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad212Between(Date value1, Date value2) {
+            addCriterion("aad212 between", value1, value2, "aad212");
+            return (Criteria) this;
+        }
+
+        public Criteria andAad212NotBetween(Date value1, Date value2) {
+            addCriterion("aad212 not between", value1, value2, "aad212");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -45,18 +45,28 @@ function openRegisterModal(){
 }
 
 function loginAjax(){
-    /*   Remove this comments when moving to server
-    $.post( "/login", function( data ) {
-            if(data == 1){
-                window.location.replace("/home");            
-            } else {
-                 shakeModal(); 
-            }
+    $.post( "login.html",{username:$("input[name='email']").val(),password:$("input[name='password']").val()}, function(data) {
+        if(data==true)
+        {
+            alert("登录成功！");
+            window.location.replace("/index.html");
+        }
+        else
+        {
+            shakeModal();
+        }
         });
-    */
-
-/*   Simulate error message from the server   */
-     shakeModal();
+    /*   Remove this comments when moving to server
+        $.post( "/login", function( data ) {
+                if(data == 1){
+                    window.location.replace("/home");
+                } else {
+                     shakeModal();
+                }
+            });
+        */
+    /*   Simulate error message from the server   */
+        // shakeModal();
 }
 
 function shakeModal(){
