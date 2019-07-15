@@ -51,19 +51,20 @@ public class Ad02Service
         ad02.setAad207(dto.getAad207());
         ad02.setAad208(BigDecimal.valueOf(2400));
         ad02.setAad209("0");  //未审核
-        ad02.setAad210(new Date());
+        ad02.setAad210(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2000-01-01 00:00"));
         ad02.setAad211(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dto.getAad211()));
+        ad02.setAad212(new Date());
         System.out.println(ad02);
         int res = ad02Mapper.insert(ad02);
         System.out.println(res);
         return res > 0;
     }
 
-    public List<Ad02> selectById() throws Exception
+    public List<Ad02> selectAll() throws Exception
     {
         Ad02Example example = new Ad02Example();
         Criteria criteria = example.createCriteria();
-        criteria.andAab101EqualTo(2);
+        criteria.andAad209EqualTo("1");
         List<Ad02> ad02List = ad02Mapper.selectByExample(example);
         return ad02List;
     }
