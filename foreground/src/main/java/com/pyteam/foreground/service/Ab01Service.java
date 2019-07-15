@@ -38,4 +38,30 @@ public class Ab01Service
         System.out.println(res);
         return res.intValue() > 0;
     }
+
+    public boolean isMember(int id, String password) throws Exception
+    {
+        Ab01 ab01 = ab01Mapper.selectByPrimaryKey(id);
+        if (ab01 == null)
+        {
+            /**
+             * 用户不存在
+             */
+            return false;
+        }
+        if (ab01.getAab108().equals(password))
+        {
+            /**
+             * 用户名密码匹配
+             */
+            return true;
+        }
+        else
+        {
+            /**
+             * 用户名不匹配密码
+             */
+            return false;
+        }
+    }
 }
