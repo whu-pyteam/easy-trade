@@ -494,6 +494,79 @@ public class Ab05Example {
             addCriterion("aab505 not between", value1, value2, "aab505");
             return (Criteria) this;
         }
+<<<<<<< HEAD
+=======
+
+        public Criteria andAab506IsNull() {
+            addCriterion("aab506 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab506IsNotNull() {
+            addCriterion("aab506 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab506EqualTo(String value) {
+            addCriterion("aab506 =", value, "aab506");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab506NotEqualTo(String value) {
+            addCriterion("aab506 <>", value, "aab506");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab506GreaterThan(String value) {
+            addCriterion("aab506 >", value, "aab506");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab506GreaterThanOrEqualTo(String value) {
+            addCriterion("aab506 >=", value, "aab506");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab506LessThan(String value) {
+            addCriterion("aab506 <", value, "aab506");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab506LessThanOrEqualTo(String value) {
+            addCriterion("aab506 <=", value, "aab506");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab506Like(String value) {
+            addCriterion("aab506 like", value, "aab506");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab506NotLike(String value) {
+            addCriterion("aab506 not like", value, "aab506");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab506In(List<String> values) {
+            addCriterion("aab506 in", values, "aab506");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab506NotIn(List<String> values) {
+            addCriterion("aab506 not in", values, "aab506");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab506Between(String value1, String value2) {
+            addCriterion("aab506 between", value1, value2, "aab506");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab506NotBetween(String value1, String value2) {
+            addCriterion("aab506 not between", value1, value2, "aab506");
+            return (Criteria) this;
+        }
+>>>>>>> ff3b309713350261d60686edffb3697e5622358b
     }
 
     public static class Criteria extends GeneratedCriteria {
