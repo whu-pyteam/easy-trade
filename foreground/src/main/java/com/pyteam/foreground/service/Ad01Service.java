@@ -2,8 +2,10 @@ package com.pyteam.foreground.service;
 
 import com.pyteam.db.mbg.entity.Ad01;
 import com.pyteam.db.mbg.entity.Ad01Example;
+import com.pyteam.db.mbg.entity.Ad05;
 import com.pyteam.db.mbg.mapper.Ad01Mapper;
 import com.pyteam.foreground.controller.Ad01Controller;
+import com.pyteam.foreground.dto.Ad01Dto;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +30,7 @@ public  interface Ad01Service
     //更新人数
     Ad01 findbyaad101(int aad101);
     void editcount(Ad01 ad01);
+    //查询买家列表
+    List<Ad05>select(int id);
 }
 

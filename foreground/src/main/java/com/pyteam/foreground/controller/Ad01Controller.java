@@ -1,7 +1,10 @@
 package com.pyteam.foreground.controller;
 
 import com.pyteam.db.mbg.entity.Ad01;
+import com.pyteam.db.mbg.entity.Ad05;
+import com.pyteam.foreground.service.Ac05Service;
 import com.pyteam.foreground.service.Ad01Service;
+import com.pyteam.foreground.service.Ad05Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -11,25 +14,30 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author wjm
  * @date2019/7/8 19:14
  */
 @Controller
-@RequestMapping("ad01")
+@RequestMapping("/ad01")
 public class Ad01Controller
 {
     @Autowired
     private Ad01Service ad01Service;
-    @GetMapping("edit")
+    @Autowired
+    private Ad05Service ad05Service;
+    @GetMapping("/edit")
     public String edit(Model m)
     {
-        m.addAttribute("ad01",ad01Service.findById(1));
+        int id=1;
+        m.addAttribute("ad01",ad01Service.findById(id));
         return "ad01/edit";
     }
-    @PostMapping("edit")
+    @PostMapping("/edit")
     public String edit(@ModelAttribute("ad01")Ad01 ad01)
     {
         System.out.println(ad01);
@@ -45,13 +53,13 @@ public class Ad01Controller
         System.out.println(ad01Service.moreQuery(question).toString());
         return "ad01/select";
     }
-    @GetMapping("select")
+    @GetMapping("/select")
     public String Query()
     {
         return "ad01/select";
     }
 
-    @PostMapping ("add")
+    @PostMapping ("/add")
     public String add(@ModelAttribute (value = "ad01")Ad01 ad01)
     {
         ad01.setAab101(1);

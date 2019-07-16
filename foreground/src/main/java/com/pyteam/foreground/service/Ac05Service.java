@@ -8,6 +8,8 @@ import com.pyteam.db.mbg.entity.Ac05;
  */
 public interface Ac05Service
 {
-    void add(Ac05 ac05);
+    void add(Ac05 ac05, int aad101);
     int count(String id);
+    void save(int aad101);
+    int ret();
 }

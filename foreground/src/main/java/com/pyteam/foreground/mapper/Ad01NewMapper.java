@@ -44,4 +44,14 @@ public interface Ad01NewMapper
 
     @Update("update ad01 set aad106=#{aad106} where aad101=#{aad101}")
     void updateaad106(Ad01 ad01);
+
+    //用户的创建单数
+
+    @Select("select count(aad101) from ad01 where aab101=#{aab101}")
+    int count (int aab101);
+
+    //单号集合
+
+    @Select("select aad101 from ad01 where aab101=#{aab101}")
+    List<Ad01> order(int aab101);
 }

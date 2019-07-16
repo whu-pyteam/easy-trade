@@ -34,4 +34,7 @@ public interface Ad05NewMapper
 
     @Delete("delete from ad05 where aad101=#{aad101} and aab101=#{aab101}")
     void delete(int aad101,int aab101);
+
+    @Select("select aab101 from ad05 where aad101=#{aad101}")
+    List<Ad05> selectbyaad101(int aad101);
 }

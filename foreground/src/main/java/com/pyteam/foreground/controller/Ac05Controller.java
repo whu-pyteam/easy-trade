@@ -1,7 +1,12 @@
 package com.pyteam.foreground.controller;
 
 import com.pyteam.db.mbg.entity.Ac05;
+import com.pyteam.db.mbg.entity.Ae07;
+import com.pyteam.foreground.mapper.Ac05NewMapper;
+import com.pyteam.foreground.mapper.Ae07NewMapper;
 import com.pyteam.foreground.service.Ac05Service;
+import org.apache.ibatis.annotations.Param;
+import org.mapstruct.ValueMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -27,33 +32,16 @@ public class Ac05Controller
     @PostMapping("orderAdd")
     public String view(@ModelAttribute("ac05")Ac05 ac05)
     {
-        Date date= ac05.getAac511();
-        SimpleDateFormat sd1= new SimpleDateFormat("yyyyMMddHH");
-        String before=sd1.format(date);
-        System.out.println(before);
-        int aab101=ac05.getAab101();
-        String aac502;
-        int count;
-        do
-        {
-            Integer after = (int) ((Math.random() * 9 + 1) * 10);
-            StringBuilder a = new StringBuilder();
-            a.append(aab101).append(before).append(after);
-            aac502 = a.toString();
-            System.out.println(aac502);
-            count=ac05Service.count(aac502);
-        }
-        while(count==1);
-
-        ac05.setAac502(aac502);
-        ac05Service.add(ac05);
-        System.out.println("插入成功");
+        int aad101=ac05Service.ret();
+        ac05Service.add(ac05,aad101);
         return "orderAdd";
     }
+
     @GetMapping("orderAdd")
-    public String view()
+    public void  select(@RequestParam(value="aad101")int aad101,Model m)
     {
-        return "orderAdd";
+        int id=aad101;
+        ac05Service.save(id);
     }
 
 

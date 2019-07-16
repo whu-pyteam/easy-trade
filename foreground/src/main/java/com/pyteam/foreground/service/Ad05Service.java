@@ -21,4 +21,7 @@ public interface Ad05Service
     int count(int aab101);
 
     void delete(int aad101,int aab101);
+
+    List<Ad05>selectbyaad101(int id);
+
 }
