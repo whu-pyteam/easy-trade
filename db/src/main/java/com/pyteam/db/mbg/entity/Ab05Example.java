@@ -1,7 +1,6 @@
 package com.pyteam.db.mbg.entity;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Ab05Example {
@@ -294,6 +293,7 @@ public class Ab05Example {
             addCriterion("aab502 not between", value1, value2, "aab502");
             return (Criteria) this;
         }
+<<<<<<< HEAD
 
         public Criteria andAab503IsNull() {
             addCriterion("aab503 is null");
@@ -564,6 +564,8 @@ public class Ab05Example {
             addCriterion("aab506 not between", value1, value2, "aab506");
             return (Criteria) this;
         }
+=======
+>>>>>>> parent of 2b55527... 拍卖物品收藏添加
     }
 
     public static class Criteria extends GeneratedCriteria {

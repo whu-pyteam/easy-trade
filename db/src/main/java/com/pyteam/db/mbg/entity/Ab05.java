@@ -1,7 +1,6 @@
 package com.pyteam.db.mbg.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Ab05 implements Serializable {
     private Integer aab501;
@@ -10,6 +9,7 @@ public class Ab05 implements Serializable {
 
     private String aab502;
 
+<<<<<<< HEAD
     private String aab503;
 
     private String aab504;
@@ -18,6 +18,8 @@ public class Ab05 implements Serializable {
 
     private String aab506;
 
+=======
+>>>>>>> parent of 2b55527... 拍卖物品收藏添加
     private static final long serialVersionUID = 1L;
 
     public Integer getAab501() {
@@ -44,6 +46,7 @@ public class Ab05 implements Serializable {
         this.aab502 = aab502;
     }
 
+<<<<<<< HEAD
     public String getAab503() {
         return aab503;
     }
@@ -76,6 +79,8 @@ public class Ab05 implements Serializable {
         this.aab506 = aab506;
     }
 
+=======
+>>>>>>> parent of 2b55527... 拍卖物品收藏添加
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -85,10 +90,13 @@ public class Ab05 implements Serializable {
         sb.append(", aab501=").append(aab501);
         sb.append(", aab101=").append(aab101);
         sb.append(", aab502=").append(aab502);
+<<<<<<< HEAD
         sb.append(", aab503=").append(aab503);
         sb.append(", aab504=").append(aab504);
         sb.append(", aab505=").append(aab505);
         sb.append(", aab506=").append(aab506);
+=======
+>>>>>>> parent of 2b55527... 拍卖物品收藏添加
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

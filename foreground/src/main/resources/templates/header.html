@@ -80,10 +80,10 @@
                 <li>
                     <a href="#">联系客服</a>
                 </li>
-                <li id="login">
+                <li>
                     <a class="btn" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">登录</a>
                 </li>
-                <li class="dropdown" id="my">
+                <li class="dropdown hidden">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">我的<span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -101,9 +101,6 @@
                         </li>
                         <li>
                             <a href="#">我的评论</a>
-                        </li>
-                        <li>
-                            <a href="#">退出登录</a>
                         </li>
                     </ul>
                 </li>
@@ -173,22 +170,5 @@
     </div>
 
     <script src="js/login-register.js"></script>
-    <script>
-        window.onload = function ()
-        {
-            show();
-        }
-        function show()
-        {
-            if (document.cookie)
-            {
-                document.getElementById("login").className = "hidden";
-            }
-            else
-            {
-                document.getElementById("my").className = "hidden";
-            }
-        }
-    </script>
 </nav>
 </html>

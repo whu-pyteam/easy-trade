@@ -4,9 +4,6 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-
-
-
     <properties resource="generator.properties"/>
     <context id="MySqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
         <property name="beginningDelimiter" value="`"/>
@@ -58,9 +55,9 @@
 <!--        <table tableName="ab04">-->
 <!--            <generatedKey column="aab401" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
-        <table tableName="ab05">
-            <generatedKey column="aab501" sqlStatement="MySql" identity="true"/>
-        </table>
+<!--        <table tableName="ab05">-->
+<!--            <generatedKey column="aab501" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
 <!--        <table tableName="ab06">-->
 <!--            <generatedKey column="aab601" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
@@ -82,9 +79,9 @@
 <!--        <table tableName="ad01">-->
 <!--            <generatedKey column="aad101" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
-<!--        <table tableName="ad02">-->
-<!--            <generatedKey column="aad201" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
+        <table tableName="ad02">
+            <generatedKey column="aad201" sqlStatement="MySql" identity="true"/>
+        </table>
 <!--        <table tableName="ad03">-->
 <!--            <generatedKey column="aad301" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->

@@ -26,7 +26,9 @@ public class Ad02Service
     @Autowired
     private QiniuUtil qiniuUtil;
 
-    public Ad02 findById(int id)
+
+
+    public Ad02 findById(int id) throws Exception
     {
         return ad02Mapper.selectByPrimaryKey(id);
     }
@@ -36,35 +38,29 @@ public class Ad02Service
      * @return 添加是否成功
      * @throws Exception
      */
-    public boolean insert(Ad02Dto dto)
+    public boolean addAd02(Ad02Dto dto) throws Exception
     {
-        try
-        {
-            Ad02 ad02 = new Ad02();
-            ad02.setAab101(2);
-            ad02.setAac201(1);
-            ad02.setAad202(dto.getAad202());
-            ad02.setAad203(qiniuUtil.uploadImg(dto.getAad203()));
-            ad02.setAad204(dto.getAad204());
-            ad02.setAad205(dto.getAad205());
-            ad02.setAad206(dto.getAad206());
-            ad02.setAad207(dto.getAad207());
-            ad02.setAad208(BigDecimal.valueOf(2400));
-            ad02.setAad209("0");  //未审核
-            ad02.setAad210(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2000-01-01 00:00"));
-            ad02.setAad211(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dto.getAad211()));
-            ad02.setAad212(new Date());
-            int res = ad02Mapper.insert(ad02);
-            return res > 0;
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            return false;
-        }
+        Ad02 ad02 = new Ad02();
+        ad02.setAab101(2);
+        ad02.setAac201(1);
+        ad02.setAad202(dto.getAad202());
+        ad02.setAad203(qiniuUtil.uploadImg(dto.getAad203()));
+        ad02.setAad204(dto.getAad204());
+        ad02.setAad205(dto.getAad205());
+        ad02.setAad206(dto.getAad206());
+        ad02.setAad207(dto.getAad207());
+        ad02.setAad208(BigDecimal.valueOf(2400));
+        ad02.setAad209("0");  //未审核
+        ad02.setAad210(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2000-01-01 00:00"));
+        ad02.setAad211(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dto.getAad211()));
+        ad02.setAad212(new Date());
+        System.out.println(ad02);
+        int res = ad02Mapper.insert(ad02);
+        System.out.println(res);
+        return res > 0;
     }
 
-    public List<Ad02> selectAll()
+    public List<Ad02> selectAll() throws Exception
     {
         Ad02Example example = new Ad02Example();
         Criteria criteria = example.createCriteria();
@@ -73,7 +69,7 @@ public class Ad02Service
         return ad02List;
     }
 
-    public List<Ad02> searchByValue(String value)
+    public List<Ad02> searchByValue(String value) throws Exception
     {
         Ad02Example example = new Ad02Example();
         Criteria criteria = example.createCriteria();
