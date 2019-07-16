@@ -294,6 +294,7 @@ public class Ab05Example {
             return (Criteria) this;
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         public Criteria andAab503IsNull() {
             addCriterion("aab503 is null");
@@ -564,6 +565,8 @@ public class Ab05Example {
             addCriterion("aab506 not between", value1, value2, "aab506");
             return (Criteria) this;
         }
+=======
+>>>>>>> parent of 2b55527... 拍卖物品收藏添加
 =======
 >>>>>>> parent of 2b55527... 拍卖物品收藏添加
     }

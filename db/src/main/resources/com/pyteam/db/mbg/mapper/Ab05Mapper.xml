@@ -6,6 +6,7 @@
     <result column="aab101" jdbcType="INTEGER" property="aab101" />
     <result column="aab502" jdbcType="VARCHAR" property="aab502" />
 <<<<<<< HEAD
+<<<<<<< HEAD
     <result column="aab503" jdbcType="VARCHAR" property="aab503" />
     <result column="aab504" jdbcType="VARCHAR" property="aab504" />
     <result column="aab505" jdbcType="TIMESTAMP" property="aab505" />
@@ -13,6 +14,8 @@
 =======
     <result column="aab506" jdbcType="VARCHAR" property="aab506" />
 >>>>>>> ff3b309713350261d60686edffb3697e5622358b
+=======
+>>>>>>> parent of 2b55527... 拍卖物品收藏添加
 =======
 >>>>>>> parent of 2b55527... 拍卖物品收藏添加
   </resultMap>
@@ -77,10 +80,14 @@
   <sql id="Base_Column_List">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     aab501, aab101, aab502, aab503, aab504, aab505
 =======
     aab501, aab101, aab502, aab503, aab504, aab505, aab506
 >>>>>>> ff3b309713350261d60686edffb3697e5622358b
+=======
+    aab501, aab101, aab502
+>>>>>>> parent of 2b55527... 拍卖物品收藏添加
 =======
     aab501, aab101, aab502
 >>>>>>> parent of 2b55527... 拍卖物品收藏添加
@@ -120,6 +127,7 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
 <<<<<<< HEAD
+<<<<<<< HEAD
     insert into ab05 (aab101, aab502, aab503, 
 <<<<<<< HEAD
       aab504, aab505)
@@ -132,6 +140,10 @@
       #{aab504,jdbcType=VARCHAR}, #{aab505,jdbcType=TIMESTAMP}, #{aab506,jdbcType=VARCHAR}
       )
 >>>>>>> ff3b309713350261d60686edffb3697e5622358b
+=======
+    insert into ab05 (aab101, aab502)
+    values (#{aab101,jdbcType=INTEGER}, #{aab502,jdbcType=VARCHAR})
+>>>>>>> parent of 2b55527... 拍卖物品收藏添加
 =======
     insert into ab05 (aab101, aab502)
     values (#{aab101,jdbcType=INTEGER}, #{aab502,jdbcType=VARCHAR})
@@ -150,6 +162,7 @@
         aab502,
       </if>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <if test="aab503 != null">
         aab503,
       </if>
@@ -167,6 +180,8 @@
 >>>>>>> ff3b309713350261d60686edffb3697e5622358b
 =======
 >>>>>>> parent of 2b55527... 拍卖物品收藏添加
+=======
+>>>>>>> parent of 2b55527... 拍卖物品收藏添加
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="aab101 != null">
@@ -175,6 +190,7 @@
       <if test="aab502 != null">
         #{aab502,jdbcType=VARCHAR},
       </if>
+<<<<<<< HEAD
 <<<<<<< HEAD
       <if test="aab503 != null">
         #{aab503,jdbcType=VARCHAR},
@@ -191,6 +207,8 @@
         #{aab506,jdbcType=VARCHAR},
       </if>
 >>>>>>> ff3b309713350261d60686edffb3697e5622358b
+=======
+>>>>>>> parent of 2b55527... 拍卖物品收藏添加
 =======
 >>>>>>> parent of 2b55527... 拍卖物品收藏添加
     </trim>
@@ -214,6 +232,7 @@
         aab502 = #{record.aab502,jdbcType=VARCHAR},
       </if>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <if test="record.aab503 != null">
         aab503 = #{record.aab503,jdbcType=VARCHAR},
       </if>
@@ -231,6 +250,8 @@
 >>>>>>> ff3b309713350261d60686edffb3697e5622358b
 =======
 >>>>>>> parent of 2b55527... 拍卖物品收藏添加
+=======
+>>>>>>> parent of 2b55527... 拍卖物品收藏添加
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -241,6 +262,7 @@
     set aab501 = #{record.aab501,jdbcType=INTEGER},
       aab101 = #{record.aab101,jdbcType=INTEGER},
 <<<<<<< HEAD
+<<<<<<< HEAD
       aab502 = #{record.aab502,jdbcType=VARCHAR},
       aab503 = #{record.aab503,jdbcType=VARCHAR},
       aab504 = #{record.aab504,jdbcType=VARCHAR},
@@ -250,6 +272,9 @@
       aab505 = #{record.aab505,jdbcType=TIMESTAMP},
       aab506 = #{record.aab506,jdbcType=VARCHAR}
 >>>>>>> ff3b309713350261d60686edffb3697e5622358b
+=======
+      aab502 = #{record.aab502,jdbcType=VARCHAR}
+>>>>>>> parent of 2b55527... 拍卖物品收藏添加
 =======
       aab502 = #{record.aab502,jdbcType=VARCHAR}
 >>>>>>> parent of 2b55527... 拍卖物品收藏添加
@@ -266,6 +291,7 @@
       <if test="aab502 != null">
         aab502 = #{aab502,jdbcType=VARCHAR},
       </if>
+<<<<<<< HEAD
 <<<<<<< HEAD
       <if test="aab503 != null">
         aab503 = #{aab503,jdbcType=VARCHAR},
@@ -284,12 +310,15 @@
 >>>>>>> ff3b309713350261d60686edffb3697e5622358b
 =======
 >>>>>>> parent of 2b55527... 拍卖物品收藏添加
+=======
+>>>>>>> parent of 2b55527... 拍卖物品收藏添加
     </set>
     where aab501 = #{aab501,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.pyteam.db.mbg.entity.Ab05">
     update ab05
     set aab101 = #{aab101,jdbcType=INTEGER},
+<<<<<<< HEAD
 <<<<<<< HEAD
       aab502 = #{aab502,jdbcType=VARCHAR},
       aab503 = #{aab503,jdbcType=VARCHAR},
@@ -300,6 +329,9 @@
       aab505 = #{aab505,jdbcType=TIMESTAMP},
       aab506 = #{aab506,jdbcType=VARCHAR}
 >>>>>>> ff3b309713350261d60686edffb3697e5622358b
+=======
+      aab502 = #{aab502,jdbcType=VARCHAR}
+>>>>>>> parent of 2b55527... 拍卖物品收藏添加
 =======
       aab502 = #{aab502,jdbcType=VARCHAR}
 >>>>>>> parent of 2b55527... 拍卖物品收藏添加
