@@ -3,6 +3,7 @@ package com.pyteam.foreground.mapper;
 import com.pyteam.db.mbg.entity.Ad05;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,7 @@ import java.util.List;
  * @author wjm
  * @date2019/7/13 9:25
  */
-@Service
+@Mapper
 @Repository
 public interface Ad05NewMapper
 {
