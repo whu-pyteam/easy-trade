@@ -16,11 +16,8 @@ public class Ab05 implements Serializable {
 
     private Date aab505;
 
-<<<<<<< HEAD
-=======
     private String aab506;
 
->>>>>>> ff3b309713350261d60686edffb3697e5622358b
     private static final long serialVersionUID = 1L;
 
     public Integer getAab501() {
@@ -71,8 +68,6 @@ public class Ab05 implements Serializable {
         this.aab505 = aab505;
     }
 
-<<<<<<< HEAD
-=======
     public String getAab506() {
         return aab506;
     }
@@ -81,7 +76,6 @@ public class Ab05 implements Serializable {
         this.aab506 = aab506;
     }
 
->>>>>>> ff3b309713350261d60686edffb3697e5622358b
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -94,10 +88,7 @@ public class Ab05 implements Serializable {
         sb.append(", aab503=").append(aab503);
         sb.append(", aab504=").append(aab504);
         sb.append(", aab505=").append(aab505);
-<<<<<<< HEAD
-=======
         sb.append(", aab506=").append(aab506);
->>>>>>> ff3b309713350261d60686edffb3697e5622358b
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

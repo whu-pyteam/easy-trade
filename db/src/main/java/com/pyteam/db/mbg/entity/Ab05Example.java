@@ -494,8 +494,6 @@ public class Ab05Example {
             addCriterion("aab505 not between", value1, value2, "aab505");
             return (Criteria) this;
         }
-<<<<<<< HEAD
-=======
 
         public Criteria andAab506IsNull() {
             addCriterion("aab506 is null");
@@ -566,7 +564,6 @@ public class Ab05Example {
             addCriterion("aab506 not between", value1, value2, "aab506");
             return (Criteria) this;
         }
->>>>>>> ff3b309713350261d60686edffb3697e5622358b
     }
 
     public static class Criteria extends GeneratedCriteria {

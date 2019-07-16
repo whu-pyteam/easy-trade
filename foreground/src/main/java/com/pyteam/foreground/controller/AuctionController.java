@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import static com.pyteam.foreground.controller.LoginController.isLogin;
 import static com.pyteam.foreground.controller.LoginController.getCookies;
@@ -55,10 +56,10 @@ public class AuctionController
 
 
     @RequestMapping(value = "/auction.html", method = RequestMethod.GET)
-    public String wel(HttpServletRequest request, Model model)
+    public String wel(HttpServletRequest request, HttpServletResponse response, Model model)
     {
         int aab101 = 0;
-        if(isLogin(request))
+        if(isLogin(request, response))
         {
             aab101 = Integer.parseInt(getCookies(request, "username"));
         }
