@@ -8,6 +8,7 @@
     <result column="aab503" jdbcType="VARCHAR" property="aab503" />
     <result column="aab504" jdbcType="VARCHAR" property="aab504" />
     <result column="aab505" jdbcType="TIMESTAMP" property="aab505" />
+    <result column="aab506" jdbcType="VARCHAR" property="aab506" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    aab501, aab101, aab502, aab503, aab504, aab505
+    aab501, aab101, aab502, aab503, aab504, aab505, aab506
   </sql>
   <select id="selectByExample" parameterType="com.pyteam.db.mbg.entity.Ab05Example" resultMap="BaseResultMap">
     select
@@ -105,9 +106,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into ab05 (aab101, aab502, aab503, 
-      aab504, aab505)
+      aab504, aab505, aab506
+      )
     values (#{aab101,jdbcType=INTEGER}, #{aab502,jdbcType=VARCHAR}, #{aab503,jdbcType=VARCHAR}, 
-      #{aab504,jdbcType=VARCHAR}, #{aab505,jdbcType=TIMESTAMP})
+      #{aab504,jdbcType=VARCHAR}, #{aab505,jdbcType=TIMESTAMP}, #{aab506,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.pyteam.db.mbg.entity.Ab05">
     <selectKey keyProperty="aab501" order="AFTER" resultType="java.lang.Integer">
@@ -130,6 +133,9 @@
       <if test="aab505 != null">
         aab505,
       </if>
+      <if test="aab506 != null">
+        aab506,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="aab101 != null">
@@ -146,6 +152,9 @@
       </if>
       <if test="aab505 != null">
         #{aab505,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aab506 != null">
+        #{aab506,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -176,6 +185,9 @@
       <if test="record.aab505 != null">
         aab505 = #{record.aab505,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.aab506 != null">
+        aab506 = #{record.aab506,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -188,7 +200,8 @@
       aab502 = #{record.aab502,jdbcType=VARCHAR},
       aab503 = #{record.aab503,jdbcType=VARCHAR},
       aab504 = #{record.aab504,jdbcType=VARCHAR},
-      aab505 = #{record.aab505,jdbcType=TIMESTAMP}
+      aab505 = #{record.aab505,jdbcType=TIMESTAMP},
+      aab506 = #{record.aab506,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -211,6 +224,9 @@
       <if test="aab505 != null">
         aab505 = #{aab505,jdbcType=TIMESTAMP},
       </if>
+      <if test="aab506 != null">
+        aab506 = #{aab506,jdbcType=VARCHAR},
+      </if>
     </set>
     where aab501 = #{aab501,jdbcType=INTEGER}
   </update>
@@ -220,7 +236,8 @@
       aab502 = #{aab502,jdbcType=VARCHAR},
       aab503 = #{aab503,jdbcType=VARCHAR},
       aab504 = #{aab504,jdbcType=VARCHAR},
-      aab505 = #{aab505,jdbcType=TIMESTAMP}
+      aab505 = #{aab505,jdbcType=TIMESTAMP},
+      aab506 = #{aab506,jdbcType=VARCHAR}
     where aab501 = #{aab501,jdbcType=INTEGER}
   </update>
 </mapper>
