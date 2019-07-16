@@ -1,6 +1,5 @@
 package com.pyteam.foreground.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.pyteam.foreground.dto.Ac01Dto;
 import com.pyteam.foreground.service.Ac01Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import static com.pyteam.foreground.controller.LoginController.isLogin;
 import static com.pyteam.foreground.controller.LoginController.getCookies;
@@ -71,9 +71,9 @@ public class IndexController
 
 
     @RequestMapping(value = "/goodLaunch.html", method = RequestMethod.GET)
-    public String add(HttpServletRequest request) throws Exception
+    public String add(HttpServletRequest request, HttpServletResponse response) throws Exception
     {
-        if (isLogin(request))
+        if (isLogin(request,response))
         {
             return "goodLaunch";
         } else
@@ -89,4 +89,6 @@ public class IndexController
         boolean res = ac01Service.addAc01(dto);
         return "goodLaunch";
     }
+
+
 }
