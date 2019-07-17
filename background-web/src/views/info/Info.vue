@@ -39,7 +39,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">保 存</el-button>
-        <el-button>重 置</el-button>
+        <el-button @click="fetchInfo">重 置</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -52,6 +52,7 @@
     data() {
       return {
         form: {
+          aaf201: '',
           username: '',
           nickname: '',
           avatarUrl: '#',
@@ -69,24 +70,24 @@
       fetchInfo() {
         getInfo().then(res => {
           // console.log(res.data)
-          this.form = {...this.form, ...res.data}
+          this.form.username = res.data.username
+          this.form.nickname = res.data.nickname
+          this.form.avatarUrl = res.data.avatarUrl
         })
       },
-      updateInfo() {
-        // console.log(this.form)
+      onSubmit() {
         updateInfo(this.form).then((res) =>
         {
           this.$message.success(res.message)
+          this.fetchInfo()
+          this.$store.dispatch('GetInfo').then()
         }).catch(() => this.$message.error('修改失败!'))
-      },
-      onSubmit() {
-        this.updateInfo()
-        this.fetchInfo()
+
       },
       submitUpload() {
         uploadImg(this.img).then(response => {
           this.form.avatarUrl = response.data.avatarUrl
-          this.$message.success("头像修改成功!")
+          this.$message.success("头像上传成功!")
           this.dialogVisible = false
         }).catch(() => this.$message.error('头像图片上传失败'))
       },
@@ -102,14 +103,6 @@
           console.log(this.img)
         }
         return false;
-      },
-      handleUploadSuccess(res, file) {
-        console.log(res)
-        this.form.avatarUrl = res.data.avatarUrl
-        this.dialogVisible = false
-      },
-      handleUploadErr(err, file) {
-        console.log(err)
       }
     }
   }

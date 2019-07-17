@@ -23,17 +23,21 @@ import java.util.List;
 @Api(tags = {"StaffController -- 员工管理"})
 @RestController
 @RequestMapping("/staff")
+@PreAuthorize("hasAuthority('admin:emp')")
 public class StaffController
 {
 
-    @Autowired
-    Af02Service af02Service;
-    @Autowired
-    Af07Service af07Service;
+    private final Af02Service af02Service;
+    private final Af07Service af07Service;
+
+    public StaffController(Af02Service af02Service, Af07Service af07Service)
+    {
+        this.af02Service = af02Service;
+        this.af07Service = af07Service;
+    }
 
     @ApiOperation("分页查询员工列表")
     @GetMapping("")
-    @PreAuthorize("hasAuthority('admin:emp')")
     public CommonResponse<CommonPage<Af02>> list(StaffQueryParam queryParam)
     {
         List<Af02> list = af02Service.list(queryParam);

@@ -37,7 +37,9 @@ service.interceptors.response.use(
       })
       // 403 没有权限, 回退一步
       if (res.code === 403) {
-        router.go(-1)
+        window.setTimeout(function () {
+          router.go(-1)
+        }, 1200)
       }
       // 401:未登录;
       if (res.code === 401) {

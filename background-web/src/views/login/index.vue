@@ -4,7 +4,6 @@
     <el-card class="login-form-layout">
       <el-form autoComplete="on"
                :model="loginForm"
-               :rules="loginRule"
                ref="loginForm"
                label-position="left">
         <h2 class="login-title">后台管理登录</h2>
@@ -35,24 +34,26 @@
           </el-input>
         </el-form-item>
         <el-form-item style="margin-bottom: 20px">
-          <el-button style="width: 100%" type="primary" :loading="loading" @click.native.prevent="handleLogin">
+          <el-button style="width: 100%" type="primary" :loading="loginLoading" @click.native.prevent="handleLogin">
             登录
           </el-button>
         </el-form-item>
         <el-form-item>
-          <el-button style="width: 100%" type="primary" :loading="loading" @click.native.prevent="handleRegister">
+          <el-button style="width: 100%" type="primary" :loading="registLoading" @click.native.prevent="handleRegister">
             注册
           </el-button>
         </el-form-item>
       </el-form>
     </el-card>
+    wxg 商品审核员
+    wxg2 悬赏审核员
+    wxg3 拍卖审核员
   </div>
 </template>
 
 <script>
   import {isvalidUsername} from '@/utils/validate'
   import {regsiterStaff} from "@/api/login"
-  import {setSupport,getSupport,SupportUrl} from '@/utils/support'
 
   export default {
     name: 'login',
@@ -80,7 +81,8 @@
           username: [{required: true, trigger: 'blur', validator: validateUsername}],
           password: [{required: true, trigger: 'blur', validator: validatePass}]
         },
-        loading: false,
+        loginLoading: false,
+        registLoading: false,
         pwdType: 'password',
         pwdIcon: 'eye'
       }
@@ -98,16 +100,12 @@
       handleLogin() {
         this.$refs.loginForm.validate(valid => {
           if (valid) {
-            let isSupport = getSupport();
-            if(isSupport===undefined||isSupport==null){
-              return;
-            }
-            this.loading = true;
+            this.loginLoading = true;
             this.$store.dispatch('Login', this.loginForm).then(() => {
               this.loading = false;
               this.$router.push({path: '/'})
             }).catch(() => {
-              this.loading = false
+              this.loginLoading = false
             })
           } else {
             console.log('参数验证不合法！');
@@ -116,7 +114,11 @@
         })
       },
       handleRegister() {
-        regsiterStaff(this.loginForm.username, this.loginForm.password).then(() => this.$message.success("注册成功"))
+        this.registLoading = true
+        regsiterStaff(this.loginForm.username, this.loginForm.password).then(() => {
+          this.$message.success("注册成功")
+          this.registLoading = false
+        })
       }
     }
   }

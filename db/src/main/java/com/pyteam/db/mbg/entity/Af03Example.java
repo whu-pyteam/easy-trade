@@ -1,6 +1,7 @@
 package com.pyteam.db.mbg.entity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Af03Example {
@@ -164,66 +165,6 @@ public class Af03Example {
             return (Criteria) this;
         }
 
-        public Criteria andAaf401IsNull() {
-            addCriterion("aaf401 is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAaf401IsNotNull() {
-            addCriterion("aaf401 is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAaf401EqualTo(Integer value) {
-            addCriterion("aaf401 =", value, "aaf401");
-            return (Criteria) this;
-        }
-
-        public Criteria andAaf401NotEqualTo(Integer value) {
-            addCriterion("aaf401 <>", value, "aaf401");
-            return (Criteria) this;
-        }
-
-        public Criteria andAaf401GreaterThan(Integer value) {
-            addCriterion("aaf401 >", value, "aaf401");
-            return (Criteria) this;
-        }
-
-        public Criteria andAaf401GreaterThanOrEqualTo(Integer value) {
-            addCriterion("aaf401 >=", value, "aaf401");
-            return (Criteria) this;
-        }
-
-        public Criteria andAaf401LessThan(Integer value) {
-            addCriterion("aaf401 <", value, "aaf401");
-            return (Criteria) this;
-        }
-
-        public Criteria andAaf401LessThanOrEqualTo(Integer value) {
-            addCriterion("aaf401 <=", value, "aaf401");
-            return (Criteria) this;
-        }
-
-        public Criteria andAaf401In(List<Integer> values) {
-            addCriterion("aaf401 in", values, "aaf401");
-            return (Criteria) this;
-        }
-
-        public Criteria andAaf401NotIn(List<Integer> values) {
-            addCriterion("aaf401 not in", values, "aaf401");
-            return (Criteria) this;
-        }
-
-        public Criteria andAaf401Between(Integer value1, Integer value2) {
-            addCriterion("aaf401 between", value1, value2, "aaf401");
-            return (Criteria) this;
-        }
-
-        public Criteria andAaf401NotBetween(Integer value1, Integer value2) {
-            addCriterion("aaf401 not between", value1, value2, "aaf401");
-            return (Criteria) this;
-        }
-
         public Criteria andAaf201IsNull() {
             addCriterion("aaf201 is null");
             return (Criteria) this;
@@ -284,73 +225,63 @@ public class Af03Example {
             return (Criteria) this;
         }
 
-        public Criteria andAaf302IsNull() {
-            addCriterion("aaf302 is null");
+        public Criteria andAaf303IsNull() {
+            addCriterion("aaf303 is null");
             return (Criteria) this;
         }
 
-        public Criteria andAaf302IsNotNull() {
-            addCriterion("aaf302 is not null");
+        public Criteria andAaf303IsNotNull() {
+            addCriterion("aaf303 is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAaf302EqualTo(String value) {
-            addCriterion("aaf302 =", value, "aaf302");
+        public Criteria andAaf303EqualTo(Date value) {
+            addCriterion("aaf303 =", value, "aaf303");
             return (Criteria) this;
         }
 
-        public Criteria andAaf302NotEqualTo(String value) {
-            addCriterion("aaf302 <>", value, "aaf302");
+        public Criteria andAaf303NotEqualTo(Date value) {
+            addCriterion("aaf303 <>", value, "aaf303");
             return (Criteria) this;
         }
 
-        public Criteria andAaf302GreaterThan(String value) {
-            addCriterion("aaf302 >", value, "aaf302");
+        public Criteria andAaf303GreaterThan(Date value) {
+            addCriterion("aaf303 >", value, "aaf303");
             return (Criteria) this;
         }
 
-        public Criteria andAaf302GreaterThanOrEqualTo(String value) {
-            addCriterion("aaf302 >=", value, "aaf302");
+        public Criteria andAaf303GreaterThanOrEqualTo(Date value) {
+            addCriterion("aaf303 >=", value, "aaf303");
             return (Criteria) this;
         }
 
-        public Criteria andAaf302LessThan(String value) {
-            addCriterion("aaf302 <", value, "aaf302");
+        public Criteria andAaf303LessThan(Date value) {
+            addCriterion("aaf303 <", value, "aaf303");
             return (Criteria) this;
         }
 
-        public Criteria andAaf302LessThanOrEqualTo(String value) {
-            addCriterion("aaf302 <=", value, "aaf302");
+        public Criteria andAaf303LessThanOrEqualTo(Date value) {
+            addCriterion("aaf303 <=", value, "aaf303");
             return (Criteria) this;
         }
 
-        public Criteria andAaf302Like(String value) {
-            addCriterion("aaf302 like", value, "aaf302");
+        public Criteria andAaf303In(List<Date> values) {
+            addCriterion("aaf303 in", values, "aaf303");
             return (Criteria) this;
         }
 
-        public Criteria andAaf302NotLike(String value) {
-            addCriterion("aaf302 not like", value, "aaf302");
+        public Criteria andAaf303NotIn(List<Date> values) {
+            addCriterion("aaf303 not in", values, "aaf303");
             return (Criteria) this;
         }
 
-        public Criteria andAaf302In(List<String> values) {
-            addCriterion("aaf302 in", values, "aaf302");
+        public Criteria andAaf303Between(Date value1, Date value2) {
+            addCriterion("aaf303 between", value1, value2, "aaf303");
             return (Criteria) this;
         }
 
-        public Criteria andAaf302NotIn(List<String> values) {
-            addCriterion("aaf302 not in", values, "aaf302");
-            return (Criteria) this;
-        }
-
-        public Criteria andAaf302Between(String value1, String value2) {
-            addCriterion("aaf302 between", value1, value2, "aaf302");
-            return (Criteria) this;
-        }
-
-        public Criteria andAaf302NotBetween(String value1, String value2) {
-            addCriterion("aaf302 not between", value1, value2, "aaf302");
+        public Criteria andAaf303NotBetween(Date value1, Date value2) {
+            addCriterion("aaf303 not between", value1, value2, "aaf303");
             return (Criteria) this;
         }
     }
