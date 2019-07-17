@@ -40,7 +40,6 @@ public class Ad01Controller
     @PostMapping("/edit")
     public String edit(@ModelAttribute("ad01")Ad01 ad01)
     {
-        System.out.println(ad01);
         ad01Service.edit(ad01);
         return "ad01/edit";
     }

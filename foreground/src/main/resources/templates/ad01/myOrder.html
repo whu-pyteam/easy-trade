@@ -50,10 +50,10 @@
 
                 <div class="form-group row">
                     <div class="col-lg-2">
-                        <label for="aac501">订单号:</label>
+                        <label for="aac502">订单号:</label>
                     </div>
                     <div class="col-lg-10">
-                        <input type="text" th:text="${ac05.aac501}" name="aac501" class="form-control"  id="aac501" readonly="readonly">
+                        <input type="text" th:value="${ac05.aac502}" name="aac502" class="form-control"  id="aac502" readonly="readonly">
                     </div>
                 </div>
 
@@ -84,8 +84,9 @@
 
 
                 <div class="form-group text-center">
-                    <input type="submit" class="btn btn-primary" value="修改订单">
-                    <a  class="btn btn-primary" role="button">取消</a>
+                    <input type="submit" class="btn btn-primary" value="修改订单" name="action">
+                    <!--<a th:href="@{ad01/delorder(aac502=${ac05.aac502})}" class="btn btn-primary" role="button" >取消</a>-->
+                    <input type="submit" class="btn btn-primary" value="取消订单" name="action">
                     <a  class="btn btn-primary" role="button">联系对方</a>
                 </div>
             </form>
@@ -176,6 +177,10 @@
         forceParse: 0
 
     });
+    function goBack()
+    {
+        window.history.back()
+    }
 </script>
 
 </html>

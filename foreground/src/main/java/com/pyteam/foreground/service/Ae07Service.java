@@ -13,4 +13,7 @@ public interface Ae07Service
 {
      void add(Ae07 ae07);
      List<Ac05> select(int id);
+
+     void update(Ac05 ac05);
+     void delete(Ac05 ac05);
 }
