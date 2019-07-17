@@ -2,13 +2,13 @@
   <div class="app-container" style="text-align: center; justify-content: center;">
 
     <el-card class="page-card" shadow="hover">
-      <el-form :inline="true" :model="condition" class="demo-form-inline">
+      <el-form :inline="true" :model="condition"  class="demo-form-inline">
         <el-form-item label="悬赏名称">
           <el-input v-model="condition.aad105" clearable></el-input>
         </el-form-item>
         <el-form-item label="悬赏状态" prop="aad102">
           <el-card shadow="never" body-style="padding: 0 10px">
-            <el-radio-group v-model="condition.aad102">
+            <el-radio-group v-model="condition.aad102" >
               <el-radio label="">所有</el-radio>
               <el-radio label="0">未审核</el-radio>
               <el-radio label="1">已审核</el-radio>

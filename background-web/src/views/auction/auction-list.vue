@@ -8,7 +8,7 @@
         </el-form-item>
         <el-form-item label="拍卖审核状态" prop="aad209">
           <el-card shadow="never" body-style="padding: 0 10px">
-            <el-radio-group v-model="condition.aad209">
+            <el-radio-group v-model="condition.aad209" >
               <el-radio label="">所有</el-radio>
               <el-radio label="0">未审核</el-radio>
               <el-radio label="1">已审核</el-radio>

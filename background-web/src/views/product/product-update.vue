@@ -96,7 +96,7 @@
             this.data.aac104 = res.data.aac104
             this.data.aac107 = res.data.aac107
             this.data.aac106 = res.data.aac106
-            this.isCheck = res.data.aac104 === '1'
+            this.isCheck = res.data.aac104==='1'
           } else {
             this.$message.error("找不到数据!")
             window.setTimeout(this.cancelUpdate, 1200)
@@ -107,7 +107,7 @@
         })
       },
       onSubmit() {
-        updateProduct(this.aac101, this.isCheck ? '1' : '2').then(res => {
+        updateProduct(this.aac101, this.isCheck?'1':'2').then(res => {
           this.$message.info(res.data.message)
           window.setTimeout(this.cancelUpdate, 1200)
         })

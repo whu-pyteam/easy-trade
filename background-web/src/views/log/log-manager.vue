@@ -88,7 +88,7 @@
           {{rowData.aaf303}}
         </el-form-item>
         <el-form-item label="操作详情" label-width="120px" style="width: 60%">
-          <json-view :data="logDetail" style="text-align: left" rootKey="操作详情"></json-view>
+          <json-view  :data="logDetail" style="text-align: left" rootKey="操作详情"></json-view>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -98,11 +98,10 @@
 
 <script>
   import {getLogDetail, getLogList} from "@/api/log"
-  import {JSONView} from 'vue-json-component'
-
+  import { JSONView } from 'vue-json-component'
   export default {
     name: 'feedback-list',
-    components: {"json-view": JSONView},
+    components: { "json-view": JSONView },
     data() {
       return {
         condition: {
