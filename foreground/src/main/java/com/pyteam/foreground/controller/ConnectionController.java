@@ -14,9 +14,17 @@ public class ConnectionController
     @Autowired
     private ConnectionService service;
 
-    @RequestMapping(value = "/addConnection", method = RequestMethod.GET)
+    @RequestMapping(value = "/auctionConn.html", method = RequestMethod.GET)
+    public String showConnection()
+    {
+
+
+        return "auctionConn";
+    }
+
+    @RequestMapping(value = "/addAucConn", method = RequestMethod.GET)
     @ResponseBody
-    public String addConnection(Ae05 ae05)
+    public String addAucConn(Ae05 ae05)
     {
         if(service.insert(ae05))
         {
@@ -28,9 +36,9 @@ public class ConnectionController
         }
     }
 
-    @RequestMapping(value = "delConnection", method = RequestMethod.GET)
+    @RequestMapping(value = "delAucConn", method = RequestMethod.GET)
     @ResponseBody
-    public String delConnection(Ae05 ae05)
+    public String delAucConn(Ae05 ae05)
     {
         if(service.delByValue(ae05))
         {
