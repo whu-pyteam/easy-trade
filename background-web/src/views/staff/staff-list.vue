@@ -10,13 +10,18 @@
           <el-input v-model="condition.aaf204" clearable></el-input>
         </el-form-item>
         <el-form-item label="员工状态" prop="aaf207">
-          <el-input v-model="condition.aaf207" clearable placeholder = "0为禁用, 1为启用"></el-input>
+          <el-radio-group v-model="condition.aad102">
+            <el-radio  label="">所有</el-radio>
+            <el-radio  label="0">禁用</el-radio>
+            <el-radio  label="1">启用</el-radio>
+          </el-radio-group>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">查询</el-button>
         </el-form-item>
       </el-form>
     </el-card>
+
     <el-card class="page-card"  shadow="hover">
 
       <el-table
@@ -70,6 +75,7 @@
 
     <el-card class="page-card"  shadow="hover">
       <el-pagination
+        @current-change="handleCurrentChange"
         background
         layout="total, prev, pager, next"
         :page-size="pageInfo.pageSize"
@@ -127,6 +133,10 @@
         })
       },
       onSubmit() {
+        this.fetchStaffList()
+      },
+      handleCurrentChange(val) {
+        this.pageInfo.pageNum = val
         this.fetchStaffList()
       },
       handleEdit(index, rowData) {
