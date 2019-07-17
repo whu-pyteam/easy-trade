@@ -21,6 +21,29 @@
         }
     </style>
 
+    <script>
+        function logout() {
+            if(confirm("确认退出登录?"))
+            {
+                $.ajax({
+                    url: "/logout.html",
+                    type: "post",
+                    success: function (data) {
+                        if(data==true)
+                        {
+                            alert("成功退出登录!");
+                            window.location.replace("/index.html");
+                        }
+                        else
+                        {
+                            alert("您已退出登录")
+                            window.location.replace("/index.html");
+                        }
+                    }
+                })
+            }
+        }
+    </script>
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -103,7 +126,7 @@
                             <a href="#">我的评论</a>
                         </li>
                         <li>
-                            <a href="#">退出登录</a>
+                            <a href="javascript:void(0)" onclick="logout()">退出登录</a>
                         </li>
                     </ul>
                 </li>
@@ -174,13 +197,25 @@
 
     <script src="js/login-register.js"></script>
     <script>
+        function getCookie(cname)
+        {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++)
+            {
+                var c = ca[i].trim();
+                if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+            }
+            return "";
+        }
+
         window.onload = function ()
         {
             show();
         }
         function show()
         {
-            if (document.cookie)
+            if (getCookie("username")!="")
             {
                 document.getElementById("login").className = "hidden";
             }
