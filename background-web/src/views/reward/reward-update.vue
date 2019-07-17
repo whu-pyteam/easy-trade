@@ -94,16 +94,16 @@
           this.data.aad107 = res.data.aad107
           this.data.aad102 = res.data.aad102
           this.data.aac107 = res.data.aac107
-          this.isCheck = res.data.aad102==='1'
+          this.isCheck = res.data.aad102 === '1'
         })
       },
       onSubmit() {
         let params = {
           id: this.aad101,
-          status: this.isCheck?'1':'2'
+          status: this.isCheck ? '1' : '2'
         }
         console.log(params)
-        updateReward(this.aad101, this.isCheck?'1':'2').then( () =>{
+        updateReward(this.aad101, this.isCheck ? '1' : '2').then(() => {
           this.$message.success("操作成功")
           this.cancelUpdate()
         })

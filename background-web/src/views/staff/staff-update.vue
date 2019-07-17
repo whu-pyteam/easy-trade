@@ -47,23 +47,22 @@
     },
     created() {
       this.fetchRoles()
-      this.fetchStaffByAaf202(this.$route.params.username)
+      this.fetchStaffByAaf202(this.$route.params.id)
     },
     methods: {
       onSubmit() {
         let params = {
-          aaf201: this.aaf201,
           aaf601List: this.selectRoles,
           aaf207: this.aaf207 ? 1 : 0
         }
-        updateStaff(params).then(res => {
+        updateStaff(this.aaf201, params).then(res => {
           console.log(res.data)
           this.$message.success("操作成功!")
-          window.setTimeout(this.goback, 2000)
+          window.setTimeout(this.goBack, 2000)
         })
       },
-      fetchStaffByAaf202(username) {
-        getSingleStaff(username).then(res => {
+      fetchStaffByAaf202(id) {
+        getSingleStaff(id).then(res => {
           if (res.data) {
             this.aaf201 = res.data.aaf201
             this.aaf202 = res.data.aaf202
@@ -93,11 +92,11 @@
           })
         })
       },
-      goback() {
+      goBack() {
         this.$router.go(-1)
       },
       cancelUpdate() {
-        this.$router.go(-1)
+        this.goBack()
       }
     }
   }

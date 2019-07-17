@@ -20,7 +20,7 @@
           center>
           <el-upload
             action="#"
-            :limit ="1"
+            :limit="1"
             ref="upload"
             :show-file-list="true"
             :before-upload="beforeUpload"
@@ -47,6 +47,7 @@
 
 <script>
   import {getInfo, updateInfo, uploadImg} from "@/api/login"
+
   export default {
     name: 'Info',
     data() {
@@ -76,8 +77,7 @@
         })
       },
       onSubmit() {
-        updateInfo(this.form).then((res) =>
-        {
+        updateInfo(this.form).then((res) => {
           this.$message.success(res.message)
           this.fetchInfo()
           this.$store.dispatch('GetInfo').then()
