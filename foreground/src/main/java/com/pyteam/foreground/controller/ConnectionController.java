@@ -1,6 +1,6 @@
 package com.pyteam.foreground.controller;
 
-import com.pyteam.foreground.dto.ConnectionDto;
+import com.pyteam.db.mbg.entity.Ae05;
 import com.pyteam.foreground.service.ConnectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +16,9 @@ public class ConnectionController
 
     @RequestMapping(value = "/addConnection", method = RequestMethod.GET)
     @ResponseBody
-    public String addConnection(ConnectionDto dto)
+    public String addConnection(Ae05 ae05)
     {
-        if(service.insert(dto))
+        if(service.insert(ae05))
         {
             return "1";
         }
@@ -30,8 +30,15 @@ public class ConnectionController
 
     @RequestMapping(value = "delConnection", method = RequestMethod.GET)
     @ResponseBody
-    public String delConnection(ConnectionDto dto)
+    public String delConnection(Ae05 ae05)
     {
-        return null;
+        if(service.delByValue(ae05))
+        {
+            return "1";
+        }
+        else
+        {
+            return null;
+        }
     }
 }

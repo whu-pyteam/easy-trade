@@ -214,21 +214,22 @@
         if(strCookie)
         {
             var arrCookie=strCookie.split("; ");
-            var username = "";
+            var aad401 = "";
             for(var i=0;i<arrCookie.length;i++){
                 var arr=arrCookie[i].split("=");
-                if("username"==arr[0]){
-                    username = arr[1];
+                if("aad401_auc"==arr[0]){
+                    aad401 = arr[1];
                     break;
                 }
+
             }
             if(document.getElementById("conn" + id).innerText == "收藏")
             {
-                addConn(id, username);
+                addConn(id, aad401);
             }
             else
             {
-                delConn(id, username);
+                delConn(id, aad401);
             }
 
         }
@@ -239,9 +240,9 @@
         }
     }
 
-    function addConn(id, userID)
+    function addConn(id, aad401)
     {
-        var data = {aab101: userID, aad201: id, aad402: '2'};
+        var data = {aad201: id, aad401: aad401};
         $.ajax({
             url : 'addConnection',
             type : 'GET',
@@ -251,7 +252,6 @@
             success : function() {
                 //alert("收藏成功！");
                 document.getElementById("conn" + id).innerText = "已收藏";
-                //document.getElementById("conn" + id).classList.remove("active");
             },
             error: function () {
                 alert("收藏失败！");
@@ -259,9 +259,9 @@
         });
     }
 
-    function delConn(id, userID)
+    function delConn(id, aad401)
     {
-        var data = {aab101: userID, aad201: id, aad402: '2'};
+        var data = {aad201: id, aad401: aad401};
         $.ajax({
             url : 'delConnection',
             type : 'GET',
@@ -271,7 +271,6 @@
             success : function() {
                 alert("取消成功！");
                 document.getElementById("conn" + id).innerText = "收藏";
-                //document.getElementById("conn" + id).classList.remove("active");
             },
             error: function () {
                 alert("取消失败！");
