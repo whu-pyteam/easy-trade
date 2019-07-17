@@ -16,20 +16,6 @@
             <el-radio  label="1">启用</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="开始时间">
-          <el-date-picker
-            v-model="condition.dateBegin"
-            type="datetime"
-            placeholder="选择日期时间">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="结束时间">
-          <el-date-picker
-            v-model="condition.dateEnd"
-            type="datetime"
-            placeholder="选择日期时间">
-          </el-date-picker>
-        </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">查询</el-button>
         </el-form-item>
@@ -44,7 +30,7 @@
         style="width: 100%">
         <el-table-column
           label="序号"
-          width="100">
+          width="150">
           <template slot-scope="scope">
             {{scope.$index}}
           </template>
@@ -52,12 +38,12 @@
         <el-table-column
           prop="aaf202"
           label="员工名称"
-          width="200">
+          width="250">
         </el-table-column>
         <el-table-column
           prop="aaf204"
           label="员工昵称"
-          width="200">
+          width="250">
         </el-table-column>
         <el-table-column
           label="员工状态"
@@ -71,13 +57,11 @@
             </el-switch>
           </template>
         </el-table-column>
-
-        <el-table-column
-          prop="aaf205"
-          label="员工创建时间"
-          width="200">
-        </el-table-column>
-
+<!--        <el-table-column-->
+<!--          prop="roles"-->
+<!--          label="员工角色"-->
+<!--          width="200">-->
+<!--        </el-table-column>-->
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
@@ -111,11 +95,9 @@
     data() {
       return {
         condition: {
-          aaf202: null,
-          aaf204: null,
-          aaf207: null,
-          dateBegin: null,
-          dateEnd: null
+          aaf202: '',
+          aaf204: '',
+          aaf207: ''
         },
         tableData: [],
         pageInfo: {

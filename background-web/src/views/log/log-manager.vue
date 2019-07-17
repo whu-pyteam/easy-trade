@@ -6,6 +6,7 @@
         <el-form-item label="操作人名称">
           <el-input v-model="condition.aaf202" clearable></el-input>
         </el-form-item>
+
         <el-form-item label="开始时间">
           <el-date-picker
             v-model="condition.dateBegin"
@@ -48,7 +49,8 @@
           label="上传时间"
           width="400">
           <template slot-scope="scope">
-            {{scope.row.aaf303}}
+            {{formatDate(scope.row.aaf303)}}
+<!--            {{scope.row.aaf303}}-->
           </template>
         </el-table-column>
         <el-table-column label="操作">
@@ -79,12 +81,12 @@
       :visible.sync="dialogVisible"
       width="30%">
 
-      <el-form :model="condition">
+      <el-form>
         <el-form-item label="操作人名称" label-width="120px">
           <el-input v-model="rowData.aaf202" disabled=""></el-input>
         </el-form-item>
         <el-form-item label="操作日期" label-width="120px">
-          <span>{{formatDate(rowData.aaf303)}}</span>
+<!--          <span>{{formatDate(rowData.aaf303)}}</span>-->
           {{rowData.aaf303}}
         </el-form-item>
         <el-form-item label="操作详情" label-width="120px">
@@ -104,9 +106,9 @@
     data() {
       return {
         condition: {
-          aaf202: null,
-          dateBegin: null,
-          dateEnd: null
+          aaf202: '',
+          dateBegin: '',
+          dateEnd: ''
         },
         tableData: [],
         pageInfo: {
@@ -151,6 +153,9 @@
       handleCurrentChange(val) {
         this.pageInfo.pageNum = val
         this.fetchLogList()
+      },
+      formatDate(date) {
+        return date.replace('.000+0000', '')
       }
     }
   }

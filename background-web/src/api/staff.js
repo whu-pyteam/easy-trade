@@ -1,10 +1,10 @@
 import request from '@/utils/request'
 
-export function queryStaffList(data) {
+export function queryStaffList(params) {
   return request({
     url: '/staff',
-    method: 'post',
-    data
+    method: 'get',
+    params: params
   })
 }
 
