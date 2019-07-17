@@ -3,9 +3,11 @@
 <mapper namespace="com.pyteam.db.mbg.mapper.Af03Mapper">
   <resultMap id="BaseResultMap" type="com.pyteam.db.mbg.entity.Af03">
     <id column="aaf301" jdbcType="INTEGER" property="aaf301" />
-    <result column="aaf401" jdbcType="INTEGER" property="aaf401" />
     <result column="aaf201" jdbcType="INTEGER" property="aaf201" />
-    <result column="aaf302" jdbcType="VARCHAR" property="aaf302" />
+    <result column="aaf303" jdbcType="TIMESTAMP" property="aaf303" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.pyteam.db.mbg.entity.Af03">
+    <result column="aaf302" jdbcType="LONGVARCHAR" property="aaf302" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,8 +68,27 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    aaf301, aaf401, aaf201, aaf302
+    aaf301, aaf201, aaf303
   </sql>
+  <sql id="Blob_Column_List">
+    aaf302
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.pyteam.db.mbg.entity.Af03Example" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from af03
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" parameterType="com.pyteam.db.mbg.entity.Af03Example" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -82,9 +103,11 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from af03
     where aaf301 = #{aaf301,jdbcType=INTEGER}
   </select>
@@ -102,9 +125,9 @@
     <selectKey keyProperty="aaf301" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into af03 (aaf401, aaf201, aaf302
+    insert into af03 (aaf201, aaf303, aaf302
       )
-    values (#{aaf401,jdbcType=INTEGER}, #{aaf201,jdbcType=INTEGER}, #{aaf302,jdbcType=VARCHAR}
+    values (#{aaf201,jdbcType=INTEGER}, #{aaf303,jdbcType=TIMESTAMP}, #{aaf302,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.pyteam.db.mbg.entity.Af03">
@@ -113,25 +136,25 @@
     </selectKey>
     insert into af03
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="aaf401 != null">
-        aaf401,
-      </if>
       <if test="aaf201 != null">
         aaf201,
+      </if>
+      <if test="aaf303 != null">
+        aaf303,
       </if>
       <if test="aaf302 != null">
         aaf302,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="aaf401 != null">
-        #{aaf401,jdbcType=INTEGER},
-      </if>
       <if test="aaf201 != null">
         #{aaf201,jdbcType=INTEGER},
       </if>
+      <if test="aaf303 != null">
+        #{aaf303,jdbcType=TIMESTAMP},
+      </if>
       <if test="aaf302 != null">
-        #{aaf302,jdbcType=VARCHAR},
+        #{aaf302,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -147,16 +170,26 @@
       <if test="record.aaf301 != null">
         aaf301 = #{record.aaf301,jdbcType=INTEGER},
       </if>
-      <if test="record.aaf401 != null">
-        aaf401 = #{record.aaf401,jdbcType=INTEGER},
-      </if>
       <if test="record.aaf201 != null">
         aaf201 = #{record.aaf201,jdbcType=INTEGER},
       </if>
+      <if test="record.aaf303 != null">
+        aaf303 = #{record.aaf303,jdbcType=TIMESTAMP},
+      </if>
       <if test="record.aaf302 != null">
-        aaf302 = #{record.aaf302,jdbcType=VARCHAR},
+        aaf302 = #{record.aaf302,jdbcType=LONGVARCHAR},
       </if>
     </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update af03
+    set aaf301 = #{record.aaf301,jdbcType=INTEGER},
+      aaf201 = #{record.aaf201,jdbcType=INTEGER},
+      aaf303 = #{record.aaf303,jdbcType=TIMESTAMP},
+      aaf302 = #{record.aaf302,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -164,9 +197,8 @@
   <update id="updateByExample" parameterType="map">
     update af03
     set aaf301 = #{record.aaf301,jdbcType=INTEGER},
-      aaf401 = #{record.aaf401,jdbcType=INTEGER},
       aaf201 = #{record.aaf201,jdbcType=INTEGER},
-      aaf302 = #{record.aaf302,jdbcType=VARCHAR}
+      aaf303 = #{record.aaf303,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -174,23 +206,29 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.pyteam.db.mbg.entity.Af03">
     update af03
     <set>
-      <if test="aaf401 != null">
-        aaf401 = #{aaf401,jdbcType=INTEGER},
-      </if>
       <if test="aaf201 != null">
         aaf201 = #{aaf201,jdbcType=INTEGER},
       </if>
+      <if test="aaf303 != null">
+        aaf303 = #{aaf303,jdbcType=TIMESTAMP},
+      </if>
       <if test="aaf302 != null">
-        aaf302 = #{aaf302,jdbcType=VARCHAR},
+        aaf302 = #{aaf302,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where aaf301 = #{aaf301,jdbcType=INTEGER}
   </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pyteam.db.mbg.entity.Af03">
+    update af03
+    set aaf201 = #{aaf201,jdbcType=INTEGER},
+      aaf303 = #{aaf303,jdbcType=TIMESTAMP},
+      aaf302 = #{aaf302,jdbcType=LONGVARCHAR}
+    where aaf301 = #{aaf301,jdbcType=INTEGER}
+  </update>
   <update id="updateByPrimaryKey" parameterType="com.pyteam.db.mbg.entity.Af03">
     update af03
-    set aaf401 = #{aaf401,jdbcType=INTEGER},
-      aaf201 = #{aaf201,jdbcType=INTEGER},
-      aaf302 = #{aaf302,jdbcType=VARCHAR}
+    set aaf201 = #{aaf201,jdbcType=INTEGER},
+      aaf303 = #{aaf303,jdbcType=TIMESTAMP}
     where aaf301 = #{aaf301,jdbcType=INTEGER}
   </update>
 </mapper>

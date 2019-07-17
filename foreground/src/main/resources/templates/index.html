@@ -9,7 +9,7 @@
     <title>Bootstrap 101 Template</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
+    <link href="css/login-register.css" rel="stylesheet">
     <style type="text/css">
         .navbar-brand {
             font-size: 18px;
@@ -42,18 +42,22 @@
             console.log(productId);
             $.post(
                 "addToCart.html",
-                {id: productId},
+                {id:productId},
                 function (data) {
-                    if (data == 0) {
+                    if(data==0)
+                    {
                         window.location.replace("cart.html");
                     }
-                    if (data == 1) {
+                    if(data==1)
+                    {
                         alert("成功加入购物车");
                     }
-                    if (data == 2) {
+                    if(data==2)
+                    {
                         alert("没有未用户创建购物车");
                     }
-                    if (data == 3) {
+                    if(data==3)
+                    {
                         alert("购物车已经存在该商品");
                     }
                 }
@@ -96,172 +100,102 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-2">
-                <div class="all">
-                    <a href="#">全部商品分类</a>
-                </div>
-                <ul class="ul_item">
-                    <li class="nav_item">
-                        <a href="#">家用电器</a><span class="jt">&gt;</span>
-                        <div class="sub_menu">
-                            <div class="left_menu">
-                                <dl>
-                                    <dt><a href="/sort.html?sortId=1">大家电</a></dt>
-                                    <dd>
-                                        <a href="#">平板电视</a>
-                                        <a href="#">空调</a>
-                                        <a href="#">冰箱</a>
-                                        <a href="#">洗衣机</a>
-                                        <a href="#">家庭影院</a>
-                                        <a href="#">DVD</a>
-                                        <a href="#">迷你音响</a>
-                                        <a href="#">烟机/灶具</a>
-                                        <a href="#"> 热水器</a>
-                                        <a href="#">消毒柜/洗碗机</a>
-                                        <a href="#">冷柜/冰吧</a>
-                                        <a href="#">酒柜</a>
-                                        <a href="#">家电配件</a>
-                                    </dd>
-                                </dl>
-                                <dl>
-                                    <dt><a href="#">生活电器</a></dt>
-                                    <dd>
-                                        <a href="#">电风扇</a>
-                                        <a href="#">冷风扇</a>
-                                        <a href="#">净化器</a>
-                                        <a href="#">加湿器</a>
-                                        <a href="#">扫地机器人</a>
-                                        <a href="#">吸尘器</a>
-                                        <a href="#">挂烫机/熨斗</a>
-                                        <a href="#">插座</a>
-                                        <a href="#"> 电话机</a>
-                                        <a href="#">清洁机</a>
-                                        <a href="#">除湿机</a>
-                                        <a href="#">干衣机</a>
-                                        <a href="#">收录/音机</a>
-                                    </dd>
-                                </dl>
-                                <dl>
-                                    <dt><a href="#">厨房电器</a></dt>
-                                    <dd>
-                                        <a href="#">电压力锅</a>
-                                        <a href="#">空调</a>
-                                        <a href="#">冰箱</a>
-                                        <a href="#">洗衣机</a>
-                                        <a href="#">家庭影院</a>
-                                        <a href="#">DVD</a>
-                                        <a href="#">迷你音响</a>
-                                        <a href="#">烟机/灶具</a>
-                                        <a href="#"> 热水器</a>
-                                        <a href="#">消毒柜/洗碗机</a>
-                                        <a href="#">冷柜/冰吧</a>
-                                        <a href="#">酒柜</a>
-                                        <a href="#">家电配件</a>
-                                    </dd>
-                                </dl>
-                                <dl>
-                                    <dt><a href="#">个护健康</a></dt>
-                                    <dd>
-                                        <a href="#">平板电视</a>
-                                        <a class="test" href="#">空调</a>
-                                        <a href="#">冰箱</a>
-                                        <a href="#">洗衣机</a>
-                                        <a href="#">家庭影院</a>
-                                        <a href="#">DVD</a>
-                                        <a href="#">迷你音响</a>
-                                        <a href="#">烟机/灶具</a>
-                                        <a href="#"> 热水器</a>
-                                        <a href="#">消毒柜/洗碗机</a>
-                                        <a href="#">冷柜/冰吧</a>
-                                        <a href="#">酒柜</a>
-                                        <a href="#">家电配件</a>
-                                    </dd>
-                                </dl>
-                                <dl>
-                                    <dt><a href="#">五金家装</a></dt>
-                                    <dd>
-                                        <a href="#">平板电视</a>
-                                        <a href="#">空调</a>
-                                        <a href="#">冰箱</a>
-                                        <a href="#">洗衣机</a>
-                                        <a href="#">家庭影院</a>
-                                        <a href="#">DVD</a>
-                                        <a href="#">迷你音响</a>
-                                        <a href="#">烟机/灶具</a>
-                                        <a href="#"> 热水器</a>
-                                        <a href="#">消毒柜/洗碗机</a>
-                                        <a href="#">冷柜/冰吧</a>
-                                        <a href="#">酒柜</a>
-                                        <a href="#">家电配件</a>
-                                    </dd>
-                                </dl>
-
+                <div class="left-sidebar">
+                    <h2>目录</h2>
+                    <div class="panel-group category-products" id="accordian">
+                        <!--category-productsr-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordian" href="#mens">
+                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                        男装
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="mens" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul>
+                                        <li>
+                                            <a href="#">衬衫</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">风衣</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">套装</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </li>
 
-                    <li class="nav_item">
-                        <a href="#">手机</a>、
-                        <a href="#">数码</a>、
-                        <a href="#">京东通信</a><span class="jt">&gt;</span></li>
-                    <li class="nav_item">
-                        <a href="#">
-                            <a href="#">电脑</a>、
-                            <a href="#">办公</a><span class="jt">&gt;</span></a></li>
-                    <li class="nav_item">
-                        <a href="#">家居</a>、
-                        <a href="#">家具</a>、
-                        <a href="#">家装</a>、
-                        <a href="#">厨具</a><span class="jt">&gt;</span></li>
-                    <li class="nav_item">
-                        <a href="#">
-                            <a href="#">男装</a>、
-                            <a href="#">女装</a>、
-                            <a href="#">内衣</a>、
-                            <a href="#">珠宝</a><span class="jt">&gt;</span></a></li>
-                    <li class="nav_item">
-                        <a href="#">个护化妆</a><span class="jt">&gt;</span></li>
-                    <li class="nav_item">
-                        <a href="#">
-                            <a href="#">鞋靴</a>、
-                            <a href="#">箱包</a>、
-                            <a href="#">钟表</a>、
-                            <a href="#">奢侈品</a><span class="jt">&gt;</span></a></li>
-                    <li class="nav_item">
-                        <a href="#">运动户外</a><span class="jt">&gt;</span></li>
-                    <li class="nav_item">
-                        <a href="#">
-                            <a href="#">汽车</a>、
-                            <a href="#">汽车用品</a><span class="jt">&gt;</span></a></li>
-                    <li class="nav_item">
-                        <a href="#">
-                            <a href="#">母婴</a>、
-                            <a href="#">玩具乐器</a><span class="jt">&gt;</span></a></li>
-                    <li class="nav_item">
-                        <a href="#">
-                            <a href="#">食品饮料</a>、
-                            <a href="#">酒类</a>、
-                            <a href="#">生鲜</a><span class="jt">&gt;</span></a></li>
-                    <li class="nav_item">
-                        <a href="#">营养保健</a><span class="jt">&gt;</span></li>
-                    <li class="nav_item">
-                        <a href="#">
-                            <a href="#">图书</a>、
-                            <a href="#">音像</a>、
-                            <a href="#">数字商品</a><span class="jt">&gt;</span></a></li>
-                    <li class="nav_item">
-                        <a href="#">
-                            <a href="#">彩票</a>、
-                            <a href="#">旅行</a>、
-                            <a href="#">充值</a>、
-                            <a href="#">票务</a><span class="jt">&gt;</span></a></li>
-                    <li class="nav_item">
-                        <a href="#">
-                            <a href="#">理财</a>、
-                            <a href="#">众筹</a>、
-                            <a href="#">白条</a>、
-                            <a href="#">保险</a><span class="jt">&gt;</span></a>
-                    </li>
-                </ul>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordian" href="#womens">
+                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                        女装
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="womens" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul>
+                                        <li>
+                                            <a href="#">连衣裙</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">牛仔</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">外套</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">T恤</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="#">儿童</a></h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="#">运动</a></h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="#">时尚</a></h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="#">家居</a></h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="#">包包</a></h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="#">鞋子</a></h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="#"><span class="pull-right">>></span>更多</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/category-products-->
+                </div>
             </div>
             <div class="col-lg-10">
                 <div class="row" style="padding: 20px">
@@ -294,13 +228,11 @@
                             </div>
 
                             <!-- Controls -->
-                            <a class="left carousel-control" href="#carousel-example-generic" role="button"
-                               data-slide="prev">
+                            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
                                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="right carousel-control" href="#carousel-example-generic" role="button"
-                               data-slide="next">
+                            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
                                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -312,15 +244,13 @@
                 <div class="col-lg-3 col-md-4 col-sm-6" th:each="ac01:${ac01List}">
                     <div class="thumbnail">
                         <a th:href="@{'goodShow.html?id=' + ${ac01.aac101}}">
-                            <img th:src="${ac01.aac106}" style="height: 150px; width: 100%; overflow: hidden"
-                                 alt="商品图片">
+                            <img th:src="${ac01.aac106}" style="height: 150px; width: 100%; overflow: hidden" alt="商品图片">
                         </a>
                         <div class="caption">
                             <h3 th:text="${ac01.aac102}"></h3>
                             <p th:text="${ac01.aac103}"></p>
                             <p>
-                                <a href="javascript:void(0)" class="btn btn-primary" role="button"
-                                   th:onclick="|javascript:addToCart('${ac01.aac101}')|">加入购物车</a>
+                                <a href="javascript:void(0)" class="btn btn-primary" role="button" th:onclick="|javascript:addToCart('${ac01.aac101}')|">加入购物车</a>
                                 <a href="#" class="btn btn-default" role="button">购买</a>
                             </p>
                         </div>
@@ -332,7 +262,9 @@
 </div>
 
 
+
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/login-register.js"></script>
 </body>
 </html>

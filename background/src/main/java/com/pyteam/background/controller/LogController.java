@@ -44,7 +44,6 @@ public class LogController
         return CommonResponse.success(CommonPage.restPage(list));
     }
 
-
     @ApiOperation("日志详情查询")
     @GetMapping("/{id}")
     public CommonResponse getLogDetail(@PathVariable("id") Integer id)

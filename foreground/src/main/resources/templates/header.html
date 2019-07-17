@@ -21,29 +21,6 @@
         }
     </style>
 
-    <script>
-        function logout() {
-            if(confirm("确认退出登录?"))
-            {
-                $.ajax({
-                    url: "/logout.html",
-                    type: "post",
-                    success: function (data) {
-                        if(data==true)
-                        {
-                            alert("成功退出登录!");
-                            window.location.replace("/index.html");
-                        }
-                        else
-                        {
-                            alert("您已退出登录")
-                            window.location.replace("/index.html");
-                        }
-                    }
-                })
-            }
-        }
-    </script>
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -60,32 +37,32 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li th:class="(${type} == 1) ? 'active':''">
-                    <a href="/index.html">首页<span class="sr-only">(current)</span></a>
+                    <a href="index.html">首页<span class="sr-only">(current)</span></a>
                 </li>
-                <li th:class="(${type} == 2) ? 'active':''">
-                    <a href="/ad01list.html">悬赏</a>
+                <li>
+                    <a href="#">悬赏</a>
                 </li>
                 <li th:class="(${type} == 3) ? 'active':''">
-                    <a href="/auction.html">拍卖</a>
+                    <a href="auction.html">拍卖</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown" id="conn">
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">收藏夹<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="/ad01/forklist">收藏的悬赏</a>
+                            <a href="#">收藏的悬赏</a>
                         </li>
                         <li>
-                            <a href="auctionConn.html">收藏的拍卖</a>
+                            <a href="#">收藏的拍卖</a>
                         </li>
                     </ul>
                 </li>
-                <li id="cart">
+                <li>
                     <a href="cart.html">购物车</a>
                 </li>
-                <li class="dropdown" id="seller">
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">卖家中心<span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -93,7 +70,7 @@
                             <a href="goodLaunch.html">出售</a>
                         </li>
                         <li>
-                            <a href="/ad01/add">添加悬赏</a>
+                            <a href="#">悬赏</a>
                         </li>
                         <li>
                             <a href="auctionLaunch.html">发起拍卖</a>
@@ -126,7 +103,7 @@
                             <a href="#">我的评论</a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)" onclick="logout()">退出登录</a>
+                            <a href="#">退出登录</a>
                         </li>
                     </ul>
                 </li>
@@ -197,33 +174,18 @@
 
     <script src="js/login-register.js"></script>
     <script>
-        function getCookie(cname)
-        {
-            var name = cname + "=";
-            var ca = document.cookie.split(';');
-            for(var i=0; i<ca.length; i++)
-            {
-                var c = ca[i].trim();
-                if (c.indexOf(name)==0) return c.substring(name.length,c.length);
-            }
-            return "";
-        }
-
         window.onload = function ()
         {
             show();
         }
         function show()
         {
-            if (getCookie("username")!="")
+            if (document.cookie)
             {
                 document.getElementById("login").className = "hidden";
             }
             else
             {
-                document.getElementById("conn").className = "hidden";
-                document.getElementById("cart").className = "hidden";
-                document.getElementById("seller").className = "hidden";
                 document.getElementById("my").className = "hidden";
             }
         }

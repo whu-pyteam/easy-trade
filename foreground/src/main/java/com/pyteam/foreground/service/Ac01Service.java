@@ -41,11 +41,34 @@ public class Ac01Service
     public List<Ac01> selectById() throws Exception
     {
         Ac01Example ac01Example=new Ac01Example();
+        Ac01Example.Criteria criteria = ac01Example.createCriteria();
+        criteria.andAac104EqualTo("1");
         List<Ac01> ac01List = ac01Mapper.selectByExample(ac01Example);
         return ac01List;
     }
 
+    /**
+     * 根据商品名称查询
+     * @param value
+     * @return
+     * @throws Exception
+     */
+    public List<Ac01> searchByValue(String value) throws Exception
+    {
+        Ac01Example ac01Example = new Ac01Example();
+        Ac01Example.Criteria criteria = ac01Example.createCriteria();
+        criteria.andAac102Like("%" + value + "%");
+        criteria.andAac104EqualTo("1");
+        List<Ac01> ad02List = ac01Mapper.selectByExample(ac01Example);
+        return ad02List;
+    }
 
+    /**
+     * 添加商品
+     * @param ac01Dto
+     * @return
+     * @throws Exception
+     */
     public boolean addAc01(Ac01Dto ac01Dto)throws Exception
     {
         Ac01 ac01 = new Ac01();
