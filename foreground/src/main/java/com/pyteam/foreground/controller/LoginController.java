@@ -26,8 +26,8 @@ public class LoginController
         if (ab01Service.isMember(Integer.parseInt(username), password))
         {
             //是会员，则在cookie中保存用户名和密码
-            setCookies(response,"username",username,120);
-            setCookies(response,"password",password,120);
+            setCookies(response,"username",username,600);
+            setCookies(response,"password",password,600);
             return true;
         }
         else
@@ -41,10 +41,14 @@ public class LoginController
      * @param request
      * @return
      */
-    public static boolean isLogin(HttpServletRequest request)
+    public static boolean isLogin(HttpServletRequest request,HttpServletResponse response)
     {
-        if(getCookies(request,"username")!=null)
+        String username = getCookies(request,"username");
+        String password = getCookies(request,"password");
+        if(username != null && password != null)
         {
+            setCookies(response,"username",username,600);
+            setCookies(response,"password",password,600);
             return true;
         }
         else
@@ -61,7 +65,7 @@ public class LoginController
      * @param value
      * @param expiry
      */
-    public void setCookies(HttpServletResponse response,String key,String value,int expiry)
+    public static void setCookies(HttpServletResponse response,String key,String value,int expiry)
     {
         //设置cookie
         Cookie cookie=new Cookie(key,value);
@@ -95,7 +99,7 @@ public class LoginController
      * @param response
      * @param name
      */
-    public  void delCookies(HttpServletRequest request,HttpServletResponse response,String name){
+    public static void delCookies(HttpServletRequest request,HttpServletResponse response,String name){
         Cookie[] cookies =  request.getCookies();
         if(cookies != null){
             for(Cookie cookie : cookies){
