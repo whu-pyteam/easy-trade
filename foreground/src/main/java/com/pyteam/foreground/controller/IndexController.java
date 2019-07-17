@@ -1,5 +1,6 @@
 package com.pyteam.foreground.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.pyteam.foreground.dto.Ac01Dto;
 import com.pyteam.foreground.service.Ac01Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import static com.pyteam.foreground.controller.LoginController.isLogin;
 import static com.pyteam.foreground.controller.LoginController.getCookies;
@@ -18,23 +18,6 @@ public class IndexController
 {
     @Autowired
     private Ac01Service ac01Service;
-
-    @RequestMapping(value = "/index.html", method = RequestMethod.GET)
-    public String wel(Model model)
-    {
-        try
-        {
-            model.addAttribute("type", 1);
-            model.addAttribute("ac01List", ac01Service.selectById());
-            return "index";
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            return "error/404";
-        }
-    }
-
 
     @RequestMapping(value="goodShow.html",method=RequestMethod.GET)
     public String searchById(int id, Model model)
@@ -52,15 +35,14 @@ public class IndexController
         }
     }
 
-    @RequestMapping(value = "/goodSearch.html", method = RequestMethod.POST)
-    public String searchByValue(@RequestParam(value = "searchValue") String value, Model model)
+    @RequestMapping(value = "/index.html", method = RequestMethod.GET)
+    public String wel(Model model)
     {
-        System.out.println(value);
         try
         {
-            model.addAttribute("searchList", ac01Service.searchByValue(value));
             model.addAttribute("type", 1);
-            return "goodSearch";
+            model.addAttribute("ac01List", ac01Service.selectById());
+            return "index";
         }
         catch (Exception e)
         {
@@ -69,11 +51,10 @@ public class IndexController
         }
     }
 
-
     @RequestMapping(value = "/goodLaunch.html", method = RequestMethod.GET)
-    public String add(HttpServletRequest request, HttpServletResponse response) throws Exception
+    public String add(HttpServletRequest request) throws Exception
     {
-        if (isLogin(request,response))
+        if (isLogin(request))
         {
             return "goodLaunch";
         } else
@@ -89,6 +70,4 @@ public class IndexController
         boolean res = ac01Service.addAc01(dto);
         return "goodLaunch";
     }
-
-
 }

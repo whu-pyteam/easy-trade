@@ -56,10 +56,14 @@ public class Ae07ServiceImpl implements Ae07Service
             if(!(ae07NewMapper.select(aad101).isEmpty()))
             {
                 List <Ae07> ae07List= ae07NewMapper.select(aad101);
-
-                int aac501 = ae07List.get(0).getAac501();
-                ac05List.add(ac05NewMapper.ac05List(aac501).get(0));
-
+                if(ae07List.isEmpty())
+                {
+                    System.out.println("kkkk");
+                }else
+                {
+                    int aac501 = ae07List.get(0).getAac501();
+                    ac05List.add(ac05NewMapper.ac05List(aac501).get(0));
+                }
             }
         }
         System.out.println(ac05List);

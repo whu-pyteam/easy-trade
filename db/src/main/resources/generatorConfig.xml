@@ -127,9 +127,9 @@
 <!--        <table tableName="af02">-->
 <!--            <generatedKey column="aaf201" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
-        <table tableName="af03">
-            <generatedKey column="aaf301" sqlStatement="MySql" identity="true"/>
-        </table>
+<!--        <table tableName="af03">-->
+<!--            <generatedKey column="aaf301" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
 <!--        <table tableName="af04">-->
 <!--            <generatedKey column="aaf401" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->

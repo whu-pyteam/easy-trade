@@ -1,7 +1,6 @@
 package com.pyteam.foreground.controller;
 
 import com.pyteam.foreground.service.Ab01Service;
-import com.pyteam.foreground.service.Ad04Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +14,6 @@ public class LoginController
 {
     @Autowired
     Ab01Service ab01Service;
-    @Autowired
-    private Ad04Service ad04Service;
 
     /**
      * 登录
@@ -32,15 +29,12 @@ public class LoginController
         String username=request.getParameter("username");
         //获取用户输入的密码
         String password=request.getParameter("password");
-        //获取用户拍卖收藏流水号
-        String aad401_auc = ad04Service.getAad401(Integer.parseInt(username), "2");
         //判断是否是会员
         if (ab01Service.isMember(Integer.parseInt(username), password))
         {
             //是会员，则在cookie中保存用户名和密码
-            setCookies(response,"username",username,600);
-            setCookies(response,"password",password,600);
-            setCookies(response, "aad401_auc", aad401_auc, 600);
+            setCookies(response,"username",username,120);
+            setCookies(response,"password",password,120);
             return true;
         }
         else
@@ -76,16 +70,10 @@ public class LoginController
      * @param request
      * @return
      */
-    public static boolean isLogin(HttpServletRequest request,HttpServletResponse response)
+    public static boolean isLogin(HttpServletRequest request)
     {
-        String username = getCookies(request,"username");
-        String password = getCookies(request,"password");
-        String aad401_auc = getCookies(request, "aad401_auc");
-        if(username != null && password != null)
+        if(getCookies(request,"username")!=null)
         {
-            setCookies(response,"username",username,600);
-            setCookies(response,"password",password,600);
-            setCookies(response, "aad401_auc", aad401_auc, 600);
             return true;
         }
         else
@@ -102,7 +90,7 @@ public class LoginController
      * @param value
      * @param expiry
      */
-    public static void setCookies(HttpServletResponse response,String key,String value,int expiry)
+    public void setCookies(HttpServletResponse response,String key,String value,int expiry)
     {
         //设置cookie
         Cookie cookie=new Cookie(key,value);
@@ -136,7 +124,7 @@ public class LoginController
      * @param response
      * @param name
      */
-    public static void delCookies(HttpServletRequest request,HttpServletResponse response,String name){
+    public  void delCookies(HttpServletRequest request,HttpServletResponse response,String name){
         Cookie[] cookies =  request.getCookies();
         if(cookies != null){
             for(Cookie cookie : cookies){
