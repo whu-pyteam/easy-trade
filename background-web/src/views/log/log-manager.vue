@@ -3,17 +3,22 @@
 
     <el-card class="page-card" shadow="hover">
       <el-form :inline="true" :model="condition" class="demo-form-inline">
-        <el-form-item label="拍卖名称">
-          <el-input v-model="condition.aad202" clearable></el-input>
+        <el-form-item label="操作人名称">
+          <el-input v-model="condition.aaf202" clearable></el-input>
         </el-form-item>
-        <el-form-item label="拍卖审核状态" prop="aad209">
-          <el-card shadow="never" body-style="padding: 0 10px">
-            <el-radio-group v-model="condition.aad209" >
-              <el-radio label="">所有</el-radio>
-              <el-radio label="0">未审核</el-radio>
-              <el-radio label="1">已审核</el-radio>
-            </el-radio-group>
-          </el-card>
+        <el-form-item label="开始时间">
+          <el-date-picker
+            v-model="condition.dateBegin"
+            type="datetime"
+            placeholder="选择日期时间">
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="结束时间">
+          <el-date-picker
+            v-model="condition.dateEnd"
+            type="datetime"
+            placeholder="选择日期时间">
+          </el-date-picker>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">查询</el-button>
@@ -35,35 +40,22 @@
           </template>
         </el-table-column>
         <el-table-column
-          prop="aad202"
-          label="拍卖名称"
-          width="250">
+          prop="aaf202"
+          label="操作员名称"
+          width="300">
         </el-table-column>
         <el-table-column
           label="上传时间"
-          width="250">
+          width="400">
           <template slot-scope="scope">
-            {{formatDate(scope.row.aad212)}}
-<!--            {{scope.row.aad212}}-->
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="审核状态"
-          width="250">
-          <template slot-scope="scope">
-            <el-switch
-              v-model="scope.row.aad209 === '0'"
-              active-text="待审核"
-              inactive-text="已审核"
-              disabled>
-            </el-switch>
+            {{scope.row.aaf303}}
           </template>
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
               icon="el-icon-edit-outline"
-              @click="handleEdit(scope.$index, scope.row)">审核
+              @click="handleDetail(scope.$index, scope.row)">查看
             </el-button>
           </template>
         </el-table-column>
@@ -81,56 +73,84 @@
       </el-pagination>
     </el-card>
 
+
+    <el-dialog
+      title="提示"
+      :visible.sync="dialogVisible"
+      width="30%">
+
+      <el-form :model="condition">
+        <el-form-item label="操作人名称" label-width="120px">
+          <el-input v-model="rowData.aaf202" disabled=""></el-input>
+        </el-form-item>
+        <el-form-item label="操作日期" label-width="120px">
+          <span>{{formatDate(rowData.aaf303)}}</span>
+          {{rowData.aaf303}}
+        </el-form-item>
+        <el-form-item label="操作详情" label-width="120px">
+          <sapn v-for="item in logDetail" :key="item">{{item}}</sapn>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
-  import {getAuctionList} from "@/api/auction";
+  import {getLogDetail, getLogList} from "@/api/log";
 
   export default {
-    name: 'auction-list',
+    name: 'feedback-list',
     data() {
       return {
         condition: {
-          aad202: '',
-          aad209: ''
+          aaf202: null,
+          dateBegin: null,
+          dateEnd: null
         },
         tableData: [],
         pageInfo: {
           total: 0,
           pageNum: 1,
           pageSize: 10
-        }
+        },
+        dialogVisible: false,
+        logDetail: {},
+        rowData: {}
       }
     },
     created() {
-      this.fetchAuctionList()
+      this.fetchLogList()
     },
     methods: {
-      fetchAuctionList() {
+      fetchLogList() {
         let params = {
           ...this.condition,
           pageNum: this.pageInfo.pageNum,
           pageSize: this.pageInfo.pageSize
         }
-        getAuctionList(params).then(res => {
+        console.log(params)
+        getLogList(params).then(res => {
           console.log(res)
           this.pageInfo.total = res.data.total
           this.tableData = res.data.list
         })
       },
       onSubmit() {
-        this.fetchAuctionList()
+        this.fetchLogList()
       },
-      handleEdit(index, rowData) {
-        this.$router.push(`/auction/${rowData.aad201}`)
+      handleDetail(index, rowData) {
+        getLogDetail(rowData.aaf201).then(res => {
+          console.log(JSON.parse(res.data.aaf302))
+          this.logDetail = JSON.parse(res.data.aaf302)
+          console.log(this.logDetail)
+          this.rowData = rowData
+        })
+        this.dialogVisible = true
       },
       handleCurrentChange(val) {
         this.pageInfo.pageNum = val
-        this.fetchAuctionList()
-      },
-      formatDate(date) {
-        return date.replace('T', ' ').replace('.000+0000', '')
+        this.fetchLogList()
       }
     }
   }

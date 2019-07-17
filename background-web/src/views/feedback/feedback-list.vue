@@ -3,15 +3,15 @@
 
     <el-card class="page-card" shadow="hover">
       <el-form :inline="true" :model="condition" class="demo-form-inline">
-        <el-form-item label="拍卖名称">
-          <el-input v-model="condition.aad202" clearable></el-input>
+        <el-form-item label="反馈名称">
+          <el-input v-model="condition.aab503" clearable></el-input>
         </el-form-item>
-        <el-form-item label="拍卖审核状态" prop="aad209">
+        <el-form-item label="反馈审核状态" prop="aad209">
           <el-card shadow="never" body-style="padding: 0 10px">
-            <el-radio-group v-model="condition.aad209" >
+            <el-radio-group v-model="condition.aab504" >
               <el-radio label="">所有</el-radio>
-              <el-radio label="0">未审核</el-radio>
-              <el-radio label="1">已审核</el-radio>
+              <el-radio label="0">未查阅</el-radio>
+              <el-radio label="1">已查阅</el-radio>
             </el-radio-group>
           </el-card>
         </el-form-item>
@@ -35,16 +35,16 @@
           </template>
         </el-table-column>
         <el-table-column
-          prop="aad202"
-          label="拍卖名称"
+          prop="aab503"
+          label="反馈名称"
           width="250">
         </el-table-column>
         <el-table-column
           label="上传时间"
           width="250">
           <template slot-scope="scope">
-            {{formatDate(scope.row.aad212)}}
-<!--            {{scope.row.aad212}}-->
+            {{formatDate(scope.row.aab505)}}
+            <!--            {{scope.row.aad212}}-->
           </template>
         </el-table-column>
         <el-table-column
@@ -52,7 +52,7 @@
           width="250">
           <template slot-scope="scope">
             <el-switch
-              v-model="scope.row.aad209 === '0'"
+              v-model="scope.row.aab504 === '0'"
               active-text="待审核"
               inactive-text="已审核"
               disabled>
@@ -85,15 +85,15 @@
 </template>
 
 <script>
-  import {getAuctionList} from "@/api/auction";
+  import {getFeedbackList} from "@/api/feedback";
 
   export default {
-    name: 'auction-list',
+    name: 'feedback-list',
     data() {
       return {
         condition: {
-          aad202: '',
-          aad209: ''
+          aab503: '',
+          aab504: ''
         },
         tableData: [],
         pageInfo: {
@@ -104,30 +104,30 @@
       }
     },
     created() {
-      this.fetchAuctionList()
+      this.fetchFeedbackList()
     },
     methods: {
-      fetchAuctionList() {
+      fetchFeedbackList() {
         let params = {
           ...this.condition,
           pageNum: this.pageInfo.pageNum,
           pageSize: this.pageInfo.pageSize
         }
-        getAuctionList(params).then(res => {
+        getFeedbackList(params).then(res => {
           console.log(res)
           this.pageInfo.total = res.data.total
           this.tableData = res.data.list
         })
       },
       onSubmit() {
-        this.fetchAuctionList()
+        this.fetchFeedbackList()
       },
       handleEdit(index, rowData) {
-        this.$router.push(`/auction/${rowData.aad201}`)
+        this.$router.push(`/feedback/${rowData.aab501}`)
       },
       handleCurrentChange(val) {
         this.pageInfo.pageNum = val
-        this.fetchAuctionList()
+        this.fetchFeedbackList()
       },
       formatDate(date) {
         return date.replace('T', ' ').replace('.000+0000', '')

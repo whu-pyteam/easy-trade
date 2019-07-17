@@ -23,7 +23,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">保存</el-button>
-          <el-button>取消</el-button>
+          <el-button @click="cancelUpdate">取消</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -48,7 +48,6 @@
     created() {
       this.fetchRoles()
       this.fetchStaffByAaf202(this.$route.params.username)
-
     },
     methods: {
       onSubmit() {
@@ -57,9 +56,9 @@
           aaf601List: this.selectRoles,
           aaf207: this.aaf207 ? 1 : 0
         }
-        updateStaff(params).then(() => {
+        updateStaff(params).then(res => {
+          console.log(res.data)
           this.$message.success("操作成功!")
-
           window.setTimeout(this.goback, 2000)
         })
       },
@@ -95,6 +94,9 @@
         })
       },
       goback() {
+        this.$router.go(-1)
+      },
+      cancelUpdate() {
         this.$router.go(-1)
       }
     }

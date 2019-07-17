@@ -7,19 +7,13 @@ import java.util.Date;
 
 /**
  * @author tyc
- * @date 2019/7/10 12:29
+ * @date 2019/7/16 14:42
  */
 @Data
-public class StaffQueryParam
+public class LogQueryParam
 {
     @ApiModelProperty("员工名称")
     private String aaf202;
-
-    @ApiModelProperty("员工昵称")
-    private String aaf204;
-
-    @ApiModelProperty("员工状态")
-    private Integer aaf207;
 
     @ApiModelProperty("开始时间")
     private Date dateBegin;
@@ -32,5 +26,4 @@ public class StaffQueryParam
 
     @ApiModelProperty("pageNum")
     private Integer pageNum;
-
 }
