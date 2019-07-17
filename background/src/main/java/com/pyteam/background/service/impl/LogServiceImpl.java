@@ -45,16 +45,6 @@ public class LogServiceImpl implements LogService
     @Override
     public List<LogInfo> list(LogQueryParam queryParam)
     {
-        // Af02 af02 = af02Service.getEmpByUsername(queryParam.getAaf202());
-        // PageHelper.startPage(queryParam.getPageNum(), queryParam.getPageSize());
-        // Af03Example example = new Af03Example();
-        // Af03Example.Criteria criteria = example.createCriteria();
-        // if(!StringUtils.isEmpty(queryParam.getAaf202()))
-        // {
-        //     criteria.andAaf201EqualTo(af02.getAaf201());
-        // }
-        //
-        // return af03Mapper.selectByExample(example);
         PageHelper.startPage(queryParam.getPageNum(), queryParam.getPageSize());
         return logMapper.getLogInfo(queryParam);
     }

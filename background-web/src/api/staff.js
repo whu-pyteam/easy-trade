@@ -1,10 +1,10 @@
 import request from '@/utils/request'
 
-export function queryStaffList(params) {
+export function queryStaffList(data) {
   return request({
     url: '/staff',
-    method: 'get',
-    params: params
+    method: 'post',
+    data
   })
 }
 
@@ -23,17 +23,17 @@ export function getRoleList() {
   })
 }
 
-export function getSingleStaff(username) {
+export function getSingleStaff(id) {
   return request({
-    url: '/staff/' + username,
+    url: '/staff/' + id,
     method: 'get'
   })
 }
 
-export function updateStaff(data) {
+export function updateStaff(id, data) {
   return request({
-    url: '/staff/role',
-    method: 'post',
+    url: '/staff/' + id,
+    method: 'put',
     data: data
   })
 }

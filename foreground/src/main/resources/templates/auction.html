@@ -214,22 +214,21 @@
         if(strCookie)
         {
             var arrCookie=strCookie.split("; ");
-            var aad401 = "";
+            var username = "";
             for(var i=0;i<arrCookie.length;i++){
                 var arr=arrCookie[i].split("=");
-                if("aad401_auc"==arr[0]){
-                    aad401 = arr[1];
+                if("username"==arr[0]){
+                    username = arr[1];
                     break;
                 }
-
             }
             if(document.getElementById("conn" + id).innerText == "收藏")
             {
-                addConn(id, aad401);
+                addConn(id, username);
             }
             else
             {
-                delConn(id, aad401);
+                delConn(id, username);
             }
 
         }
@@ -240,11 +239,11 @@
         }
     }
 
-    function addConn(id, aad401)
+    function addConn(id, userID)
     {
-        var data = {aad201: id, aad401: aad401};
+        var data = {aab101: userID, aad201: id, aad402: '2'};
         $.ajax({
-            url : 'addAucConn',
+            url : 'addConnection',
             type : 'GET',
             contentType : 'application/json',
             dataType : 'json',
@@ -252,6 +251,7 @@
             success : function() {
                 //alert("收藏成功！");
                 document.getElementById("conn" + id).innerText = "已收藏";
+                //document.getElementById("conn" + id).classList.remove("active");
             },
             error: function () {
                 alert("收藏失败！");
@@ -259,11 +259,11 @@
         });
     }
 
-    function delConn(id, aad401)
+    function delConn(id, userID)
     {
-        var data = {aad201: id, aad401: aad401};
+        var data = {aab101: userID, aad201: id, aad402: '2'};
         $.ajax({
-            url : 'delAucConn',
+            url : 'delConnection',
             type : 'GET',
             contentType : 'application/json',
             dataType : 'json',
@@ -271,6 +271,7 @@
             success : function() {
                 alert("取消成功！");
                 document.getElementById("conn" + id).innerText = "收藏";
+                //document.getElementById("conn" + id).classList.remove("active");
             },
             error: function () {
                 alert("取消失败！");

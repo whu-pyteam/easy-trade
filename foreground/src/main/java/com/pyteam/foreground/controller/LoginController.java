@@ -1,7 +1,6 @@
 package com.pyteam.foreground.controller;
 
 import com.pyteam.foreground.service.Ab01Service;
-import com.pyteam.foreground.service.Ad04Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,16 +14,7 @@ public class LoginController
 {
     @Autowired
     Ab01Service ab01Service;
-    @Autowired
-    private Ad04Service ad04Service;
 
-    /**
-     * 登录
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
     @PostMapping(value = "login.html")
     public boolean login(HttpServletRequest request, HttpServletResponse response) throws Exception
     {
@@ -32,37 +22,12 @@ public class LoginController
         String username=request.getParameter("username");
         //获取用户输入的密码
         String password=request.getParameter("password");
-        //获取用户拍卖收藏流水号
-        String aad401_auc = ad04Service.getAad401(Integer.parseInt(username), "2");
         //判断是否是会员
         if (ab01Service.isMember(Integer.parseInt(username), password))
         {
             //是会员，则在cookie中保存用户名和密码
             setCookies(response,"username",username,600);
             setCookies(response,"password",password,600);
-            setCookies(response, "aad401_auc", aad401_auc, 600);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    /**
-     * 退出登录
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    @PostMapping(value = "logout.html")
-    public boolean logout(HttpServletRequest request, HttpServletResponse response) throws Exception
-    {
-        if(isLogin(request,response))
-        {
-            delCookies(request,response,"username");
-            delCookies(request,response,"password");
             return true;
         }
         else
@@ -80,12 +45,10 @@ public class LoginController
     {
         String username = getCookies(request,"username");
         String password = getCookies(request,"password");
-        String aad401_auc = getCookies(request, "aad401_auc");
         if(username != null && password != null)
         {
             setCookies(response,"username",username,600);
             setCookies(response,"password",password,600);
-            setCookies(response, "aad401_auc", aad401_auc, 600);
             return true;
         }
         else
