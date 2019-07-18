@@ -23,16 +23,21 @@ import java.util.List;
 @Api(tags = {"StaffController -- 员工管理"})
 @RestController
 @RequestMapping("/staff")
+@PreAuthorize("hasAuthority('admin:emp')")
 public class StaffController
 {
 
-    @Autowired
-    Af02Service af02Service;
-    @Autowired
-    Af07Service af07Service;
+    private final Af02Service af02Service;
+    private final Af07Service af07Service;
+
+    public StaffController(Af02Service af02Service, Af07Service af07Service)
+    {
+        this.af02Service = af02Service;
+        this.af07Service = af07Service;
+    }
 
     @ApiOperation("分页查询员工列表")
-    @PostMapping("")
+    @GetMapping("")
     public CommonResponse<CommonPage<Af02>> list(StaffQueryParam queryParam)
     {
         List<Af02> list = af02Service.list(queryParam);
@@ -40,21 +45,20 @@ public class StaffController
     }
 
     @ApiOperation("单例查询员工信息")
-    @GetMapping("/{id}")
-    public CommonResponse<Af02> getInfoById(@PathVariable("id") Integer id)
+    @GetMapping("/{username}")
+    public CommonResponse<Af02> getInfoById(@PathVariable("username") String username)
     {
-        return CommonResponse.success(af02Service.getAf02ById(id));
+        return CommonResponse.success(af02Service.getEmpByUsername(username));
     }
 
 
     @ApiOperation("更新员工角色")
-    @PutMapping("/{id}")
+    @PostMapping("/role")
     @PreAuthorize("hasAuthority('admin:emp')")
-    public CommonResponse updateStaffRole(@PathVariable("id") Integer id, @RequestBody StaffRoleParam staffRoleParam)
+    public CommonResponse updateStaffRole(@RequestBody StaffRoleParam staffRoleParam)
     {
-        Af02 af02 = af02Service.getAf02ById(id);
+        Af02 af02 = af02Service.getAf02ById(staffRoleParam.getAaf201());
         af02.setAaf207(staffRoleParam.getAaf207());
-        staffRoleParam.setAaf201(id);
         if(af07Service.staffRoleRelation(staffRoleParam) && af02Service.updateInfo(af02) == 1)
         {
             return CommonResponse.success("更新成功");

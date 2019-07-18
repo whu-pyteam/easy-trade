@@ -18,13 +18,6 @@ public class LoginController
     @Autowired
     private Ad04Service ad04Service;
 
-    /**
-     * 登录
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
     @PostMapping(value = "login.html")
     public boolean login(HttpServletRequest request, HttpServletResponse response) throws Exception
     {
@@ -41,28 +34,6 @@ public class LoginController
             setCookies(response,"username",username,600);
             setCookies(response,"password",password,600);
             setCookies(response, "aad401_auc", aad401_auc, 600);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    /**
-     * 退出登录
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
-    @PostMapping(value = "logout.html")
-    public boolean logout(HttpServletRequest request, HttpServletResponse response) throws Exception
-    {
-        if(isLogin(request,response))
-        {
-            delCookies(request,response,"username");
-            delCookies(request,response,"password");
             return true;
         }
         else

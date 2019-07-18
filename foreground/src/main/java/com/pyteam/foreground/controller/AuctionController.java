@@ -60,12 +60,12 @@ public class AuctionController
     @RequestMapping(value = "/auction.html", method = RequestMethod.GET)
     public String wel(HttpServletRequest request, HttpServletResponse response, Model model)
     {
-        int aab101 = 0;
+        int aad401 = 0;
         if(isLogin(request, response))
         {
-            aab101 = Integer.parseInt(getCookies(request, "username"));
+            aad401 = Integer.parseInt(getCookies(request, "aad401_auc"));
         }
-        model.addAttribute("aconnList", connService.selectAd02AndAe05(aab101, "2"));
+        model.addAttribute("aconnList", connService.selectAd02LeftAe05(aad401));
         //model.addAttribute("ad02List", service.selectAll());
         model.addAttribute("type", 3);
         return "auction";

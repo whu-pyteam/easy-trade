@@ -64,9 +64,4 @@ public class Ab01Service
             return false;
         }
     }
-
-    public Ab01 getMemberInfo(Integer aab101)throws Exception
-    {
-        return ab01Mapper.selectByPrimaryKey(aab101);
-    }
 }
