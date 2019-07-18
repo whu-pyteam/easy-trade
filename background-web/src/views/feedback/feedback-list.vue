@@ -8,7 +8,7 @@
         </el-form-item>
         <el-form-item label="反馈审核状态" prop="aad209">
           <el-card shadow="never" body-style="padding: 0 10px">
-            <el-radio-group v-model="condition.aab504" >
+            <el-radio-group v-model="condition.aab504">
               <el-radio label="">所有</el-radio>
               <el-radio label="0">未查阅</el-radio>
               <el-radio label="1">已查阅</el-radio>
@@ -43,8 +43,7 @@
           label="上传时间"
           width="250">
           <template slot-scope="scope">
-            {{formatDate(scope.row.aab505)}}
-            <!--            {{scope.row.aad212}}-->
+            {{scope.row.aad212}}
           </template>
         </el-table-column>
         <el-table-column
@@ -128,9 +127,6 @@
       handleCurrentChange(val) {
         this.pageInfo.pageNum = val
         this.fetchFeedbackList()
-      },
-      formatDate(date) {
-        return date.replace('T', ' ').replace('.000+0000', '')
       }
     }
   }
