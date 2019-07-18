@@ -19,14 +19,13 @@ public interface Af02Service
 {
     /**
      * 根据用户名或昵称分页查询用户
-     * @param queryParam
+     * @param
      * @return
      */
     List<Af02> list(StaffQueryParam queryParam);
 
 
     /**
-     * 通过id查询
      * @param id
      * @return
      */

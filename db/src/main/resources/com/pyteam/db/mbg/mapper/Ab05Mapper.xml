@@ -5,10 +5,6 @@
     <id column="aab501" jdbcType="INTEGER" property="aab501" />
     <result column="aab101" jdbcType="INTEGER" property="aab101" />
     <result column="aab502" jdbcType="VARCHAR" property="aab502" />
-    <result column="aab503" jdbcType="VARCHAR" property="aab503" />
-    <result column="aab504" jdbcType="VARCHAR" property="aab504" />
-    <result column="aab505" jdbcType="TIMESTAMP" property="aab505" />
-    <result column="aab506" jdbcType="VARCHAR" property="aab506" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    aab501, aab101, aab502, aab503, aab504, aab505, aab506
+    aab501, aab101, aab502
   </sql>
   <select id="selectByExample" parameterType="com.pyteam.db.mbg.entity.Ab05Example" resultMap="BaseResultMap">
     select
@@ -105,12 +101,8 @@
     <selectKey keyProperty="aab501" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into ab05 (aab101, aab502, aab503, 
-      aab504, aab505, aab506
-      )
-    values (#{aab101,jdbcType=INTEGER}, #{aab502,jdbcType=VARCHAR}, #{aab503,jdbcType=VARCHAR}, 
-      #{aab504,jdbcType=VARCHAR}, #{aab505,jdbcType=TIMESTAMP}, #{aab506,jdbcType=VARCHAR}
-      )
+    insert into ab05 (aab101, aab502)
+    values (#{aab101,jdbcType=INTEGER}, #{aab502,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.pyteam.db.mbg.entity.Ab05">
     <selectKey keyProperty="aab501" order="AFTER" resultType="java.lang.Integer">
@@ -124,18 +116,6 @@
       <if test="aab502 != null">
         aab502,
       </if>
-      <if test="aab503 != null">
-        aab503,
-      </if>
-      <if test="aab504 != null">
-        aab504,
-      </if>
-      <if test="aab505 != null">
-        aab505,
-      </if>
-      <if test="aab506 != null">
-        aab506,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="aab101 != null">
@@ -143,18 +123,6 @@
       </if>
       <if test="aab502 != null">
         #{aab502,jdbcType=VARCHAR},
-      </if>
-      <if test="aab503 != null">
-        #{aab503,jdbcType=VARCHAR},
-      </if>
-      <if test="aab504 != null">
-        #{aab504,jdbcType=VARCHAR},
-      </if>
-      <if test="aab505 != null">
-        #{aab505,jdbcType=TIMESTAMP},
-      </if>
-      <if test="aab506 != null">
-        #{aab506,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -176,18 +144,6 @@
       <if test="record.aab502 != null">
         aab502 = #{record.aab502,jdbcType=VARCHAR},
       </if>
-      <if test="record.aab503 != null">
-        aab503 = #{record.aab503,jdbcType=VARCHAR},
-      </if>
-      <if test="record.aab504 != null">
-        aab504 = #{record.aab504,jdbcType=VARCHAR},
-      </if>
-      <if test="record.aab505 != null">
-        aab505 = #{record.aab505,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.aab506 != null">
-        aab506 = #{record.aab506,jdbcType=VARCHAR},
-      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -197,11 +153,7 @@
     update ab05
     set aab501 = #{record.aab501,jdbcType=INTEGER},
       aab101 = #{record.aab101,jdbcType=INTEGER},
-      aab502 = #{record.aab502,jdbcType=VARCHAR},
-      aab503 = #{record.aab503,jdbcType=VARCHAR},
-      aab504 = #{record.aab504,jdbcType=VARCHAR},
-      aab505 = #{record.aab505,jdbcType=TIMESTAMP},
-      aab506 = #{record.aab506,jdbcType=VARCHAR}
+      aab502 = #{record.aab502,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -215,29 +167,13 @@
       <if test="aab502 != null">
         aab502 = #{aab502,jdbcType=VARCHAR},
       </if>
-      <if test="aab503 != null">
-        aab503 = #{aab503,jdbcType=VARCHAR},
-      </if>
-      <if test="aab504 != null">
-        aab504 = #{aab504,jdbcType=VARCHAR},
-      </if>
-      <if test="aab505 != null">
-        aab505 = #{aab505,jdbcType=TIMESTAMP},
-      </if>
-      <if test="aab506 != null">
-        aab506 = #{aab506,jdbcType=VARCHAR},
-      </if>
     </set>
     where aab501 = #{aab501,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.pyteam.db.mbg.entity.Ab05">
     update ab05
     set aab101 = #{aab101,jdbcType=INTEGER},
-      aab502 = #{aab502,jdbcType=VARCHAR},
-      aab503 = #{aab503,jdbcType=VARCHAR},
-      aab504 = #{aab504,jdbcType=VARCHAR},
-      aab505 = #{aab505,jdbcType=TIMESTAMP},
-      aab506 = #{aab506,jdbcType=VARCHAR}
+      aab502 = #{aab502,jdbcType=VARCHAR}
     where aab501 = #{aab501,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -18,21 +18,15 @@ public interface Af03Mapper {
 
     int insertSelective(Af03 record);
 
-    List<Af03> selectByExampleWithBLOBs(Af03Example example);
-
     List<Af03> selectByExample(Af03Example example);
 
     Af03 selectByPrimaryKey(Integer aaf301);
 
     int updateByExampleSelective(@Param("record") Af03 record, @Param("example") Af03Example example);
 
-    int updateByExampleWithBLOBs(@Param("record") Af03 record, @Param("example") Af03Example example);
-
     int updateByExample(@Param("record") Af03 record, @Param("example") Af03Example example);
 
     int updateByPrimaryKeySelective(Af03 record);
-
-    int updateByPrimaryKeyWithBLOBs(Af03 record);
 
     int updateByPrimaryKey(Af03 record);
 }

@@ -23,7 +23,7 @@ public class Af07ServiceImpl implements Af07Service
     Af07Mapper af07Mapper;
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional
     public boolean staffRoleRelation(StaffRoleParam staffRoleParam)
     {
         // 查询 af07 员工已关联的角色

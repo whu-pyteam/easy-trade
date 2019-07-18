@@ -1,7 +1,0 @@
-server:
-  port: 9527
-spring:
-  mvc:
-    view:
-      prefix: /WEB-INF/jsp/
-      suffix: .jsp

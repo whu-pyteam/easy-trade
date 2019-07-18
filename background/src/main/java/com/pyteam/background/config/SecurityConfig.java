@@ -75,7 +75,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                // .antMatchers("/**")
                // .permitAll();
                 // 除上面外的所有请求全部需要鉴权认证
-                .antMatchers("/**")
+                .antMatchers("/admin/**")
                 .authenticated();
 
         // 禁用缓存
