@@ -28,11 +28,7 @@ public class Ad05Controller
     @Autowired
     private Ad01Service ad01Service;
 
-//    @GetMapping("ad01/addid")
-//    public String add()
-//    {
-//        return "ad01/addid";
-//    }
+
 
     @GetMapping ("ad01/addid")
     public String add(@RequestParam(value = "aad101",required = false)int aad101, Session session)

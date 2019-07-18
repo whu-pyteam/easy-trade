@@ -27,8 +27,8 @@ public interface Ad04NewMapper
 
     //根据用户id反应收藏流水号
 
-    @Select("select aad401 from ad04 where aab101=#{id} and aad402=1")
-    List<Ad04> findById(int id);
+    @Select("select aad401 from ad04 where aab101=#{aab101} and aad402=1")
+    List<Ad04> findById(Ad04 ad04);
 
 
 }
