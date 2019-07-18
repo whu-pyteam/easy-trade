@@ -1,5 +1,6 @@
 package com.pyteam.foreground.service;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.pyteam.db.entity.AuctionConn;
@@ -13,7 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ConnectionService
@@ -27,9 +30,9 @@ public class ConnectionService
     @Autowired
     private AuctionMapper auctionMapper;
 
-    public List<Ad02> selectAd02RightAe05(int aad401, int pageNum, int pageSize)
+    public Map<String, Object>  selectAd02RightAe05(int aad401, int pageNum, int pageSize)
     {
-        PageHelper.startPage(pageNum, pageSize);
+        Page page = PageHelper.startPage(pageNum, pageSize);
         List<Ad02> ad02List = auctionMapper.selectAd02RightAe05(aad401);
         for(Ad02 ad02:ad02List)
         {
@@ -38,7 +41,16 @@ public class ConnectionService
             String date = sf.format(aad211);
             ad02.setAad204(date);
         }
-        return ad02List;
+//        System.out.println("getTotal:" + page.getTotal());              //总数量
+//        System.out.println("getCountColumn:" + page.getCountColumn());  //0
+//        System.out.println("getEndRow:" + page.getEndRow());            //pageSize
+//        System.out.println("getPageNum:" + page.getPageNum());          //pageNum
+//        System.out.println("getPages:" + page.getPages());              //总页数
+//        System.out.println("getPageSize:" + page.getPageSize());        //pageSize
+        Map<String, Object> connMap = new HashMap<>();
+        connMap.put("ad02List", ad02List);
+        connMap.put("pageCount", page.getPages());
+        return connMap;
     }
 
     public List<AuctionConn> selectAd02LeftAe05(int aad401)

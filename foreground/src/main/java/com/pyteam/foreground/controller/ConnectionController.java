@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.util.Map;
+
 import static com.pyteam.foreground.controller.LoginController.getCookies;
 import static com.pyteam.foreground.controller.LoginController.isLogin;
 
@@ -24,12 +26,28 @@ public class ConnectionController
     @RequestMapping(value = "/auctionConn.html", method = RequestMethod.GET)
     public String showConnection(HttpServletRequest request, HttpServletResponse response, Model model)
     {
+        int pageNum = Integer.parseInt(request.getParameter("pageNum"));
         int aad401 = 0;
         if(isLogin(request, response))
         {
             aad401 = Integer.parseInt(getCookies(request, "aad401_auc"));
         }
-        model.addAttribute("aconnList", connService.selectAd02RightAe05(aad401, 1, 8));
+        Map<String, Object> connMap = connService.selectAd02RightAe05(aad401, pageNum, 8);
+        int pageCount = (int)connMap.get("pageCount");
+        if((pageNum > pageCount)||(pageNum < 1))
+        {
+            try
+            {
+                response.sendError(404);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        model.addAttribute("aconnList", connMap.get("ad02List"));
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("pageCount", pageCount);
         return "auctionConn";
     }
 
