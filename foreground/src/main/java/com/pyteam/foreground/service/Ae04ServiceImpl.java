@@ -4,6 +4,7 @@ import com.pyteam.db.mbg.entity.Ad01;
 import com.pyteam.db.mbg.entity.Ad04;
 import com.pyteam.db.mbg.entity.Ae04;
 import com.pyteam.db.mbg.mapper.Ad01Mapper;
+import com.pyteam.foreground.mapper.Ad01NewMapper;
 import com.pyteam.foreground.mapper.Ad04NewMapper;
 import com.pyteam.foreground.mapper.Ae04NewMapper;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,5 @@
 package com.pyteam.background.service.impl;
 
-import cn.hutool.core.date.DateUtil;
 import com.github.pagehelper.PageHelper;
 import com.pyteam.background.dto.StaffLoginParam;
 import com.pyteam.background.dto.StaffQueryParam;
@@ -63,6 +62,8 @@ public class Af02ServiceImpl implements Af02Service
         PageHelper.startPage(queryParam.getPageNum(), queryParam.getPageSize());
         Af02Example af02Example = new Af02Example();
         Af02Example.Criteria criteria1 = af02Example.createCriteria();
+        Af02Example.Criteria criteria2 = af02Example.createCriteria();
+        Af02Example.Criteria criteria3 = af02Example.createCriteria();
 
         if(!StringUtils.isEmpty(queryParam.getAaf202()))
         {
@@ -70,26 +71,15 @@ public class Af02ServiceImpl implements Af02Service
         }
         if(!StringUtils.isEmpty(queryParam.getAaf204()))
         {
-            criteria1.andAaf204Like("%" + queryParam.getAaf204() + "%");
+            criteria2.andAaf204Like("%" + queryParam.getAaf204() + "%");
         }
         if(!StringUtils.isEmpty(queryParam.getAaf207()))
         {
-            criteria1.andAaf207EqualTo(queryParam.getAaf207());
-        }
-        if(queryParam.getDateBegin() != null && queryParam.getDateEnd() ==  null)
-        {
-            criteria1.andAaf205GreaterThanOrEqualTo(queryParam.getDateBegin());
-        }
-        if(queryParam.getDateEnd() !=  null && queryParam.getDateBegin() == null)
-        {
-            criteria1.andAaf205LessThanOrEqualTo(queryParam.getDateEnd());
-        }
-        if(queryParam.getDateEnd() !=  null && queryParam.getDateBegin() != null)
-        {
-            criteria1.andAaf205Between(queryParam.getDateBegin(), queryParam.getDateEnd());
+            criteria3.andAaf207EqualTo(queryParam.getAaf207());
         }
 
-
+        af02Example.or(criteria2);
+        af02Example.or(criteria3);
 
         return af02Mapper.selectByExample(af02Example);
     }

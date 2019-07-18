@@ -2,6 +2,3 @@ server:
   port: 9527
 
 
-tencentMail:
-  SDKAppID: 1400233863
-  AppKey: 99ea865a32e4151fdc49e85332570995
