@@ -2,6 +2,7 @@ package com.pyteam.foreground.service;
 
 import com.pyteam.db.mbg.entity.Ac01;
 import com.pyteam.db.mbg.entity.Ac01Example;
+import com.pyteam.db.mbg.entity.Ac02Example;
 import com.pyteam.db.mbg.mapper.Ac01Mapper;
 import com.pyteam.foreground.dto.Ac01Dto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,24 +42,74 @@ public class Ac01Service
     public List<Ac01> selectById() throws Exception
     {
         Ac01Example ac01Example=new Ac01Example();
+        Ac01Example.Criteria criteria = ac01Example.createCriteria();
+        criteria.andAac104EqualTo("1");
         List<Ac01> ac01List = ac01Mapper.selectByExample(ac01Example);
         return ac01List;
     }
 
+    /**
+     * 根据商品名称查询
+     * @param value
+     * @return
+     * @throws Exception
+     */
+    public List<Ac01> searchByValue(String value) throws Exception
+    {
+        Ac01Example ac01Example = new Ac01Example();
+        Ac01Example.Criteria criteria = ac01Example.createCriteria();
+        criteria.andAac102Like("%" + value + "%");
+        criteria.andAac104EqualTo("1");
+        List<Ac01> ad02List = ac01Mapper.selectByExample(ac01Example);
+        return ad02List;
+    }
 
+    /**
+     * 添加商品
+     * @param ac01Dto
+     * @return
+     * @throws Exception
+     */
     public boolean addAc01(Ac01Dto ac01Dto)throws Exception
     {
         Ac01 ac01 = new Ac01();
-        ac01.setAab101(1);
-        ac01.setAac201(1);
+
+        System.out.println(ac01Dto.getAab101());
+        ac01.setAab101(ac01Dto.getAab101());
+
+        System.out.println(ac01Dto.getAac201());
+        ac01.setAac201(ac01Dto.getAac201());
+
+        System.out.println(ac01Dto.getAac102());
         ac01.setAac102(ac01Dto.getAac102());
+
+        System.out.println(ac01Dto.getAac103());
         ac01.setAac103(ac01Dto.getAac103());
+
         ac01.setAac104("0");
+
+        System.out.println(ac01Dto.getAac105());
         ac01.setAac105(ac01Dto.getAac105());
+
+        System.out.println(ac01Dto.getAac106());
         ac01.setAac106(qiniuUtil.uploadImg(ac01Dto.getAac106()));
+
         ac01.setAac107(new Date());
 
         int res = ac01Mapper.insert(ac01);
         return res > 0;
+    }
+
+    /**
+     * 根据商品类别获取商品
+     * @param aac201
+     * @return
+     */
+    public List<Ac01> getByCategory(Integer aac201)
+    {
+        Ac01Example ac01Example= new Ac01Example();
+        Ac01Example.Criteria criteria= ac01Example.createCriteria();
+        criteria.andAac201EqualTo(aac201);
+        return ac01Mapper.selectByExample(ac01Example);
     }
 }

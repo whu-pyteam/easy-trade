@@ -9,7 +9,7 @@
     <title>Bootstrap 101 Template</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/login-register.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
     <style type="text/css">
         .navbar-brand {
             font-size: 18px;
@@ -37,7 +37,29 @@
             padding-bottom: 20px;
         }
     </style>
-
+    <script>
+        function addToCart(productId) {
+            console.log(productId);
+            $.post(
+                "addToCart.html",
+                {id: productId},
+                function (data) {
+                    if (data == 0) {
+                        window.location.replace("cart.html");
+                    }
+                    if (data == 1) {
+                        alert("成功加入购物车");
+                    }
+                    if (data == 2) {
+                        alert("没有未用户创建购物车");
+                    }
+                    if (data == 3) {
+                        alert("购物车已经存在该商品");
+                    }
+                }
+            );
+        }
+    </script>
 </head>
 
 <body>
@@ -50,11 +72,7 @@
 <!--        <div th:include="header :: header"></div>-->
 
 <div th:replace="header :: header(${type})"></div>
-<!--
-    作者：2361991194@qq.com
-    时间：2019-07-10
-    描述：搜索栏
--->
+
 <div class="ssl">
     <div class="container">
         <div class="col-lg-4">
@@ -64,9 +82,9 @@
 
         </div>
         <div class="col-sm-8">
-            <form class="navbar-form navbar-right" role="search">
+            <form class="navbar-form navbar-right" role="search" action="/goodSearch.html" method="post">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" class="form-control" placeholder="Search" name="searchValue">
                     <button type="submit" class="btn btn-default">搜索</button>
                 </div>
             </form>
@@ -78,102 +96,164 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-2">
-                <div class="left-sidebar">
-                    <h2>目录</h2>
-                    <div class="panel-group category-products" id="accordian">
-                        <!--category-productsr-->
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordian" href="#mens">
-                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                        男装
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="mens" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul>
-                                        <li>
-                                            <a href="#">衬衫</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">风衣</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">套装</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordian" href="#womens">
-                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                        女装
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="womens" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul>
-                                        <li>
-                                            <a href="#">连衣裙</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">牛仔</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">外套</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">T恤</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">儿童</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">运动</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">时尚</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">家居</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">包包</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">鞋子</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#"><span class="pull-right">>></span>更多</a></h4>
-                            </div>
-                        </div>
-                    </div>
-                    <!--/category-products-->
+                <div class="all">
+                    <a href="#">全部商品分类</a>
                 </div>
+                <ul class="ul_item">
+                    <li class="nav_item">
+                        <a href="/sort.html?sortId=2">书籍</a><span class="jt">&gt;</span>
+                        <div class="sub_menu">
+                            <div class="left_menu">
+                                <dl>
+                                    <dt><a href="/sort.html?sortId=4">课本</a></dt>
+                                    <dd>
+                                        <a href="#">平板电视</a>
+                                        <a href="#">空调</a>
+                                        <a href="#">冰箱</a>
+                                        <a href="#">洗衣机</a>
+                                        <a href="#">家庭影院</a>
+                                        <a href="#">DVD</a>
+                                        <a href="#">迷你音响</a>
+                                        <a href="#">烟机/灶具</a>
+                                        <a href="#"> 热水器</a>
+                                        <a href="#">消毒柜/洗碗机</a>
+                                        <a href="#">冷柜/冰吧</a>
+                                        <a href="#">酒柜</a>
+                                        <a href="#">家电配件</a>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt><a href="/sort.html?sortId=5">二手图书</a></dt>
+                                    <dd>
+                                        <a href="#">电风扇</a>
+                                        <a href="#">冷风扇</a>
+                                        <a href="#">净化器</a>
+                                        <a href="#">加湿器</a>
+                                        <a href="#">扫地机器人</a>
+                                        <a href="#">吸尘器</a>
+                                        <a href="#">挂烫机/熨斗</a>
+                                        <a href="#">插座</a>
+                                        <a href="#"> 电话机</a>
+                                        <a href="#">清洁机</a>
+                                        <a href="#">除湿机</a>
+                                        <a href="#">干衣机</a>
+                                        <a href="#">收录/音机</a>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt><a href="#">厨房电器</a></dt>
+                                    <dd>
+                                        <a href="#">电压力锅</a>
+                                        <a href="#">空调</a>
+                                        <a href="#">冰箱</a>
+                                        <a href="#">洗衣机</a>
+                                        <a href="#">家庭影院</a>
+                                        <a href="#">DVD</a>
+                                        <a href="#">迷你音响</a>
+                                        <a href="#">烟机/灶具</a>
+                                        <a href="#"> 热水器</a>
+                                        <a href="#">消毒柜/洗碗机</a>
+                                        <a href="#">冷柜/冰吧</a>
+                                        <a href="#">酒柜</a>
+                                        <a href="#">家电配件</a>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt><a href="#">个护健康</a></dt>
+                                    <dd>
+                                        <a href="#">平板电视</a>
+                                        <a class="test" href="#">空调</a>
+                                        <a href="#">冰箱</a>
+                                        <a href="#">洗衣机</a>
+                                        <a href="#">家庭影院</a>
+                                        <a href="#">DVD</a>
+                                        <a href="#">迷你音响</a>
+                                        <a href="#">烟机/灶具</a>
+                                        <a href="#"> 热水器</a>
+                                        <a href="#">消毒柜/洗碗机</a>
+                                        <a href="#">冷柜/冰吧</a>
+                                        <a href="#">酒柜</a>
+                                        <a href="#">家电配件</a>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt><a href="#">五金家装</a></dt>
+                                    <dd>
+                                        <a href="#">平板电视</a>
+                                        <a href="#">空调</a>
+                                        <a href="#">冰箱</a>
+                                        <a href="#">洗衣机</a>
+                                        <a href="#">家庭影院</a>
+                                        <a href="#">DVD</a>
+                                        <a href="#">迷你音响</a>
+                                        <a href="#">烟机/灶具</a>
+                                        <a href="#"> 热水器</a>
+                                        <a href="#">消毒柜/洗碗机</a>
+                                        <a href="#">冷柜/冰吧</a>
+                                        <a href="#">酒柜</a>
+                                        <a href="#">家电配件</a>
+                                    </dd>
+                                </dl>
+
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav_item">
+                        <a href="#">手机</a>、
+                        <a href="#">数码</a>、<span class="jt">&gt;</span></li>
+                    <li class="nav_item">
+                        <a href="#">
+                            <a href="#">电脑</a>、
+                            <a href="#">办公</a><span class="jt">&gt;</span></a></li>
+                    <li class="nav_item">
+                        <a href="#">家居</a>、
+                        <a href="#">家具</a>、<span class="jt">&gt;</span></li>
+                    <li class="nav_item">
+                        <a href="#">
+                            <a href="#">男装</a>、
+                            <a href="#">女装</a>、<span class="jt">&gt;</span></a></li>
+                    <li class="nav_item">
+                        <a href="#">个护化妆</a><span class="jt">&gt;</span></li>
+                    <li class="nav_item">
+                        <a href="#">
+                            <a href="#">鞋靴</a>、
+                            <a href="#">箱包</a>、
+                            <span class="jt">&gt;</span></a></li>
+                    <li class="nav_item">
+                        <a href="#">运动户外</a><span class="jt">&gt;</span></li>
+                    <li class="nav_item">
+                        <a href="#">
+                            <a href="#">汽车</a>、
+                            <a href="#">汽车用品</a><span class="jt">&gt;</span></a></li>
+                    <li class="nav_item">
+                        <a href="#">
+                            <a href="#">母婴</a>、
+                            <a href="#">玩具乐器</a><span class="jt">&gt;</span></a></li>
+                    <li class="nav_item">
+                        <a href="#">
+                            <a href="#">食品饮料</a>、
+                            <a href="#">酒类</a>、<span class="jt">&gt;</span></a></li>
+                    <li class="nav_item">
+                        <a href="#">营养保健</a><span class="jt">&gt;</span></li>
+                    <li class="nav_item">
+                        <a href="#">
+                            <a href="#">图书</a>、
+                            <a href="#">音像</a>、<span class="jt">&gt;</span></a></li>
+                    <li class="nav_item">
+                        <a href="#">
+                            <a href="#">彩票</a>、
+                            <a href="#">旅行</a>、
+                            <a href="#">充值</a>、
+                            <a href="#">票务</a><span class="jt">&gt;</span></a></li>
+                    <li class="nav_item">
+                        <a href="#">
+                            <a href="#">理财</a>、
+                            <a href="#">众筹</a>、
+                            <a href="#">白条</a>、
+                            <a href="#">保险</a><span class="jt">&gt;</span></a>
+                    </li>
+                </ul>
             </div>
             <div class="col-lg-10">
                 <div class="row" style="padding: 20px">
@@ -206,11 +286,13 @@
                             </div>
 
                             <!-- Controls -->
-                            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                            <a class="left carousel-control" href="#carousel-example-generic" role="button"
+                               data-slide="prev">
                                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                            <a class="right carousel-control" href="#carousel-example-generic" role="button"
+                               data-slide="next">
                                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -222,85 +304,27 @@
                 <div class="col-lg-3 col-md-4 col-sm-6" th:each="ac01:${ac01List}">
                     <div class="thumbnail">
                         <a th:href="@{'goodShow.html?id=' + ${ac01.aac101}}">
-                            <img th:src="${ac01.aac106}" style="height: 150px; width: 100%; overflow: hidden" alt="商品图片">
+                            <img th:src="${ac01.aac106}" style="height: 150px; width: 100%; overflow: hidden"
+                                 alt="商品图片">
                         </a>
                         <div class="caption">
                             <h3 th:text="${ac01.aac102}"></h3>
                             <p th:text="${ac01.aac103}"></p>
                             <p>
-                                <a href="#" class="btn btn-primary" role="button">收藏</a>
+                                <a href="javascript:void(0)" class="btn btn-primary" role="button"
+                                   th:onclick="|javascript:addToCart('${ac01.aac101}')|">加入购物车</a>
                                 <a href="#" class="btn btn-default" role="button">购买</a>
                             </p>
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade login" id="loginModal">
-    <div class="modal-dialog login animated">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Login with</h4>
-            </div>
-            <div class="modal-body">
-                <div class="box">
-                    <div class="content">
-
-                        <div class="error"></div>
-                        <div class="form loginBox">
-                            <form method="post" action="#" accept-charset="UTF-8">
-                                <input class="form-control" type="text" placeholder="账号" name="email">
-                                <input class="form-control" type="password" placeholder="密码" name="password">
-                                <input class="btn btn-default btn-login" type="button" value="登录" onclick="loginAjax()">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="content registerBox" style="display:none;">
-                        <div class="form">
-                            <form method="post" html="{:multipart=>true}" data-remote="true" action="/user/login"
-                                  accept-charset="UTF-8">
-                                <input class="form-control" type="text" placeholder="用户名" name="">
-                                <input class="form-control" type="password" placeholder="密码" name="">
-                                <input class="form-control" type="password" placeholder="确认密码" name="">
-                                <input class="form-control" type="text" placeholder="手机号" name="">
-                                <div class="col-lg-6">
-                                    <input class="form-control" type="text" placeholder="验证码" name="">
-                                </div>
-                                <div class="col-lg-6">
-                                    <input class="btn btn-default btn-register" type="button" value="获取验证码" name="">
-                                </div>
-                                <input class="btn btn-default btn-register" type="submit" value="确认注册" name="commit">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div class="forgot login-footer">
-							<span>
-                                 <a href="javascript: showRegisterForm();">新账户注册</a>
-                            </span>
-                </div>
-                <div class="forgot register-footer" style="display:none">
-                    <span>已注册账号？</span>
-                    <a href="javascript: showLoginForm();">登录</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/login-register.js"></script>
 </body>
 </html>
