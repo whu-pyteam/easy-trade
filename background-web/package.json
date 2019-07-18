@@ -16,9 +16,11 @@
     "js-cookie": "^2.2.0",
     "normalize.css": "^8.0.0",
     "nprogress": "^0.2.0",
+    "tslib": "^1.10.0",
     "v-charts": "^1.19.0",
     "v-distpicker": "^1.0.20",
     "vue": "^2.5.2",
+    "vue-json-component": "^0.3.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },
