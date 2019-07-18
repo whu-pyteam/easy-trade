@@ -1,6 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <nav class="navbar-default navber-fixed-top" th:fragment="header(type)">
+    <link href="css/login-register.css" rel="stylesheet">
+    <style type="text/css">
+        .navbar-brand {
+            font-size: 18px;
+        }
+
+        .navbar-right > li > a, .dropdown-menu > li > a {
+            font-size: 12px;
+        }
+
+        .navbar {
+            min-height: 20px;
+        }
+
+        .navbar-nav > li > a, .navbar-header > a {
+            padding-top: 5px;
+            height: 30px;
+        }
+    </style>
+
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -17,32 +37,32 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li th:class="(${type} == 1) ? 'active':''">
-                    <a href="/index.html">首页<span class="sr-only">(current)</span></a>
+                    <a href="index.html">首页<span class="sr-only">(current)</span></a>
                 </li>
-                <li th:class="(${type} == 2) ? 'active':''">
-                    <a href="/ad01list.html">悬赏</a>
+                <li>
+                    <a href="#">悬赏</a>
                 </li>
                 <li th:class="(${type} == 3) ? 'active':''">
-                    <a href="/auction.html">拍卖</a>
+                    <a href="auction.html">拍卖</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
+                <li class="dropdown" id="conn">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">收藏夹<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="/ad01/forklist">收藏的悬赏</a>
+                            <a href="#">收藏的悬赏</a>
                         </li>
                         <li>
-                            <a href="#">收藏的拍卖</a>
+                            <a href="auctionConn.html">收藏的拍卖</a>
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#">购物车</a>
+                <li id="cart">
+                    <a href="cart.html">购物车</a>
                 </li>
-                <li class="dropdown">
+                <li class="dropdown" id="seller">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">卖家中心<span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -50,7 +70,7 @@
                             <a href="goodLaunch.html">出售</a>
                         </li>
                         <li>
-                            <a href="/ad01/add">添加悬赏</a>
+                            <a href="#">悬赏</a>
                         </li>
                         <li>
                             <a href="auctionLaunch.html">发起拍卖</a>
@@ -60,10 +80,10 @@
                 <li>
                     <a href="#">联系客服</a>
                 </li>
-                <li>
+                <li id="login">
                     <a class="btn" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">登录</a>
                 </li>
-                <li class="dropdown hidden">
+                <li class="dropdown" id="my">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">我的<span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -82,6 +102,9 @@
                         <li>
                             <a href="#">我的评论</a>
                         </li>
+                        <li>
+                            <a href="#">退出登录</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -89,8 +112,86 @@
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container-fluid -->
+
+    <div class="modal fade login" id="loginModal">
+        <div class="modal-dialog login animated">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Login with</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="box">
+                        <div class="content">
+
+                            <div class="error"></div>
+                            <div class="form loginBox">
+                                <form method="post" action="#" accept-charset="UTF-8">
+                                    <input class="form-control" type="text" placeholder="账号" name="email">
+                                    <input class="form-control" type="password" placeholder="密码" name="password">
+                                    <input class="btn btn-default btn-login" type="button" value="登录"
+                                           onclick="loginAjax()">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="content registerBox" style="display:none;">
+                            <div class="form">
+                                <form method="post" html="{:multipart=>true}" data-remote="true" action="/user/login"
+                                      accept-charset="UTF-8">
+                                    <input class="form-control" type="text" placeholder="用户名" name="">
+                                    <input class="form-control" type="password" placeholder="密码" name="">
+                                    <input class="form-control" type="password" placeholder="确认密码" name="">
+                                    <input class="form-control" type="text" placeholder="手机号" name="">
+                                    <div class="col-lg-6">
+                                        <input class="form-control" type="text" placeholder="验证码" name="">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="btn btn-default btn-register" type="button" value="获取验证码" name="">
+                                    </div>
+                                    <input class="btn btn-default btn-register" type="submit" value="确认注册"
+                                           name="commit">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="forgot login-footer">
+							<span>
+                                 <a href="javascript: showRegisterForm();">新账户注册</a>
+                            </span>
+                    </div>
+                    <div class="forgot register-footer" style="display:none">
+                        <span>已注册账号？</span>
+                        <a href="javascript: showLoginForm();">登录</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/login-register.js"></script>
+    <script>
+        window.onload = function ()
+        {
+            show();
+        }
+        function show()
+        {
+            if (document.cookie)
+            {
+                document.getElementById("login").className = "hidden";
+            }
+            else
+            {
+                document.getElementById("conn").className = "hidden";
+                document.getElementById("cart").className = "hidden";
+                document.getElementById("seller").className = "hidden";
+                document.getElementById("my").className = "hidden";
+            }
+        }
+    </script>
 </nav>
-
-
-
 </html>

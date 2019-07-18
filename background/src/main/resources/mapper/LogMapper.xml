@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pyteam.background.mapper.LogMapper">
+    <select id="getLogInfo" resultType="com.pyteam.background.dto.LogInfo">
+        select b.aaf201, a.aaf303, b.aaf202
+        from af03 a left join af02 b
+        on a.aaf201 = b.aaf201
+        where b.aaf202 like "%"#{aaf202}"%"
+        <if test="dateBegin != null">
+            <![CDATA[and a.aaf303 >= #{dateBegin} ]]>
+        </if>
+        <if test="dateEnd != null">
+            <![CDATA[and a.aaf303 <= #{dateEnd} ]]>
+        </if>
+    </select>
+</mapper>
