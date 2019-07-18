@@ -43,7 +43,7 @@
           label="上传时间"
           width="250">
           <template slot-scope="scope">
-            {{scope.row.aad107}}
+            {{formatDate(scope.row.aad107)}}
           </template>
         </el-table-column>
         <el-table-column
@@ -93,13 +93,21 @@
       return {
         condition: {
           aad105: '',
-          aad102: '0'
+          aad102: ''
         },
         tableData: [],
         pageInfo: {
           total: 0,
           pageNum: 1,
           pageSize: 10
+        },
+        rules: {
+          aad102: [{
+            type: 'enum',
+            enum: ['0', '1'],
+            trigger: blur,
+            massage: "输入错误!"
+          }]
         }
       }
     },
@@ -128,6 +136,9 @@
       handleCurrentChange(val) {
         this.pageInfo.pageNum = val
         this.fetchRewardList()
+      },
+      formatDate(date) {
+        return date.replace('T', ' ').replace('.000+0000', '')
       }
     }
   }

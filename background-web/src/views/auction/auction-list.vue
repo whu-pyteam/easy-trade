@@ -43,7 +43,8 @@
           label="上传时间"
           width="250">
           <template slot-scope="scope">
-            {{scope.row.aad212}}
+            {{formatDate(scope.row.aad212)}}
+<!--            {{scope.row.aad212}}-->
           </template>
         </el-table-column>
         <el-table-column
@@ -127,6 +128,9 @@
       handleCurrentChange(val) {
         this.pageInfo.pageNum = val
         this.fetchAuctionList()
+      },
+      formatDate(date) {
+        return date.replace('T', ' ').replace('.000+0000', '')
       }
     }
   }

@@ -49,13 +49,14 @@
           label="上传时间"
           width="400">
           <template slot-scope="scope">
-            {{scope.row.aaf303}}
+            {{formatDate(scope.row.aaf303)}}
+<!--            {{scope.row.aaf303}}-->
           </template>
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
-              icon="el-icon-search"
+              icon="el-icon-edit-outline"
               @click="handleDetail(scope.$index, scope.row)">查看
             </el-button>
           </template>
@@ -76,19 +77,20 @@
 
 
     <el-dialog
-      title="查看操作"
+      title="提示"
       :visible.sync="dialogVisible"
-      width="60%">
+      width="30%">
 
       <el-form>
-        <el-form-item label="操作人名称" label-width="120px" style="width: 400px;">
+        <el-form-item label="操作人名称" label-width="120px">
           <el-input v-model="rowData.aaf202" disabled=""></el-input>
         </el-form-item>
-        <el-form-item label="操作日期" label-width="120px" style="width: 400px;">
+        <el-form-item label="操作日期" label-width="120px">
+<!--          <span>{{formatDate(rowData.aaf303)}}</span>-->
           {{rowData.aaf303}}
         </el-form-item>
-        <el-form-item label="操作详情" label-width="120px" style="width: 60%">
-          <json-view  :data="logDetail" style="text-align: left" rootKey="操作详情"></json-view>
+        <el-form-item label="操作详情" label-width="120px">
+          <sapn v-for="item in logDetail" :key="item">{{item}}</sapn>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -97,11 +99,10 @@
 </template>
 
 <script>
-  import {getLogDetail, getLogList} from "@/api/log"
-  import { JSONView } from 'vue-json-component'
+  import {getLogDetail, getLogList} from "@/api/log";
+
   export default {
     name: 'feedback-list',
-    components: { "json-view": JSONView },
     data() {
       return {
         condition: {
@@ -142,7 +143,8 @@
       },
       handleDetail(index, rowData) {
         getLogDetail(rowData.aaf201).then(res => {
-          this.logDetail = res.data
+          console.log(JSON.parse(res.data.aaf302))
+          this.logDetail = JSON.parse(res.data.aaf302)
           console.log(this.logDetail)
           this.rowData = rowData
         })
@@ -151,6 +153,9 @@
       handleCurrentChange(val) {
         this.pageInfo.pageNum = val
         this.fetchLogList()
+      },
+      formatDate(date) {
+        return date.replace('.000+0000', '')
       }
     }
   }

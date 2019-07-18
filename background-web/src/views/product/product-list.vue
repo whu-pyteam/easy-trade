@@ -2,7 +2,7 @@
     <div class="app-container" style="text-align: center; justify-content: center;">
 
       <el-card class="page-card"  shadow="hover" >
-        <el-form :inline="true" :model="condition" class="demo-form-inline">
+        <el-form :inline="true" :model="condition" :rules="rules" class="demo-form-inline">
           <el-form-item label="商品名称">
             <el-input v-model="condition.aac102" clearable></el-input>
           </el-form-item>
@@ -43,7 +43,7 @@
             label="上传时间"
             width="250">
             <template slot-scope="scope">
-              {{scope.row.aac107}}
+              {{formatDate(scope.row.aac107)}}
             </template>
           </el-table-column>
           <el-table-column
@@ -92,13 +92,21 @@
       return {
         condition: {
           aac102: '',
-          aac104: '0'
+          aac104: ''
         },
         tableData: [],
         pageInfo: {
           total: 0,
           pageNum: 1,
           pageSize: 10
+        },
+        rules: {
+          aac104: [{
+            type: 'enum',
+            enum: ['0', '1'],
+            trigger: blur,
+            massage: "输入错误!"
+          }]
         }
       }
     },
@@ -129,6 +137,10 @@
       handleCurrentChange(val) {
         this.pageInfo.pageNum = val
         this.fetchProductList()
+      },
+      formatDate(date) {
+        console.log(date)
+        return date.replace('T', ' ').replace('.000+0000', '')
       }
     }
   }

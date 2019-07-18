@@ -1,18 +1,17 @@
 package com.pyteam.foreground.service;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.pyteam.db.entity.AuctionConn;
 import com.pyteam.db.mapper.AuctionMapper;
-import com.pyteam.db.mbg.entity.*;
+import com.pyteam.db.mbg.entity.Ad04;
+import com.pyteam.db.mbg.entity.Ad04Example;
+import com.pyteam.db.mbg.entity.Ae05;
+import com.pyteam.db.mbg.entity.Ae05Example;
 import com.pyteam.db.mbg.mapper.Ad04Mapper;
 import com.pyteam.db.mbg.mapper.Ae05Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,25 +26,43 @@ public class ConnectionService
     @Autowired
     private AuctionMapper auctionMapper;
 
-    public List<Ad02> selectAd02RightAe05(int aad401, int pageNum, int pageSize)
+    public List<AuctionConn> selectAd02AndAe05(int aab101, String aad402)
     {
-        PageHelper.startPage(pageNum, pageSize);
-        List<Ad02> ad02List = auctionMapper.selectAd02RightAe05(aad401);
-        for(Ad02 ad02:ad02List)
+        Ad04Example ad04Example = new Ad04Example();
+        Ad04Example.Criteria ad04Criteria = ad04Example.createCriteria();
+        ad04Criteria.andAab101EqualTo(aab101);
+        ad04Criteria.andAad402EqualTo(aad402);
+        List<Ad04> ad04List = ad04Mapper.selectByExample(ad04Example);
+        int aad401 = 0;
+        if(!ad04List.isEmpty())
         {
-            Date aad211 = ad02.getAad211();
-            SimpleDateFormat sf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
-            String date = sf.format(aad211);
-            ad02.setAad204(date);
+            aad401= ad04List.get(0).getAad401();
         }
-        return ad02List;
+        return auctionMapper.selectAd02AndAe05(aad401);
     }
 
-    public List<AuctionConn> selectAd02LeftAe05(int aad401)
+    public List<Ae05> selectByValue(int aab101, String aad402)
     {
-        return auctionMapper.selectAd02LeftAe05(aad401);
+        Ad04Example ad04Example = new Ad04Example();
+        Ad04Example.Criteria ad04Criteria = ad04Example.createCriteria();
+        ad04Criteria.andAab101EqualTo(aab101);
+        ad04Criteria.andAad402EqualTo(aad402);
+        List<Ad04> ad04List = ad04Mapper.selectByExample(ad04Example);
+        if(ad04List.isEmpty())
+        {
+            return null;
+        }
+        else
+        {
+            int aad401 = ad04List.get(0).getAad401();
+            Ae05Example ae05Example = new Ae05Example();
+            Ae05Example.Criteria ae05criteria = ae05Example.createCriteria();
+            ae05criteria.andAad401EqualTo(aad401);
+            return ae05Mapper.selectByExample(ae05Example);
+        }
     }
 
+    @Transactional
     public boolean delByValue(Ae05 ae05)
     {
         Ae05Example ae05Example = new Ae05Example();
