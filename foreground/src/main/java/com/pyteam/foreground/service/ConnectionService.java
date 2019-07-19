@@ -34,13 +34,6 @@ public class ConnectionService
     {
         Page page = PageHelper.startPage(pageNum, pageSize);
         List<Ad02> ad02List = auctionMapper.selectAd02RightAe05(aad401);
-        for(Ad02 ad02:ad02List)
-        {
-            Date aad211 = ad02.getAad211();
-            SimpleDateFormat sf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
-            String date = sf.format(aad211);
-            ad02.setAad204(date);
-        }
 //        System.out.println("getTotal:" + page.getTotal());              //总数量
 //        System.out.println("getCountColumn:" + page.getCountColumn());  //0
 //        System.out.println("getEndRow:" + page.getEndRow());            //pageSize

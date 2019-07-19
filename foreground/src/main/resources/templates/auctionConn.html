@@ -16,7 +16,7 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <td>商品名称</td>
+                    <td>物品</td>
                     <td></td>
                     <td>当前最高价</td>
                     <td>截止时间</td>
@@ -28,16 +28,21 @@
                     <td><img th:src="${aconn.aad203}" style="height: 100px; width: 100px; overflow: hidden"></td>
                     <td><h3 th:text="${aconn.aad202}"></h3></td>
                     <td><p th:text="${aconn.aad208}"></p></td>
-                    <td><p th:text="${aconn.aad204}"></p></td>
+                    <td th:switch="${aconn.aad209}">
+                        <p th:case="1" th:text="${#dates.format(aconn.aad211, 'yyyy年MM月dd日 HH:mm')}"></p>
+                        <p th:case="3">卖家已取消拍卖</p>
+                    </td>
                     <td>
                         <button class="btn btn-primary" th:onclick="connShow([[${aconn.aad201}]])"
                                 th:id="'conn'+${aconn.aad201}">
                             已收藏
                         </button>
-                        <a th:href="@{'auctionShow.html?id=' + ${aconn.aad201}}">
-                            <button class="btn btn-info">查看</button>
-                        </a>
-                        <button class="btn btn-default">出价</button>
+                        <span th:if="${aconn.aad209 == '1'}">
+                             <a th:href="'auctionShow.html?id=' + ${aconn.aad201}">
+                                 <button class="btn btn-info">查看</button>
+                             </a>
+                            <button class="btn btn-default">出价</button>
+                        </span>
                     </td>
                 </tr>
                 </tbody>
@@ -45,10 +50,10 @@
         </div>
         <div class="row">
             <ul class="pager">
-                <li th:if="${pageNum == 1}" class="disabled"><span>上一页</span></li>
-                <li th:if="${pageNum != 1}"><a th:href="'auctionConn.html?pageNum=' + ${pageNum - 1}">上一页</a></li>
-                <li th:if="${pageNum != pageCount}"><a th:href="'auctionConn.html?pageNum=' + ${pageNum + 1}">下一页</a></li>
-                <li th:if="${pageNum == pageCount}" class="disabled"><span>下一页</span></li>
+                <li th:if="${!pre}" class="disabled"><span>上一页</span></li>
+                <li th:if="${pre}"><a th:href="'auctionConn.html?pageNum=' + ${pageNum - 1}">上一页</a></li>
+                <li th:if="${next}"><a th:href="'auctionConn.html?pageNum=' + ${pageNum + 1}">下一页</a></li>
+                <li th:if="${!next}" class="disabled"><span>下一页</span></li>
             </ul>
         </div>
     </div>
@@ -87,7 +92,6 @@
             data: data,
             success: function () {
                 alert("取消成功！");
-                document.getElementById("conn" + id).innerText = "收藏";
             },
             error: function () {
                 alert("取消失败！");

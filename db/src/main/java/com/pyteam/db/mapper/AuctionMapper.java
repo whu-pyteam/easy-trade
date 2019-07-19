@@ -26,6 +26,6 @@ public interface AuctionMapper
             "       from ad02 d \n" +
             "       right join ae05 e \n" +
             "       on d.aad201 = e.aad201 and e.aad401 = #{aad401}\n" +
-            "       where d.aad209='1'")
+            "       where d.aad209='1' or d.aad209='3'")
     List<Ad02> selectAd02RightAe05(@Param("aad401") int aad401);
 }
