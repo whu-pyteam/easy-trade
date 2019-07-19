@@ -26,8 +26,34 @@ public class Ad02Service
     @Autowired
     private QiniuUtil qiniuUtil;
 
+    public boolean deleteById(int aad201)
+    {
+        Ad02 ad02 = new Ad02();
+        ad02.setAad201(aad201);
+        ad02.setAad209("3");
+        return ad02Mapper.updateByPrimaryKeySelective(ad02) > 0;
+    }
 
+    /**
+     * 依据用户流水号查看拍卖物品
+     * @param aab101
+     * @return
+     */
+    public List<Ad02> findByUserId(int aab101)
+    {
+        Ad02Example ad02Example = new Ad02Example();
+        Criteria criteria = ad02Example.createCriteria();
+        criteria.andAab101EqualTo(aab101);
+        //criteria.andAad209EqualTo("1");
+        criteria.andAad209Between("0", "2");
+        return ad02Mapper.selectByExample(ad02Example);
+    }
 
+    /**
+     * 依据拍卖物品流水号查看拍卖物品
+     * @param id
+     * @return
+     */
     public Ad02 findById(int id)
     {
         return ad02Mapper.selectByPrimaryKey(id);
@@ -68,16 +94,12 @@ public class Ad02Service
         }
     }
 
-    public List<Ad02> selectAll()
-    {
-        Ad02Example example = new Ad02Example();
-        Criteria criteria = example.createCriteria();
-        criteria.andAad209EqualTo("1");
-        List<Ad02> ad02List = ad02Mapper.selectByExample(example);
-        return ad02List;
-    }
-
-    public List<Ad02> searchByValue(String value)
+    /**
+     * 依据拍卖页面搜索栏信息查找拍卖物品
+     * @param value
+     * @return
+     */
+    public List<Ad02> findByValue(String value)
     {
         Ad02Example example = new Ad02Example();
         Criteria criteria = example.createCriteria();
