@@ -1,8 +1,10 @@
 package com.pyteam.foreground.controller;
 
+import com.pyteam.db.mbg.entity.Ad06;
 import com.pyteam.db.mbg.entity.Ae05;
 import com.pyteam.foreground.dto.Ad02Dto;
 import com.pyteam.foreground.service.Ad02Service;
+import com.pyteam.foreground.service.Ad06Service;
 import com.pyteam.foreground.service.ConnectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,26 @@ public class AuctionController
 
     @Autowired
     private ConnectionService connService;
+
+    @Autowired
+    private Ad06Service ad06Service;
+
+    @RequestMapping(value = "/auctionOffer.html", method = RequestMethod.POST)
+    public String insertAd06(HttpServletRequest request, HttpServletResponse response, Ad06 ad06)
+    {
+        if(isLogin(request, response))
+        {
+            int aab101 = Integer.parseInt(getCookies(request, "username"));
+            ad06.setAab101(aab101);
+            if(ad06Service.insertAd06(ad06))
+            {
+                return "auctionOffer";
+            }
+            return "bad";
+        }
+
+        return "error/404";
+    }
 
     @RequestMapping(value = "/delMyAuc", method = RequestMethod.GET)
     @ResponseBody

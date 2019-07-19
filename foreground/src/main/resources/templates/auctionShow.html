@@ -16,6 +16,11 @@
             padding-top: 20px;
             padding-bottom: 20px;
         }
+
+        .form-control-static>span
+        {
+            font-size: 20px;
+        }
     </style>
 </head>
 
@@ -44,19 +49,52 @@
 <div class="zt">
     <div class="container">
         <div class="row" style="border: 1px solid #E8E8E8; padding-top: 15px; padding-bottom: 15px;">
-            <div class="col-lg-5">
-                <img th:src="${ad02.aad203}"
-                     style="height: 400px; width: 100%; overflow: hidden;" alt=""/>
+            <div class="col-sm-4">
+                <img th:src="${ad02.aad203}" style="height: 300px; width: 100%; overflow: hidden;" alt=""/>
             </div>
-            <div class="col-lg-7">
-                <h3 th:text="${ad02.aad202}"></h3>
-                <p th:text="'商品简介：' + ${ad02.aad204}"></p>
-                <p id="navbar_time"></p>
-                <p th:text="'当前价格:' + ${ad02.aad208}"></p>
-                <p>
-                    <a href="#" class="btn btn-primary" role="button">收藏</a>
-                    <a href="#" class="btn btn-default" role="button">出价</a>
-                </p>
+            <div class="col-sm-8">
+                <form class="form-horizontal" action="auctionOffer.html" method="post">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">物品名称：</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static" th:text="${ad02.aad202}"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">物品简介：</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static" th:text="${ad02.aad204}"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">距结束：</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static" id="navbar_time"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">当前价格：</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static" th:text="${ad02.aad208} + '元'"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="aad602" class="col-sm-2 control-label">出价：</label>
+                        <div class="col-sm-10">
+                            <div class="input-group col-sm-3">
+                                <input type="number" class="form-control" step="0.01" id="aad602" name="aad602" th:value="${ad02.aad207 + ad02.aad208}" th:min="${ad02.aad207 + ad02.aad208}">
+                                <div class="input-group-addon">元</div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="text" class="hidden" name="aad201" th:value="${ad02.aad201}">
+                    <div class="form-group">
+                        <div class="col-sm-offset-1">
+                            <button type="button" class="btn btn-primary">收藏</button>
+                            <button type="submit" class="btn btn-default">参与</button>
+                        </div>
+                    </div>
+                </form>
                 <input type="text" th:value="${ad02.aad211.getTime()}" id="endTime" hidden>
             </div>
         </div>
@@ -86,7 +124,7 @@
 
         mm = extra(mm);
         ss = extra(ss);
-        document.getElementById("navbar_time").innerHTML = "距结束：" + dd + "天" + hh + "时" + mm + "分" + ss + "秒";
+        document.getElementById("navbar_time").innerHTML = "<span>" + dd + "</span>天<span>" + hh + "</span>时<span>" + mm + "</span>分<span>" + ss + "</span>秒";
     }
 
     function extra(x) {
