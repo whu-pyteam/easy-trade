@@ -165,63 +165,73 @@ public class Ab02Example {
             return (Criteria) this;
         }
 
-        public Criteria andAab101IsNull() {
-            addCriterion("aab101 is null");
+        public Criteria andAab204IsNull() {
+            addCriterion("aab204 is null");
             return (Criteria) this;
         }
 
-        public Criteria andAab101IsNotNull() {
-            addCriterion("aab101 is not null");
+        public Criteria andAab204IsNotNull() {
+            addCriterion("aab204 is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAab101EqualTo(Integer value) {
-            addCriterion("aab101 =", value, "aab101");
+        public Criteria andAab204EqualTo(String value) {
+            addCriterion("aab204 =", value, "aab204");
             return (Criteria) this;
         }
 
-        public Criteria andAab101NotEqualTo(Integer value) {
-            addCriterion("aab101 <>", value, "aab101");
+        public Criteria andAab204NotEqualTo(String value) {
+            addCriterion("aab204 <>", value, "aab204");
             return (Criteria) this;
         }
 
-        public Criteria andAab101GreaterThan(Integer value) {
-            addCriterion("aab101 >", value, "aab101");
+        public Criteria andAab204GreaterThan(String value) {
+            addCriterion("aab204 >", value, "aab204");
             return (Criteria) this;
         }
 
-        public Criteria andAab101GreaterThanOrEqualTo(Integer value) {
-            addCriterion("aab101 >=", value, "aab101");
+        public Criteria andAab204GreaterThanOrEqualTo(String value) {
+            addCriterion("aab204 >=", value, "aab204");
             return (Criteria) this;
         }
 
-        public Criteria andAab101LessThan(Integer value) {
-            addCriterion("aab101 <", value, "aab101");
+        public Criteria andAab204LessThan(String value) {
+            addCriterion("aab204 <", value, "aab204");
             return (Criteria) this;
         }
 
-        public Criteria andAab101LessThanOrEqualTo(Integer value) {
-            addCriterion("aab101 <=", value, "aab101");
+        public Criteria andAab204LessThanOrEqualTo(String value) {
+            addCriterion("aab204 <=", value, "aab204");
             return (Criteria) this;
         }
 
-        public Criteria andAab101In(List<Integer> values) {
-            addCriterion("aab101 in", values, "aab101");
+        public Criteria andAab204Like(String value) {
+            addCriterion("aab204 like", value, "aab204");
             return (Criteria) this;
         }
 
-        public Criteria andAab101NotIn(List<Integer> values) {
-            addCriterion("aab101 not in", values, "aab101");
+        public Criteria andAab204NotLike(String value) {
+            addCriterion("aab204 not like", value, "aab204");
             return (Criteria) this;
         }
 
-        public Criteria andAab101Between(Integer value1, Integer value2) {
-            addCriterion("aab101 between", value1, value2, "aab101");
+        public Criteria andAab204In(List<String> values) {
+            addCriterion("aab204 in", values, "aab204");
             return (Criteria) this;
         }
 
-        public Criteria andAab101NotBetween(Integer value1, Integer value2) {
-            addCriterion("aab101 not between", value1, value2, "aab101");
+        public Criteria andAab204NotIn(List<String> values) {
+            addCriterion("aab204 not in", values, "aab204");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab204Between(String value1, String value2) {
+            addCriterion("aab204 between", value1, value2, "aab204");
+            return (Criteria) this;
+        }
+
+        public Criteria andAab204NotBetween(String value1, String value2) {
+            addCriterion("aab204 not between", value1, value2, "aab204");
             return (Criteria) this;
         }
 
