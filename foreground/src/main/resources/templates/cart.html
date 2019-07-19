@@ -20,13 +20,23 @@
     <link href="css/login-register.css" rel="stylesheet">
 
     <style type="text/css">
-        .pull-right.pagination-detail{
-            display:none;
+        #footer{
+            position: fixed;
+            bottom: 0;
+            height: 100px;
+            width: 100%;
+        }
+        .orderDisplay{
+            display: none;
+            position: absolute;
+            z-index: 10;
         }
     </style>
 </head>
 <body>
 <div th:replace="header :: header(${type})"></div>
+
+
 <div class="container">
     <div class="row">
         <div class="col-lg-2"></div>
@@ -38,10 +48,48 @@
                 <table id="table"></table>
             </div>
         </div>
-        <div class="col-lg-2"></div>
+        <div class="col-lg-2">
+            <div class="orderDisplay">
+                <form class="orderForm" id="orderForm" onsubmit="return false" action="#" method="post">
+                    <div>
+                        <label>收货人姓名</label>
+                        <input type="text" name="aac506" required>
+                    </div>
+                    <div>
+                        <label>收货人电话</label>
+                        <input type="text" name="aac507" id="aac507" required>
+                    </div>
+                    <div>
+                        <label>交易方式</label>
+                        <input type="radio" name="aac504" value="1" checked>线下
+                        <input type="radio" name="aac504" value="2">快递
+                    </div>
+                    <div>
+                        <label>交易地址</label>
+                        <input type="text" name="aac509" id="aac509" required>
+                    </div>
+                    <div>
+                        <label>总金额</label>
+                        <input type="text" name="aac505" id="aac505" readonly>
+                    </div>
+                    <div>
+                        <label>备注</label>
+                        <input type="text" name="aac510" id="aac510">
+                    </div>
+                    <div>
+                        <input type="submit" value="提交订单" onclick="submitOrder()">
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-
+    <div id="footer">
+        <p id="totalMoney">0</p>
+        <input class="btn btn-default" id="buyBtn" type="button" value="购买" onclick="buy()">
+    </div>
 </div>
+
+
 
 <script type="text/javascript">
     var _table = $('#table');
@@ -97,9 +145,29 @@
                 align: 'center',
                 events: operateEvents,
                 formatter: operateFormatter
-            }]
-        });
+            }],
+            onCheck: function (row) {
+                console.log(row.aac105.toString());
+                var textMoney=$('#totalMoney').text().toString();
+                console.log(textMoney);
+
+                var money=parseFloat(textMoney)+parseFloat(row.aac105.toString());
+                console.log(money)
+                $('#totalMoney').text(money);
+            },
+            onUncheck: function (row) {
+                console.log(row.aac105.toString());
+                var textMoney=$('#totalMoney').text().toString();
+                console.log(textMoney);
+
+                var money=parseFloat(textMoney)-parseFloat(row.aac105.toString());
+                console.log(money)
+                $('#totalMoney').text(money);
+            }
+        }
+        );
     }
+
 
     //批量删除
     function patchDelete() {
@@ -138,11 +206,85 @@
                 }
                 if(data==2)
                 {
-                    alert("批量失败")
+                    alert("批量删除失败")
                     window.location.replace("/cart.html")
                 }
             }
         });
+    }
+
+    function buy() {
+        $('.orderDisplay').css("display","block");
+        $('#aac505').val($('#totalMoney').text().toString());
+        var opts = $('#table').bootstrapTable('getSelections');
+        if (opts == "") {
+            alert("请选择要购买的商品");
+        }
+    }
+
+    function buyExecute(idArray)
+    {
+        $.ajax({
+            url : "/patchDelete.html",
+            data : "ids="+idArray,
+            type : "post",
+            dataType : "json",
+            success: function (data) {
+                if(data==0)
+                {
+                    alert("请登录")
+                    window.location.replace("/cart.html")
+                }
+                if(data==1)
+                {
+                    alert("购买成功")
+                    window.location.replace("/cart.html");
+                }
+                if(data==2)
+                {
+                    alert("购买失败")
+                    window.location.replace("/cart.html")
+                }
+            }
+        });
+    }
+
+    function submitOrder() {
+        console.log("submit..")
+        var opts = $('#table').bootstrapTable('getSelections');
+        console.log(opts.length)
+
+        var aac101s=opts[0].aac101;
+        for(var i=1;i<opts.length;i++)
+        {
+            aac101s=aac101s+","+opts[i].aac101;
+            console.log(aac101s)
+        }
+
+        console.log(aac101s)
+        var data={
+            "aac504":$('input[name="aac504"]').val(),
+            "aac505":$('input[name="aac505"]').val(),
+            "aac506":$('input[name="aac506"]').val(),
+            "aac507":$('input[name="aac507"]').val(),
+            "aac509":$('input[name="aac509"]').val(),
+            "aac510":$('input[name="aac510"]').val(),
+            "aac101s":aac101s
+        }
+
+        console.log(data);
+        $.ajax({
+            url: "submitGoodOrder.html",
+            type: "post",
+            data: data
+        })
+
+        var idArray = [];
+        for (var i = 0; i < opts.length; i++) {
+            idArray.push(opts[i].aac101);
+        }
+
+        buyExecute(idArray);
     }
 
 
@@ -191,6 +333,17 @@
     $(function(){
         init();//启动表格插件
     });
+
+    window.onload = function(){
+        var inpEle = document.getElementById('aac507');
+        var myreg = /^1[34578]\d{9}$/;
+        inpEle.onblur = function(){
+            var inpVal = this.value;
+            if (!myreg.exec(inpVal)){
+                alert('请输入正确的手机号')
+            }
+        }
+    }
 </script>
 </body>
 </html>

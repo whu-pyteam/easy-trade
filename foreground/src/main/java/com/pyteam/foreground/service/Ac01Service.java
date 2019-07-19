@@ -1,9 +1,8 @@
 package com.pyteam.foreground.service;
 
-import com.pyteam.db.mbg.entity.Ac01;
-import com.pyteam.db.mbg.entity.Ac01Example;
-import com.pyteam.db.mbg.entity.Ac02Example;
+import com.pyteam.db.mbg.entity.*;
 import com.pyteam.db.mbg.mapper.Ac01Mapper;
+import com.pyteam.db.mbg.mapper.Ae06Mapper;
 import com.pyteam.foreground.dto.Ac01Dto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +18,8 @@ public class Ac01Service
 {
     @Autowired
     private Ac01Mapper ac01Mapper;
+    @Autowired
+    private Ae06Mapper ae06Mapper;
 
     @Autowired
     private QiniuUtil qiniuUtil;
@@ -47,6 +48,37 @@ public class Ac01Service
         List<Ac01> ac01List = ac01Mapper.selectByExample(ac01Example);
         return ac01List;
     }
+
+    /**
+     * 获取未出售的商品
+     * @return
+     * @throws Exception
+     */
+    public List<Ac01> getUnsoldGoodList() throws Exception
+    {
+        Ac01Example ac01Example=new Ac01Example();
+        Ac01Example.Criteria criteria = ac01Example.createCriteria();
+        criteria.andAac104EqualTo("1");
+        List<Ac01> ac01List = ac01Mapper.selectByExample(ac01Example);
+
+        Ae06Example ae06Example=new Ae06Example();
+        List<Ae06> ae06List=ae06Mapper.selectByExample(ae06Example);
+
+        for(int i=0;i<ac01List.size();i++)
+        {
+            for(int j=0;j<ae06List.size();j++)
+            {
+                if(ac01List.get(i).getAac101().equals(ae06List.get(j).getAac101()))
+                {
+                    ac01List.remove(i);
+                }
+            }
+        }
+        return ac01List;
+    }
+
+
+
 
     /**
      * 根据商品名称查询

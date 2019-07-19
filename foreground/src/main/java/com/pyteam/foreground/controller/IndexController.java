@@ -37,7 +37,7 @@ public class IndexController
         try
         {
             model.addAttribute("type", 1);
-            model.addAttribute("ac01List", ac01Service.selectById());
+            model.addAttribute("ac01List", ac01Service.getUnsoldGoodList());
             return "index";
         }
         catch (Exception e)

@@ -1,6 +1,7 @@
 package com.pyteam.db.mbg.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Ac05 implements Serializable {
@@ -14,7 +15,7 @@ public class Ac05 implements Serializable {
 
     private Integer aac504;
 
-    private Long aac505;
+    private BigDecimal aac505;
 
     private String aac506;
 
@@ -70,11 +71,11 @@ public class Ac05 implements Serializable {
         this.aac504 = aac504;
     }
 
-    public Long getAac505() {
+    public BigDecimal getAac505() {
         return aac505;
     }
 
-    public void setAac505(Long aac505) {
+    public void setAac505(BigDecimal aac505) {
         this.aac505 = aac505;
     }
 
