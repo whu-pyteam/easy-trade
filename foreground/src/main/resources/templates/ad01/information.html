@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>详细信息</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/login-register.css" rel="stylesheet">
+    <style type="text/css">
+        .navbar-nav > li > a {
+            padding-top: 4px;
+            padding-bottom: 0;
+            height: 30px;
+        }
+
+        .navbar-right > li > a,
+        .dropdown-menu > li > a {
+            font-size: 12px;
+        }
+
+        .navbar {
+            min-height: 20px;
+        }
+
+        .jumbotron {
+            padding-top: 20px;
+        }
+
+        .ssl {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div th:replace="header::header(${2})"></div>
+
+<div class="ssl">
+    <div class="container">
+        <div class="col-lg-4">
+            <div class="logo pull-left">
+                <a href="index.html"><img src="../images/logo.jpg" height="45" width="260" alt=""/></a>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <form class="navbar-form navbar-right" role="search" th:action="@{'/ad01/cxk'}" >
+                <div class="form-group">
+                    <input type="text" class="form-control" name="notsure" id="notsure" placeholder="Search">
+                    <button type="submit" class="btn btn-default">搜索</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="zt">
+    <div class="container">
+        <div class="row" style="border: 1px solid #E8E8E8; padding-top: 15px; padding-bottom: 15px;">
+            <div class="col-lg-5">
+                <div th:text="${ad01.aad103}"
+                     style="height: 400px; width: 100%; overflow: hidden;" alt=""/>
+            </div>
+            <div class="col-lg-7">
+                <div class="caption">
+                    <h3 th:text="标题  +${ad01.aad105}"></h3>
+                    <p th:text="价格 +${ad01.aad104}"></p>
+                    <p th:text="申请人数 +${ad01.aad106}"></p>
+                    <p th:text="开始时间+  ${#dates.format(ad01.aad107,'yyyy-MM-dd HH:mm:ss')}"></p>
+                    <p th:text="结束时间 +${#dates.format(ad01.aad108,'yyyy-MM-dd HH:mm:ss')}"></p>
+                    <p>
+                        <a href="#" class="btn btn-primary" role="button">接受</a>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade login" id="loginModal">
+    <div class="modal-dialog login animated">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
+                </button>
+                <h4 class="modal-title">Login with</h4></div>
+            <div class="modal-body">
+                <div class="box">
+                    <div class="content">
+                        <div class="error"></div>
+                        <div class="form loginBox">
+                            <form method="post" action="#" accept-charset="UTF-8"><input class="form-control"
+                                                                                         type="text" placeholder="账号"
+                                                                                         name="email"><input
+                                    class="form-control" type="password" placeholder="密码" name="password"><input
+                                    class="btn btn-default btn-login" type="button" value="登录" onclick="loginAjax()">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="content registerBox" style="display:none;">
+                        <div class="form">
+                            <form method="post" html="{:multipart=>true}" data-remote="true" action="#"
+                                  accept-charset="UTF-8"><input class="form-control" type="text" placeholder="用户名"
+                                                                name=""><input class="form-control" type="password"
+                                                                               placeholder="密码" name=""><input
+                                    class="form-control" type="password" placeholder="确认密码" name=""><input
+                                    class="form-control" type="text" placeholder="手机号" name="">
+                                <div class="col-lg-6"><input class="form-control" type="text" placeholder="验证码" name="">
+                                </div>
+                                <div class="col-lg-6"><input class="btn btn-default btn-register" type="button"
+                                                             value="获取验证码" name=""></div>
+                                <input class="btn btn-default btn-register" type="submit" value="确认注册" name="commit">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="forgot login-footer"><span><a href="javascript: showRegisterForm();">新账户注册</a></span></div>
+                <div class="forgot register-footer" style="display:none"><span>已注册账号？</span>
+                    <a href="javascript: showLoginForm();">登录</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/login-register.js"></script>
+</body>
+
+</html>

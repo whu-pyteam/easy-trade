@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <nav class="navbar-default navber-fixed-top" th:fragment="header(type)">
-    <link href="css/login-register.css" rel="stylesheet">
+    <link href="/css/login-register.css" rel="stylesheet">
     <style type="text/css">
         .navbar-brand {
             font-size: 18px;
@@ -60,13 +60,13 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li th:class="(${type} == 1) ? 'active':''">
-                    <a href="index.html">首页<span class="sr-only">(current)</span></a>
+                    <a href="/index.html">首页<span class="sr-only">(current)</span></a>
                 </li>
-                <li>
-                    <a href="#">悬赏</a>
+                <li th:class="(${type} == 2) ? 'active':''">
+                    <a href="/ad01list.html">悬赏</a>
                 </li>
                 <li th:class="(${type} == 3) ? 'active':''">
-                    <a href="auction.html">拍卖</a>
+                    <a href="/auction.html">拍卖</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -75,7 +75,7 @@
                        aria-expanded="false">收藏夹<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#">收藏的悬赏</a>
+                            <a href="/ad01/forklist">收藏的悬赏</a>
                         </li>
                         <li>
                             <a href="auctionConn.html">收藏的拍卖</a>
@@ -195,7 +195,7 @@
         </div>
     </div>
 
-    <script src="js/login-register.js"></script>
+    <script src="/js/login-register.js"></script>
     <script>
         function getCookie(cname)
         {
