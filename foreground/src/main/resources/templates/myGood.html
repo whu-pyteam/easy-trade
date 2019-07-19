@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+    <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Bootstrap 101 Template</title>
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
+        <style type="text/css">
+            .navbar-brand {
+                font-size: 18px;
+            }
+
+            .navbar-right > li > a, .dropdown-menu > li > a {
+                font-size: 12px;
+            }
+
+            .navbar {
+                min-height: 20px;
+            }
+
+            .navbar-nav > li > a, .navbar-header > a {
+                padding-top: 5px;
+                height: 30px;
+            }
+
+            .jumbotron {
+                padding-top: 20px;
+            }
+
+            .ssl {
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+        </style>
+    </head>
+
+<body>
+
+<div th:replace="header :: header(1)"></div>
+
+<div class="col-lg-3 col-md-4 col-sm-6" th:each="ac01:${ac01List}">
+    <div class="thumbnail">
+        <a th:href="@{'goodShow.html?id=' + ${ac01.aac101}}">
+            <img th:src="${ac01.aac106}" style="height: 150px; width: 100%; overflow: hidden"
+                 alt="商品图片">
+        </a>
+        <div class="caption">
+            <h3 th:text="${ac01.aac102}"></h3>
+            <p th:text="${ac01.aac103}"></p>
+        </div>
+    </div>
+</div>
+
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html></title>
+</head>
+
+</body>
+</html>

@@ -1,7 +1,9 @@
 package com.pyteam.foreground.service;
 
 import com.pyteam.db.mbg.entity.Ab01;
+import com.pyteam.db.mbg.entity.Ab01Example;
 import com.pyteam.db.mbg.mapper.Ab01Mapper;
+import com.pyteam.foreground.dto.Ab01Dto;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,5 +70,20 @@ public class Ab01Service
     public Ab01 getMemberInfo(Integer aab101)throws Exception
     {
         return ab01Mapper.selectByPrimaryKey(aab101);
+    }
+
+    public boolean updateMemberInfo(Integer aab101,Ab01Dto ab01Dto)throws Exception
+    {
+        Ab01 ab01=new Ab01();
+        ab01.setAab101(aab101);
+        ab01.setAab103(ab01Dto.getAab103());
+        ab01.setAab104(ab01Dto.getAab104());
+        ab01.setAab105(new SimpleDateFormat("yyyy-MM-dd").parse(ab01Dto.getAab105()));
+        ab01.setAab106(ab01Dto.getAab106());
+        ab01.setAab107(ab01Dto.getAab107());
+        ab01.setAab111(ab01Dto.getAab111());
+
+        System.out.println(ab01Mapper.updateByPrimaryKeySelective(ab01));
+        return true;
     }
 }

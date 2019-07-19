@@ -1,23 +1,63 @@
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>个人信息</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Bootstrap 101 Template</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <style type="text/css">
+        .navbar-brand {
+            font-size: 18px;
+        }
+
+        .navbar-right > li > a, .dropdown-menu > li > a {
+            font-size: 12px;
+        }
+
+        .navbar {
+            min-height: 20px;
+        }
+
+        .navbar-nav > li > a, .navbar-header > a {
+            padding-top: 5px;
+            height: 30px;
+        }
+
+        .jumbotron {
+            padding-top: 20px;
+        }
+
+        .ssl {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+    </style>
 </head>
+
 <body>
+
 <div th:replace="header :: header(1)"></div>
-<form action="#" type="post">
-    <label>昵称</label>
-    <input type="text" value="猪">
-    <label>性别</label>
-    <input type="radio" name="sex">男
-    <input type="radio" name="sex">女
-    <input type="radio" name="sex">不知道
-    <label></label>
-    <label></label>
-    <label></label>
-    <label></label>
-    <label></label>
+<form action="/memberInfoSubmit.html" method="post">
+    昵称
+    <input type="text" name="aab103" th:value="${aab103}">
+    性别
+    <input type="text" name="aab104" th:value="${aab104}">
+    生日
+    <input type="date" name="aab105" th:value="${aab105}">
+    学校
+    <input type="text" name="aab106" th:value="${aab106}">
+    头像
+    <input type="text" name="aab107" th:value="${aab107}">
+    个性签名
+    <input type="text" name="aab111" th:value="${aab111}">
+    <input type="submit" th:value="提交">
 </form>
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
 </body>
 </html>

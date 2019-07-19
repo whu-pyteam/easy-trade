@@ -62,8 +62,6 @@
                 <li th:class="(${type} == 1) ? 'active':''">
                     <a href="index.html">首页<span class="sr-only">(current)</span></a>
                 </li>
-                <li>
-                    <a href="#">悬赏</a>
                 </li>
                 <li th:class="(${type} == 3) ? 'active':''">
                     <a href="auction.html">拍卖</a>
@@ -111,7 +109,7 @@
                        aria-expanded="false">我的<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#">我的出售</a>
+                            <a href="myGood.html">我的出售</a>
                         </li>
                         <li>
                             <a href="#">我的悬赏</a>
@@ -163,10 +161,10 @@
                             <div class="form">
                                 <form method="post" html="{:multipart=>true}" data-remote="true" action="/user/login"
                                       accept-charset="UTF-8">
-                                    <input class="form-control" type="text" placeholder="用户名" name="">
+
+                                    <input class="form-control" type="text" placeholder="手机号" name="">
                                     <input class="form-control" type="password" placeholder="密码" name="">
                                     <input class="form-control" type="password" placeholder="确认密码" name="">
-                                    <input class="form-control" type="text" placeholder="手机号" name="">
                                     <div class="col-lg-6">
                                         <input class="form-control" type="text" placeholder="验证码" name="">
                                     </div>

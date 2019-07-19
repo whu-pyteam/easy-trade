@@ -112,4 +112,17 @@ public class Ac01Service
         criteria.andAac201EqualTo(aac201);
         return ac01Mapper.selectByExample(ac01Example);
     }
+
+    /**
+     * 根据商品卖家id获取商品
+     * @param aab101
+     * @return
+     */
+    public List<Ac01> getByOwner(Integer aab101)
+    {
+        Ac01Example ac01Example=new Ac01Example();
+        Ac01Example.Criteria criteria=ac01Example.createCriteria();
+        criteria.andAab101EqualTo(aab101);
+        return ac01Mapper.selectByExample(ac01Example);
+    }
 }
