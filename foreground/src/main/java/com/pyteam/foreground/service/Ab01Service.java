@@ -1,13 +1,18 @@
 package com.pyteam.foreground.service;
 
 import com.pyteam.db.mbg.entity.Ab01;
+import com.pyteam.db.mbg.entity.Ab01Example;
+import com.pyteam.db.mbg.entity.Af02;
+import com.pyteam.db.mbg.entity.Af02Example;
 import com.pyteam.db.mbg.mapper.Ab01Mapper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户表ab01
@@ -15,6 +20,9 @@ import java.util.Date;
 @Service
 public class Ab01Service
 {
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
     @Autowired
     private Ab01Mapper ab01Mapper;
 
@@ -39,9 +47,9 @@ public class Ab01Service
         return res.intValue() > 0;
     }
 
-    public boolean isMember(int id, String password) throws Exception
+    public boolean isMember(String username, String password) throws Exception
     {
-        Ab01 ab01 = ab01Mapper.selectByPrimaryKey(id);
+        Ab01 ab01 = this.getMemberByUsername(username);
         if (ab01 == null)
         {
             /**
@@ -49,7 +57,7 @@ public class Ab01Service
              */
             return false;
         }
-        if (ab01.getAab108().equals(password))
+        if (passwordEncoder.matches(password, ab01.getAab108()))
         {
             /**
              * 用户名密码匹配
@@ -64,4 +72,19 @@ public class Ab01Service
             return false;
         }
     }
+
+    public Ab01 getMemberInfo(Integer aab101)throws Exception
+    {
+        return ab01Mapper.selectByPrimaryKey(aab101);
+    }
+
+    public Ab01 getMemberByUsername(String username)
+    {
+        Ab01Example example = new Ab01Example();
+        Ab01Example.Criteria criteria = example.createCriteria();
+        criteria.andAab102EqualTo(username);
+        return ab01Mapper.selectByExample(example).get(0);
+    }
+
+
 }
