@@ -32,10 +32,11 @@ public class LoginController
         String username=request.getParameter("username");
         //获取用户输入的密码
         String password=request.getParameter("password");
+        Integer id = ab01Service.getMemberByUsername(username).getAab101();
         //获取用户拍卖收藏流水号
-        String aad401_auc = ad04Service.getAad401(Integer.parseInt(username), "2");
+        String aad401_auc = ad04Service.getAad401(id, "2");
         //判断是否是会员
-        if (ab01Service.isMember(Integer.parseInt(username), password))
+        if (ab01Service.isMember(username, password))
         {
             //是会员，则在cookie中保存用户名和密码
             setCookies(response,"username",username,600);
