@@ -211,62 +211,51 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/login-register.js"></script>
 <script>
-    function conn(id) {
-        var strCookie = document.cookie;
-        if (strCookie) {
-            var arrCookie = strCookie.split("; ");
-            var aad401 = "";
-            for (var i = 0; i < arrCookie.length; i++) {
-                var arr = arrCookie[i].split("=");
-                if ("aad401_auc" == arr[0]) {
-                    aad401 = arr[1];
-                    break;
-                }
-
-            }
-            if (document.getElementById("conn" + id).innerText == "收藏") {
-                addConn(id, aad401);
-            } else {
-                delConn(id, aad401);
-            }
-
-        } else {
-            openLoginModal();
+    function conn(aad201)
+    {
+        if (document.getElementById("conn" + aad201).innerText == "收藏")
+        {
+            addConn(aad201);
+        }
+        else
+        {
+            delConn(aad201);
         }
     }
 
-    function addConn(id, aad401) {
-        var data = {aad201: id, aad401: aad401};
+    function addConn(aad201) {
+        var data = {aad201: aad201};
         $.ajax({
             url: 'addAucConn',
             type: 'GET',
+            data: data,
             contentType: 'application/json',
             dataType: 'json',
-            data: data,
             success: function () {
-                //alert("收藏成功！");
-                document.getElementById("conn" + id).innerText = "已收藏";
+                document.getElementById("conn" + aad201).innerText = "已收藏";
             },
             error: function () {
                 alert("收藏失败！");
+                location.reload();
             }
         });
     }
 
-    function delConn(id, aad401) {
-        var data = {aad201: id, aad401: aad401};
+    function delConn(aad201) {
+        var data = {aad201: aad201};
         $.ajax({
             url: 'delAucConn',
             type: 'GET',
+            data: data,
             contentType: 'application/json',
             dataType: 'json',
-            data: data,
             success: function () {
                 alert("取消成功！");
-                document.getElementById("conn" + id).innerText = "收藏";
+                document.getElementById("conn" + aad201).innerText = "收藏";
             },
             error: function () {
                 alert("取消失败！");
+                location.reload();
             }
         });
     }

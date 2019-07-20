@@ -69,27 +69,29 @@ public class ConnectionController
     @ResponseBody
     public String addAucConn(HttpServletRequest request, HttpServletResponse response, Ae05 ae05)
     {
-        if(isLogin(request, response) && !connService.insert(ae05))
+        if(isLogin(request, response))
         {
+            ae05.setAad401(Integer.parseInt(getCookies(request, "aad401_auc")));
+            if(connService.insert(ae05))
+            {
+                return "true";
+            }
+        }
             return null;
-        }
-        else
-        {
-            return "1";
-        }
     }
 
     @RequestMapping(value = "delAucConn", method = RequestMethod.GET)
     @ResponseBody
     public String delAucConn(HttpServletRequest request, HttpServletResponse response, Ae05 ae05)
     {
-        if(isLogin(request, response) && !connService.delByValue(ae05))
+        if(isLogin(request, response))
         {
-            return null;
+            ae05.setAad401(Integer.parseInt(getCookies(request, "aad401_auc")));
+            if(connService.delByValue(ae05))
+            {
+                return "true";
+            }
         }
-        else
-        {
-            return "1";
-        }
+        return null;
     }
 }

@@ -30,18 +30,16 @@
                     <td><p th:text="${aconn.aad208}"></p></td>
                     <td th:switch="${aconn.aad209}">
                         <p th:case="1" th:text="${#dates.format(aconn.aad211, 'yyyy年MM月dd日 HH:mm')}"></p>
-                        <p th:case="3">卖家已取消拍卖</p>
+                        <p th:case="3">竞拍已结束</p>
+                        <p th:case="4">卖家已取消竞拍</p>
                     </td>
                     <td>
-                        <button class="btn btn-primary" th:onclick="connShow([[${aconn.aad201}]])"
-                                th:id="'conn'+${aconn.aad201}">
+                        <a class="btn btn-primary" th:onclick="connShow([[${aconn.aad201}]])">
                             已收藏
-                        </button>
-                        <span th:if="${aconn.aad209 == '1'}">
-                             <a th:href="'auctionShow.html?id=' + ${aconn.aad201}">
-                                 <button class="btn btn-info">查看</button>
-                             </a>
-                        </span>
+                        </a>
+                        <a th:if="${aconn.aad209 == '1'}" th:href="'auctionShow.html?id=' + ${aconn.aad201}">
+                            <button class="btn btn-info">查看</button>
+                        </a>
                     </td>
                 </tr>
                 </tbody>
@@ -60,40 +58,23 @@
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script>
-    function connShow(id) {
-        var strCookie = document.cookie;
-        if (strCookie) {
-            var arrCookie = strCookie.split("; ");
-            var aad401 = "";
-            for (var i = 0; i < arrCookie.length; i++) {
-                var arr = arrCookie[i].split("=");
-                if ("aad401_auc" == arr[0]) {
-                    aad401 = arr[1];
-                    break;
-                }
-
-            }
-            delConn(id, aad401);
-            location.reload();
-        } else {
-            alert("请先登录！");
-            location.reload();
-        }
-    }
-
-    function delConn(id, aad401) {
-        var data = {aad201: id, aad401: aad401};
+    function connShow(aad201)
+    {
+        var data = {aad201: aad201};
         $.ajax({
             url: 'delAucConn',
             type: 'GET',
+            data: data,
             contentType: 'application/json',
             dataType: 'json',
-            data: data,
-            success: function () {
+            success: function ()
+            {
                 alert("取消成功！");
+                location.reload();
             },
             error: function () {
                 alert("取消失败！");
+                location.reload();
             }
         });
     }

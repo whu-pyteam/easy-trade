@@ -26,11 +26,30 @@ public class Ad02Service
     @Autowired
     private QiniuUtil qiniuUtil;
 
+    /**
+     * 依据拍卖物品流水号（aad201）更新当前最高价（aad208）
+     * @param aad201
+     * @param aad208
+     * @return
+     */
+    public boolean updateAad208ByAad201(int aad201, BigDecimal aad208)
+    {
+        Ad02 ad02 = new Ad02();
+        ad02.setAad201(aad201);
+        ad02.setAad208(aad208);
+        return ad02Mapper.updateByPrimaryKeySelective(ad02) > 0;
+    }
+
+    /**
+     * 用户删除拍卖
+     * @param aad201
+     * @return
+     */
     public boolean deleteById(int aad201)
     {
         Ad02 ad02 = new Ad02();
         ad02.setAad201(aad201);
-        ad02.setAad209("3");
+        ad02.setAad209("4");
         return ad02Mapper.updateByPrimaryKeySelective(ad02) > 0;
     }
 
@@ -44,8 +63,7 @@ public class Ad02Service
         Ad02Example ad02Example = new Ad02Example();
         Criteria criteria = ad02Example.createCriteria();
         criteria.andAab101EqualTo(aab101);
-        //criteria.andAad209EqualTo("1");
-        criteria.andAad209Between("0", "2");
+        criteria.andAad209Between("0", "3");
         return ad02Mapper.selectByExample(ad02Example);
     }
 
@@ -77,7 +95,7 @@ public class Ad02Service
             ad02.setAad205(dto.getAad205());
             ad02.setAad206(dto.getAad206());
             ad02.setAad207(dto.getAad207());
-            ad02.setAad208(BigDecimal.valueOf(2400));
+            ad02.setAad208(dto.getAad206());
             ad02.setAad209("0");  //未审核
             ad02.setAad210(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2000-01-01 00:00"));
             ad02.setAad211(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dto.getAad211()));
