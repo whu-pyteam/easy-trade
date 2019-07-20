@@ -28,4 +28,6 @@ public interface Ae07NewMapper
     @Select("select aae701 from ae07 where aac501=#{aac501}")
     Ae07 selectbyaac501(Ae07 ae07);
 
+    @Select("select aad101 from ae07 where aac501=#{aac501}")
+    int aad101(int aac501);
 }

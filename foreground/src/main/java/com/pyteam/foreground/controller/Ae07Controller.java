@@ -1,6 +1,7 @@
 package com.pyteam.foreground.controller;
 
 import com.pyteam.db.mbg.entity.Ac05;
+import com.pyteam.foreground.service.Ae02Service;
 import com.pyteam.foreground.service.Ae07Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -23,6 +24,8 @@ public class Ae07Controller
 {
     @Autowired
     private Ae07Service ae07Service;
+    @Autowired
+    private Ae02Service ae02Service;
 
 
     @GetMapping("/ad01/myOrder")
@@ -50,6 +53,10 @@ public class Ae07Controller
             ae07Service.delete(ac05list);
             System.out.println("取消运行");
 
+        }
+        else if(action.equals("完成订单"))
+        {
+            ae02Service.updatecc(aac502);
         }
         return "/ad01/myOrder";
     }

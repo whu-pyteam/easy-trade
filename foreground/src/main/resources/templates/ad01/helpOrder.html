@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>已经生成订单</title>
+    <title>接受订单</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/login-register.css" rel="stylesheet">
     <link href="../css/fileinput.css" rel="stylesheet">
@@ -28,7 +28,7 @@
     <div class="container">
         <div class="col-lg-4">
             <div class="logo pull-left">
-                <a href="index.html"><img src="../images/logo.jpg" height="45" width="260" alt=""/></a>
+                <a href="index.html"><img src="images/logo.jpg" height="45" width="260" alt=""/></a>
             </div>
         </div>
         <div class="col-sm-8">
@@ -46,7 +46,7 @@
     <div class="row">
         <div class="col-lg-3"></div>
         <div class="col-lg-6">
-            <form class="fqxs" th:action="@{/ad01/myOrder}"  th:object="${ac05}" th:each="ac05:${ac05}" method="post" enctype="multipart/form-data">
+            <form class="fqxs" th:action="@{/ad01/helpOrder}"  th:object="${ac05}" th:each="ac05:${ac05}" method="post" enctype="multipart/form-data">
 
                 <div class="form-group row">
                     <div class="col-lg-2">
@@ -63,20 +63,19 @@
                         <label for="03">金额:</label>
                     </div>
                     <div class="col-lg-10">
-                        <input type="number" class="form-control" step="0.01" th:value="${ac05.aac505}" name="aac505" id="03">
+                        <input type="number" class="form-control" step="0.01" th:value="${ac05.aac505}" name="aac505" id="03" readonly="readonly">
                     </div>
                 </div>
 
 
                 <div class="form-group row">
                     <div class="col-lg-2">
-                        <label for="aac503">订单状态:</label>
+                        <label for="10">订单状态:</label>
                     </div>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" th:value="${ac05.aac503}" id="aac503" name="aac503" readonly >
+                            <input type="text" class="form-control" th:value="${ac05.aac503}==0?'需要您确认':'需要对方确认'" id="10" name="aac503" readonly >
                     </div>
                 </div>
-
 
                 <div class="form-group row">
                     <div class="col-lg-2">
@@ -92,12 +91,8 @@
 
 
                 <div class="form-group text-center">
-                    <input type="submit" class="btn btn-primary" value="修改订单" name="action">
-                    <!--<a th:href="@{ad01/delorder(aac502=${ac05.aac502})}" class="btn btn-primary" role="button" >取消</a>-->
-                    <input type="submit" class="btn btn-primary" value="取消订单" name="action">
-                    <input type="submit" class="btn btn-primary" value="完成订单" name="action">
-
-                    <a th:href="@{/ad01/addad03(aac502=${ac05.aac502})}" role="button" class="btn btn-primary" onclick="vue()">生成评论</a>
+                    <input type="submit" class="btn btn-primary" value="确认订单" name="action">
+                    <input type="submit" class="btn btn-primary" value="取消接受" name="action">
                     <a  class="btn btn-primary" role="button">联系对方</a>
                 </div>
             </form>
@@ -166,18 +161,6 @@
 <script src="../js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 </body>
 <script>
-
-    function vue()
-    {
-         var immm=document.getElementById("aac503").value;
-        if(immm !=2)
-        {
-            alert("抱歉,您的订单没有完成,无法生成评论")
-        }
-    }
-
-
-
     $("#kv-explorer").fileinput({
         theme: 'explorer-fas',
         uploadUrl: '#',

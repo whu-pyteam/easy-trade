@@ -30,8 +30,8 @@ public interface Ac05NewMapper
 
     //    根据订单号确定流水号
 
-    @Select("select aac501 from ac05 where aac502=#{id} ")
-    int query(String id);
+    @Select("select aac501 from ac05 where aac502=#{aac502} ")
+    int query(String aac502);
 
 
     //订单号查询整个信息
@@ -41,9 +41,24 @@ public interface Ac05NewMapper
 
     //更改信息
 
-    @Update("update ac05 set aac504#{aac504},aac505=#{aac505},aac506=#{aac506},aac507=#{aac507},aac509=#{aac509},aac510=#{aac510} where aac502=#{aac502}")
+    @Update("update ac05 set aac504=#{aac504},aac505=#{aac505},aac506=#{aac506},aac507=#{aac507},aac509=#{aac509},aac510=#{aac510} where aac502=#{aac502}")
     void update (Ac05 ac05);
 
     @Delete("delete from ac05 where aac501=#{aac501}")
     void deletebyaac501(Ac05 ac05);
+
+
+    //根据接收方查询
+
+    @Select("select aac501,aab101,aac502,aac503,aac504,aac505,aac506,aac507,aac508,aac509,aac510,aac511 from ac05 where aab101=#{aab101}")
+    List<Ac05> queryByAab101(int aab101);
+
+    @Update("update ac05 set aac503=1 where aac502=#{aac502}")
+    void updatenn(String aac502);
+
+    @Update("update ac05 set aac503=2 where aac502=#{aac502}")
+    void updatecc(String aac502);
+
+    @Select("select aab101 from ac05 where aac502=#{aac502}")
+    int aab101(String aac502);
 }
