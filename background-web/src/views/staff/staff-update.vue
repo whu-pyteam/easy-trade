@@ -38,7 +38,7 @@
     name: 'staff-update',
     data() {
       return {
-        aaf201: null,
+        aaf201: this.$route.params.id,
         aaf202: '',
         aaf207: false,
         roles: [],
@@ -47,15 +47,16 @@
     },
     created() {
       this.fetchRoles()
-      this.fetchStaffByAaf202(this.$route.params.id)
+      this.fetchStaffByAaf202(this.aaf201)
     },
     methods: {
       onSubmit() {
         let params = {
+          aaf201: this.aaf201,
           aaf601List: this.selectRoles,
           aaf207: this.aaf207 ? 1 : 0
         }
-        updateStaff(this.aaf201, params).then(res => {
+        updateStaff(params).then(res => {
           console.log(res.data)
           this.$message.success("操作成功!")
           window.setTimeout(this.goBack, 2000)

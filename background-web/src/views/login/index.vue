@@ -44,9 +44,6 @@
         </el-form-item>
       </el-form>
     </el-card>
-    wxg 商品审核员
-    wxg2 悬赏审核员
-    wxg3 拍卖审核员
   </div>
 </template>
 
