@@ -16,8 +16,12 @@ import java.util.List;
 @Service
 public class Af06ServiceImpl implements Af06Service
 {
-    @Autowired
-    Af06Mapper af06Mapper;
+    private final Af06Mapper af06Mapper;
+
+    public Af06ServiceImpl(Af06Mapper af06Mapper)
+    {
+        this.af06Mapper = af06Mapper;
+    }
 
     @Override
     public List<Af06> getRoleList()

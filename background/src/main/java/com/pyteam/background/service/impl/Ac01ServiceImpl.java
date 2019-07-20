@@ -27,19 +27,16 @@ public class Ac01ServiceImpl implements Ac01Service
     {
         PageHelper.startPage(queryParam.getPageNum(), queryParam.getPageSize());
         Ac01Example ac01Example = new Ac01Example();
-        Ac01Example.Criteria criteria1 = ac01Example.createCriteria();
-        Ac01Example.Criteria criteria2 = ac01Example.createCriteria();
+        Ac01Example.Criteria criteria = ac01Example.createCriteria();
 
         if(!StringUtils.isEmpty(queryParam.getAac102()))
         {
-            criteria1.andAac102Like("%" + queryParam.getAac102() + "%");
+            criteria.andAac102Like("%" + queryParam.getAac102() + "%");
         }
         if(!StringUtils.isEmpty(queryParam.getAac104()))
         {
-            criteria2.andAac104EqualTo(queryParam.getAac104());
+            criteria.andAac104EqualTo(queryParam.getAac104());
         }
-
-        ac01Example.or(criteria2);
 
         return ac01Mapper.selectByExample(ac01Example);
     }
