@@ -57,10 +57,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         http.formLogin()
                 .loginPage("/login") // 自定义用户登入页面
                 .failureUrl("/login?error") // 自定义登入失败页面，前端可以通过url中是否有error来提供友好的用户登入提示
-                .and()
-                .logout()
-                .logoutUrl("/logout")// 自定义用户登出页面
-                .logoutSuccessUrl("/")
+//                .and()
+//                .logout()
+//                .logoutUrl("/logout")// 自定义用户登出页面
+//                .logoutSuccessUrl("/")
                 .and()
                 /*
                  * 默认允许所有路径所有人都可以访问，确保静态资源的正常访问。

@@ -25,18 +25,19 @@ public class ConnectionController
     @Autowired
     private ConnectionService connService;
 
+    private boolean isLogin;
+
     @RequestMapping(value = "/auctionConn.html", method = RequestMethod.GET)
-    public String showConnection(HttpServletRequest request, HttpServletResponse response, Model model)
+    public String showConnection(HttpServletRequest request, HttpServletResponse response, int pageNum, Model model)
     {
-        int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+        isLogin = isLogin(request, response);
         int aad401 = 0;
-        if(isLogin(request, response))
+        if(isLogin)
         {
             aad401 = Integer.parseInt(getCookies(request, "aad401_auc"));
         }
         Map<String, Object> connMap = connService.selectAd02RightAe05(aad401, pageNum, 8);
         int pageCount = (int)connMap.get("pageCount");
-        model.addAttribute("aconnList", (List<Ad02>)connMap.get("ad02List"));
         boolean pre = true;
         boolean next = true;
         if(pageCount <= 1)
@@ -54,16 +55,10 @@ public class ConnectionController
         }
         else
         {
-            try
-            {
-                response.sendError(404);
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
+            return "auction";
         }
-        model.addAttribute("aconnList", connMap.get("ad02List"));
+        model.addAttribute("aconnList", (List<Ad02>)connMap.get("ad02List"));
+        model.addAttribute("isLogin", isLogin);
         model.addAttribute("pre", pre);
         model.addAttribute("next", next);
         model.addAttribute("pageNum", pageNum);
@@ -72,29 +67,29 @@ public class ConnectionController
 
     @RequestMapping(value = "/addAucConn", method = RequestMethod.GET)
     @ResponseBody
-    public String addAucConn(Ae05 ae05)
+    public String addAucConn(HttpServletRequest request, HttpServletResponse response, Ae05 ae05)
     {
-        if(connService.insert(ae05))
+        if(isLogin(request, response) && !connService.insert(ae05))
         {
-            return "1";
+            return null;
         }
         else
         {
-            return null;
+            return "1";
         }
     }
 
     @RequestMapping(value = "delAucConn", method = RequestMethod.GET)
     @ResponseBody
-    public String delAucConn(Ae05 ae05)
+    public String delAucConn(HttpServletRequest request, HttpServletResponse response, Ae05 ae05)
     {
-        if(connService.delByValue(ae05))
+        if(isLogin(request, response) && !connService.delByValue(ae05))
         {
-            return "1";
+            return null;
         }
         else
         {
-            return null;
+            return "1";
         }
     }
 }

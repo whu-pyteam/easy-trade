@@ -32,90 +32,122 @@ public class AuctionController
     @Autowired
     private Ad06Service ad06Service;
 
+    private boolean isLogin;
+
     @RequestMapping(value = "/auctionOffer.html", method = RequestMethod.POST)
-    public String insertAd06(HttpServletRequest request, HttpServletResponse response, Ad06 ad06)
+    public String insertAd06(HttpServletRequest request, HttpServletResponse response, Ad06 ad06, Model model)
     {
-        if(isLogin(request, response))
+        isLogin = isLogin(request, response);
+        if(isLogin)
         {
-            int aab101 = Integer.parseInt(getCookies(request, "username"));
+            int aab101 = Integer.parseInt(getCookies(request, "userId"));
             ad06.setAab101(aab101);
             if(ad06Service.insertAd06(ad06))
             {
+                model.addAttribute("isLogin", isLogin);
                 return "auctionOffer";
             }
-            return "bad";
+            else
+            {
+                return "123456";
+            }
         }
-
-        return "error/404";
+        model.addAttribute("isLogin", isLogin);
+        return "auction";
     }
 
     @RequestMapping(value = "/delMyAuc", method = RequestMethod.GET)
     @ResponseBody
-    public String delMyAuc(int aad201)
+    public String delMyAuc(HttpServletRequest request, HttpServletResponse response, int aad201)
     {
-        if(service.deleteById(aad201))
+        if(isLogin(request, response) && !service.deleteById(aad201))
         {
-            return "1";
+            return null;
         }
         else
         {
-            return null;
+            return "1";
         }
     }
 
     @RequestMapping(value = "myAuction.html", method = RequestMethod.GET)
     public String findByUserID(HttpServletRequest request, HttpServletResponse response, Model model)
     {
-        int aab101 = 0;
-        if(isLogin(request, response))
+        isLogin = isLogin(request, response);
+        if(isLogin)
         {
-            aab101 = Integer.parseInt(getCookies(request, "username"));
+            int aab101 = Integer.parseInt(getCookies(request, "userId"));
+            model.addAttribute("ad02List", service.findByUserId(aab101));
+            model.addAttribute("isLogin", isLogin);
+            return "myAuction";
         }
-        model.addAttribute("ad02List", service.findByUserId(aab101));
-        return "myAuction";
+        model.addAttribute("isLogin", isLogin);
+        return "auction";
     }
 
     @RequestMapping(value = "/auctionShow.html", method = RequestMethod.GET)
-    public String findById(int id, Model model)
+    public String findById(HttpServletRequest request, HttpServletResponse response, int id, Model model)
     {
         model.addAttribute("ad02", service.findById(id));
-        model.addAttribute("type", 3);
+        model.addAttribute("isLogin", isLogin(request, response));
         return "auctionShow";
     }
 
     @RequestMapping(value = "/auctionSearch.html", method = RequestMethod.POST)
-    public String searchByValue(@RequestParam(value = "searchValue") String value, Model model)
+    public String searchByValue(HttpServletRequest request, HttpServletResponse response, String searchValue, Model model)
     {
-        model.addAttribute("searchList", service.findByValue(value));
-        model.addAttribute("type", 3);
+        model.addAttribute("searchList", service.findByValue(searchValue));
+        model.addAttribute("isLogin", isLogin(request, response));
         return "auctionSearch";
     }
 
     @RequestMapping(value = "/auctionLaunch.html", method = RequestMethod.GET)
-    public String insert(Model model)
+    public String insert(HttpServletRequest request, HttpServletResponse response, Model model)
     {
-        return "auctionLaunch";
+        isLogin = isLogin(request, response);
+        if(isLogin)
+        {
+            model.addAttribute("isLogin", isLogin);
+            return "auctionLaunch";
+        }
+        model.addAttribute("isLogin", isLogin);
+        return "auction";
     }
 
     @RequestMapping(value = "/auctionLaunch.html", method = RequestMethod.POST)
-    public String insert(Ad02Dto dto, Model model)
+    public String insert(HttpServletRequest request, HttpServletResponse response, Ad02Dto dto, Model model)
     {
-        service.insert(dto);
-        return "auctionLaunch";
+        isLogin = isLogin(request, response);
+        if(isLogin)
+        {
+            dto.setAab101(Integer.parseInt(getCookies(request, "userId")));
+            if(service.insert(dto))
+            {
+                model.addAttribute("isLogin", isLogin);
+                return "auctionLaunch";
+            }
+            else
+            {
+                return "123456";
+            }
+
+        }
+        model.addAttribute("isLogin", isLogin);
+        return "auction";
     }
 
 
     @RequestMapping(value = "/auction.html", method = RequestMethod.GET)
     public String wel(HttpServletRequest request, HttpServletResponse response, Model model)
     {
+        isLogin = isLogin(request, response);
         int aad401 = 0;
-        if(isLogin(request, response))
+        if(isLogin)
         {
             aad401 = Integer.parseInt(getCookies(request, "aad401_auc"));
         }
-        model.addAttribute("aconnList", connService.selectAd02LeftAe05(aad401));
-        //model.addAttribute("ad02List", service.selectAll());
-        model.addAttribute("type", 3);
+        model.addAttribute("ad02_connList", connService.selectAd02LeftAe05(aad401));
+        model.addAttribute("isLogin", isLogin);
         return "auction";
     }
 }
