@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -19,11 +20,11 @@ import java.util.List;
 public class Af07ServiceImpl implements Af07Service
 {
 
-    @Autowired
+    @Resource
     Af07Mapper af07Mapper;
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional
     public boolean staffRoleRelation(StaffRoleParam staffRoleParam)
     {
         // 查询 af07 员工已关联的角色

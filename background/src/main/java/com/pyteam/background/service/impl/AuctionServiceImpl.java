@@ -21,8 +21,12 @@ import java.util.List;
 public class AuctionServiceImpl implements AuctionService
 {
 
-    @Autowired
-    Ad02Mapper ad02Mapper;
+    private final Ad02Mapper ad02Mapper;
+
+    public AuctionServiceImpl(Ad02Mapper ad02Mapper)
+    {
+        this.ad02Mapper = ad02Mapper;
+    }
 
 
     @Override
@@ -30,18 +34,16 @@ public class AuctionServiceImpl implements AuctionService
     {
         PageHelper.startPage(queryParam.getPageNum(), queryParam.getPageSize());
         Ad02Example example = new Ad02Example();
-        Ad02Example.Criteria criteria1 = example.createCriteria();
-        Ad02Example.Criteria criteria2 = example.createCriteria();
+        Ad02Example.Criteria criteria = example.createCriteria();
         if(!StringUtils.isEmpty(queryParam.getAad202()))
         {
-            criteria1.andAad202Like(queryParam.getAad202());
+            criteria.andAad202Like(queryParam.getAad202());
         }
         if(!StringUtils.isEmpty(queryParam.getAad209()))
         {
-            criteria2.andAad209EqualTo((queryParam.getAad209()));
+            criteria.andAad209EqualTo((queryParam.getAad209()));
         }
 
-        example.or(criteria2);
         return ad02Mapper.selectByExample(example);
     }
 

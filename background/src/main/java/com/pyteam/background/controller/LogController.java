@@ -14,7 +14,6 @@ import com.pyteam.db.mbg.entity.Af03;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,7 +25,6 @@ import java.util.List;
 @Api(tags = "日志操作")
 @RestController
 @RequestMapping("/log")
-@PreAuthorize("hasAuthority('admin:emp')")
 public class LogController
 {
     @Autowired
@@ -43,6 +41,7 @@ public class LogController
         }
         return CommonResponse.success(CommonPage.restPage(list));
     }
+
 
     @ApiOperation("日志详情查询")
     @GetMapping("/{id}")

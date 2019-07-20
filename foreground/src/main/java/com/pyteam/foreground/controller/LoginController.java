@@ -18,13 +18,6 @@ public class LoginController
     @Autowired
     private Ad04Service ad04Service;
 
-    /**
-     * 登录
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
-     */
     @PostMapping(value = "login.html")
     public boolean login(HttpServletRequest request, HttpServletResponse response) throws Exception
     {
@@ -32,13 +25,15 @@ public class LoginController
         String username=request.getParameter("username");
         //获取用户输入的密码
         String password=request.getParameter("password");
+        Integer id = ab01Service.getMemberByUsername(username).getAab101();
         //获取用户拍卖收藏流水号
-        String aad401_auc = ad04Service.getAad401(Integer.parseInt(username), "2");
+        String aad401_auc = ad04Service.getAad401(id, "2");
         //判断是否是会员
-        if (ab01Service.isMember(Integer.parseInt(username), password))
+        if (ab01Service.isMember(username, password))
         {
             //是会员，则在cookie中保存用户名和密码
             setCookies(response,"username",username,600);
+            setCookies(response, "userId", id.toString(), 600);
             setCookies(response,"password",password,600);
             setCookies(response, "aad401_auc", aad401_auc, 600);
             return true;
@@ -62,7 +57,9 @@ public class LoginController
         if(isLogin(request,response))
         {
             delCookies(request,response,"username");
+            delCookies(request,response,"userId");
             delCookies(request,response,"password");
+            delCookies(request,response,"aad401_auc");
             return true;
         }
         else
@@ -79,11 +76,13 @@ public class LoginController
     public static boolean isLogin(HttpServletRequest request,HttpServletResponse response)
     {
         String username = getCookies(request,"username");
+        String userId = getCookies(request, "userId");
         String password = getCookies(request,"password");
         String aad401_auc = getCookies(request, "aad401_auc");
         if(username != null && password != null)
         {
             setCookies(response,"username",username,600);
+            setCookies(response, "userId", userId, 600);
             setCookies(response,"password",password,600);
             setCookies(response, "aad401_auc", aad401_auc, 600);
             return true;

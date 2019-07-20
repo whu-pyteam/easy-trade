@@ -25,12 +25,19 @@ import java.util.List;
 @Service
 public class LogServiceImpl implements LogService
 {
-    @Autowired
+    private final
     Af03Mapper af03Mapper;
-    @Autowired
+    private final
     Af02Service af02Service;
-    @Autowired
+    private final
     LogMapper logMapper;
+
+    public LogServiceImpl(Af03Mapper af03Mapper, Af02Service af02Service, LogMapper logMapper)
+    {
+        this.af03Mapper = af03Mapper;
+        this.af02Service = af02Service;
+        this.logMapper = logMapper;
+    }
 
     @Override
     public void insert(Integer id, String log)
@@ -52,8 +59,7 @@ public class LogServiceImpl implements LogService
     @Override
     public Af03 getLogDetail(Integer id)
     {
-        Af03 af03 = af03Mapper.selectByPrimaryKey(id);
-        return af03;
+        return af03Mapper.selectByPrimaryKey(id);
     }
 
 

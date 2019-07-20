@@ -46,7 +46,7 @@
 时间：2019-07-10
 描述：导航栏
 -->
-<div th:replace="header :: header(${type})"></div>
+<div th:replace="header :: header(3)"></div>
 <!--
     作者：2361991194@qq.com
     时间：2019-07-10
@@ -72,131 +72,134 @@
 
 <div class="zt">
     <div class="container">
-        <div class="col-lg-2">
-            <div class="left-sidebar">
-                <h2>目录</h2>
-                <div class="panel-group category-products" id="accordian">
-                    <!--category-productsr-->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordian" href="#mens">
-                                    <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                    男装
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="mens" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <ul>
-                                    <li>
-                                        <a href="#">衬衫</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">风衣</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">套装</a>
-                                    </li>
-                                </ul>
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="left-sidebar">
+                    <h2>目录</h2>
+                    <div class="panel-group category-products" id="accordian">
+                        <!--category-productsr-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordian" href="#mens">
+                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                        男装
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="mens" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul>
+                                        <li>
+                                            <a href="#">衬衫</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">风衣</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">套装</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordian" href="#womens">
-                                    <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                    女装
-                                </a>
-                            </h4>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordian" href="#womens">
+                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                        女装
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="womens" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul>
+                                        <li>
+                                            <a href="#">连衣裙</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">牛仔</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">外套</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">T恤</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                        <div id="womens" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <ul>
-                                    <li>
-                                        <a href="#">连衣裙</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">牛仔</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">外套</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">T恤</a>
-                                    </li>
-                                </ul>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="#">儿童</a></h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="#">运动</a></h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="#">时尚</a></h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="#">家居</a></h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="#">包包</a></h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="#">鞋子</a></h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="#"><span class="pull-right">>></span>更多</a></h4>
                             </div>
                         </div>
                     </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><a href="#">儿童</a></h4>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><a href="#">运动</a></h4>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><a href="#">时尚</a></h4>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><a href="#">家居</a></h4>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><a href="#">包包</a></h4>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><a href="#">鞋子</a></h4>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title"><a href="#"><span class="pull-right">>></span>更多</a></h4>
-                        </div>
-                    </div>
+                    <!--/category-products-->
                 </div>
-                <!--/category-products-->
             </div>
-        </div>
-        <div class="col-lg-10">
-            <div class="jumbotron">
-                <h1>Hello, world!</h1>
-                <p>...</p>
-                <p>
-                    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-                </p>
-            </div>
+            <div class="col-lg-10">
+                <div class="jumbotron">
+                    <h1>Hello, world!</h1>
+                    <p>...</p>
+                    <p>
+                        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                    </p>
+                </div>
 
-            <!--            <p th:text="${ad02List}"></p>-->
+                <!--            <p th:text="${ad02List}"></p>-->
 
-            <div class="col-lg-3 col-md-4 col-sm-6" th:each="aconn:${aconnList}">
-                <div class="thumbnail">
-                    <a th:href="@{'auctionShow.html?id=' + ${aconn.aad201}}">
-                        <img th:src="${aconn.aad203}" style="height: 150px; width: 100%; overflow: hidden" alt="拍卖物品图片">
-                    </a>
-                    <div class="caption">
-                        <h3 th:text="${aconn.aad202}"></h3>
-                        <p th:text="${aconn.aad204}"></p>
-                        <p>
-                            <button class="btn btn-primary" th:onclick="conn([[${aconn.aad201}]])" th:id="'conn'+${aconn.aad201}">
-                                <span th:if="${aconn.aae501 == null}">收藏</span>
-                                <span th:if="${aconn.aae501 != null}">已收藏</span>
-                            </button>
-                            <!--                            <a href="connection" class="btn btn-primary" role="button">收藏</a>-->
-                            <a href="#" class="btn btn-default" role="button">购买</a>
-                        </p>
+                <div class="col-lg-3 col-md-4 col-sm-6" th:each="ad02_conn:${ad02_connList}">
+                    <div class="thumbnail">
+                        <a th:href="@{'auctionShow.html?id=' + ${ad02_conn.aad201}}">
+                            <img th:src="${ad02_conn.aad203}" style="height: 150px; width: 100%; overflow: hidden"
+                                 alt="拍卖物品图片">
+                        </a>
+                        <div class="caption">
+                            <h3 th:text="${ad02_conn.aad202}"></h3>
+                            <p th:text="${ad02_conn.aad204}"></p>
+                            <p th:switch="${isLogin}">
+                                <a th:case="true" class="btn btn-primary" role="button" th:onclick="conn([[${ad02_conn.aad201}]])" th:id="'conn'+${ad02_conn.aad201}">
+                                    <span th:if="${ad02_conn.aae501 == null}">收藏</span>
+                                    <span th:if="${ad02_conn.aae501 != null}">已收藏</span>
+                                </a>
+                                <a th:case="false" class="btn btn-primary" onclick="openLoginModal();">收藏</a>
+                                <a th:href="@{'auctionShow.html?id=' + ${ad02_conn.aad201}}" class="btn btn-default" role="button">查看</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -208,72 +211,51 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/login-register.js"></script>
 <script>
-    function conn(id)
+    function conn(aad201)
     {
-        var strCookie=document.cookie;
-        if(strCookie)
+        if (document.getElementById("conn" + aad201).innerText == "收藏")
         {
-            var arrCookie=strCookie.split("; ");
-            var aad401 = "";
-            for(var i=0;i<arrCookie.length;i++){
-                var arr=arrCookie[i].split("=");
-                if("aad401_auc"==arr[0]){
-                    aad401 = arr[1];
-                    break;
-                }
-
-            }
-            if(document.getElementById("conn" + id).innerText == "收藏")
-            {
-                addConn(id, aad401);
-            }
-            else
-            {
-                delConn(id, aad401);
-            }
-
+            addConn(aad201);
         }
         else
         {
-            alert("请先登录！");
-            location.reload();
+            delConn(aad201);
         }
     }
 
-    function addConn(id, aad401)
-    {
-        var data = {aad201: id, aad401: aad401};
+    function addConn(aad201) {
+        var data = {aad201: aad201};
         $.ajax({
-            url : 'addAucConn',
-            type : 'GET',
-            contentType : 'application/json',
-            dataType : 'json',
-            data : data,
-            success : function() {
-                //alert("收藏成功！");
-                document.getElementById("conn" + id).innerText = "已收藏";
+            url: 'addAucConn',
+            type: 'GET',
+            data: data,
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function () {
+                document.getElementById("conn" + aad201).innerText = "已收藏";
             },
             error: function () {
                 alert("收藏失败！");
+                location.reload();
             }
         });
     }
 
-    function delConn(id, aad401)
-    {
-        var data = {aad201: id, aad401: aad401};
+    function delConn(aad201) {
+        var data = {aad201: aad201};
         $.ajax({
-            url : 'delAucConn',
-            type : 'GET',
-            contentType : 'application/json',
-            dataType : 'json',
-            data : data,
-            success : function() {
+            url: 'delAucConn',
+            type: 'GET',
+            data: data,
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function () {
                 alert("取消成功！");
-                document.getElementById("conn" + id).innerText = "收藏";
+                document.getElementById("conn" + aad201).innerText = "收藏";
             },
             error: function () {
                 alert("取消失败！");
+                location.reload();
             }
         });
     }

@@ -23,21 +23,17 @@
 
     <script>
         function logout() {
-            if(confirm("确认退出登录?"))
-            {
+            if (confirm("确认退出登录?")) {
                 $.ajax({
                     url: "/logout.html",
                     type: "post",
                     success: function (data) {
-                        if(data==true)
-                        {
-                            alert("成功退出登录!");
-                            window.location.replace("/index.html");
-                        }
-                        else
-                        {
+                        if (data == true) {
+                            alert("成功退出登录!")
+                            window.location.replace("/index.html")
+                        } else {
                             alert("您已退出登录")
-                            window.location.replace("/index.html");
+                            window.location.replace("/index.html")
                         }
                     }
                 })
@@ -70,22 +66,22 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown" id="conn">
+                <li th:if="${isLogin}" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">收藏夹<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="/ad01/forklist">收藏的悬赏</a>
+                            <a href="#">收藏的悬赏</a>
                         </li>
                         <li>
-                            <a href="auctionConn.html">收藏的拍卖</a>
+                            <a href="auctionConn.html?pageNum=1">收藏的拍卖</a>
                         </li>
                     </ul>
                 </li>
-                <li id="cart">
+                <li th:if="${isLogin}">
                     <a href="cart.html">购物车</a>
                 </li>
-                <li class="dropdown" id="seller">
+                <li th:if="${isLogin}" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">卖家中心<span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -103,10 +99,10 @@
                 <li>
                     <a href="#">联系客服</a>
                 </li>
-                <li id="login">
+                <li th:if="${!isLogin}">
                     <a class="btn" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">登录</a>
                 </li>
-                <li class="dropdown" id="my">
+                <li th:if="${isLogin}" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">我的<span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -117,7 +113,7 @@
                             <a href="#">我的悬赏</a>
                         </li>
                         <li>
-                            <a href="#">我的拍卖</a>
+                            <a href="myAuction.html">我的拍卖</a>
                         </li>
                         <li>
                             <a href="#">购买记录</a>
@@ -140,20 +136,22 @@
         <div class="modal-dialog login animated">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Login with</h4>
-                </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
+                    </button>
+                    <h4 class="modal-title">Login with</h4></div>
                 <div class="modal-body">
                     <div class="box">
                         <div class="content">
 
                             <div class="error"></div>
                             <div class="form loginBox">
-                                <form method="post" action="#" accept-charset="UTF-8">
-                                    <input class="form-control" type="text" placeholder="账号" name="email">
-                                    <input class="form-control" type="password" placeholder="密码" name="password">
-                                    <input class="btn btn-default btn-login" type="button" value="登录"
-                                           onclick="loginAjax()">
+                                <form method="post" action="#" accept-charset="UTF-8"><input class="form-control"
+                                                                                             type="text"
+                                                                                             placeholder="账号"
+                                                                                             name="email"><input
+                                        class="form-control" type="password" placeholder="密码" name="password"><input
+                                        class="btn btn-default btn-login" type="button" value="登录"
+                                        onclick="loginAjax()">
                                 </form>
                             </div>
                         </div>
@@ -161,19 +159,21 @@
                     <div class="box">
                         <div class="content registerBox" style="display:none;">
                             <div class="form">
-                                <form method="post" html="{:multipart=>true}" data-remote="true" action="/user/login"
-                                      accept-charset="UTF-8">
-                                    <input class="form-control" type="text" placeholder="用户名" name="">
-                                    <input class="form-control" type="password" placeholder="密码" name="">
-                                    <input class="form-control" type="password" placeholder="确认密码" name="">
-                                    <input class="form-control" type="text" placeholder="手机号" name="">
+                                <form method="post" action="/register"
+                                      accept-charset="UTF-8" id="register_form">
+                                    <input class="form-control" type="text" placeholder="用户名" name="username">
+                                    <input class="form-control" type="password" placeholder="密码" name="pwd">
+                                    <input class="form-control" type="password" placeholder="确认密码" name="pwd2">
+                                    <input class="form-control" type="text" placeholder="手机号" id="mobile" name="number">
                                     <div class="col-lg-6">
-                                        <input class="form-control" type="text" placeholder="验证码" name="">
+                                        <input class="form-control" type="text" placeholder="验证码" name="code">
                                     </div>
                                     <div class="col-lg-6">
-                                        <input class="btn btn-default btn-register" type="button" value="获取验证码" name="">
+                                        <input class="btn btn-default btn-register" type="button"
+                                               value="获取验证码" name="smsBtn" onclick="sendSms()">
                                     </div>
-                                    <input class="btn btn-default btn-register" type="submit" value="确认注册"
+                                    <input class="btn btn-default btn-register" type="button" value="确认注册"
+                                           onclick="register()"
                                            name="commit">
                                 </form>
                             </div>
@@ -181,13 +181,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <div class="forgot login-footer">
-							<span>
-                                 <a href="javascript: showRegisterForm();">新账户注册</a>
-                            </span>
+                    <div class="forgot login-footer"><span><a href="javascript: showRegisterForm();">新账户注册</a></span>
                     </div>
-                    <div class="forgot register-footer" style="display:none">
-                        <span>已注册账号？</span>
+                    <div class="forgot register-footer" style="display:none"><span>已注册账号？</span>
                         <a href="javascript: showLoginForm();">登录</a>
                     </div>
                 </div>
@@ -195,37 +191,57 @@
         </div>
     </div>
 
-    <script src="/js/login-register.js"></script>
+
+    <script src="js/login-register.js"></script>
+    <script src="js/jquery.js"></script>
     <script>
-        function getCookie(cname)
-        {
-            var name = cname + "=";
-            var ca = document.cookie.split(';');
-            for(var i=0; i<ca.length; i++)
-            {
-                var c = ca[i].trim();
-                if (c.indexOf(name)==0) return c.substring(name.length,c.length);
-            }
-            return "";
+        function sendSms() {
+            var value = document.getElementById("mobile").value
+            $.ajax({
+                type: "post",
+                url: "/register/sms",
+                data: {"number": value},
+                success: function (result) {
+                    if (result.message === 'success') {
+                        alert("验证码已发送!")
+                    } else {
+                        alert("手机号已被注册")
+                    }
+                }
+            })
         }
 
-        window.onload = function ()
-        {
-            show();
-        }
-        function show()
-        {
-            if (getCookie("username")!="")
-            {
-                document.getElementById("login").className = "hidden";
+
+        function register() {
+            var pwd1 = document.getElementsByName("pwd")[0].value
+            var pwd2 = document.getElementsByName("pwd2")[0].value
+            if (pwd1 !== pwd2) {
+                alert("密码不一致!")
+                return false;
             }
-            else
-            {
-                document.getElementById("conn").className = "hidden";
-                document.getElementById("cart").className = "hidden";
-                document.getElementById("seller").className = "hidden";
-                document.getElementById("my").className = "hidden";
-            }
+            var username = document.getElementsByName("username")[0].value
+            var number = document.getElementsByName("number")[0].value
+            var code = document.getElementsByName("code")[0].value
+            $.ajax({
+                type: "post",
+                url: "/register",
+                data: {
+                    "username": username,
+                    "password": pwd1,
+                    "number": number,
+                    "code": code
+                },
+                success: function (result) {
+                    if (result.message === 'success') {
+                        alert("注册成功!");
+                        // window.location.reload();
+                    } else if (result.message === "name") {
+                        alert("账号重复!")
+                    } else if (result.message === "code") {
+                        alert("验证码错误!")
+                    }
+                }
+            })
         }
     </script>
 </nav>
