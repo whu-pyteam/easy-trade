@@ -51,12 +51,12 @@ public class Ad02Service
 
     /**
      * 依据拍卖物品流水号查看拍卖物品
-     * @param id
+     * @param aad201
      * @return
      */
-    public Ad02 findById(int id)
+    public Ad02 findById(int aad201)
     {
-        return ad02Mapper.selectByPrimaryKey(id);
+        return ad02Mapper.selectByPrimaryKey(aad201);
     }
 
     /**
@@ -69,7 +69,7 @@ public class Ad02Service
         try
         {
             Ad02 ad02 = new Ad02();
-            ad02.setAab101(2);
+            ad02.setAab101(dto.getAab101());
             ad02.setAac201(1);
             ad02.setAad202(dto.getAad202());
             ad02.setAad203(qiniuUtil.uploadImg(dto.getAad203()));

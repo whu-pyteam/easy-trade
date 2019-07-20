@@ -38,7 +38,7 @@ public class Ac01Service
      * @return
      * @throws Exception
      */
-    public List<Ac01> selectById() throws Exception
+    public List<Ac01> selectById()
     {
         Ac01Example ac01Example=new Ac01Example();
         Ac01Example.Criteria criteria = ac01Example.createCriteria();
