@@ -37,8 +37,11 @@
                         <p th:case="5">卖家已取消竞拍</p>
                     </td>
                     <td>
-                        <a class="btn btn-primary" th:onclick="delPart([[${apart.aad601}]])">
+                        <a th:if="${apart.aad603 != '3'}" class="btn btn-primary" th:onclick="delPart([[${apart.aad601}]])">
                             取消竞拍
+                        </a>
+                        <a th:if="${apart.aad603 == '3'}" class="btn btn-primary" href="#">
+                            生成订单
                         </a>
                         <a th:if="${apart.aad603 == '1'}" th:href="'auctionShow.html?aad201=' + ${apart.aad201}">
                             <button class="btn btn-info">查看</button>

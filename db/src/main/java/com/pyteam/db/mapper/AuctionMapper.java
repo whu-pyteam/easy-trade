@@ -35,7 +35,7 @@ public interface AuctionMapper
             "    from ad06 n\n" +
             "    left join ad02 m\n" +
             "    on m.aad201 = n.aad201\n" +
-            "    where n.aab101 = #{aab101} and n.aad603 != '6'")
+            "    where n.aab101 = #{aab101} and n.aad603 != '4' and n.aad603 != '6'")
     List<AuctionPart> selectAd06LeftAd02(@Param("aab101") int aab101);
 
 }
