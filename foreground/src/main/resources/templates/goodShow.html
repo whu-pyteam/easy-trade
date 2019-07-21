@@ -28,9 +28,10 @@
             padding-top: 20px;
         }
 
-        .ssl {
-            padding-top: 20px;
-            padding-bottom: 20px;
+
+        img{
+            width: 300px;
+            height: 300px;
         }
     </style>
 </head>
@@ -39,98 +40,311 @@
 
 <div th:replace="header::header(${type})"></div>
 
-<div class="ssl">
+
+
+<div class="zt">
     <div class="container">
-        <div class="col-lg-4">
-            <div class="logo pull-left">
-                <a href="index.html"><img src="images/logo.jpg" height="45" width="260" alt=""/></a>
+        <div class="row" id="goodInfo" style="border: 1px solid #E8E8E8; padding-top: 15px; padding-bottom: 15px;">
+            <div class="col-lg-5">
+                <img th:src="${ac01.aac106}"
+                     style="height: 300px; width: 300px; overflow: hidden;" alt="啊咧，图片消失了"/>
+            </div>
+            <div class="col-lg-7">
+                <div class="caption">
+                    <h3 th:text="${ac01.aac102}"></h3>
+                    <a th:href="@{sellerInfo.html(id=${ac01.aab101})}"><p th:text="${aab103}"></p></a>
+                    <p th:text="'商品价格： '+${ac01.aac105}"></p>
+                    <p th:text="'商品分类： '+${aac202}"></p>
+                    <p th:text="'商品详情： '+${ac01.aac103}"></p>
+
+                    <div id="otherPerson" style="display: none">
+                        <a href="#" class="btn btn-primary" role="button" th:onclick="|javascript:addToCart('${ac01.aac101}')|">加入购物车</a>
+                    </div>
+
+
+                    <div id="buyer" style="display: none">
+                        <a href="#" id="receiveGood" class="btn btn-success" role="button" th:onclick="|javascript:receiveGood('${ac01.aac101}')|">确认收货</a>
+                    </div>
+
+                    <div id="sellman" style="display: none">
+                        <a href="#" id="sentGood" class="btn btn-primary" role="button" style="display: none" th:onclick="|javascript:sendGood('${ac01.aac101}')|">确认发货</a>
+                        <a href="#" id="deleteGood" class="btn btn-danger" role="button" style="display: none" th:onclick="|javascript:deleteGood('${ac01.aac101}')|">删除商品</a>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-sm-8">
-            <form class="navbar-form navbar-right" role="search">
-                <div class="form-group"><input type="text" class="form-control" placeholder="Search">
-                    <button type="submit" class="btn btn-default">搜索</button>
+        <div class="row" id="comment" style="display:none;">
+
+            <p id="commentBuyer"></p>
+            <p id="commentSeller"></p>
+            <form id="commentForm" onsubmit="return false" action="#" method="post" style="display: none;">
+                <div>
+                    <label>评论：</label>
+                    <input name="aad303" class="form-control" type="text">
+                </div>
+                <div>
+                    <label>给几颗星：</label>
+                    <input name="aad304" type="radio" value="5" checked>5
+                    <input name="aad304" type="radio" value="4">4
+                    <input name="aad304" type="radio" value="3">3
+                    <input name="aad304" type="radio" value="2">2
+                    <input name="aad304" type="radio" value="1">1
+                </div>
+                <div>
+                    <input type="submit" class="btn btn-success" onclick="submitComment()">
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-<div class="zt">
-    <div class="container">
-        <div class="row" style="border: 1px solid #E8E8E8; padding-top: 15px; padding-bottom: 15px;">
-            <div class="col-lg-5">
-                <img th:src="${ac01.aac106}"
-                     style="height: 400px; width: 100%; overflow: hidden;" alt=""/>
-            </div>
-            <div class="col-lg-7">
-                <div class="caption">
-                    <h3 th:text="${ac01.aac102}"></h3>
-                    <p th:text="${ac01.aac103}"></p>
-                    <a th:href="@{sellerInfo.html(id=${ac01.aab101})}">卖家：<p th:text="${ac01.aab101}"></p></a>
-                    <p>
-                        <a href="#" class="btn btn-primary" role="button">加入购物车</a>
-                        <a href="#" class="btn btn-default" role="button">购买</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<p id="assist" th:value="${ac01.aac101}" style="display: none">
 
-
-<div class="modal fade login" id="loginModal">
-    <div class="modal-dialog login animated">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
-                </button>
-                <h4 class="modal-title">Login with</h4></div>
-            <div class="modal-body">
-                <div class="box">
-                    <div class="content">
-                        <div class="error"></div>
-                        <div class="form loginBox">
-                            <form method="post" action="#" accept-charset="UTF-8"><input class="form-control"
-                                                                                         type="text" placeholder="账号"
-                                                                                         name="email"><input
-                                    class="form-control" type="password" placeholder="密码" name="password"><input
-                                    class="btn btn-default btn-login" type="button" value="登录" onclick="loginAjax()">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="content registerBox" style="display:none;">
-                        <div class="form">
-                            <form method="post" html="{:multipart=>true}" data-remote="true" action="#"
-                                  accept-charset="UTF-8"><input class="form-control" type="text" placeholder="用户名"
-                                                                name=""><input class="form-control" type="password"
-                                                                               placeholder="密码" name=""><input
-                                    class="form-control" type="password" placeholder="确认密码" name=""><input
-                                    class="form-control" type="text" placeholder="手机号" name="">
-                                <div class="col-lg-6"><input class="form-control" type="text" placeholder="验证码" name="">
-                                </div>
-                                <div class="col-lg-6"><input class="btn btn-default btn-register" type="button"
-                                                             value="获取验证码" name=""></div>
-                                <input class="btn btn-default btn-register" type="submit" value="确认注册" name="commit">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div class="forgot login-footer"><span><a href="javascript: showRegisterForm();">新账户注册</a></span></div>
-                <div class="forgot register-footer" style="display:none"><span>已注册账号？</span>
-                    <a href="javascript: showLoginForm();">登录</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/login-register.js"></script>
+<script>
+    var orderState;
+    var username;
+    var sellerId;
+    var buyerId;
+    var buyerhasComment;
+    var sellerhasComment;
+    var buyerComment;
+    var sellerComment;
+    var buyerStar;
+    var sellerStar;
+
+    function getCookie(cname)
+    {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0; i<ca.length; i++)
+        {
+            var c = ca[i].trim();
+            if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+        }
+        return "";
+    }
+
+    function submitComment() {
+        $.ajax({
+            url:"submitComment.html",
+            type: "post",
+            data:{
+                "aad303":$('input[name="aad303"]').val(),
+                "aad304":$('input[name="aad304"]:checked').val(),
+                "aab101":username,
+                "aac101":$("#assist").attr("value")
+            },
+            success:function (data) {
+                if(username==buyerId)
+                {
+                    $("#buyerHasComment").attr("value","1");
+                }
+                if(username==sellerId)
+                {
+                    $("#sellerHasComment").attr("value","1");
+                }
+
+                window.location.reload();
+            }
+        })
+    }
+
+    function deleteGood(productId) {
+        $.post(
+            "deleteGood.html",
+            {id: productId},
+            function (data) {
+                if (data == true) {
+                    window.location.replace("index.html");
+                }
+                if (data == false) {
+                    alert("删除失败")
+                    window.location.replace("index.html");
+                }
+            }
+        );
+    }
+
+    function sendGood(productId)
+    {
+        if(orderState=="1")
+        {
+            alert("已发货")
+        }
+        if(orderState=="2")
+        {
+            alert("买家已收货")
+        }
+        if(orderState=="0")
+        {
+            $.post(
+                "sendGood.html",
+                {id: productId},
+                function (data) {
+                    if (data == true) {
+                        alert("成功发货")
+
+                        orderState="1";
+                        window.location.reload();
+                    }
+                    if (data == false) {
+                        alert("操作失败")
+                        window.location.reload();
+                    }
+                }
+            );
+        }
+    }
+
+    function receiveGood(productId)
+    {
+        if(orderState=="0")
+        {
+            alert("卖家未发货")
+        }
+        if(orderState=="2")
+        {
+            alert("已收货")
+        }
+        if(orderState=="1")
+        {
+            $.post(
+                "receiveGood.html",
+                {id: productId},
+                function (data) {
+                    if (data == true) {
+                        alert("成功收货");
+
+                        orderState = "2";
+                        window.location.reload();
+                    }
+                    if (data == false) {
+                        alert("操作失败")
+                        window.location.reload();
+                    }
+                }
+            );
+        }
+    }
+
+
+    function addToCart(productId) {
+        $.post(
+            "addToCart.html",
+            {id: productId},
+            function (data) {
+                if (data == 0) {
+                    window.location.replace("cart.html");
+                }
+                if (data == 1) {
+                    alert("成功加入购物车");
+                }
+                if (data == 2) {
+                    alert("没有未用户创建购物车");
+                }
+                if (data == 3) {
+                    alert("购物车已经存在该商品");
+                }
+            }
+        );
+    }
+
+    window.onload=function () {
+
+        username = getCookie("username");
+        var productId = $("#assist").attr("value");
+        if(username=="")
+        {
+            username="-1";
+        }
+        console.log(username+" "+productId);
+        $.ajax({
+            url: "sellerAndBuyer.html",
+            type: "post",
+            data: {"productId":productId},
+            async: false,
+            success: function (data) {
+                console.log(data);
+                var ids = data.split("&");
+                sellerId=ids[0];
+                buyerId=ids[1];
+                orderState=ids[2];
+                buyerhasComment=ids[3];
+                sellerhasComment=ids[4];
+                buyerComment=ids[5];
+                sellerComment=ids[6];
+                buyerStar=ids[7];
+                sellerStar=ids[8];
+
+                if(username == sellerId)
+                {
+                    $("#sellman").css("display","block");
+
+                    if(orderState == "")
+                    {
+                        $("#deleteGood").css("display","inline-block");
+                    }
+                    else{
+                        $("#sentGood").css("display","inline-block");
+                        if(orderState == "2")
+                        {
+                            $("#comment").css("display","block");
+                            if(sellerhasComment == "0") {
+                                $("#commentForm").css("display", "block");
+                            }
+                            if(sellerhasComment == "1") {
+                                $("#commentForm").css("display", "none");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if(username == buyerId)
+                    {
+                        $("#buyer").css("display","block");
+                        if(orderState == "2")
+                        {
+                            $("#comment").css("display","block");
+                            console.log("here111")
+                            if(buyerhasComment == "0") {
+                                $("#commentForm").css("display", "block");
+                            }
+                            if(buyerhasComment == "1") {
+                                console.log("here222")
+                                $("#commentForm").css("display", "none");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if(buyerId=="") {
+                            $("#otherPerson").css("display", "block");
+                        }
+                        if(orderState == "2")
+                        {
+                            $("#comment").css("display","block");
+                        }
+                    }
+                }
+            }
+        })
+        if(buyerhasComment==1)
+        {
+            $("#commentBuyer").append("买家说："+buyerComment+" 给出了"+buyerStar+"星评价");
+        }
+        if(sellerhasComment==1)
+        {
+            $("#commentSeller").append("卖家说："+sellerComment+" 给出了"+sellerStar+"星评价");
+        }
+
+    }
+
+</script>
+
 </body>
 
 </html>

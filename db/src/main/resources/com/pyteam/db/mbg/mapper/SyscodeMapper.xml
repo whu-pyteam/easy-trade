@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pyteam.db.mbg.mapper.SyscodeMapper">
+  <resultMap id="BaseResultMap" type="com.pyteam.db.mbg.entity.Syscode">
+    <id column="syscodeid" jdbcType="INTEGER" property="syscodeid" />
+    <result column="idname" jdbcType="CHAR" property="idname" />
+    <result column="parentid" jdbcType="CHAR" property="parentid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    syscodeid, idname, parentid
+  </sql>
+  <select id="selectByExample" parameterType="com.pyteam.db.mbg.entity.SyscodeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from syscode
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from syscode
+    where syscodeid = #{syscodeid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from syscode
+    where syscodeid = #{syscodeid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pyteam.db.mbg.entity.SyscodeExample">
+    delete from syscode
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pyteam.db.mbg.entity.Syscode">
+    <selectKey keyProperty="syscodeid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into syscode (idname, parentid)
+    values (#{idname,jdbcType=CHAR}, #{parentid,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pyteam.db.mbg.entity.Syscode">
+    <selectKey keyProperty="syscodeid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into syscode
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idname != null">
+        idname,
+      </if>
+      <if test="parentid != null">
+        parentid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idname != null">
+        #{idname,jdbcType=CHAR},
+      </if>
+      <if test="parentid != null">
+        #{parentid,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pyteam.db.mbg.entity.SyscodeExample" resultType="java.lang.Long">
+    select count(*) from syscode
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update syscode
+    <set>
+      <if test="record.syscodeid != null">
+        syscodeid = #{record.syscodeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.idname != null">
+        idname = #{record.idname,jdbcType=CHAR},
+      </if>
+      <if test="record.parentid != null">
+        parentid = #{record.parentid,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update syscode
+    set syscodeid = #{record.syscodeid,jdbcType=INTEGER},
+      idname = #{record.idname,jdbcType=CHAR},
+      parentid = #{record.parentid,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pyteam.db.mbg.entity.Syscode">
+    update syscode
+    <set>
+      <if test="idname != null">
+        idname = #{idname,jdbcType=CHAR},
+      </if>
+      <if test="parentid != null">
+        parentid = #{parentid,jdbcType=CHAR},
+      </if>
+    </set>
+    where syscodeid = #{syscodeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pyteam.db.mbg.entity.Syscode">
+    update syscode
+    set idname = #{idname,jdbcType=CHAR},
+      parentid = #{parentid,jdbcType=CHAR}
+    where syscodeid = #{syscodeid,jdbcType=INTEGER}
+  </update>
+</mapper>

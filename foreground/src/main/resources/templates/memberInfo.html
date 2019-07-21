@@ -36,28 +36,92 @@
             padding-top: 20px;
             padding-bottom: 20px;
         }
+         #preview, .img, img {
+             width: 300px;
+             height: 300px;
+         }
+
     </style>
+
 </head>
 
 <body>
 
 <div th:replace="header :: header(1)"></div>
-<form action="/memberInfoSubmit.html" method="post">
-    昵称
-    <input type="text" name="aab103" th:value="${aab103}">
-    性别
-    <input type="text" name="aab104" th:value="${aab104}">
-    生日
-    <input type="date" name="aab105" th:value="${aab105}">
-    学校
-    <input type="text" name="aab106" th:value="${aab106}">
-    头像
-    <input type="text" name="aab107" th:value="${aab107}">
-    个性签名
-    <input type="text" name="aab111" th:value="${aab111}">
-    <input type="submit" th:value="提交">
+<form enctype="multipart/form-data" id="tf" onsubmit="return false">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-3">
+            <div id="preview"><img id="previewSrc" class="img-thumbnail" th:src="${aab107}"></div>
+            头像:<input type="file" name="aab107" onchange="preview(this)"><br/>
+        </div>
+        <div class="col-lg-5">
+            <div class="form-group">
+                昵称<input type="text" class="form-control" name="aab103" th:value="${aab103}">
+            </div>
+            <div class="form-group">
+                性别
+                <input type="radio"  name="aab104" value="1" th:checked="${aab104 eq '1' }">男
+                <input type="radio"  name="aab104" value="2" th:checked="${aab104 eq '2' }">女
+                <input type="radio"  name="aab104" value="3" th:checked="${aab104 eq '3' }">不确定
+            </div>
+            <div class="form-group">
+                生日<input type="date"  class="form-control" name="aab105" th:value="${aab105}">
+            </div>
+            <div class="form-group">
+                学校<input list="schoolType" class="form-control" name="aab106" th:value="${aab106}">
+                <datalist id="schoolType">
+                    <option value="武汉大学">
+                    <option value="华中科技大学">
+                </datalist>
+            </div>
+            <div class="form-group">
+                个性签名<input type="text" class="form-control" name="aab111" th:value="${aab111}">
+            </div>
+            <div class="form-group">
+                <input type="text" value="0" name="hasEdit" style="display: none">
+                <input type="submit" class="btn btn-default" th:value="修改" onclick="test()">
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
 </form>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script>
+    function test(){
+        var form = new FormData(document.getElementById("tf"));
+
+        $.ajax({
+            url:"memberInfoSubmit.html",
+            type:"post",
+            data:form,
+            processData:false,
+            contentType:false,
+            success:function(data){
+                $('input[name="hasEdit"]').attr("value","0");
+                alert("修改成功")
+            },
+            error:function(e){
+                alert("请重新提交！");
+            }
+        });
+    }
+
+    function preview(file) {
+        $('input[name="hasEdit"]').attr("value","1");
+        var prevDiv = document.getElementById('preview');
+        if (file.files && file.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(evt) {
+                prevDiv.innerHTML = '<img src="' + evt.target.result + '" class="img-thumbnail" />';
+            }
+            reader.readAsDataURL(file.files[0]);
+        } else {
+            prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';
+        }
+    }
+
+</script>
 </body>
 </html>

@@ -33,7 +33,7 @@
                 </div>
                 <div class="form-group">
                     <label for="kv-explorer">物品图片：</label>
-                    <input id="kv-explorer" type="file" name="aac106" multiple required>
+                    <input id="kv-explorer" type="file" name="aac106" required>
                 </div>
                 <div class="form-group">
                     <label for="02">物品介绍：</label>
@@ -41,7 +41,25 @@
                 </div>
                 <div class="form-group">
                     <label for="03">物品类别：(填ac02存在的商品类别id)</label>
-                    <input type="number" class="form-control" step="1" name="aac201" id="03" required>
+                    <!--<input type="number" class="form-control" step="1" name="aac201" id="03" required>-->
+
+                    <input list="goodType" class="form-control" id="03" name="aac202" required>
+                    <datalist id="goodType">
+                        <option value="图书">
+                        <option value="课本">
+                        <option value="手机">
+                        <option value="电脑">
+                        <option value="男装">
+                        <option value="女装">
+                        <option value="个护">
+                        <option value="化妆">
+                        <option value="食品">
+                        <option value="饮料">
+                        <option value="日常用品">
+                        <option value="寝室神器">
+                        <option value="票券">
+                        <option value="充值服务">
+                    </datalist>
                 </div>
                 <div class="form-group">
                     <label for="04">价格</label>

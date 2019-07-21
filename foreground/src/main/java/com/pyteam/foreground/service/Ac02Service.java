@@ -26,6 +26,12 @@ public class Ac02Service
         return ac02Mapper.insert(ac02) > 0;
     }
 
+    public String getName(Integer aac201)
+    {
+        return ac02Mapper.selectByPrimaryKey(aac201).getAac202();
+    }
+
+
     /**
      * 根据商品分类父id获取所有子id
      * @param aac203

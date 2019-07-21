@@ -1,7 +1,9 @@
 package com.pyteam.foreground.controller;
 
+import com.pyteam.db.mbg.entity.Ab01;
 import com.pyteam.db.mbg.entity.Ac01;
 import com.pyteam.foreground.dto.Ac01Dto;
+import com.pyteam.foreground.service.Ab01Service;
 import com.pyteam.foreground.service.Ac01Service;
 import com.pyteam.foreground.service.Ac02Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,8 @@ public class IndexController
     private Ac01Service ac01Service;
     @Autowired
     private Ac02Service ac02Service;
+    @Autowired
+    private Ab01Service ab01Service;
 
     /**
      * 返回主页
@@ -58,7 +62,14 @@ public class IndexController
     {
         try
         {
-            model.addAttribute("ac01", ac01Service.findById(id));
+            Ac01 ac01=ac01Service.findById(id);
+            model.addAttribute("ac01", ac01);
+
+            String name=ac02Service.getName(ac01.getAac201());
+
+            Ab01 ab01=ab01Service.getMemberInfo(ac01.getAab101());
+            model.addAttribute("aab103",ab01.getAab103());
+            model.addAttribute("aac202",name);
             model.addAttribute("type", 1);
             return "goodShow";
         }

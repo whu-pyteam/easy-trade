@@ -20,12 +20,7 @@
     <link href="css/login-register.css" rel="stylesheet">
 
     <style type="text/css">
-        #footer{
-            position: fixed;
-            bottom: 0;
-            height: 100px;
-            width: 100%;
-        }
+
         .orderDisplay{
             display: none;
             position: absolute;
@@ -38,11 +33,19 @@
 
 
 <div class="container">
-    <div class="row">
+    <div class="row" style="padding-top: 30px">
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
             <div class="row">
-                <input class="btn btn-default" id="mybtn" type="button" value="批量删除" onclick="patchDelete()">
+                <div class="col-lg-8" style="padding-left: 0px;">
+                    <input class="btn btn-default" id="mybtn" type="button" value="批量删除" onclick="patchDelete()">
+                </div>
+                <div class="col-lg-2">
+                    <label id="totalMoney" >0</label>
+                </div>
+                <div class="col-lg-2" style="float: right;padding-right: 0px">
+                    <input class="btn btn-default" id="buyBtn" type="button" value="购买" onclick="buy()" style="float: right">
+                </div>
             </div>
             <div class="row">
                 <table id="table"></table>
@@ -53,11 +56,11 @@
                 <form class="orderForm" id="orderForm" onsubmit="return false" action="#" method="post">
                     <div>
                         <label>收货人姓名</label>
-                        <input type="text" name="aac506" required>
+                        <input type="text" class="form-control" name="aac506" required>
                     </div>
                     <div>
                         <label>收货人电话</label>
-                        <input type="text" name="aac507" id="aac507" required>
+                        <input type="text" class="form-control" name="aac507" id="aac507" required>
                     </div>
                     <div>
                         <label>交易方式</label>
@@ -66,26 +69,22 @@
                     </div>
                     <div>
                         <label>交易地址</label>
-                        <input type="text" name="aac509" id="aac509" required>
+                        <input type="text" class="form-control" name="aac509" id="aac509" required>
                     </div>
                     <div>
                         <label>总金额</label>
-                        <input type="text" name="aac505" id="aac505" readonly>
+                        <input type="text" class="form-control" name="aac505" id="aac505" readonly>
                     </div>
                     <div>
                         <label>备注</label>
-                        <input type="text" name="aac510" id="aac510">
+                        <input type="text" class="form-control" name="aac510" id="aac510">
                     </div>
                     <div>
-                        <input type="submit" value="提交订单" onclick="submitOrder()">
+                        <input type="submit" class="btn btn-default"  value="提交订单" onclick="submitOrder()">
                     </div>
                 </form>
             </div>
         </div>
-    </div>
-    <div id="footer">
-        <p id="totalMoney">0</p>
-        <input class="btn btn-default" id="buyBtn" type="button" value="购买" onclick="buy()">
     </div>
 </div>
 
@@ -102,6 +101,7 @@
             cache: false,
             height: getHeight(),
             pagination: true,  //表格底部显示分页条
+            smartDisplay:false,
             sidePagination: "server",
             paginationDetailHAlign:"right",
             escape:false, //启动转义字符
@@ -263,7 +263,7 @@
 
         console.log(aac101s)
         var data={
-            "aac504":$('input[name="aac504"]').val(),
+            "aac504":$('input[name="aac504"]:checked').val(),
             "aac505":$('input[name="aac505"]').val(),
             "aac506":$('input[name="aac506"]').val(),
             "aac507":$('input[name="aac507"]').val(),

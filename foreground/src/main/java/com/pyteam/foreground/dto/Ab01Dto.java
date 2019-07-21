@@ -1,6 +1,7 @@
 package com.pyteam.foreground.dto;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,17 +29,18 @@ public class Ab01Dto
     /**
      * 院校名称
      */
-    private Integer aab106;
+    private String aab106;
 
     /**
      * 头像
      */
-    private String aab107;
+    private MultipartFile aab107;
 
     /**
      * 个性签名
      */
     private String aab111;
 
+    private String hasEdit;
 
 }

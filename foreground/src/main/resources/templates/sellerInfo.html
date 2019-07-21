@@ -36,33 +36,66 @@
                     padding-top: 20px;
                     padding-bottom: 20px;
                 }
+
+                img {
+                    width: 200px;
+                    height: 200px;
+                }
             </style>
         </head>
 
 <body>
 
 <div th:replace="header :: header(1)"></div>
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+        <div id="info">
+            <h1>TA的个人信息</h1>
+            <div class="col-lg-3">
+                <img th:src="${aab107}">
+            </div>
+            <div class="col-lg-5">
+                <p th:text="'用户名: '+ ${aab102}"></p>
 
+                <p th:text="'昵称: '+ ${aab103}"></p>
 
-    <p th:text="'用户名: '+ ${aab102}">
+                <p th:text="'性别: '+ ${aab104}"></p>
 
-    <p th:text="'昵称: '+ ${aab103}">
+                <p th:text="'生日: '+ ${aab105}"></p>
 
-    <p th:text="'性别: '+ ${aab104}">
+                <p th:text="'学校: '+ ${aab106}"></p>
 
-    <p th:text="'生日: '+ ${aab105}">
+                <p th:text="'信誉积分: '+ ${aab109}"></p>
 
-    <p th:text="'学校: '+ ${aab106}">
-
-    <p th:text="'头像: '+ ${aab107}">
-
-    <p th:text="'信誉积分: '+ ${aab109}">
-
-    <p th:text="'个性签名: '+ ${aab111}">
-
+                <p th:text="'个性签名: '+ ${aab111}"></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+        <div id="good">
+            <h1>TA发布的商品</h1>
+            <div class="col-lg-3 col-md-4 col-sm-6" th:each="ac01:${ac01List}">
+                <div class="thumbnail">
+                    <a th:href="@{'goodShow.html?id=' + ${ac01.aac101}}">
+                        <img th:src="${ac01.aac106}" style="height: 150px; width: 100%; overflow: hidden"
+                             alt="商品图片">
+                    </a>
+                    <div class="caption">
+                        <h3 th:text="${ac01.aac102}"></h3>
+                        <p th:text="${ac01.aac103}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2"></div>
+</div>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 </body>
-</html></title>
-</head>
-<body>
+</html>

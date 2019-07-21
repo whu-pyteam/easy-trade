@@ -2,15 +2,20 @@ package com.pyteam.foreground.service;
 
 import com.pyteam.db.mbg.entity.*;
 import com.pyteam.db.mbg.mapper.Ac01Mapper;
+import com.pyteam.db.mbg.mapper.Ac02Mapper;
+import com.pyteam.db.mbg.mapper.Ac04Mapper;
 import com.pyteam.db.mbg.mapper.Ae06Mapper;
 import com.pyteam.foreground.dto.Ac01Dto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.pyteam.db.utils.QiniuUtil;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -20,7 +25,10 @@ public class Ac01Service
     private Ac01Mapper ac01Mapper;
     @Autowired
     private Ae06Mapper ae06Mapper;
-
+    @Autowired
+    private Ac04Mapper ac04Mapper;
+    @Autowired
+    private Ac02Mapper ac02Mapper;
     @Autowired
     private QiniuUtil qiniuUtil;
 
@@ -64,13 +72,16 @@ public class Ac01Service
         Ae06Example ae06Example=new Ae06Example();
         List<Ae06> ae06List=ae06Mapper.selectByExample(ae06Example);
 
-        for(int i=0;i<ac01List.size();i++)
+
+        Iterator<Ac01> ac01Iterator=ac01List.iterator();
+        while (ac01Iterator.hasNext())
         {
-            for(int j=0;j<ae06List.size();j++)
+            Ac01 tempAc01=ac01Iterator.next();
+            for(int i=0;i<ae06List.size();i++)
             {
-                if(ac01List.get(i).getAac101().equals(ae06List.get(j).getAac101()))
+                if(tempAc01.getAac101().equals(ae06List.get(i).getAac101()))
                 {
-                    ac01List.remove(i);
+                    ac01Iterator.remove();
                 }
             }
         }
@@ -78,6 +89,29 @@ public class Ac01Service
     }
 
 
+    /**
+     * 删除商品
+     * @param aac101
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public boolean deleteGood(Integer aac101)
+    {
+        try
+        {
+            Ac04Example ac04Example = new Ac04Example();
+            Ac04Example.Criteria criteria = ac04Example.createCriteria();
+            criteria.andAac101EqualTo(aac101);
+            ac04Mapper.deleteByExample(ac04Example);
+
+            ac01Mapper.deleteByPrimaryKey(aac101);
+            return true;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 
     /**
@@ -106,24 +140,30 @@ public class Ac01Service
     {
         Ac01 ac01 = new Ac01();
 
-        System.out.println(ac01Dto.getAab101());
         ac01.setAab101(ac01Dto.getAab101());
 
-        System.out.println(ac01Dto.getAac201());
-        ac01.setAac201(ac01Dto.getAac201());
+        String aac202=ac01Dto.getAac202();
+        Ac02Example ac02Example=new Ac02Example();
+        Ac02Example.Criteria criteria=ac02Example.createCriteria();
+        criteria.andAac202EqualTo(aac202);
+        List<Ac02> ac02List=ac02Mapper.selectByExample(ac02Example);
+        if(ac02List.size()==1)
+        {
+            ac01.setAac201(ac02List.get(0).getAac201());
+        }
+        else
+        {
+            ac01.setAac201(1);
+        }
 
-        System.out.println(ac01Dto.getAac102());
         ac01.setAac102(ac01Dto.getAac102());
 
-        System.out.println(ac01Dto.getAac103());
         ac01.setAac103(ac01Dto.getAac103());
 
         ac01.setAac104("0");
 
-        System.out.println(ac01Dto.getAac105());
         ac01.setAac105(ac01Dto.getAac105());
 
-        System.out.println(ac01Dto.getAac106());
         ac01.setAac106(qiniuUtil.uploadImg(ac01Dto.getAac106()));
 
         ac01.setAac107(new Date());
@@ -157,4 +197,5 @@ public class Ac01Service
         criteria.andAab101EqualTo(aab101);
         return ac01Mapper.selectByExample(ac01Example);
     }
+
 }
