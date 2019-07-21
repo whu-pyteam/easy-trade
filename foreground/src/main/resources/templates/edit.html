@@ -122,6 +122,7 @@
                 <select id="oselect" onchange="func()">
                     <option th:each="item:${ad01.ac02List}" th:text="${item.aac202}" th:value="${item.aac202}" name="aac202" ></option>
                 </select>
+                <span class="label label-info" th:each="item:${ad01.ac02List}" th:text="${item.aac202}" th:value="${item.aac202}" onclick="func()"></span>
             </form>
             <br/>
             <br/>

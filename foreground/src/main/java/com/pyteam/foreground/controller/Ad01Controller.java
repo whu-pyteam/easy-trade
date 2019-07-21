@@ -101,10 +101,17 @@ public class Ad01Controller
     }
 
     @GetMapping("/selectbybq")
-    public String sel(Model m,@RequestParam("aac202")String aac202)
+    public String sel(Model m,@RequestParam("aac202")String aac202,HttpServletResponse response, HttpServletRequest request)
     {
-            m.addAttribute("ad01",ae09Service.sel(aac202));
-            return"select";
+        isLogin = isLogin(request, response);
+        if(isLogin)
+        {
+            m.addAttribute("isLogin", isLogin);
+            m.addAttribute("ad01", ae09Service.sel(aac202));
+            return "select";
+        }
+        m.addAttribute("isLogin",isLogin);
+        return "select";
     }
 
     @PostMapping(value="/select")
@@ -112,7 +119,6 @@ public class Ad01Controller
     {
         System.out.println(question);
         m.addAttribute("ad01",ad01Service.moreQuery(question));
-        System.out.println(ad01Service.moreQuery(question).toString());
         return "select";
     }
     @GetMapping("/select")
