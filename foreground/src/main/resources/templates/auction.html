@@ -184,7 +184,7 @@
 
                 <div class="col-lg-3 col-md-4 col-sm-6" th:each="ad02_conn:${ad02_connList}">
                     <div class="thumbnail">
-                        <a th:href="@{'auctionShow.html?id=' + ${ad02_conn.aad201}}">
+                        <a th:href="@{'auctionShow.html?aad201=' + ${ad02_conn.aad201}}">
                             <img th:src="${ad02_conn.aad203}" style="height: 150px; width: 100%; overflow: hidden"
                                  alt="拍卖物品图片">
                         </a>
@@ -197,7 +197,7 @@
                                     <span th:if="${ad02_conn.aae501 != null}">已收藏</span>
                                 </a>
                                 <a th:case="false" class="btn btn-primary" onclick="openLoginModal();">收藏</a>
-                                <a th:href="@{'auctionShow.html?id=' + ${ad02_conn.aad201}}" class="btn btn-default" role="button">查看</a>
+                                <a th:href="@{'auctionShow.html?aad201=' + ${ad02_conn.aad201}}" class="btn btn-default" role="button">查看</a>
                             </p>
                         </div>
                     </div>

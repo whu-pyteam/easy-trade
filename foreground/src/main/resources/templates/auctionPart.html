@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>收藏的拍卖</title>
+    <title>参与的拍卖</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -19,24 +19,30 @@
                     <td>物品</td>
                     <td></td>
                     <td>当前最高价</td>
-                    <td>截止时间</td>
-                    <td>审核状态</td>
+                    <td>我的出价</td>
+                    <td>竞拍状态</td>
                     <td></td>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="ad02:${ad02List}">
-                    <td><img th:src="${ad02.aad203}" style="height: 100px; width: 100px; overflow: hidden"></td>
-                    <td><h3 th:text="${ad02.aad202}"></h3></td>
-                    <td><p th:text="${ad02.aad208}"></p></td>
-                    <td><p th:text="${#dates.format(ad02.aad211, 'yyyy年MM月dd日 HH:mm')}"></p></td>
-                    <td th:switch="${ad02.aad209}">
-                        <p th:case="0">未审核</p>
-                        <p th:case="1">已通过</p>
-                        <p th:case="2">未通过</p>
+                <tr th:each="apart:${apartList}">
+                    <td><img th:src="${apart.aad203}" style="height: 100px; width: 100px; overflow: hidden"></td>
+                    <td><h3 th:text="${apart.aad202}"></h3></td>
+                    <td><p th:text="${apart.aad208}"></p></td>
+                    <td><p th:text="${apart.aad602}"></p></td>
+                    <td th:switch="${apart.aad603}">
+                        <p th:case="1">正在竞拍</p>
+                        <p th:case="2">竞拍失败</p>
+                        <p th:case="3">竞拍成功</p>
+                        <p th:case="5">卖家已取消竞拍</p>
                     </td>
                     <td>
-                            <button class="btn btn-info" th:onclick="delMyAuc([[${ad02.aad201}]])">删除</button>
+                        <a class="btn btn-primary" th:onclick="delPart([[${apart.aad601}]])">
+                            取消竞拍
+                        </a>
+                        <a th:if="${apart.aad603 == '1'}" th:href="'auctionShow.html?aad201=' + ${apart.aad201}">
+                            <button class="btn btn-info">查看</button>
+                        </a>
                     </td>
                 </tr>
                 </tbody>
@@ -55,25 +61,25 @@
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script>
-    function delMyAuc(aad201)
+    function delPart(aad601)
     {
-        var data = {aad201: aad201};
+        var data = {aad601: aad601};
         $.ajax({
-            url: 'delMyAuc',
+            url: 'delPart',
             type: 'GET',
+            data: data,
             contentType: 'application/json',
             dataType: 'json',
-            data: data,
-            success: function () {
-                alert("删除成功！");
+            success: function ()
+            {
+                alert("取消成功！");
                 location.reload();
             },
             error: function () {
-                alert("删除失败！");
+                alert("取消失败！");
                 location.reload();
             }
         });
-
     }
 </script>
 </body>

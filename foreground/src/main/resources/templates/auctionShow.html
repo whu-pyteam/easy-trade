@@ -117,7 +117,10 @@
                     <input type="text" class="hidden" name="aad201" th:value="${ad02.aad201}">
                     <div th:switch="${isLogin}" class="form-group" id="dobtn">
                         <div th:case="true" class="col-sm-offset-1">
-                            <button type="button" class="btn btn-primary">收藏</button>
+                            <a type="button" class="btn btn-primary" th:onclick="conn([[${ad02.aad201}]])" th:id="'conn'+${ad02.aad201}">
+                                <span th:if="${!isConn}">收藏</span>
+                                <span th:if="${isConn}">已收藏</span>
+                            </a>
                             <button type="submit" class="btn btn-default">参与</button>
                         </div>
                         <div th:case="false" class="col-sm-offset-1">
@@ -173,6 +176,55 @@
         } else {
             return x;
         }
+    }
+
+    function conn(aad201)
+    {
+        if (document.getElementById("conn" + aad201).innerText == "收藏")
+        {
+            addConn(aad201);
+        }
+        else
+        {
+            delConn(aad201);
+        }
+    }
+
+    function addConn(aad201) {
+        var data = {aad201: aad201};
+        $.ajax({
+            url: 'addAucConn',
+            type: 'GET',
+            data: data,
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function () {
+                document.getElementById("conn" + aad201).innerText = "已收藏";
+            },
+            error: function () {
+                alert("收藏失败！");
+                location.reload();
+            }
+        });
+    }
+
+    function delConn(aad201) {
+        var data = {aad201: aad201};
+        $.ajax({
+            url: 'delAucConn',
+            type: 'GET',
+            data: data,
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function () {
+                alert("取消成功！");
+                document.getElementById("conn" + aad201).innerText = "收藏";
+            },
+            error: function () {
+                alert("取消失败！");
+                location.reload();
+            }
+        });
     }
 </script>
 </body>
