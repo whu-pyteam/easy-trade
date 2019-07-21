@@ -65,7 +65,6 @@
                     <a href="auction.html">拍卖</a>
                 </li>
             </ul>
-
             <ul class="nav navbar-nav navbar-right">
                 <li th:if="${isLogin}" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -96,7 +95,7 @@
                             <a href="auctionLaunch.html">发起拍卖</a>
                         </li>
                         <li>
-                            <a href="#">我的出售</a>
+                            <a href="myGood.html">我的出售</a>
                         </li>
                         <li>
                             <a href="edit">我的悬赏</a>
@@ -117,20 +116,19 @@
                        aria-expanded="false">我的<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#">购买记录</a>
+                            <a href="memberInfo.html">我的信息</a>
+                        </li>
+                        <li>
+                            <a href="myPurchase.html">购买记录</a>
                         </li>
                         <li>
                             <a href="auctionPart.html">竞拍记录</a>
-                        </li>
-                        <li>
-                            <a href="#">评论</a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" onclick="logout()">退出登录</a>
                         </li>
                     </ul>
                 </li>
-
             </ul>
         </div>
         <!-- /.navbar-collapse -->

@@ -40,6 +40,7 @@ public class CartController
         if (isLogin(request,response))
         {
             model.addAttribute("type",1);
+            model.addAttribute("isLogin", isLogin(request, response));
             return "cart";
         } else
         {
@@ -58,7 +59,7 @@ public class CartController
     public JSONObject cartShow(int pageSize,int pageIndex,HttpServletRequest request) throws Exception
     {
         //从cookie中取出用户id
-        String username = getCookies(request,"username");
+        String username = getCookies(request,"userId");
 
         //根据用户id获取购物车id
         Integer cartId= ac03Service.getCartIdByUserId(Integer.parseInt(username));
@@ -105,7 +106,7 @@ public class CartController
         //判断用户是否登录
         if (isLogin(request,response))
         {
-            String username = getCookies(request,"username");
+            String username = getCookies(request,"userId");
 
             //根据用户id获取购物车id
             Integer cartId= ac03Service.getCartIdByUserId(Integer.parseInt(username));
@@ -144,7 +145,7 @@ public class CartController
     {
         if (isLogin(request,response))
         {
-            String username = getCookies(request,"username");
+            String username = getCookies(request,"userId");
 
             //根据用户id获取购物车id
             Integer cartId= ac03Service.getCartIdByUserId(Integer.parseInt(username));
@@ -175,7 +176,7 @@ public class CartController
     {
         if (isLogin(request,response))
         {
-            String username = getCookies(request,"username");
+            String username = getCookies(request,"userId");
 
             //根据用户id获取购物车id
             Integer cartId= ac03Service.getCartIdByUserId(Integer.parseInt(username));

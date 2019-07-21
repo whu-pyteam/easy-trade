@@ -43,8 +43,11 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.pyteam.db.mbg.mapper"
                              targetProject="db\src\main\java"/>
 
-        <table tableName="ab01">
-            <generatedKey column="aab101" sqlStatement="MySql" identity="true"/>
+<!--        <table tableName="ab01">-->
+<!--            <generatedKey column="aab101" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+        <table tableName="syscode">
+            <generatedKey column="syscodeid" sqlStatement="MySql" identity="true"/>
         </table>
 <!--        <table tableName="ab02">-->
 <!--            <generatedKey column="aab201" sqlStatement="MySql" identity="true"/>-->
@@ -79,9 +82,9 @@
 <!--        <table tableName="ad01">-->
 <!--            <generatedKey column="aad101" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
-<!--        <table tableName="ad02">-->
-<!--            <generatedKey column="aad201" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
+        <table tableName="ad02">
+            <generatedKey column="aad201" sqlStatement="MySql" identity="true"/>
+        </table>
 <!--        <table tableName="ad03">-->
 <!--            <generatedKey column="aad301" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
@@ -127,9 +130,9 @@
 <!--        <table tableName="af02">-->
 <!--            <generatedKey column="aaf201" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
-<!--        <table tableName="af03">-->
-<!--            <generatedKey column="aaf301" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
+        <table tableName="af03">
+            <generatedKey column="aaf301" sqlStatement="MySql" identity="true"/>
+        </table>
 <!--        <table tableName="af04">-->
 <!--            <generatedKey column="aaf401" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
@@ -148,6 +151,5 @@
 <!--        <table tableName="af09">-->
 <!--            <generatedKey column="aaf901" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
-
     </context>
 </generatorConfiguration>

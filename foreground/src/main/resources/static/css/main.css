@@ -60,6 +60,7 @@
 .sub_menu {
     display: none;
     width: 550px;
+    height: 250px;
     position: absolute;
     left: 180px;
     top: 44px;

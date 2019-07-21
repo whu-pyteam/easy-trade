@@ -49,7 +49,7 @@ function loginAjax(){
         if(data==true)
         {
             alert("登录成功！");
-            window.location.replace("/index.html");
+            window.location.reload();
         }
         else
         {
