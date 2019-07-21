@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>已接收悬赏</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/login-register.css" rel="stylesheet">
+    <link href="css/fileinput.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+    <link href="css/theme.css" rel="stylesheet">
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <style type="text/css">
+        .fqxs {
+            padding-top: 60px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div th:replace="header::header(${2})"></div>
+
+<div class="ssl">
+    <div class="container">
+        <div class="col-lg-4">
+            <div class="logo pull-left">
+                <a href="index.html"><img src="images/logo.jpg" height="45" width="260" alt=""/></a>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <form class="navbar-form navbar-right" role="search" th:action="@{'/cxk'}" >
+                <div class="form-group">
+                    <input type="text" class="form-control" name="notsure" id="notsure" placeholder="Search">
+                    <button type="submit" class="btn btn-default">搜索</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <form class="fqxs" th:action="@{/ad01Accept}"  th:object="${ad01}" th:each="ad01:${ad01}" method="post" enctype="multipart/form-data">
+
+                <div class="form-group row">
+                    <div class="col-lg-2">
+                        <label for="aad101">悬赏号:</label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="text" th:value="${ad01.aad101}" name="aad101" class="form-control"  id="aad101" readonly="readonly">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-2">
+                        <label for="aad105">悬赏名称:</label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="text" th:value="${ad01.aad105}" class="form-control" name="aad105"  id="aad105" readonly="readonly">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-lg-2">
+                        <label for="02">悬赏介绍:</label>
+                    </div>
+                    <div class="col-lg-10">
+                        <textarea class="form-control" rows="5"  th:text="${ad01.aad103}" name="aad103" id="02" readonly="readonly"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-lg-2">
+                        <label for="03">悬赏价格:</label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="number" class="form-control" step="0.01" th:value="${ad01.aad104}" name="aad104" id="03" readonly="readonly">
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <div class="col-lg-2">
+                        <label for="aad107">开始时间:</label>
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="input-group date form_date">
+                            <input type="datetime" class="form-control"  id="aad107" name="aad107"  th:value="${#dates.format(ad01.aad107, 'yyyy-MM-dd HH:mm:ss')}" readonly="readonly">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-lg-2">
+                        <label for="aad108">截止时间:</label>
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="input-group date form_date">
+                            <input type="text" class="form-control" th:value="${#dates.format(ad01.aad108, 'yyyy-MM-dd HH:mm:ss')}" id="aad108" name="aad108" placeholder="请选择截止时间" readonly="readonly">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <input type="submit" class="btn btn-primary" value="取消">
+                    <!--<a th:href="@{/ad01/delad01(aad101=${ad01.aad101})}" class="btn btn-primary" role="button">删除</a>-->
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+</div>
+
+
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/login-register.js"></script>
+<script src="js/fileinput.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/locales/zh.js"></script>
+<script src="js/bootstrap-datetimepicker.min.js"></script>
+<script src="js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+</body>
+
+</html>
