@@ -16,6 +16,11 @@
             padding-top: 20px;
             padding-bottom: 20px;
         }
+
+        .form-control-static>span
+        {
+            font-size: 20px;
+        }
     </style>
 </head>
 
@@ -44,19 +49,86 @@
 <div class="zt">
     <div class="container">
         <div class="row" style="border: 1px solid #E8E8E8; padding-top: 15px; padding-bottom: 15px;">
-            <div class="col-lg-5">
-                <img th:src="${ad02.aad203}"
-                     style="height: 400px; width: 100%; overflow: hidden;" alt=""/>
+            <div class="col-sm-4">
+                <img th:src="${ad02.aad203}" style="height: 300px; width: 100%; overflow: hidden;" alt=""/>
             </div>
-            <div class="col-lg-7">
-                <h3 th:text="${ad02.aad202}"></h3>
-                <p th:text="'商品简介：' + ${ad02.aad204}"></p>
-                <p id="navbar_time"></p>
-                <p th:text="'当前价格:' + ${ad02.aad208}"></p>
-                <p>
-                    <a href="#" class="btn btn-primary" role="button">收藏</a>
-                    <a href="#" class="btn btn-default" role="button">出价</a>
-                </p>
+            <div class="col-sm-8">
+                <form class="form-horizontal" action="auctionOffer.html" method="post">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">物品名称：</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static" th:text="${ad02.aad202}"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">物品简介：</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static" th:text="${ad02.aad204}"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">距结束：</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static" id="navbar_time"></p>
+                        </div>
+                    </div>
+                    <div th:if="${ad02.aad205 == '1'}"  class="form-group">
+                        <label class="col-sm-2 control-label">竞拍方式：</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static">一口价竞拍</p>
+                        </div>
+                    </div>
+                    <div th:if="${ad02.aad205 == '2'}"  class="form-group">
+                        <label class="col-sm-2 control-label">竞拍方式：</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static">加价竞拍</p>
+                        </div>
+                    </div>
+                    <div th:if="${ad02.aad205 == '1'}" class="form-group">
+                        <label class="col-sm-2 control-label">竞拍底价：</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static" th:text="${ad02.aad206} + '元'"></p>
+                        </div>
+                    </div>
+                    <div th:if="${ad02.aad205 == '2'}" class="form-group">
+                        <label class="col-sm-2 control-label">当前价格：</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static" th:text="${ad02.aad208} + '元'"></p>
+                        </div>
+                    </div>
+                    <div th:if="${ad02.aad205 == '1'}" class="form-group">
+                        <label for="yaad602" class="col-sm-2 control-label">出价：</label>
+                        <div class="col-sm-10">
+                            <div class="input-group col-sm-3">
+                                <input type="number" class="form-control" step="0.01" id="yaad602" name="aad602" th:value="${ad02.aad207 + ad02.aad206}" th:min="${ad02.aad207 + ad02.aad206}">
+                                <div class="input-group-addon">元</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div th:if="${ad02.aad205 == '2'}" class="form-group">
+                        <label for="jaad602" class="col-sm-2 control-label">出价：</label>
+                        <div class="col-sm-10">
+                            <div class="input-group col-sm-3">
+                                <input type="number" class="form-control" step="0.01" id="jaad602" name="aad602" th:value="${ad02.aad207 + ad02.aad208}" th:min="${ad02.aad207 + ad02.aad208}">
+                                <div class="input-group-addon">元</div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="text" class="hidden" name="aad201" th:value="${ad02.aad201}">
+                    <div th:switch="${isLogin}" class="form-group" id="dobtn">
+                        <div th:case="true" class="col-sm-offset-1">
+                            <a type="button" class="btn btn-primary" th:onclick="conn([[${ad02.aad201}]])" th:id="'conn'+${ad02.aad201}">
+                                <span th:if="${!isConn}">收藏</span>
+                                <span th:if="${isConn}">已收藏</span>
+                            </a>
+                            <button type="submit" class="btn btn-default">参与</button>
+                        </div>
+                        <div th:case="false" class="col-sm-offset-1">
+                            <a class="btn btn-primary" onclick="openLoginModal();">收藏</a>
+                            <a class="btn btn-default" onclick="openLoginModal();">参与</a>
+                        </div>
+                    </div>
+                </form>
                 <input type="text" th:value="${ad02.aad211.getTime()}" id="endTime" hidden>
             </div>
         </div>
@@ -73,20 +145,29 @@
 
     function getlocaltime() {
         var lasttime = endTime - new Date().getTime();
-        var day = 1000*60*60*24;
-        var hour = 1000*60*60;
-        var minute = 1000*60;
-        var dd = Math.floor(lasttime/day);
-        lasttime = lasttime - dd*day;
-        var hh = Math.floor(lasttime/hour);
-        lasttime = lasttime - hh*hour;
-        var mm = Math.floor(lasttime/minute);
-        lasttime = lasttime - mm*minute;
-        var ss = Math.floor(lasttime/1000);
+        if(lasttime < 0)
+        {
+            document.getElementById("navbar_time").innerHTML = "已结束";
+            document.getElementById("dobtn").className = "hidden";
+        }
+        else
+        {
+            var day = 1000*60*60*24;
+            var hour = 1000*60*60;
+            var minute = 1000*60;
+            var dd = Math.floor(lasttime/day);
+            lasttime = lasttime - dd*day;
+            var hh = Math.floor(lasttime/hour);
+            lasttime = lasttime - hh*hour;
+            var mm = Math.floor(lasttime/minute);
+            lasttime = lasttime - mm*minute;
+            var ss = Math.floor(lasttime/1000);
 
-        mm = extra(mm);
-        ss = extra(ss);
-        document.getElementById("navbar_time").innerHTML = "距结束：" + dd + "天" + hh + "时" + mm + "分" + ss + "秒";
+            mm = extra(mm);
+            ss = extra(ss);
+            document.getElementById("navbar_time").innerHTML = "<span>" + dd + "</span>天<span>" + hh + "</span>时<span>" + mm + "</span>分<span>" + ss + "</span>秒";
+        }
+
     }
 
     function extra(x) {
@@ -95,6 +176,55 @@
         } else {
             return x;
         }
+    }
+
+    function conn(aad201)
+    {
+        if (document.getElementById("conn" + aad201).innerText == "收藏")
+        {
+            addConn(aad201);
+        }
+        else
+        {
+            delConn(aad201);
+        }
+    }
+
+    function addConn(aad201) {
+        var data = {aad201: aad201};
+        $.ajax({
+            url: 'addAucConn',
+            type: 'GET',
+            data: data,
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function () {
+                document.getElementById("conn" + aad201).innerText = "已收藏";
+            },
+            error: function () {
+                alert("收藏失败！");
+                location.reload();
+            }
+        });
+    }
+
+    function delConn(aad201) {
+        var data = {aad201: aad201};
+        $.ajax({
+            url: 'delAucConn',
+            type: 'GET',
+            data: data,
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function () {
+                alert("取消成功！");
+                document.getElementById("conn" + aad201).innerText = "收藏";
+            },
+            error: function () {
+                alert("取消失败！");
+                location.reload();
+            }
+        });
     }
 </script>
 </body>

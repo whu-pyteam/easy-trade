@@ -3,11 +3,15 @@ package com.pyteam.foreground.service;
 import com.pyteam.db.mbg.entity.Ad02;
 import com.pyteam.db.mbg.entity.Ad02Example;
 import com.pyteam.db.mbg.entity.Ad02Example.Criteria;
+import com.pyteam.db.mbg.entity.Ad06;
+import com.pyteam.db.mbg.entity.Ad06Example;
 import com.pyteam.db.mbg.mapper.Ad02Mapper;
+import com.pyteam.db.mbg.mapper.Ad06Mapper;
 import com.pyteam.db.utils.QiniuUtil;
 import com.pyteam.foreground.dto.Ad02Dto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -26,11 +30,81 @@ public class Ad02Service
     @Autowired
     private QiniuUtil qiniuUtil;
 
+    @Autowired
+    private Ad06Mapper ad06Mapper;
 
-
-    public Ad02 findById(int id)
+    /**
+     * 依据拍卖物品流水号（aad201）更新当前最高价（aad208）
+     * @param aad201
+     * @param aad208
+     * @return
+     */
+    public boolean updateAad208ByAad201(int aad201, BigDecimal aad208)
     {
-        return ad02Mapper.selectByPrimaryKey(id);
+        Ad02 ad02 = new Ad02();
+        ad02.setAad201(aad201);
+        ad02.setAad208(aad208);
+        return ad02Mapper.updateByPrimaryKeySelective(ad02) > 0;
+    }
+
+    /**
+     * 用户删除拍卖
+     * @param aad201
+     * @return
+     */
+    @Transactional
+    public boolean deleteById(int aad201)
+    {
+        Ad02 ad02 = new Ad02();
+        ad02.setAad201(aad201);
+        ad02.setAad209("4");
+        if(ad02Mapper.updateByPrimaryKeySelective(ad02) > 0)
+        {
+            Ad06Example ad06Example = new Ad06Example();
+            Ad06Example.Criteria ad06Criteria = ad06Example.createCriteria();
+            ad06Criteria.andAad201EqualTo(aad201);
+            List<Ad06> ad06List = ad06Mapper.selectByExample(ad06Example);
+            if(!ad06List.isEmpty())
+            {
+                for (Ad06 ad06:ad06List)
+                {
+                    ad06.setAad603("5");
+                    if(ad06Mapper.updateByPrimaryKey(ad06) <= 0)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /**
+     * 依据用户流水号查看拍卖物品
+     * @param aab101
+     * @return
+     */
+    public List<Ad02> findByUserId(int aab101)
+    {
+        Ad02Example ad02Example = new Ad02Example();
+        Criteria criteria = ad02Example.createCriteria();
+        criteria.andAab101EqualTo(aab101);
+        criteria.andAad209Between("0", "3");
+        return ad02Mapper.selectByExample(ad02Example);
+    }
+
+    /**
+     * 依据拍卖物品流水号查看拍卖物品
+     * @param aad201
+     * @return
+     */
+    public Ad02 findById(int aad201)
+    {
+        return ad02Mapper.selectByPrimaryKey(aad201);
     }
 
     /**
@@ -43,7 +117,7 @@ public class Ad02Service
         try
         {
             Ad02 ad02 = new Ad02();
-            ad02.setAab101(2);
+            ad02.setAab101(dto.getAab101());
             ad02.setAac201(1);
             ad02.setAad202(dto.getAad202());
             ad02.setAad203(qiniuUtil.uploadImg(dto.getAad203()));
@@ -51,7 +125,7 @@ public class Ad02Service
             ad02.setAad205(dto.getAad205());
             ad02.setAad206(dto.getAad206());
             ad02.setAad207(dto.getAad207());
-            ad02.setAad208(BigDecimal.valueOf(2400));
+            ad02.setAad208(dto.getAad206());
             ad02.setAad209("0");  //未审核
             ad02.setAad210(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2000-01-01 00:00"));
             ad02.setAad211(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dto.getAad211()));
@@ -68,16 +142,12 @@ public class Ad02Service
         }
     }
 
-    public List<Ad02> selectAll()
-    {
-        Ad02Example example = new Ad02Example();
-        Criteria criteria = example.createCriteria();
-        criteria.andAad209EqualTo("1");
-        List<Ad02> ad02List = ad02Mapper.selectByExample(example);
-        return ad02List;
-    }
-
-    public List<Ad02> searchByValue(String value)
+    /**
+     * 依据拍卖页面搜索栏信息查找拍卖物品
+     * @param value
+     * @return
+     */
+    public List<Ad02> findByValue(String value)
     {
         Ad02Example example = new Ad02Example();
         Criteria criteria = example.createCriteria();

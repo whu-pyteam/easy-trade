@@ -30,25 +30,14 @@ public class IndexController
     @Autowired
     private Ab01Service ab01Service;
 
-    /**
-     * 返回主页
-     * @param model
-     * @return
-     */
+    private boolean isLogin;
+
     @RequestMapping(value = "/index.html", method = RequestMethod.GET)
-    public String wel(Model model)
+    public String wel(HttpServletRequest request, HttpServletResponse response, Model model)throws Exception
     {
-        try
-        {
-            model.addAttribute("type", 1);
-            model.addAttribute("ac01List", ac01Service.getUnsoldGoodList());
-            return "index";
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            return "error/404";
-        }
+        model.addAttribute("ac01List", ac01Service.selectById());
+        model.addAttribute("isLogin", isLogin(request, response));
+        return "index";
     }
 
     /**

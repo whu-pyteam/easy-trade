@@ -113,7 +113,6 @@
           pageSize: this.pageInfo.pageSize
         }
         getAuctionList(params).then(res => {
-          console.log(res)
           this.pageInfo.total = res.data.total
           this.tableData = res.data.list
         })

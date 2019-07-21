@@ -22,26 +22,29 @@ import java.util.List;
 public class FeedbackServiceImpl implements FeedbackService
 {
 
-    @Autowired
+    private final
     Ab05Mapper ab05Mapper;
+
+    public FeedbackServiceImpl(Ab05Mapper ab05Mapper)
+    {
+        this.ab05Mapper = ab05Mapper;
+    }
 
     @Override
     public List<Ab05> list(FeedbackQueryParam queryParam)
     {
         PageHelper.startPage(queryParam.getPageNum(), queryParam.getPageSize());
         Ab05Example example = new Ab05Example();
-        Ab05Example.Criteria criteria1 = example.createCriteria();
-        Ab05Example.Criteria criteria2 = example.createCriteria();
+        Ab05Example.Criteria criteria = example.createCriteria();
         if(!StringUtils.isEmpty(queryParam.getAab503()))
         {
-            criteria1.andAab503Like(queryParam.getAab503());
+            criteria.andAab503Like(queryParam.getAab503());
         }
         if(!StringUtils.isEmpty(queryParam.getAab504()))
         {
-            criteria2.andAab504EqualTo((queryParam.getAab504()));
+            criteria.andAab504EqualTo((queryParam.getAab504()));
         }
 
-        example.or(criteria2);
         return ab05Mapper.selectByExample(example);
     }
 

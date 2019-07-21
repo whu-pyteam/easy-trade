@@ -43,7 +43,7 @@
           label="上传时间"
           width="250">
           <template slot-scope="scope">
-            {{scope.row.aad212}}
+            {{scope.row.aab505}}
           </template>
         </el-table-column>
         <el-table-column
@@ -52,8 +52,8 @@
           <template slot-scope="scope">
             <el-switch
               v-model="scope.row.aab504 === '0'"
-              active-text="待审核"
-              inactive-text="已审核"
+              active-text="待查阅"
+              inactive-text="已查阅"
               disabled>
             </el-switch>
           </template>

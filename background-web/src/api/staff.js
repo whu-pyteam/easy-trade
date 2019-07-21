@@ -1,10 +1,10 @@
 import request from '@/utils/request'
 
-export function queryStaffList(data) {
+export function queryStaffList(params) {
   return request({
     url: '/staff',
-    method: 'post',
-    data
+    method: 'get',
+    params: params
   })
 }
 
@@ -30,10 +30,10 @@ export function getSingleStaff(id) {
   })
 }
 
-export function updateStaff(id, data) {
+export function updateStaff(data) {
   return request({
-    url: '/staff/' + id,
-    method: 'put',
+    url: '/staff/role',
+    method: 'post',
     data: data
   })
 }

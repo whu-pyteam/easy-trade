@@ -10,13 +10,74 @@
 <body>
 <div th:replace="header :: header(3)"></div>
 
-<div class="container">
-    <div class="row">
-
+<div class="zt">
+    <div class="container">
+        <div class="row">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <td>物品</td>
+                    <td></td>
+                    <td>当前最高价</td>
+                    <td>截止时间</td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="aconn:${aconnList}">
+                    <td><img th:src="${aconn.aad203}" style="height: 100px; width: 100px; overflow: hidden"></td>
+                    <td><h3 th:text="${aconn.aad202}"></h3></td>
+                    <td><p th:text="${aconn.aad208}"></p></td>
+                    <td th:switch="${aconn.aad209}">
+                        <p th:case="1" th:text="${#dates.format(aconn.aad211, 'yyyy年MM月dd日 HH:mm')}"></p>
+                        <p th:case="3">竞拍已结束</p>
+                        <p th:case="4">卖家已取消竞拍</p>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" th:onclick="connShow([[${aconn.aad201}]])">
+                            已收藏
+                        </a>
+                        <a th:if="${aconn.aad209 == '1'}" th:href="'auctionShow.html?aad201=' + ${aconn.aad201}">
+                            <button class="btn btn-info">查看</button>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <ul class="pager">
+                <li th:if="${!pre}" class="disabled"><span>上一页</span></li>
+                <li th:if="${pre}"><a th:href="'auctionConn.html?pageNum=' + ${pageNum - 1}">上一页</a></li>
+                <li th:if="${next}"><a th:href="'auctionConn.html?pageNum=' + ${pageNum + 1}">下一页</a></li>
+                <li th:if="${!next}" class="disabled"><span>下一页</span></li>
+            </ul>
+        </div>
     </div>
 </div>
-
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script>
+    function connShow(aad201)
+    {
+        var data = {aad201: aad201};
+        $.ajax({
+            url: 'delAucConn',
+            type: 'GET',
+            data: data,
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function ()
+            {
+                alert("取消成功！");
+                location.reload();
+            },
+            error: function () {
+                alert("取消失败！");
+                location.reload();
+            }
+        });
+    }
+</script>
 </body>
 </html>
