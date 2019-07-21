@@ -5,6 +5,7 @@ import com.pyteam.db.mbg.entity.Ae05;
 import com.pyteam.foreground.dto.Ad02Dto;
 import com.pyteam.foreground.service.Ad02Service;
 import com.pyteam.foreground.service.Ad06Service;
+import com.pyteam.foreground.service.AuctionService;
 import com.pyteam.foreground.service.ConnectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,7 +33,39 @@ public class AuctionController
     @Autowired
     private Ad06Service ad06Service;
 
+    @Autowired
+    private AuctionService auctionService;
+
     private boolean isLogin;
+
+    @RequestMapping(value = "/delPart", method = RequestMethod.GET)
+    @ResponseBody
+    public String delMyPart(HttpServletRequest request, HttpServletResponse response, int aad601)
+    {
+        if(isLogin(request, response) && !ad06Service.deleteById(aad601))
+        {
+            return null;
+        }
+        else
+        {
+            return "1";
+        }
+    }
+
+    @RequestMapping(value = "/auctionPart.html", method = RequestMethod.GET)
+    public String selectAucPart(HttpServletRequest request, HttpServletResponse response, Model model)
+    {
+        isLogin = isLogin(request, response);
+        if(isLogin)
+        {
+            int aab101 = Integer.parseInt(getCookies(request, "userId"));
+            model.addAttribute("apartList", auctionService.selectAd06LeftAd02(aab101));
+            model.addAttribute("isLogin", isLogin);
+            return "auctionPart";
+        }
+        model.addAttribute("isLogin", isLogin);
+        return "auction";
+    }
 
     @RequestMapping(value = "/auctionOffer.html", method = RequestMethod.POST)
     public String insertAd06(HttpServletRequest request, HttpServletResponse response, Ad06 ad06, Model model)
@@ -49,7 +82,8 @@ public class AuctionController
             }
             else
             {
-                return "123456";
+                model.addAttribute("isLogin", isLogin);
+                return "auction";
             }
         }
         model.addAttribute("isLogin", isLogin);
@@ -70,7 +104,7 @@ public class AuctionController
         }
     }
 
-    @RequestMapping(value = "myAuction.html", method = RequestMethod.GET)
+    @RequestMapping(value = "auctionMyLau.html", method = RequestMethod.GET)
     public String findByUserID(HttpServletRequest request, HttpServletResponse response, Model model)
     {
         isLogin = isLogin(request, response);
@@ -79,17 +113,24 @@ public class AuctionController
             int aab101 = Integer.parseInt(getCookies(request, "userId"));
             model.addAttribute("ad02List", service.findByUserId(aab101));
             model.addAttribute("isLogin", isLogin);
-            return "myAuction";
+            return "auctionMyLau";
         }
         model.addAttribute("isLogin", isLogin);
         return "auction";
     }
 
     @RequestMapping(value = "/auctionShow.html", method = RequestMethod.GET)
-    public String findById(HttpServletRequest request, HttpServletResponse response, int id, Model model)
+    public String findById(HttpServletRequest request, HttpServletResponse response, int aad201, Model model)
     {
-        model.addAttribute("ad02", service.findById(id));
-        model.addAttribute("isLogin", isLogin(request, response));
+        isLogin = isLogin(request, response);
+        int aad401 = 0;
+        if(isLogin)
+        {
+            aad401 = Integer.parseInt(getCookies(request, "aad401_auc"));
+        }
+        model.addAttribute("ad02", service.findById(aad201));
+        model.addAttribute("isLogin", isLogin);
+        model.addAttribute("isConn", connService.isAe05Exist(aad401, aad201));
         return "auctionShow";
     }
 

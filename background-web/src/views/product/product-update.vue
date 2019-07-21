@@ -108,9 +108,9 @@
       },
       onSubmit() {
         updateProduct(this.aac101, this.isCheck?'1':'2').then(res => {
-          this.$message.info(res.data.message)
+          this.$message.info(res.data)
           window.setTimeout(this.cancelUpdate, 1200)
-        })
+        }).catch(err => console.log(err))
       },
       cancelUpdate() {
         this.$router.go(-1)

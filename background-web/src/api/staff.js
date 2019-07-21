@@ -23,9 +23,9 @@ export function getRoleList() {
   })
 }
 
-export function getSingleStaff(username) {
+export function getSingleStaff(id) {
   return request({
-    url: '/staff/' + username,
+    url: '/staff/' + id,
     method: 'get'
   })
 }

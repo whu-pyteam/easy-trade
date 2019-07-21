@@ -22,13 +22,26 @@ import java.util.Map;
 public class ConnectionService
 {
     @Autowired
-    private Ad04Mapper ad04Mapper;
-
-    @Autowired
     private Ae05Mapper ae05Mapper;
 
     @Autowired
     private AuctionMapper auctionMapper;
+
+    public boolean isAe05Exist(int aad401, int aad201)
+    {
+        Ae05Example ae05Example = new Ae05Example();
+        Ae05Example.Criteria criteria = ae05Example.createCriteria();
+        criteria.andAad401EqualTo(aad401);
+        criteria.andAad201EqualTo(aad201);
+        if(ae05Mapper.selectByExample(ae05Example).isEmpty())
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 
     public Map<String, Object>  selectAd02RightAe05(int aad401, int pageNum, int pageSize)
     {
