@@ -5,10 +5,13 @@ import com.pyteam.db.mbg.mapper.Ac01Mapper;
 import com.pyteam.db.mbg.mapper.Ac05Mapper;
 import com.pyteam.db.mbg.mapper.Ae06Mapper;
 import com.pyteam.foreground.dto.Ac05Dto;
+import com.pyteam.foreground.mapper.Ac05NewMapper;
+import com.pyteam.foreground.mapper.Ae07NewMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +25,10 @@ public class Ac05Service
     Ae06Mapper ae06Mapper;
     @Autowired
     Ac01Mapper ac01Mapper;
+    @Autowired
+    private Ac05NewMapper ac05NewMapper;
+    @Autowired
+    private Ae07NewMapper ae07NewMapper;
 
     /**
      * 为商品创建订单
@@ -134,4 +141,64 @@ public class Ac05Service
         }
         return ac01List;
     }
+
+
+
+    int aad101;
+
+    @Transactional
+    public void add(Ac05 ac05, int aad101)
+    {
+        Date date= ac05.getAac511();
+        SimpleDateFormat sd1= new SimpleDateFormat("yyyyMMddHH");
+        String before=sd1.format(date);
+        System.out.println(before);
+        int aab101=ac05.getAab101();
+        String aac502;
+        int count;
+        do
+        {
+            Integer after = (int) ((Math.random() * 9 + 1) * 10);
+            StringBuilder a = new StringBuilder();
+            a.append(aab101).append(before).append(after);
+            aac502 = a.toString();
+            System.out.println(aac502);
+            count=ac05NewMapper.count(aac502);
+        }
+        while(count==1);
+
+        ac05.setAac502(aac502);
+        ac05NewMapper.insertAc05(ac05);
+        System.out.println("插入成功");
+        String mm=ac05.getAac508();
+        System.out.println(mm);
+        if("2".equals(mm))
+        {
+            Ae07 ae07=new Ae07();
+            ae07.setAac501(ac05NewMapper.query(aac502));
+            ae07.setAad101(aad101);
+            System.out.println(aad101);
+            ae07NewMapper.addAe07(ae07);
+        }
+
+
+    }
+
+
+    public int count(String id)
+    {
+        return ac05NewMapper.count(id);
+    }
+
+    public void save(int aad101)
+    {
+        this.aad101=aad101;
+    }
+
+    public int ret()
+    {
+        return aad101;
+    }
+
+
 }
