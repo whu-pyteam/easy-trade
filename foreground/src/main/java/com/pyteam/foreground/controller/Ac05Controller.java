@@ -5,6 +5,7 @@ import com.pyteam.db.mbg.entity.Ae07;
 import com.pyteam.foreground.mapper.Ac05NewMapper;
 import com.pyteam.foreground.mapper.Ae07NewMapper;
 import com.pyteam.foreground.service.Ac05Service;
+import com.pyteam.foreground.service.Ad05Service;
 import org.apache.ibatis.annotations.Param;
 import org.mapstruct.ValueMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,8 @@ public class Ac05Controller
 {
     @Autowired
     private Ac05Service ac05Service;
-
+    @Autowired
+    private Ad05Service ad05Service;
     @PostMapping("orderAdd")
     public String view(@ModelAttribute("ac05")Ac05 ac05)
     {
@@ -43,6 +45,8 @@ public class Ac05Controller
     {
 
         int id=aad101;
+        m.addAttribute("ad05",ad05Service.selectbyaad101(id));
+        System.out.println(ad05Service.selectbyaab101(id));
         ac05Service.save(id);
         return"orderAdd";
     }

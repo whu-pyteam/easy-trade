@@ -1,3 +1,6 @@
+<html>
+
+
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 
@@ -19,14 +22,22 @@
     </style>
 </head>
 
+
 <body>
 <div class="container">
     <div class="row">
         <div class="col-lg-3"></div>
         <div class="col-lg-6">
-            <form class="fqxs" th:action="@{/ad01/addad03}"  th:object="${ad03}"  method="post" enctype="multipart/form-data">
+            <form class="fqxs" th:action="@{/myComment}"  th:object="${ad03}" th:each="ad03:${ad03}" method="post" enctype="multipart/form-data">
 
-
+                <div class="form-group row">
+                    <div class="col-lg-2">
+                        <label for="aad301">评论号:</label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="text" th:value="${ad03.aad301}" name="aad301" class="form-control"  id="aad301" readonly="readonly">
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label>星级:</label>
@@ -34,27 +45,28 @@
                     <label><input type="radio" name="aad304" value="2">二星级</label>
                     <label><input type="radio" name="aad304" value="3" >三星级</label>
                     <label><input type="radio" name="aad304" value="4">四星级</label>
-                    <label><input type="radio" name="aad304" value="5" checked>五星级</label>
+                    <label><input type="radio" name="aad304" value="5">五星级</label>
                 </div>
 
                 <div>
                     <label>自己id</label>
-                    <input readonly="readonly" th:value="${aab101}" name="aab101">
+                    <input readonly="readonly" th:value="${ad03.aab101}"  name="aab101">
                 </div>
 
                 <div class="form-group row">
                     <div class="col-lg-2">
-                        <label for="aad303">备注:</label>
+                        <label for="aad303">评价:</label>
                     </div>
                     <div class="col-lg-10">
-                        <textarea class="form-control" rows="6" name="aad303" id="aad303" placeholder="请限制在200字内..."
+                        <textarea th:text="${ad03.aad303}" class="form-control" rows="6" name="aad303" id="aad303"
                                   maxlength="200" onchange="this.value=this.value.substring(0, 200)" onkeydown="this.value=this.value.substring(0, 200)" onkeyup="this.value=this.value.substring(0, 200)"></textarea>
                     </div>
                 </div>
 
 
                 <div class="form-group text-center">
-                    <input type="submit" class="btn btn-primary" value="提交">
+                    <input type="submit" class="btn btn-primary" value="提交修改" name="action">
+                    <input type="submit"  class="btn btn-primary" value="删除评论" name="action">
                 </div>
             </form>
         </div>
@@ -70,3 +82,5 @@
 <script src="../js/bootstrap-datetimepicker.min.js"></script>
 <script src="../js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 </body>
+
+</html>

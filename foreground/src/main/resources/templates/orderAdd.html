@@ -26,12 +26,19 @@
         <div class="col-lg-6">
             <form class="fqxs" th:action="@{/orderAdd}"  th:object="${ac05}"  method="post" enctype="multipart/form-data">
                 <div class="form-group row">
+                    <!--<div class="col-lg-2">-->
+                        <!--<label for="01">买家流水号:</label>-->
+                    <!--</div>-->
+                    <!--<div class="col-lg-10">-->
+                        <!--<input type="text" class="form-control" name="aab101" id="01">-->
+                    <!--</div>-->
                     <div class="col-lg-2">
-                        <label for="01">买家流水号:</label>
+                    <label >买家流水号:</label>
                     </div>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" name="aab101" id="01">
-                    </div>
+
+                    <select th:object="${ad05}" name="aab101">
+                    <option th:each="ad05:${ad05}" th:value="${ad05.ad05.aab101}" th:text="${ad05.ab01.aab102}">选择</option>
+                    </select>
                 </div>
 
 

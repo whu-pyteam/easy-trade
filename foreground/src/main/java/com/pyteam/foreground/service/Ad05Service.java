@@ -1,6 +1,7 @@
 package com.pyteam.foreground.service;
 
 import com.pyteam.db.mbg.entity.Ad05;
+import com.pyteam.foreground.dto.Ad05Ad01Dto;
 
 import java.util.List;
 
@@ -22,6 +23,8 @@ public interface Ad05Service
 
     void delete(int aad101, int aab101);
 
-    List<Ad05> selectbyaad101(int id);
+    List<Ad05Ad01Dto> selectbyaad101(int id);
+
+
 
 }

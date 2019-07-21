@@ -35,4 +35,7 @@ public interface Ad05NewMapper
 
     @Select("select aab101 from ad05 where aad101=#{aad101}")
     List<Ad05> selectbyaad101(int aad101);
+
+    @Select("select count(aab101) from ad05 where aad101=#{aad101}")
+    int countaad101(int aad101);
 }

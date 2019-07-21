@@ -2,7 +2,6 @@ package com.pyteam.foreground.controller;
 
 import com.pyteam.db.mbg.entity.Ad03;
 import com.pyteam.foreground.dto.Ae02Dto;
-import com.pyteam.foreground.mapper.Ad01NewMapper;
 import com.pyteam.foreground.service.Ad01Service;
 import com.pyteam.foreground.service.Ae02Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import static com.pyteam.foreground.controller.LoginController.getCookies;
+import static com.pyteam.foreground.controller.LoginController.isLogin;
 
 /**
  * @author wjm
@@ -26,33 +31,35 @@ public class Ae02Controller
     @Autowired
     private Ae02Service ae02Service;
 
+    private Boolean isLogin;
+
     Ae02Dto ae02Dto=new Ae02Dto();
 
-    @GetMapping("/ad01/addad03")
-    public String mo(@RequestParam("aac502")String aac502,Model m)
+    @GetMapping("addad03")
+    public String mo(@RequestParam("aac502")String aac502,Model m,HttpServletRequest request,HttpServletResponse response)
     {
-        int i=1;
+        int i=Integer.parseInt(getCookies(request, "userId"));
         ae02Dto.setAac502(aac502);
         m.addAttribute("aab101",i);
-        return "ad01/addad03";
+        return "addad03";
     }
-    @PostMapping("/ad01/addad03")
+    @PostMapping("addad03")
     public String mo(@ModelAttribute("ad03") Ad03 ad03)
     {
         String aac502=ae02Dto.getAac502();
         ae02Service.insert(ad03,aac502);
-        return "/ad01/myComment";
+        return "myComment";
     }
 
-    @GetMapping("/ad01/helpOrder")
-    public String mo(Model m)
+    @GetMapping("helpOrder")
+    public String mo(Model m, HttpServletRequest request, HttpServletResponse response)
     {
 
-        int aab101=1;
+        int aab101=Integer.parseInt(getCookies(request, "userId"));
         m.addAttribute("ac05",ae02Service.queryByAab101(aab101));
-        return "ad01/helpOrder";
+        return "helpOrder";
     }
-    @PostMapping("/ad01/helpOrder")
+    @PostMapping("helpOrder")
     public String wie(@RequestParam("aac503") String aac503,@RequestParam("aac502")String aac502, String action)
     {
         if(action.equals("确认订单"))
@@ -64,19 +71,26 @@ public class Ae02Controller
         {
 
         }
-        return "ad01/helpOrder";
+        return "helpOrder";
     }
 
-    @GetMapping("ad01/myComment")
-    public String nnc(Model m)
+    @GetMapping("myComment")
+    public String nnc(Model m,HttpServletResponse response,HttpServletRequest request)
     {
-        int i=1;
-        m.addAttribute("ad03",ae02Service.qe(i));
-        System.out.println(ae02Service.qe(i));
-        return "ad01/myComment";
+        isLogin = isLogin(request, response);
+        if(isLogin)
+        {
+            m.addAttribute("isLogin",isLogin);
+            int i = Integer.parseInt(getCookies(request, "userId"));
+            m.addAttribute("ad03", ae02Service.qe(i));
+            System.out.println(ae02Service.qe(i));
+            return "myComment";
+        }
+        m.addAttribute("isLogin",isLogin);
+        return "ad01list";
     }
 
-    @PostMapping("ad01/myComment")
+    @PostMapping("myComment")
     public void ss(@ModelAttribute("ad03")Ad03 ad03,String action)
     {
         if(action.equals("提交修改"))

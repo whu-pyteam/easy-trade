@@ -1,5 +1,6 @@
 package com.pyteam.foreground.service;
 
+import com.github.pagehelper.PageHelper;
 import com.pyteam.db.mbg.entity.Ac02;
 import com.pyteam.db.mbg.entity.Ad01;
 import com.pyteam.db.mbg.entity.Ad05;
@@ -57,6 +58,7 @@ public class Ad01ServiceImpl implements Ad01Service
     @Override
     public List<Ad01> listByAll()
     {
+        PageHelper.startPage(1,8);
         return ad01NewMapper.listByAll();
     }
 
@@ -83,12 +85,14 @@ public class Ad01ServiceImpl implements Ad01Service
     public List<Ad01ac02Dto> findById(int id)
     {
         List<Ad01ac02Dto>ad01ac02DtoList=new ArrayList<>();
-        List<Ad01> ad01List=ad01NewMapper.findById(id);
-        int count=ad01NewMapper.countpass(id);
-        System.out.println(count);    //审核情况可能导致数目不一样
+        List<Ad01> ad01List=ad01NewMapper.findallById(id);
+        int count=ad01NewMapper.count(id);
+        System.out.println(count);
+
+        //审核情况可能导致数目不一样
         for(int i=0;i<count;i++)
         {
-            if(ad01List.get(i).getAad101()==null)
+            if(ad01List==null)
             {
 
             }

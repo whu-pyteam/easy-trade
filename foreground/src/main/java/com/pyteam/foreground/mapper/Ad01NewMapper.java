@@ -33,6 +33,10 @@ public interface Ad01NewMapper
     @Select("select  aad101,aab101,aad103,aad104,aad105,aad106,aad107,aad108 from ad01 where aad102=1 and aab101=#{id}")
     List<Ad01> findById(int id);
 
+
+    @Select("select  aad101,aab101,aad102,aad103,aad104,aad105,aad106,aad107,aad108 from ad01 where aab101=#{id}")
+    List<Ad01> findallById(int id);
+
     @Update("update ad01 set aad103=#{aad103},aad104=#{aad104},aad105=#{aad105},aad108=#{aad108},aad107=#{aad107} where aad101=#{aad101} ")
     void updatenn(Ad01 ad01);
 

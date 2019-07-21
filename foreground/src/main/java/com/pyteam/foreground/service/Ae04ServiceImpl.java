@@ -32,7 +32,7 @@ public class Ae04ServiceImpl implements Ae04Service
 
 
     @Override
-    public void addad04(Ad04 ad04, Ad01 ad01)
+    public int addad04(Ad04 ad04, Ad01 ad01)
     {
 //        添加ad04 ad01
 //        ad04要提前放好用户流水号 aab101
@@ -41,7 +41,7 @@ public class Ae04ServiceImpl implements Ae04Service
         if(ad04List.isEmpty())
         {
             Ad01 ad01s=new Ad01();
-            ad01s.setAab101(ad04List.get(0).getAab101());
+            ad01s.setAab101(ad04.getAab101());
             ad04NewMapper.addad01(ad01s);
         }
         else
@@ -55,10 +55,11 @@ public class Ae04ServiceImpl implements Ae04Service
         if(ae04NewMapper.select(ae04s)==null)
         {
             ae04NewMapper.addae04(ae04s);
+            return 1;
         }
         else
             {
-            System.out.println("收藏过");
+            return 2;
         }
     }
 

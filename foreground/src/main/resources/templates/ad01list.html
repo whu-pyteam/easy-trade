@@ -36,25 +36,20 @@
             padding-top: 20px;
             padding-bottom: 20px;
         }
+
+
+        .conmm{
+            white-space: nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+        }
     </style>
 
 </head>
 
 <body>
-<!--
-作者：2361991194@qq.com
-时间：2019-07-10
-描述：导航栏
--->
-<!--      引入头部  -->
-<!--        <div th:include="header :: header"></div>-->
-
 <div th:replace="/header :: header(2)"></div>
-<!--
-    作者：2361991194@qq.com
-    时间：2019-07-10
-    描述：搜索栏
--->
+
 <div class="ssl">
     <div class="container">
         <div class="col-lg-4">
@@ -64,7 +59,7 @@
 
         </div>
         <div class="col-sm-8">
-            <form class="navbar-form navbar-right" role="search"  th:action="@{'/ad01/cxk'}">
+            <form class="navbar-form navbar-right" role="search"  th:action="@{'/cxk'}">
                 <div class="form-group">
                     <input type="text" class="form-control" name="notsure" id="notsure" placeholder="Search">
                     <button type="submit" class="btn btn-default">搜索</button>
@@ -82,95 +77,35 @@
                     <h2>目录</h2>
                     <div class="panel-group category-products" id="accordian">
                         <!--category-productsr-->
+
+                        <div th:if="${isLogin}">
+
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordian" href="#mens">
-                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                        男装
-                                    </a>
-                                </h4>
+                                <h4 class="panel-title"><a th:href="@{/forklist}">收藏夹</a></h4>
                             </div>
-                            <div id="mens" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul>
-                                        <li>
-                                            <a href="#">衬衫</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">风衣</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">套装</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                        </div>
+
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a th:href="@{/myOrder}">我的订单</a></h4>
                             </div>
                         </div>
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordian" href="#womens">
-                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                        女装
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="womens" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul>
-                                        <li>
-                                            <a href="#">连衣裙</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">牛仔</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">外套</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">T恤</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <h4 class="panel-title"><a th:href="@{/ad01Accept}">已接受悬赏</a></h4>
                             </div>
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">儿童</a></h4>
+                                <h4 class="panel-title"><a th:href="@{/edit}">我的悬赏区</a></h4>
                             </div>
                         </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#">运动</a></h4>
-                            </div>
+
                         </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a th:href="@{/ad01/forklist}">收藏夹</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a th:href="@{/ad01/myOrder}">我的订单</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a th:href="@{/ad01/ad01Accept}">已接受悬赏</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a th:href="@{/ad01/edit}">我的悬赏区</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a href="#"><span class="pull-right">>></span>更多</a></h4>
-                            </div>
-                        </div>
+
                     </div>
                     <!--/category-products-->
                 </div>
@@ -222,17 +157,24 @@
                     <div class="col-lg-3 col-md-4 col-sm-6" >
 
                     <div class="thumbnail">
-                        <img src="https://cdn.jsdelivr.net/npm/@bootcss/www.bootcss.com@0.0.2/dist/img/expo.png" alt="...">
+                        <img src="images/rewordlogo.png" alt="...">
                         <div class="caption">
-                            <h3 th:text=" ${ad01.aad105}" th:field="${ad01.aad105}"></h3>
-                            <p th:text="单号+ ${ad01.aad101}" disabled="disabled" th:field="${ad01.aad101}"></p>
-                            <p th:text="详情+${ad01.aad103}" th:field="${ad01.aad103}"></p>
-                            <p th:text="价格+ ${ad01.aad104}" th:field="${ad01.aad104}"></p>
-                            <p th:text="${ad01.aab101}" ></p>
-                            <p>
+                            <h3 class="conmm" th:text=" ${ad01.aad105}" th:field="${ad01.aad105}"></h3>
+                            <p th:text="${ad01.aad101}" readonly="readonly" th:field="${ad01.aad101}" hidden></p>
 
-                                <a th:href="@{/ad01/list(aad101=${ad01.aad101})}" class="btn btn-primary" role="button">收藏</a>
-                                <a th:href="@{/ad01/information(aad101=${ad01.aad101})}" class="btn btn-default" role="button">详情</a>
+                            <p>详情:</p>
+                            <p class="conmm" th:text="${ad01.aad103}" th:field="${ad01.aad103}"></p>
+
+                            <p>价格:</p>
+                            <p th:text="${ad01.aad104}" th:field="${ad01.aad104}" id="5"></p>
+                            <p th:text="${ad01.aab101}" hidden></p>
+                            <p th:switch="${isLogin}">
+                                <a th:case="true" class="btn btn-primary" role="button" th:onclick=" 'javascript:forkit(\''+${ad01.aad101}+'\')'" >
+                                <span>收藏</span>
+
+                                </a>
+                                <a th:case="false" class="btn btn-primary"  onclick="openLoginModal()">收藏</a>
+                                <a th:href="@{/information(aad101=${ad01.aad101})}" class="btn btn-default" role="button">详情</a>
                             </p>
                         </div>
                     </div>
@@ -244,65 +186,41 @@
     </div>
 </div>
 
-<div class="modal fade login" id="loginModal">
-    <div class="modal-dialog login animated">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Login with</h4>
-            </div>
-            <div class="modal-body">
-                <div class="box">
-                    <div class="content">
-
-                        <div class="error"></div>
-                        <div class="form loginBox">
-                            <form method="post" action="#" accept-charset="UTF-8">
-                                <input class="form-control" type="text" placeholder="账号" name="email">
-                                <input class="form-control" type="password" placeholder="密码" name="password">
-                                <input class="btn btn-default btn-login" type="button" value="登录" onclick="loginAjax()">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="content registerBox" style="display:none;">
-                        <div class="form">
-                            <form method="post" html="{:multipart=>true}" data-remote="true" action="/user/login"
-                                  accept-charset="UTF-8">
-                                <input class="form-control" type="text" placeholder="用户名" name="">
-                                <input class="form-control" type="password" placeholder="密码" name="">
-                                <input class="form-control" type="password" placeholder="确认密码" name="">
-                                <input class="form-control" type="text" placeholder="手机号" name="">
-                                <div class="col-lg-6">
-                                    <input class="form-control" type="text" placeholder="验证码" name="">
-                                </div>
-                                <div class="col-lg-6">
-                                    <input class="btn btn-default btn-register" type="button" value="获取验证码" name="">
-                                </div>
-                                <input class="btn btn-default btn-register" type="submit" value="确认注册" name="commit">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <div class="forgot login-footer">
-							<span>
-                                 <a href="javascript: showRegisterForm();">新账户注册</a>
-                            </span>
-                </div>
-                <div class="forgot register-footer" style="display:none">
-                    <span>已注册账号？</span>
-                    <a href="javascript: showLoginForm();">登录</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/login-register.js"></script>
+<script>
+    function forkit(id)
+    {
+        var aad101=id;
+        addo(aad101);
+    }
+    function addo(aad101) {
+        console.log(aad101);
+        var data = {aad101: aad101};
+        $.ajax({
+            url: 'list',
+            type: 'GET',
+            data: data,
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (data){
+                if(data==1)
+                {
+                    alert("成功加入");
+                }
+                if(data==2)
+                {
+                    alert("您已加入过此到收藏");
+                }
+                if(data==10)
+                {
+                    alert("请登录")
+                }
+            }
+        });
+    }
+
+</script>
 </body>
 </html>

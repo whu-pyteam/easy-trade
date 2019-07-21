@@ -28,12 +28,11 @@ public class Ae09Controler
     private Ae09Service ae09Service;
 
 
-    @GetMapping("ad01/addae09")
+    @GetMapping("addae09")
     public String showA()
     {
-        return "ad01/addae09";
+        return "addae09";
     }
-
 
 
 }

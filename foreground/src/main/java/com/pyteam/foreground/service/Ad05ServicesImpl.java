@@ -1,11 +1,16 @@
 package com.pyteam.foreground.service;
 
+import com.pyteam.db.mbg.entity.Ab01;
 import com.pyteam.db.mbg.entity.Ad05;
+import com.pyteam.foreground.dto.Ad01ac02Dto;
+import com.pyteam.foreground.dto.Ad05Ad01Dto;
+import com.pyteam.foreground.mapper.Ab01NewMapper;
 import com.pyteam.foreground.mapper.Ad05NewMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +23,9 @@ public class Ad05ServicesImpl implements Ad05Service
 {
     @Autowired
     private Ad05NewMapper ad05NewMapper;
+
+    @Autowired
+    private Ab01NewMapper ab01NewMapper;
 //    @Autowired
 //    private Ad01NewMapper ad01NewMapper;
 
@@ -60,9 +68,24 @@ public class Ad05ServicesImpl implements Ad05Service
     }
 
     @Override
-    public List<Ad05> selectbyaad101(int id)
+    public List<Ad05Ad01Dto> selectbyaad101(int id)
     {
-        return ad05NewMapper.selectbyaad101(id);
+        List<Ad05Ad01Dto> ad05Ad01DtoList=new ArrayList<>();
+        int count =ad05NewMapper.countaad101(id);
+        List<Ad05> ad05list= ad05NewMapper.selectbyaad101(id);
+        if(ad05list!=null)
+        {
+            for(int i=0;i<count;i++)
+            {
+                int aab101=ad05list.get(i).getAab101();
+                Ab01 ab01=ab01NewMapper.selectad01(aab101);
+                Ad05Ad01Dto ad05Ad01Dto=new Ad05Ad01Dto();
+                ad05Ad01Dto.setAd05(ad05list.get(i));
+                ad05Ad01Dto.setAb01(ab01);
+                ad05Ad01DtoList.add(i,ad05Ad01Dto);
+            }
+        }
+        return ad05Ad01DtoList;
     }
 
 }

@@ -1,11 +1,9 @@
 package com.pyteam.foreground.controller;
 
-import com.google.gson.JsonObject;
 import com.pyteam.db.mbg.entity.Ac02;
 import com.pyteam.db.mbg.entity.Ad01;
-import com.pyteam.db.mbg.entity.Ad05;
 import com.pyteam.db.mbg.entity.Ae09;
-import com.pyteam.foreground.service.Ac05Service;
+import com.pyteam.foreground.dto.Ad01ac02Dto;
 import com.pyteam.foreground.service.Ad01Service;
 import com.pyteam.foreground.service.Ad05Service;
 import com.pyteam.foreground.service.Ae09Service;
@@ -16,18 +14,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+
+import static com.pyteam.foreground.controller.LoginController.getCookies;
+import static com.pyteam.foreground.controller.LoginController.isLogin;
 
 /**
  * @author wjm
  * @date2019/7/8 19:14
  */
 @Controller
-@RequestMapping("/ad01")
 public class Ad01Controller
 {
     @Autowired
@@ -37,20 +37,39 @@ public class Ad01Controller
     @Autowired
     private Ae09Service ae09Service;
 
+    private boolean isLogin;
+
     @GetMapping("/edit")
-    public String edit(Model m)
+    public String edit(Model m,HttpServletRequest request, HttpServletResponse response)
     {
-        int id=1;
-        m.addAttribute("ad01",ad01Service.findById(id));
-        System.out.println(ad01Service.findById(id));
-        return "ad01/edit";
+        isLogin = isLogin(request, response);
+        if(isLogin)
+        {
+            m.addAttribute("isLogin",isLogin);
+            int id = Integer.parseInt(getCookies(request, "userId"));
+            m.addAttribute("ad01", ad01Service.findById(id));
+            return "edit";
+        }
+        m.addAttribute("isLogin",isLogin);
+        return "ad01list";
     }
+
     @PostMapping("/edit")
-    public String edit(@ModelAttribute("Ad01") Ad01 ad01)
+    public void edit(@RequestParam("aad101")int aad101,@RequestParam("aad105")String aad105,
+            @RequestParam("aad103")String aad103,@RequestParam("aad104")long aad104 ,@RequestParam("aad107") Date aad107,
+            @RequestParam("aad108")Date aad108, HttpServletRequest request, HttpServletResponse response)
     {
-            ad01Service.edit(ad01);
-            System.out.println("修改");
-            return "ad01/edit";
+        System.out.println("kaishi");
+        Ad01 ad01=new Ad01();
+        ad01.setAad101(aad101);
+        ad01.setAad105(aad105);
+        ad01.setAad103(aad103);
+        ad01.setAad104(aad104);
+        ad01.setAad108(aad108);
+        ad01.setAad107(aad107);
+        ad01Service.edit(ad01);
+        System.out.println("修改" + ad01);
+
     }
 
     @PostMapping("/biaoqian")
@@ -78,14 +97,14 @@ public class Ad01Controller
 
         m.addAttribute("ac02",ae09Service.query(aad101));
         System.out.println(m);
-        return "ad01/edit";
+        return "edit";
     }
 
     @GetMapping("/selectbybq")
     public String sel(Model m,@RequestParam("aac202")String aac202)
     {
             m.addAttribute("ad01",ae09Service.sel(aac202));
-            return"ad01/select";
+            return"select";
     }
 
     @PostMapping(value="/select")
@@ -94,25 +113,25 @@ public class Ad01Controller
         System.out.println(question);
         m.addAttribute("ad01",ad01Service.moreQuery(question));
         System.out.println(ad01Service.moreQuery(question).toString());
-        return "ad01/select";
+        return "select";
     }
     @GetMapping("/select")
     public String Query()
     {
-        return "ad01/select";
+        return "select";
     }
 
     @PostMapping ("/add")
-    public String add(@ModelAttribute (value = "ad01")Ad01 ad01)
+    public String add(@ModelAttribute (value = "ad01")Ad01 ad01,HttpServletRequest request, HttpServletResponse response)
     {
-        ad01.setAab101(1);
+        ad01.setAab101(Integer.parseInt(getCookies(request, "userId")));
         ad01Service.add(ad01);
-        return "ad01/add";
+        return "add";
     }
     @GetMapping("add")
     public String showadd()
     {
-        return "ad01/add";
+        return "add";
     }
 
     @PostMapping("/del")
@@ -121,37 +140,51 @@ public class Ad01Controller
         System.out.println(id);
         int aid=Integer.parseInt(id);
         ad01Service.deleteById(aid);
-        return "ad01/edit";
+        return "edit";
     }
     @GetMapping("del")
     public String showdel(Model m)
     {
         m.addAttribute("ad01",ad01Service.findById(1));
-        return "ad01/del";
+        return "del";
     }
     @RequestMapping("/delad01")
     public String delete(@RequestParam(value = "aad101",required = false) int id)
     {
         System.out.println(id);
         ad01Service.deleteById(id);
-        return "ad01/edit";
+        return "edit";
     }
 
     @RequestMapping("cxk")
-    public String showList(@RequestParam(value = "notsure",required=false)String id,Model m)
+    public String showList(@RequestParam(value = "notsure",required=false)String id,Model m,HttpServletRequest request, HttpServletResponse response)
     {
-        System.out.println(id);
-        m.addAttribute("ad01",ad01Service.notSure(id));
-        System.out.println(ad01Service.notSure(id).toString());
-        return "ad01/select";
+        isLogin = isLogin(request, response);
+        if(isLogin)
+        {
+            m.addAttribute("isLogin", isLogin);
+            System.out.println(id);
+            m.addAttribute("ad01", ad01Service.notSure(id));
+            System.out.println(ad01Service.notSure(id).toString());
+            return "select";
+        }
+        m.addAttribute("isLogin", isLogin);
+        m.addAttribute("ad01", ad01Service.notSure(id));
+        return "select";
     }
 
 
     @GetMapping("information")
-    public String moreinformation(@RequestParam(value = "aad101")int aad101,Model m)
+    public String moreinformation(@RequestParam(value = "aad101")int aad101, Model m, HttpServletRequest request, HttpServletResponse response)
     {
+        isLogin = isLogin(request, response);
+        if (isLogin)
+        {
+
+        }
         m.addAttribute("ad01",ad01Service.findbyaad101(aad101));
-        return "ad01/information";
+        m.addAttribute("isLogin", isLogin);
+        return "/information";
     }
 
 

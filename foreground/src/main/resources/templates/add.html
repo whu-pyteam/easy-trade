@@ -6,13 +6,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>添加拍卖</title>
+    <title>添加悬赏</title>
 
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/fileinput.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/fileinput.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
-    <link href="../css/theme.css" rel="stylesheet">
-    <link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="css/theme.css" rel="stylesheet">
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <style type="text/css">
         .fqxs {
             padding-top: 60px;
@@ -25,7 +25,7 @@
     <div class="row">
         <div class="col-lg-3"></div>
         <div class="col-lg-6">
-            <form class="fqxs" th:action="@{/ad01/add}"  th:object="${ad01}" method="post" enctype="multipart/form-data">
+            <form class="fqxs" th:action="@{/add}"  th:object="${ad01}" method="post" enctype="multipart/form-data">
                 <div class="form-group row">
                     <div class="col-lg-2">
                         <label for="aad105">悬赏名称:</label>
@@ -86,13 +86,13 @@
     </div>
 </div>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/fileinput.js"></script>
-<script src="../js/theme.js"></script>
-<script src="../js/locales/zh.js"></script>
-<script src="../js/bootstrap-datetimepicker.min.js"></script>
-<script src="../js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/fileinput.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/locales/zh.js"></script>
+<script src="js/bootstrap-datetimepicker.min.js"></script>
+<script src="js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 </body>
 
 <script>
