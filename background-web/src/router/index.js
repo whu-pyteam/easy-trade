@@ -56,7 +56,7 @@ export const constantRouterMap = [
         meta: {title: "员工列表", icon: 'product-list'},
       },
       {
-        path: ':username',
+        path: ':id',
         name: 'staff-add',
         component: () => import('@/views/staff/staff-update'),
         meta: {title: "员工修改", icon: 'audit'},

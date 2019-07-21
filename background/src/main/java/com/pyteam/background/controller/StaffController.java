@@ -45,10 +45,10 @@ public class StaffController
     }
 
     @ApiOperation("单例查询员工信息")
-    @GetMapping("/{username}")
-    public CommonResponse<Af02> getInfoById(@PathVariable("username") String username)
+    @GetMapping("/{id}")
+    public CommonResponse<Af02> getInfoById(@PathVariable("id") Integer id)
     {
-        return CommonResponse.success(af02Service.getEmpByUsername(username));
+        return CommonResponse.success(af02Service.getAf02ById(id));
     }
 
 
