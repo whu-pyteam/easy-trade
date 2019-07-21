@@ -3,6 +3,7 @@ package com.pyteam.foreground;
 import com.pyteam.db.mbg.entity.*;
 import com.pyteam.db.mbg.mapper.Ab01Mapper;
 import com.pyteam.db.mbg.mapper.Ab02Mapper;
+import com.pyteam.db.mbg.mapper.Ac03Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,8 @@ public class RegisterService
     Ab01Mapper ab01Mapper;
     @Autowired
     Ab02Mapper ab02Mapper;
+    @Autowired
+    Ac03Mapper ac03Mapper;
 
     /**
      * 注册
@@ -34,9 +37,16 @@ public class RegisterService
     {
         Ab01 ab01 = new Ab01();
         ab01.setAab102(username);
+        ab01.setAab103(username);
+        ab01.setAab104("3");
+        ab01.setAab105(new Date());
+        ab01.setAab106(1);
+        ab01.setAab107("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3999684833,1365604362&fm=26&gp=0.jpg");
         ab01.setAab108(password);
-        ab01.setAab112(number);
+        ab01.setAab109(0);
         ab01.setAab110("0");
+        ab01.setAab111("这个人很懒，啥都没有留下...");
+        ab01.setAab112(number);
         ab01.setAab113(new Date());
         ab01.setAab114(new Date());
 
@@ -52,6 +62,10 @@ public class RegisterService
         String encodePassword = passwordEncoder.encode(password);
         ab01.setAab108(encodePassword);
         ab01Mapper.insert(ab01);
+
+        Ac03 ac03=new Ac03();
+        ac03.setAab101(ab01.getAab101());
+        ac03Mapper.insert(ac03);
         return true;
     }
 

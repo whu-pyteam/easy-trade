@@ -28,7 +28,7 @@ public class OrderController
         if (isLogin(request,response))
         {
             Ac05Dto ac05Dto = new Ac05Dto();
-            ac05Dto.setAab101(Integer.parseInt(getCookies(request,"username")));
+            ac05Dto.setAab101(Integer.parseInt(getCookies(request,"userId")));
             ac05Dto.setAac503(0);
             ac05Dto.setAac504(Integer.parseInt(request.getParameter("aac504")));
             ac05Dto.setAac505(new BigDecimal(request.getParameter("aac505")));

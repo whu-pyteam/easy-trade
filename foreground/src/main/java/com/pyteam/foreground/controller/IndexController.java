@@ -30,7 +30,6 @@ public class IndexController
     @Autowired
     private Ab01Service ab01Service;
 
-    private boolean isLogin;
 
     @RequestMapping(value = "/index.html", method = RequestMethod.GET)
     public String wel(HttpServletRequest request, HttpServletResponse response, Model model)throws Exception
@@ -47,7 +46,7 @@ public class IndexController
      * @return
      */
     @RequestMapping(value="goodShow.html",method=RequestMethod.GET)
-    public String searchById(int id, Model model)
+    public String searchById(int id, Model model,HttpServletRequest request,HttpServletResponse response)
     {
         try
         {
@@ -60,6 +59,7 @@ public class IndexController
             model.addAttribute("aab103",ab01.getAab103());
             model.addAttribute("aac202",name);
             model.addAttribute("type", 1);
+            model.addAttribute("isLogin", isLogin(request, response));
             return "goodShow";
         }
         catch (Exception e)
@@ -76,13 +76,14 @@ public class IndexController
      * @return
      */
     @RequestMapping(value = "/goodSearch.html", method = RequestMethod.POST)
-    public String searchByValue(@RequestParam(value = "searchValue") String value, Model model)
+    public String searchByValue(@RequestParam(value = "searchValue") String value, Model model,HttpServletRequest request,HttpServletResponse response)
     {
         System.out.println(value);
         try
         {
             model.addAttribute("searchList", ac01Service.searchByValue(value));
             model.addAttribute("type", 1);
+            model.addAttribute("isLogin", isLogin(request, response));
             return "goodSearch";
         }
         catch (Exception e)
@@ -106,6 +107,7 @@ public class IndexController
         if (isLogin(request,response))
         {
             model.addAttribute("type","1");
+            model.addAttribute("isLogin", isLogin(request, response));
             return "goodLaunch";
         } else
         {
@@ -126,7 +128,7 @@ public class IndexController
     {
         if (isLogin(request,response))
         {
-            dto.setAab101(Integer.parseInt(getCookies(request,"username")));
+            dto.setAab101(Integer.parseInt(getCookies(request,"userId")));
             try
             {
                 boolean res = ac01Service.addAc01(dto);
@@ -134,6 +136,7 @@ public class IndexController
                 {
                     model.addAttribute("type", 1);
                     model.addAttribute("ac01List", ac01Service.selectById());
+                    model.addAttribute("isLogin", isLogin(request, response));
                     return "index";
                 }
                 else
@@ -160,7 +163,7 @@ public class IndexController
      * @return
      */
     @GetMapping("sort.html")
-    public String  getGoodByCategory(int sortId,Model model)
+    public String  getGoodByCategory(int sortId,Model model,HttpServletRequest request,HttpServletResponse response)
     {
         //定义返回的商品list容器
         List<Ac01> goodList=new ArrayList<>();
@@ -185,6 +188,7 @@ public class IndexController
         {
             model.addAttribute("type", 1);
             model.addAttribute("ac01List", goodList);
+            model.addAttribute("isLogin", isLogin(request, response));
             return "index";
         }
         catch (Exception e)

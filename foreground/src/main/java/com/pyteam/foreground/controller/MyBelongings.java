@@ -38,10 +38,11 @@ public class MyBelongings
         //判断用户是否登录
         if (isLogin(request,response))
         {
-            String username = getCookies(request,"username");
+            String username = getCookies(request,"userId");
 
             List<Ac01> ac01List = ac01Service.getByOwner(Integer.parseInt(username));
             model.addAttribute("ac01List",ac01List);
+            model.addAttribute("isLogin", isLogin(request, response));
             return "myGood";
         }
         else
@@ -57,10 +58,11 @@ public class MyBelongings
         //判断用户是否登录
         if (isLogin(request,response))
         {
-            String username = getCookies(request,"username");
+            String username = getCookies(request,"userId");
 
             List<Ac01> ac01List = ac05Service.getByOrder(Integer.parseInt(username));
             model.addAttribute("ac01List",ac01List);
+            model.addAttribute("isLogin", isLogin(request, response));
             return "myPurchase";
         }
         else

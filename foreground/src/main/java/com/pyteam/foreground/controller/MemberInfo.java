@@ -37,8 +37,9 @@ public class MemberInfo
     {
         if (isLogin(request,response))
         {
-            String username = getCookies(request,"username");
+            String username = getCookies(request,"userId");
             Ab01 ab01 = ab01Service.getMemberInfo(Integer.parseInt(username));
+
 
             model.addAttribute("aab103",ab01.getAab103());
             model.addAttribute("aab104",ab01.getAab104());
@@ -48,7 +49,7 @@ public class MemberInfo
             model.addAttribute("aab106",schoolName);
             model.addAttribute("aab107",ab01.getAab107());
             model.addAttribute("aab111",ab01.getAab111());
-
+            model.addAttribute("isLogin", isLogin(request, response));
             return "memberInfo";
         } else
         {
@@ -57,14 +58,15 @@ public class MemberInfo
     }
 
     @PostMapping("memberInfoSubmit.html")
-    public String memberInfoSubmit(Ab01Dto ab01Dto,HttpServletRequest request,HttpServletResponse response)throws Exception
+    public String memberInfoSubmit(Ab01Dto ab01Dto,Model model,HttpServletRequest request,HttpServletResponse response)throws Exception
     {
         if (isLogin(request,response))
         {
-            String username = getCookies(request,"username");
+            String username = getCookies(request,"userId");
             try
             {
                 ab01Service.updateMemberInfo(Integer.parseInt(username),ab01Dto);
+                model.addAttribute("isLogin", isLogin(request, response));
                 return "memberInfo";
             }
             catch(Exception e)
@@ -80,7 +82,7 @@ public class MemberInfo
     }
 
     @GetMapping("sellerInfo.html")
-    public String sellerInfo(Integer id,Model model)throws Exception
+    public String sellerInfo(Integer id,Model model,HttpServletRequest request,HttpServletResponse response)throws Exception
     {
         try
         {
@@ -121,6 +123,7 @@ public class MemberInfo
 
             List<Ac01> ac01List = ac01Service.getByOwner(id);
             model.addAttribute("ac01List",ac01List);
+            model.addAttribute("isLogin", isLogin(request, response));
             return "sellerInfo";
         }
         catch (Exception e)
