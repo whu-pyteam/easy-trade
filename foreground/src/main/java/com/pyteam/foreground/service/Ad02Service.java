@@ -3,11 +3,15 @@ package com.pyteam.foreground.service;
 import com.pyteam.db.mbg.entity.Ad02;
 import com.pyteam.db.mbg.entity.Ad02Example;
 import com.pyteam.db.mbg.entity.Ad02Example.Criteria;
+import com.pyteam.db.mbg.entity.Ad06;
+import com.pyteam.db.mbg.entity.Ad06Example;
 import com.pyteam.db.mbg.mapper.Ad02Mapper;
+import com.pyteam.db.mbg.mapper.Ad06Mapper;
 import com.pyteam.db.utils.QiniuUtil;
 import com.pyteam.foreground.dto.Ad02Dto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -25,6 +29,9 @@ public class Ad02Service
 
     @Autowired
     private QiniuUtil qiniuUtil;
+
+    @Autowired
+    private Ad06Mapper ad06Mapper;
 
     /**
      * 依据拍卖物品流水号（aad201）更新当前最高价（aad208）
@@ -45,12 +52,35 @@ public class Ad02Service
      * @param aad201
      * @return
      */
+    @Transactional
     public boolean deleteById(int aad201)
     {
         Ad02 ad02 = new Ad02();
         ad02.setAad201(aad201);
         ad02.setAad209("4");
-        return ad02Mapper.updateByPrimaryKeySelective(ad02) > 0;
+        if(ad02Mapper.updateByPrimaryKeySelective(ad02) > 0)
+        {
+            Ad06Example ad06Example = new Ad06Example();
+            Ad06Example.Criteria ad06Criteria = ad06Example.createCriteria();
+            ad06Criteria.andAad201EqualTo(aad201);
+            List<Ad06> ad06List = ad06Mapper.selectByExample(ad06Example);
+            if(!ad06List.isEmpty())
+            {
+                for (Ad06 ad06:ad06List)
+                {
+                    ad06.setAad603("5");
+                    if(ad06Mapper.updateByPrimaryKey(ad06) <= 0)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /**

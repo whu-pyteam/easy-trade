@@ -18,6 +18,7 @@
                 <tr>
                     <td>物品</td>
                     <td></td>
+                    <td>竞拍底价</td>
                     <td>当前最高价</td>
                     <td>截止时间</td>
                     <td>审核状态</td>
@@ -28,12 +29,14 @@
                 <tr th:each="ad02:${ad02List}">
                     <td><img th:src="${ad02.aad203}" style="height: 100px; width: 100px; overflow: hidden"></td>
                     <td><h3 th:text="${ad02.aad202}"></h3></td>
+                    <td><p th:text="${ad02.aad206}"></p></td>
                     <td><p th:text="${ad02.aad208}"></p></td>
                     <td><p th:text="${#dates.format(ad02.aad211, 'yyyy年MM月dd日 HH:mm')}"></p></td>
                     <td th:switch="${ad02.aad209}">
                         <p th:case="0">未审核</p>
                         <p th:case="1">已通过</p>
                         <p th:case="2">未通过</p>
+                        <p th:case="3">已结束</p>
                     </td>
                     <td>
                             <button class="btn btn-info" th:onclick="delMyAuc([[${ad02.aad201}]])">删除</button>

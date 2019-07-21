@@ -1,5 +1,7 @@
 package com.pyteam.foreground.service;
 
+import com.pyteam.db.entity.AuctionPart;
+import com.pyteam.db.mapper.AuctionMapper;
 import com.pyteam.db.mbg.entity.Ad02;
 import com.pyteam.db.mbg.entity.Ad02Example;
 import com.pyteam.db.mbg.entity.Ad06;
@@ -8,6 +10,7 @@ import com.pyteam.db.mbg.mapper.Ad02Mapper;
 import com.pyteam.db.mbg.mapper.Ad06Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -24,6 +27,7 @@ public class OrderService
     /**
      * 更新拍卖信息表和关联表
      */
+    @Transactional
     public void updateAd02AndAd06()
     {
         Ad02Example ad02Example = new Ad02Example();
