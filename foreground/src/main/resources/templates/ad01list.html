@@ -86,6 +86,51 @@
 
                         <div th:if="${isLogin}">
 
+                            <nav id="cd-vertical-nav">
+                                <ul>
+                                    <li>
+                                        <a th:href="@{/forklist}" data-number="1">
+                                            <span class="cd-dot"></span>
+                                            <span class="cd-label">收藏夹</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/myOrder}" data-number="2">
+                                            <span class="cd-dot"></span>
+                                            <span class="cd-label">我的订单</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/ad01Accept}" data-number="3">
+                                            <span class="cd-dot"></span>
+                                            <span class="cd-label">已接受悬赏</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/edit}" data-number="4">
+                                            <span class="cd-dot"></span>
+                                            <span class="cd-label">我的悬赏区</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-number="5">
+                                            <span class="cd-dot"></span>
+                                            <span class="cd-label">Typography</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-number="6">
+                                            <span class="cd-dot"></span>
+                                            <span class="cd-label">Content Areas</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </nav>
+
+
+
+
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title"><a th:href="@{/forklist}">收藏夹</a></h4>
@@ -181,7 +226,7 @@
                                 <a th:case="false" class="btn btn-primary"  onclick="openLoginModal()">收藏</a>
                                 <a th:href="@{/information(aad101=${ad01.ad01.aad101})}" class="btn btn-default" role="button">详情</a>
                             </div>
-                            
+
                             <div class="cssnn" th:each="item:${ad01.ac02List}">
                                 <span class="label label-primary"  th:text="${item.aac202}" th:value="${item.aac202}"   onclick="func(this.innerText)"></span>
                             </div>
