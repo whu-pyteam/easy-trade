@@ -1,5 +1,7 @@
 package com.pyteam.foreground.service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.pyteam.db.mbg.entity.Ad02;
 import com.pyteam.db.mbg.entity.Ad02Example;
 import com.pyteam.db.mbg.entity.Ad02Example.Criteria;
@@ -16,7 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 拍卖商品表ad02
@@ -41,12 +45,17 @@ public class Ad02Service
         return ad02Mapper.selectByExample(ad02Example);
     }
 
-    public List<Ad02> selectAll()
+    public Map<String, Object> selectAll(int pageNum, int pageSize)
     {
         Ad02Example ad02Example = new Ad02Example();
         Criteria criteria = ad02Example.createCriteria();
         criteria.andAad209EqualTo("1");
-        return ad02Mapper.selectByExample(ad02Example);
+        Page page = PageHelper.startPage(pageNum, pageSize);
+        List<Ad02> ad02List = ad02Mapper.selectByExample(ad02Example);
+        Map<String, Object> ad02Map = new HashMap<>();
+        ad02Map.put("ad02List", ad02List);
+        ad02Map.put("pageCount", page.getPages());
+        return ad02Map;
     }
 
     /**

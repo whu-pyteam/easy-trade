@@ -136,26 +136,42 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6" th:each="ad02:${ad02List}">
-                <div class="thumbnail">
-                    <a th:href="@{'auctionShow.html?aad201=' + ${ad02.aad201}}" style="text-decoration:none;">
-                        <img th:src="${ad02.aad203}" style="height: 150px; width: 100%; object-fit: cover;"
-                             alt="拍卖物品图片">
-                        <div class="caption">
-                            <h4 th:text="${ad02.aad202}"></h4>
-                            <p th:if="${ad02.aad205} == '1'">竞拍价：￥<span th:text="${ad02.aad206}"
-                                                                        style="font-size: 24px; color: red;"></span>元
-                            </p>
-                            <p th:if="${ad02.aad205} == '2'">当前价：￥<span th:text="${ad02.aad208}"
-                                                                        style="font-size: 24px; color: red;"></span>元
-                            </p>
-                            <p>竞拍方式：<span th:text="(${ad02.aad205} == '1')?'一口价竞拍':'加价竞拍'"></span></p>
-                            <p>截止时间：<span th:text="${#dates.format(ad02.aad211, 'MM月dd日 HH:mm')}"></span></p>
-                        </div>
-                    </a>
+            <div class="col-sm-10">
+                <div class="col-lg-3 col-md-4 col-sm-6" th:each="ad02:${ad02List}">
+                    <div class="thumbnail">
+                        <a th:href="@{'auctionShow.html?aad201=' + ${ad02.aad201}}" style="text-decoration:none;">
+                            <img th:src="${ad02.aad203}" style="height: 150px; width: 100%; object-fit: cover;"
+                                 alt="拍卖物品图片">
+                            <div class="caption">
+                                <h4 th:text="${ad02.aad202}"></h4>
+                                <p th:if="${ad02.aad205} == '1'">竞拍价：￥
+                                    <span th:if="${ad02.aad206} < 10000" th:text="${ad02.aad206}" style="font-size: 20px; color: red;"></span>
+                                    <span th:if="${ad02.aad206} >= 10000" th:text="${ad02.aad206 / 10000} + '万'" style="font-size: 20px; color: red;"></span>元
+                                </p>
+                                <p th:if="${ad02.aad205} == '2'">当前价：￥
+                                    <span th:if="${ad02.aad206} < 10000" th:text="${ad02.aad208}" style="font-size: 20px; color: red;"></span>
+                                    <span th:if="${ad02.aad206} >= 10000" th:text="${ad02.aad208 / 10000} + '万'" style="font-size: 20px; color: red;"></span>元
+                                </p>
+                                <p>竞拍方式：<span th:text="(${ad02.aad205} == '1')?'一口价竞拍':'加价竞拍'"></span></p>
+                                <p>截止时间：<span th:text="${#dates.format(ad02.aad211, 'MM月dd日 HH:mm')}"></span></p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <ul class="pager">
+                        <li th:if="${!pre}" class="disabled"><span>上一页</span></li>
+                        <li th:if="${pre}"><a th:href="'auction.html?pageNum=' + ${pageNum - 1}">上一页</a></li>
+                        <li th:if="${next}"><a th:href="'auction.html?pageNum=' + ${pageNum + 1}">下一页</a></li>
+                        <li th:if="${!next}" class="disabled"><span>下一页</span></li>
+                    </ul>
                 </div>
             </div>
+            <div class="col-sm-2">
+
+            </div>
         </div>
+
     </div>
 </div>
 

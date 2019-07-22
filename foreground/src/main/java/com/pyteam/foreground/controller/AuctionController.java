@@ -1,5 +1,6 @@
 package com.pyteam.foreground.controller;
 
+import com.pyteam.db.mbg.entity.Ad02;
 import com.pyteam.db.mbg.entity.Ad06;
 import com.pyteam.db.mbg.entity.Ae05;
 import com.pyteam.foreground.dto.Ad02Dto;
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.util.List;
+import java.util.Map;
 
 import static com.pyteam.foreground.controller.LoginController.isLogin;
 import static com.pyteam.foreground.controller.LoginController.getCookies;
@@ -179,17 +183,38 @@ public class AuctionController
 
 
     @RequestMapping(value = "/auction.html", method = RequestMethod.GET)
-    public String wel(HttpServletRequest request, HttpServletResponse response, Model model)
+    public String wel(HttpServletRequest request, HttpServletResponse response, int pageNum, Model model)
     {
-        isLogin = isLogin(request, response);
-        int aad401 = 0;
-        if(isLogin)
+
+        Map<String, Object> ad02Map = service.selectAll(pageNum, 8);
+        int pageCount = (int)ad02Map.get("pageCount");
+        boolean pre = true;
+        boolean next = true;
+        if(pageCount <= 1)
         {
-            aad401 = Integer.parseInt(getCookies(request, "aad401_auc"));
+            pre = false;
+            next = false;
         }
-        model.addAttribute("ad02List", service.selectAll());
+        else if(pageNum == 1)
+        {
+            pre = false;
+        }
+        else if(pageNum == pageCount)
+        {
+            next = false;
+        }
+        else
+        {
+            return "404";
+        }
+
+
+        model.addAttribute("ad02List", (List<Ad02>)ad02Map.get("ad02List"));
         model.addAttribute("slideList", service.selectSlide());
-        model.addAttribute("isLogin", isLogin);
+        model.addAttribute("isLogin", isLogin(request, response));
+        model.addAttribute("pre", pre);
+        model.addAttribute("next", next);
+        model.addAttribute("pageNum", pageNum);
         return "auction";
     }
 }
