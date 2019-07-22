@@ -47,7 +47,7 @@
             text-align:center;
             padding-left: 10px;
             padding-right: 10px;
-            margin:5px 3px 0px 0px;
+            float:left;
         }
     </style>
 
@@ -174,19 +174,16 @@
                             <p>价格:</p>
                             <p th:text="${ad01.ad01.aad104}" th:field="${ad01.ad01.aad104}" id="5"></p>
                             <p th:text="${ad01.ad01.aab101}" hidden></p>
-                            <p th:switch="${isLogin}">
+                            <div th:switch="${isLogin}">
                                 <a th:case="true" class="btn btn-primary" role="button" th:onclick=" 'javascript:forkit(\''+${ad01.ad01.aad101}+'\')'" >
                                 <span>收藏</span>
-
                                 </a>
                                 <a th:case="false" class="btn btn-primary"  onclick="openLoginModal()">收藏</a>
                                 <a th:href="@{/information(aad101=${ad01.ad01.aad101})}" class="btn btn-default" role="button">详情</a>
-                            </p>
-                            <!--<select id="oselect" onchange="func()" hidden="hidde">-->
-                                <!--<option th:each="item:${ad01.ac02List}" th:text="${item.aac202}" th:value="${item.aac202}" name="aac202" ></option>-->
-                            <!--</select>-->
-                            <div class="cssnn">
-                                <span class="label label-primary" th:each="item:${ad01.ac02List}" th:text="${item.aac202}" th:value="${item.aac202}"   onclick="func(this.innerText)"></span> &nbsp;
+                            </div>
+                            
+                            <div class="cssnn" th:each="item:${ad01.ac02List}">
+                                <span class="label label-primary"  th:text="${item.aac202}" th:value="${item.aac202}"   onclick="func(this.innerText)"></span>
                             </div>
                         </div>
                     </div>
