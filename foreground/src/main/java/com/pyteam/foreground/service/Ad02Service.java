@@ -33,6 +33,22 @@ public class Ad02Service
     @Autowired
     private Ad06Mapper ad06Mapper;
 
+    public List<Ad02> selectSlide()
+    {
+        Ad02Example ad02Example = new Ad02Example();
+        Criteria criteria = ad02Example.createCriteria();
+        criteria.andAad209EqualTo("5");
+        return ad02Mapper.selectByExample(ad02Example);
+    }
+
+    public List<Ad02> selectAll()
+    {
+        Ad02Example ad02Example = new Ad02Example();
+        Criteria criteria = ad02Example.createCriteria();
+        criteria.andAad209EqualTo("1");
+        return ad02Mapper.selectByExample(ad02Example);
+    }
+
     /**
      * 依据拍卖物品流水号（aad201）更新当前最高价（aad208）
      * @param aad201

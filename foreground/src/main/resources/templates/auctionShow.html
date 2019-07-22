@@ -50,7 +50,7 @@
     <div class="container">
         <div class="row" style="border: 1px solid #E8E8E8; padding-top: 15px; padding-bottom: 15px;">
             <div class="col-sm-4">
-                <img th:src="${ad02.aad203}" style="height: 300px; width: 100%; overflow: hidden;" alt=""/>
+                <img th:src="${ad02.aad203}" style="height: 400px; width: 100%; object-fit: cover;" alt=""/>
             </div>
             <div class="col-sm-8">
                 <form class="form-horizontal" action="auctionOffer.html" method="post">
@@ -140,10 +140,13 @@
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
     setInterval(getlocaltime, 1000);
-    var endTime = document.getElementById("endTime").value;
-    window.onload(getlocaltime());
+    window.onload = function ()
+    {
+        getlocaltime();
+    }
 
     function getlocaltime() {
+        var endTime = document.getElementById("endTime").value;
         var lasttime = endTime - new Date().getTime();
         if(lasttime < 0)
         {
