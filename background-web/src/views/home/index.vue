@@ -1,12 +1,16 @@
 <template>
   <div class="app-container">
-    <h1>首页</h1>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'home'
+    name: 'home',
+    data() {
+      return {
+
+      }
+    }
   }
 </script>
 
