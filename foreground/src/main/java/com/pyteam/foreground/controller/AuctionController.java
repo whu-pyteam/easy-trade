@@ -187,7 +187,8 @@ public class AuctionController
         {
             aad401 = Integer.parseInt(getCookies(request, "aad401_auc"));
         }
-        model.addAttribute("ad02_connList", connService.selectAd02LeftAe05(aad401));
+        model.addAttribute("ad02List", service.selectAll());
+        model.addAttribute("slideList", service.selectSlide());
         model.addAttribute("isLogin", isLogin);
         return "auction";
     }
