@@ -58,10 +58,24 @@ public class Ad01Service
         }
 
 
-        public List<Ad01> listByAll()
+        public List<Ad01ac02Dto> listByAll()
         {
-            PageHelper.startPage(1,8);
-            return ad01NewMapper.listByAll();
+            List<Ad01ac02Dto>ad01ac02DtoList=new ArrayList<>();
+            List<Ad01> ad01List= ad01NewMapper.listByAll();
+            int count=ad01NewMapper.list();
+            for(int i=0;i<count;i++)
+            {
+                if(ad01List==null)
+                {
+                }
+                int aad101= ad01List.get(i).getAad101();
+                List<Ac02> ac02List = ae09Service.query(aad101);
+                Ad01ac02Dto ad01ac02Dto = new Ad01ac02Dto();
+                ad01ac02Dto.setAd01(ad01List.get(i));
+                ad01ac02Dto.setAc02List(ac02List);
+                ad01ac02DtoList.add(ad01ac02Dto);
+            }
+            return ad01ac02DtoList;
         }
 
 
@@ -89,7 +103,6 @@ public class Ad01Service
             List<Ad01ac02Dto>ad01ac02DtoList=new ArrayList<>();
             List<Ad01> ad01List=ad01NewMapper.findallById(id);
             int count=ad01NewMapper.count(id);
-            System.out.println(count);
 
             //审核情况可能导致数目不一样
             for(int i=0;i<count;i++)
@@ -150,6 +163,7 @@ public class Ad01Service
 
             return ad05List;
         }
+
 
 }
 

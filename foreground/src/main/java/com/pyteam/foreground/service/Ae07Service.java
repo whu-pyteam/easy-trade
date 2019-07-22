@@ -38,7 +38,7 @@ public class Ae07Service
      {
           ae07NewMapper.addAe07(ae07);
      }
-     
+
      public List<Ac05> select(int id)
      {
           List<Ad01> ad01List=ad01NewMapper.order(id);

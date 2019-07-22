@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -55,16 +56,18 @@ public class Ad01Controller
     }
 
     @PostMapping("/edit")
-    public void edit(@RequestParam("aad101")int aad101,@RequestParam("aad105")String aad105,
-            @RequestParam("aad103")String aad103,@RequestParam("aad104")long aad104 ,@RequestParam("aad107") Date aad107,
-            @RequestParam("aad108")Date aad108, HttpServletRequest request, HttpServletResponse response)
+    public void edit(@RequestParam("aad101")int aad101, @RequestParam("aad105")String aad105,
+                     @RequestParam("aad103")String aad103, @RequestParam("aad104") String aad104 , @RequestParam("aad107") Date aad107,
+                     @RequestParam("aad108")Date aad108, HttpServletRequest request, HttpServletResponse response)
     {
         System.out.println("kaishi");
         Ad01 ad01=new Ad01();
+        BigDecimal bg=new BigDecimal(aad104);
+        System.out.println(bg);
         ad01.setAad101(aad101);
         ad01.setAad105(aad105);
         ad01.setAad103(aad103);
-        ad01.setAad104(aad104);
+        ad01.setAad104(bg);
         ad01.setAad108(aad108);
         ad01.setAad107(aad107);
         ad01Service.edit(ad01);
