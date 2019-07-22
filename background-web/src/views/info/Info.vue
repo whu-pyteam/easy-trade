@@ -1,5 +1,7 @@
 <template>
   <div class="app-container">
+    <h3>&nbsp;&nbsp;欢迎回来, {{username}}!</h3>
+    <br>
     <el-form ref="form" :model="form" label-width="80px" style="width: 500px;">
       <el-form-item label="我的名称">
         <el-input v-model="form.username" disabled></el-input>
@@ -51,6 +53,7 @@
     name: 'Info',
     data() {
       return {
+        username: this.$store.state.user.name,
         form: {
           aaf201: '',
           username: '',
