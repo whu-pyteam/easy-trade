@@ -29,4 +29,6 @@ public interface Ac05Mapper {
     int updateByPrimaryKeySelective(Ac05 record);
 
     int updateByPrimaryKey(Ac05 record);
+
+    int updateAac503ByPrimaryKey(Ac05 record);
 }

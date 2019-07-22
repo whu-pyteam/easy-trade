@@ -318,4 +318,9 @@
       aac511 = #{aac511,jdbcType=TIMESTAMP}
     where aac501 = #{aac501,jdbcType=INTEGER}
   </update>
+  <update id="updateAac503ByPrimaryKey"  parameterType="com.pyteam.db.mbg.entity.Ac05">
+    update ac05
+    set aac503=#{aac503}
+    where aac501=#{aac501}
+  </update>
 </mapper>

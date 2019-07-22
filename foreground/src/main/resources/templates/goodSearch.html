@@ -60,21 +60,23 @@
 <div class="zt">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6" th:each="search:${searchList}">
-                <div class="thumbnail">
-                    <a href="index.html"><img
-                            th:src="${search.aac106}"
-                            style="height: 150px; width: 100%;" alt=""/></a>
-                    <div class="caption">
-                        <h3 th:text="${search.aac102}"></h3>
-                        <p th:text="${search.aac103}"></p>
-                        <p>
-                            <a href="#" class="btn btn-primary" role="button">加入购物车</a>
-                            <a href="#" class="btn btn-default" role="button">购买</a>
-                        </p>
+            <h3 id="hint" style="display: none">没有相关商品记录</h3>
+                <div class="col-lg-3 col-md-4 col-sm-6" th:each="search:${searchList}">
+                    <div class="thumbnail">
+                        <a href="index.html"><img
+                                th:src="${search.aac106}"
+                                style="height: 150px; width: 100%;" alt=""/></a>
+                        <div class="caption">
+                            <h3 th:text="${search.aac102}"></h3>
+                            <p th:text="${search.aac103}"></p>
+                            <p>
+                                <a href="javascript:void(0)" class="btn btn-primary" role="button"
+                                   th:onclick="|javascript:addToCart('${search.aac101}')|">加入购物车</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <h3 id="assist" th:value="${searchList}" style="display: none"></h3>
         </div>
     </div>
 </div>
@@ -82,6 +84,38 @@
 
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/login-register.js"></script>
+<script>
+    function addToCart(productId) {
+        console.log(productId);
+        $.post(
+            "addToCart.html",
+            {id: productId},
+            function (data) {
+                if (data == 0) {
+                    window.location.replace("cart.html");
+                }
+                if (data == 1) {
+                    alert("成功加入购物车");
+                }
+                if (data == 2) {
+                    alert("没有未用户创建购物车");
+                }
+                if (data == 3) {
+                    alert("购物车已经存在该商品");
+                }
+            }
+        );
+    }
+
+    window.onload=function () {
+        if($("#assist").attr("value").length==2)
+        {
+            console.log("here")
+            $("#hint").css("display","block");
+        }
+    }
+</script>
 </body>
 
 </html>

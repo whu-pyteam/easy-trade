@@ -2,16 +2,20 @@ package com.pyteam.foreground.service;
 
 import com.pyteam.db.mbg.entity.Ab01;
 import com.pyteam.db.mbg.entity.Ab01Example;
-import com.pyteam.db.mbg.entity.Af02;
-import com.pyteam.db.mbg.entity.Af02Example;
+import com.pyteam.db.mbg.entity.Syscode;
+import com.pyteam.db.mbg.entity.SyscodeExample;
 import com.pyteam.db.mbg.mapper.Ab01Mapper;
-import org.mybatis.spring.annotation.MapperScan;
+import com.pyteam.db.mbg.mapper.SyscodeMapper;
+import com.pyteam.db.utils.QiniuUtil;
+import com.pyteam.foreground.dto.Ab01Dto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
 import java.util.List;
 
 /**
@@ -25,6 +29,10 @@ public class Ab01Service
     PasswordEncoder passwordEncoder;
     @Autowired
     private Ab01Mapper ab01Mapper;
+    @Autowired
+    private SyscodeMapper syscodeMapper;
+    @Autowired
+    private QiniuUtil qiniuUtil;
 
     public boolean addAb01() throws Exception
     {
@@ -87,4 +95,40 @@ public class Ab01Service
     }
 
 
+
+
+    public boolean updateMemberInfo(Integer aab101,Ab01Dto ab01Dto)throws Exception
+    {
+        Ab01 ab01=new Ab01();
+        ab01.setAab101(aab101);
+        ab01.setAab103(ab01Dto.getAab103());
+        ab01.setAab104(ab01Dto.getAab104());
+        ab01.setAab105(new SimpleDateFormat("yyyy-MM-dd").parse(ab01Dto.getAab105()));
+
+        SyscodeExample syscodeExample=new SyscodeExample();
+        SyscodeExample.Criteria criteria=syscodeExample.createCriteria();
+        criteria.andIdnameEqualTo(ab01Dto.getAab106());
+        List<Syscode> syscodeList=syscodeMapper.selectByExample(syscodeExample);
+        if(syscodeList.size()==1)
+        {
+            ab01.setAab106(syscodeList.get(0).getSyscodeid());
+        }
+        else
+        {
+            ab01.setAab106(1);
+        }
+
+        if(ab01Dto.getHasEdit().equals("0"))
+        {
+            ab01.setAab107(ab01Mapper.selectByPrimaryKey(aab101).getAab107());
+        }
+        else
+        {
+            ab01.setAab107(qiniuUtil.uploadImg(ab01Dto.getAab107()));
+        }
+        ab01.setAab111(ab01Dto.getAab111());
+
+        ab01Mapper.updateByPrimaryKeySelective(ab01);
+        return true;
+    }
 }
