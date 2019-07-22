@@ -110,9 +110,11 @@ public class Ad01Controller
         if(isLogin)
         {
             m.addAttribute("isLogin", isLogin);
+            System.out.println("？？？"+aac202);
             m.addAttribute("ad01", ae09Service.sel(aac202));
             return "select";
         }
+        m.addAttribute("ad01", ae09Service.sel(aac202));
         m.addAttribute("isLogin",isLogin);
         return "select";
     }

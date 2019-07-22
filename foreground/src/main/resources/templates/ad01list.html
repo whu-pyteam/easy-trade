@@ -182,11 +182,11 @@
                                 <a th:case="false" class="btn btn-primary"  onclick="openLoginModal()">收藏</a>
                                 <a th:href="@{/information(aad101=${ad01.ad01.aad101})}" class="btn btn-default" role="button">详情</a>
                             </p>
-                            <select id="oselect" onchange="func()">
-                                <option th:each="item:${ad01.ac02List}" th:text="${item.aac202}" th:value="${item.aac202}" name="aac202" ></option>
-                            </select>
+                            <!--<select id="oselect" onchange="func()" hidden="hidde">-->
+                                <!--<option th:each="item:${ad01.ac02List}" th:text="${item.aac202}" th:value="${item.aac202}" name="aac202" ></option>-->
+                            <!--</select>-->
                             <div class="cssnn">
-                                <span class="label label-info" th:each="item:${ad01.ac02List}" th:text="${item.aac202}" th:value="${item.aac202}" id="nn" onclick="func()"></span>
+                                <span class="label label-primary" th:each="item:${ad01.ac02List}" th:text="${item.aac202}" th:value="${item.aac202}"   onclick="func(this.innerText)"></span> &nbsp;
                             </div>
                         </div>
                     </div>
@@ -233,10 +233,10 @@
         });
     }
 
-    function func()
+    function func(obj)
     {
-        var id = $('select option:selected').val();
-        window.location.href = "/selectbybq?aac202=" + id;
+        var id = obj;
+        window.location.href = "/selectbybq?aac202="+ id;
     }
 
 </script>
