@@ -50,14 +50,6 @@ public class Ad02Service
         }
     }
 
-    public List<Ad02> selectSlide()
-    {
-        Ad02Example ad02Example = new Ad02Example();
-        Criteria criteria = ad02Example.createCriteria();
-        criteria.andAad209EqualTo("5");
-        return ad02Mapper.selectByExample(ad02Example);
-    }
-
     public Map<String, Object> selectAll(int pageNum, int pageSize)
     {
         Ad02Example ad02Example = new Ad02Example();
@@ -126,13 +118,18 @@ public class Ad02Service
      * @param aab101
      * @return
      */
-    public List<Ad02> findByUserId(int aab101)
+    public Map<String, Object> findByUserId(int aab101, int pageNum, int pageSize)
     {
         Ad02Example ad02Example = new Ad02Example();
         Criteria criteria = ad02Example.createCriteria();
         criteria.andAab101EqualTo(aab101);
         criteria.andAad209Between("0", "3");
-        return ad02Mapper.selectByExample(ad02Example);
+        Page page = PageHelper.startPage(pageNum, pageSize);
+        List<Ad02> ad02List = ad02Mapper.selectByExample(ad02Example);
+        Map<String, Object> ad02Map = new HashMap<>();
+        ad02Map.put("ad02List", ad02List);
+        ad02Map.put("pageCount", page.getPages());
+        return ad02Map;
     }
 
     /**
@@ -188,8 +185,7 @@ public class Ad02Service
         Ad02Example example = new Ad02Example();
         Criteria criteria = example.createCriteria();
         criteria.andAad202Like("%" + value + "%");
-        List<Ad02> ad02List = ad02Mapper.selectByExample(example);
-        return ad02List;
+        return ad02Mapper.selectByExample(example);
     }
 
 }

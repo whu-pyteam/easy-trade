@@ -41,9 +41,9 @@
         <div class="section">
             <div class="row">
                 <div class="col-md-3  col-md-offset-9">
-                    <form class="navbar-form navbar-right" role="search" style="position: absolute; top: -60px;">
+                    <form class="navbar-form navbar-right" role="search" action="auctionSearch.html" method="post" style="position: absolute; top: -60px;">
                         <div class="form-group form-white">
-                            <input type="text" class="form-control" placeholder="搜索">
+                            <input type="text" name="searchValue" class="form-control" placeholder="搜索">
                         </div>
                         <button type="submit" class="btn btn-white btn-raised btn-fab btn-fab-mini"><i class="material-icons">search</i></button>
                     </form>
@@ -91,13 +91,13 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <ul class="pagination pagination-info">
-                        <li><a href="javascript:void(0);">上一页</a></li>
-                        <li><a href="javascript:void(0);">下一页</a></li>
-                    </ul>
-                </div>
+            <div th:if="${type == 1}" class="row">
+                <ul class="pager">
+                    <li th:if="${!pre}" class="disabled"><span>上一页</span></li>
+                    <li th:if="${pre}"><a th:href="'auction.html?pageNum=' + ${pageNum - 1}">上一页</a></li>
+                    <li th:if="${next}"><a th:href="'auction.html?pageNum=' + ${pageNum + 1}">下一页</a></li>
+                    <li th:if="${!next}" class="disabled"><span>下一页</span></li>
+                </ul>
             </div>
         </div>
     </div>

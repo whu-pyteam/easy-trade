@@ -190,15 +190,39 @@ public class AuctionController
     }
 
     @RequestMapping(value = "auctionMyLau.html", method = RequestMethod.GET)
-    public String findByUserID(HttpServletRequest request, HttpServletResponse response, Model model)
+    public String findByUserID(HttpServletRequest request, HttpServletResponse response, int pageNum, Model model)
     {
         isLogin = isLogin(request, response);
         if(isLogin)
         {
             int aab101 = Integer.parseInt(getCookies(request, "userId"));
-            List<Ad02> ad02List = service.findByUserId(aab101);
+            Map<String, Object> ad02Map = service.findByUserId(aab101, pageNum, 8);
+            int pageCount = (int)ad02Map.get("pageCount");
+            boolean pre = true;
+            boolean next = true;
+            if(pageCount <= 1)
+            {
+                pre = false;
+                next = false;
+            }
+            else if(pageNum == 1)
+            {
+                pre = false;
+            }
+            else if(pageNum == pageCount)
+            {
+                next = false;
+            }
+            else
+            {
+                return "404";
+            }
+            List<Ad02> ad02List = (List<Ad02>)ad02Map.get("ad02List");
             model.addAttribute("ad02List", orderService.myLauState(ad02List));
             model.addAttribute("isLogin", isLogin);
+            model.addAttribute("pre", pre);
+            model.addAttribute("next", next);
+            model.addAttribute("pageNum", pageNum);
             return "auctionMyLau";
         }
         model.addAttribute("isLogin", isLogin);
@@ -223,9 +247,10 @@ public class AuctionController
     @RequestMapping(value = "/auctionSearch.html", method = RequestMethod.POST)
     public String searchByValue(HttpServletRequest request, HttpServletResponse response, String searchValue, Model model)
     {
-        model.addAttribute("searchList", service.findByValue(searchValue));
+        model.addAttribute("ad02List", service.findByValue(searchValue));
         model.addAttribute("isLogin", isLogin(request, response));
-        return "auctionSearch";
+        model.addAttribute("type", 2);
+        return "auction";
     }
 
     @RequestMapping(value = "/auctionLaunch.html", method = RequestMethod.GET)
@@ -271,7 +296,6 @@ public class AuctionController
     @RequestMapping(value = "/auction.html", method = RequestMethod.GET)
     public String wel(HttpServletRequest request, HttpServletResponse response, int pageNum, Model model)
     {
-
         Map<String, Object> ad02Map = service.selectAll(pageNum, 8);
         int pageCount = (int)ad02Map.get("pageCount");
         boolean pre = true;
@@ -293,14 +317,12 @@ public class AuctionController
         {
             return "404";
         }
-
-
         model.addAttribute("ad02List", (List<Ad02>)ad02Map.get("ad02List"));
-        model.addAttribute("slideList", service.selectSlide());
         model.addAttribute("isLogin", isLogin(request, response));
         model.addAttribute("pre", pre);
         model.addAttribute("next", next);
         model.addAttribute("pageNum", pageNum);
+        model.addAttribute("type", 1);
         return "auction";
     }
 }

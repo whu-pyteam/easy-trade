@@ -150,23 +150,6 @@ public class OrderService
         return res;
     }
 
-    public Ac05 getAucOrder(int aab101, int aad601)
-    {
-        Ad06 ad06 = ad06Mapper.selectByPrimaryKey(aad601);
-        if((ad06.getAab101() == aab101) && ad06.getAad603().equals("3"))
-        {
-            Ac05 ac05 = new Ac05();
-            ac05.setAac502("201907230001");
-            ac05.setAac505(ad06.getAad602());
-            return ac05;
-        }
-        else
-        {
-            System.out.println("......................");
-            return null;
-        }
-    }
-
     /**
      * 更新拍卖信息表和关联表
      */

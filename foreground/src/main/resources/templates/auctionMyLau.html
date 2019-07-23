@@ -40,7 +40,7 @@
                             <tbody>
                             <tr th:each="ad02:${ad02List}">
                                 <td><img th:src="${ad02.aad203}" style="height: 100px; width: 100px; object-fit: cover;"></td>
-                                <td><h3 th:text="${ad02.aad202}"></h3></td>
+                                <td><h4 th:text="${ad02.aad202}"></h4></td>
                                 <td><span th:text="${ad02.aad205 == '1'}?'一口价竞拍':'加价竞拍'"></span></td>
                                 <td class="text-center"><span th:text="${ad02.aad206}"></span></td>
                                 <td class="text-center"><span th:text="${ad02.aad208}"></span></td>
@@ -64,14 +64,14 @@
                             </tbody>
                         </table>
                     </div>
-<!--                    <div class="row">-->
-<!--                        <ul class="pager">-->
-<!--                            <li th:if="${!pre}" class="disabled"><span>上一页</span></li>-->
-<!--                            <li th:if="${pre}"><a th:href="'auctionConn.html?pageNum=' + ${pageNum - 1}">上一页</a></li>-->
-<!--                            <li th:if="${next}"><a th:href="'auctionConn.html?pageNum=' + ${pageNum + 1}">下一页</a></li>-->
-<!--                            <li th:if="${!next}" class="disabled"><span>下一页</span></li>-->
-<!--                        </ul>-->
-<!--                    </div>-->
+                    <div class="row">
+                        <ul class="pager">
+                            <li th:if="${!pre}" class="disabled"><span>上一页</span></li>
+                            <li th:if="${pre}"><a th:href="'auctionMyLau.html?pageNum=' + ${pageNum - 1}">上一页</a></li>
+                            <li th:if="${next}"><a th:href="'auctionMyLau.html?pageNum=' + ${pageNum + 1}">下一页</a></li>
+                            <li th:if="${!next}" class="disabled"><span>下一页</span></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 

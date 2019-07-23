@@ -39,7 +39,7 @@
                             <tr th:each="aconn:${aconnList}">
                                 <td><img th:src="${aconn.aad203}"
                                          style="height: 100px; width: 100px; object-fit: cover;"></td>
-                                <td><h3 th:text="${aconn.aad202}"></h3></td>
+                                <td><h4 th:text="${aconn.aad202}"></h4></td>
                                 <td><span th:text="${aconn.aad205 == '1'}?'一口价竞拍':'加价竞拍'"></span></td>
                                 <td class="text-center"><span
                                         th:text="${aconn.aad205 == '1'}?${aconn.aad206}:${aconn.aad208}"></span></td>
