@@ -1,106 +1,118 @@
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
     <title>添加拍卖</title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/material-kit.css?v=1.2.1" rel="stylesheet"/>
+
     <link href="css/fileinput.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
     <link href="css/theme.css" rel="stylesheet">
     <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-    <style type="text/css">
-        .fqxs {
-            padding-top: 60px;
-        }
-    </style>
 </head>
 
-<body>
-<div th:replace="header::header(3)"></div>
+<body class="signup-page">
+<div th:replace="auctionHeader::header(3)"></div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-3"></div>
-        <div class="col-lg-6">
-            <form class="fqxs" action="/auctionLaunch.html" method="post" enctype="multipart/form-data">
-                <div class="form-group row">
-                    <div class="col-lg-2">
-                        <label for="01">物品名称:</label>
-                    </div>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" name="aad202" id="01" required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-2">
-                        <label for="kv-explorer">物品图片:</label>
-                    </div>
-                    <div class="col-lg-10">
-                        <input id="kv-explorer" type="file" name="aad203" multiple required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-2">
-                        <label for="02">物品介绍:</label>
-                    </div>
-                    <div class="col-lg-10">
-                        <textarea class="form-control" rows="5" name="aad204" id="02" required></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>拍卖方式：</label>
-                    <label><input type="radio" name="aad205" value="1" checked>一口价竞拍</label>
-                    <label><input type="radio" name="aad205" value="2">加价竞拍</label>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-2">
-                        <label for="03">交易底价:</label>
-                    </div>
-                    <div class="col-lg-10">
-                        <input type="number" class="form-control" step="0.01" name="aad206" id="03" required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-2">
-                        <label for="04">加价金额:</label>
-                    </div>
-                    <div class="col-lg-10">
-                        <input type="number" class="form-control" step="0.01" name="aad207" id="04" required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-2">
-                        <label for="05">截止时间:</label>
-                    </div>
-                    <div class="col-lg-10">
-                        <div class="input-group date form_date">
-                            <input type="text" class="form-control" name="aad211" id="05" placeholder="请选择截止时间" readonly>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+<div class="page-header header-filter" style="background-image: url('images/bg_auc.jpg'); background-size: cover; background-position: top center;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="card card-signup">
+                    <div th:if="${res == 1}" class="alert alert-success">
+                        <div class="alert-icon">
+                            <i class="material-icons">check</i>
                         </div>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                        </button>
+                        <b>提交成功：</b>管理员即将进行审核。
+                    </div>
+                    <div th:if="${res == 2}" class="alert alert-warning">
+                        <div class="alert-icon">
+                            <i class="material-icons">warning</i>
+                        </div>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                        </button>
+                        <b>警告:</b>网络故障，请稍后再试！
+                    </div>
+                    <h3 class="card-title text-center">发起拍卖</h3>
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <form class="form" action="/auctionLaunch.html" method="post" enctype="multipart/form-data">
+                                <div class="card-content">
+                                    <div class="form-group">
+                                        <label class="control-label">物品名称</label>
+                                        <input type="text" name="aad202" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">物品图片</label>
+                                        <input id="kv-explorer" type="file" name="aad203" multiple required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">物品介绍</label>
+                                        <textarea name="aad204" class="form-control" rows="4" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">截止时间</label>
+                                        <div class="input-group date form_date">
+                                            <input type="text" class="form-control" name="aad211" placeholder="请选择截止时间"
+                                                   readonly>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">竞拍方式</label>
+                                        <label><input type="radio" name="aad205" value="1" checked>一口价竞拍</label>
+                                        <label><input type="radio" name="aad205" value="2">加价竞拍</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">竞拍底价</label>
+                                        <input type="number" class="form-control" step="0.01" name="aad206" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">加价金额</label>
+                                        <input type="number" class="form-control" step="0.01" name="aad207" required>
+                                    </div>
+                                </div>
+                                <div class="footer submit text-center">
+                                    <input type="submit" class="btn btn-primary btn-raised btn-round" value="提交"/>
+                                </div>
+                            </form>
+                        </div>
+
                     </div>
                 </div>
-                <div class="form-group text-center">
-                    <input type="submit" class="btn btn-primary" value="提交">
-                </div>
-            </form>
+
+            </div>
         </div>
-        <div class="col-lg-3"></div>
     </div>
 </div>
 
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<div th:replace="auctionHeader::footer"></div>
+
+</body>
+<!--   Core JS Files   -->
+<script src="js/jquery.min.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/material.min.js"></script>
+
 <script src="js/fileinput.js"></script>
 <script src="js/theme.js"></script>
 <script src="js/locales/zh.js"></script>
 <script src="js/bootstrap-datetimepicker.min.js"></script>
 <script src="js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
-</body>
-
 <script>
     $("#kv-explorer").fileinput({
         theme: 'explorer-fas',
@@ -116,7 +128,7 @@
         }
     });
     var sDate = new Date();
-    var eDate = new Date(sDate.getTime() + 1000*60*60*24*30);
+    var eDate = new Date(sDate.getTime() + 1000 * 60 * 60 * 24 * 30);
     $('.form_date').datetimepicker({
         language: 'zh-CN',
         autoclose: true, //自动关闭
@@ -129,4 +141,24 @@
     });
 </script>
 
+<!--    Plugin for Date Time Picker and Full Calendar Plugin   -->
+<script src="js/moment.min.js"></script>
+
+<!--	Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/   -->
+<script src="js/nouislider.min.js" type="text/javascript"></script>
+
+<!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker   -->
+<script src="js/bootstrap-datetimepicker.js" type="text/javascript"></script>
+
+<!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select   -->
+<script src="js/bootstrap-selectpicker.js" type="text/javascript"></script>
+
+<!--	Plugin for Tags, full documentation here: http://xoxco.com/projects/code/tagsinput/   -->
+<script src="js/bootstrap-tagsinput.js"></script>
+
+<!--	Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput   -->
+<script src="js/jasny-bootstrap.min.js"></script>
+
+<!--    Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc    -->
+<script src="js/material-kit.js?v=1.2.1" type="text/javascript"></script>
 </html>

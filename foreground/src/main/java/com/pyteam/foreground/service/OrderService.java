@@ -54,12 +54,14 @@ public class OrderService
                 {
                     break;
                 }
+                boolean isSet = false;
                 for(Ad06 ad06:ad06List)
                 {
-                    if(ad06.getAad602() == ad02.getAad208())
+                    if(!isSet && (ad06.getAad602() == ad02.getAad208()))
                     {
                         ad06.setAad603("3");
                         ad06Mapper.updateByPrimaryKey(ad06);
+                        isSet = true;
                     }
                     else
                     {

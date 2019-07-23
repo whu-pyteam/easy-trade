@@ -153,6 +153,7 @@ public class AuctionController
         if(isLogin)
         {
             model.addAttribute("isLogin", isLogin);
+            model.addAttribute("res", 0);
             return "auctionLaunch";
         }
         model.addAttribute("isLogin", isLogin);
@@ -169,11 +170,14 @@ public class AuctionController
             if(service.insert(dto))
             {
                 model.addAttribute("isLogin", isLogin);
+                model.addAttribute("res", 1);
                 return "auctionLaunch";
             }
             else
             {
-                return "123456";
+                model.addAttribute("isLogin", isLogin);
+                model.addAttribute("res", 2);
+                return "auctionLaunch";
             }
 
         }

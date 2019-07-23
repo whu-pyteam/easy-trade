@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div th:fragment="header(type)">
+    <nav class="navbar navbar-inverse navbar-transparent navbar-absolute" role="navigation-demo">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#pablo">EasyTrade</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navigation-example-2">
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <a href="index.html">
+                            <i class="material-icons">redeem</i> 首页
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="ad01list.html">
+                            <i class="material-icons">hearing</i> 悬赏
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="auction.html?pageNum=1">
+                            <i class="material-icons">gavel</i> 拍卖
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown" th:if="${isLogin}">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="material-icons">star</i> 收藏夹
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu dropdown-with-icons">
+                            <li>
+                                <a href="forklist.html">
+                                    <i class="material-icons">star_border</i> 收藏的悬赏
+                                </a>
+                            </li>
+                            <li>
+                                <a href="auctionConn.html?pageNum=1">
+                                    <i class="material-icons">star_border</i> 收藏的拍卖
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li th:if="${isLogin}">
+                        <a href="cart.html">
+                            <i class="material-icons">add_shopping_cart</i> 购物车
+                        </a>
+                    </li>
+                    <li class="dropdown" th:if="${isLogin}">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="material-icons">perm_contact_calendar</i> 卖家中心
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu dropdown-with-icons">
+                            <li>
+                                <a href="goodLaunch.html">
+                                    <i class="material-icons">redeem</i> 出售
+                                </a>
+                            </li>
+                            <li>
+                                <a href="add.html">
+                                    <i class="material-icons">hearing</i> 悬赏
+                                </a>
+                            </li>
+                            <li>
+                                <a href="auctionLaunch.html">
+                                    <i class="material-icons">gavel</i> 发起拍卖
+                                </a>
+                            </li>
+                            <li>
+                                <a href="myGood.html">
+                                    <i class="material-icons">redeem</i> 我的出售
+                                </a>
+                            </li>
+                            <li>
+                                <a href="edit.html">
+                                    <i class="material-icons">hearing</i> 我的悬赏
+                                </a>
+                            </li>
+                            <li>
+                                <a href="auctionMyLau.html">
+                                    <i class="material-icons">gavel</i> 我的拍卖
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">record_voice_over</i> 联系客服
+                        </a>
+                    </li>
+
+                    <li class="button-container" th:if="${!isLogin}">
+                        <a href="javascript:void(0)" target="_blank" class="btn btn-rose btn-round"
+                           onclick="openLoginModal();">
+                            <i class="material-icons">vpn_key</i> 登录
+                        </a>
+                    </li>
+
+                    <li class="dropdown" th:if="${isLogin}">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="material-icons">perm_identity</i> 我的
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu dropdown-with-icons">
+                            <li>
+                                <a href="memberInfo.html">
+                                    <i class="material-icons">border_color</i> 我的信息
+                                </a>
+                            </li>
+                            <li>
+                                <a href="myPurchase.html">
+                                    <i class="material-icons">notes</i> 购买记录
+                                </a>
+                            </li>
+                            <li>
+                                <a href="auctionPart.html">
+                                    <i class="material-icons">bubble_chart</i> 竞拍记录
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" onclick="logout()">
+                                    <i class="material-icons">directions_run</i> 退出登录
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-->
+    </nav>
+
+    <div class="modal fade login" id="loginModal">
+        <div class="modal-dialog login animated">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
+                    </button>
+                    <h4 class="modal-title">Login with</h4></div>
+                <div class="modal-body">
+                    <div class="box">
+                        <div class="content">
+                            <div class="error"></div>
+                            <div class="form loginBox">
+                                <form method="post" action="#" accept-charset="UTF-8"><input class="form-control"
+                                                                                             type="text"
+                                                                                             placeholder="账号"
+                                                                                             name="email"><input
+                                        class="form-control" type="password" placeholder="密码" name="password"><input
+                                        class="btn btn-default btn-login" type="button" value="登录"
+                                        onclick="loginAjax()">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="content registerBox" style="display:none;">
+                            <div class="form">
+                                <form method="post" action="/register"
+                                      accept-charset="UTF-8" id="register_form">
+                                    <input class="form-control" type="text" placeholder="用户名" name="username">
+                                    <input class="form-control" type="password" placeholder="密码" name="pwd">
+                                    <input class="form-control" type="password" placeholder="确认密码" name="pwd2">
+                                    <input class="form-control" type="text" placeholder="手机号" id="mobile" name="number">
+                                    <div class="col-lg-6">
+                                        <input class="form-control" type="text" placeholder="验证码" name="code">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="btn btn-default btn-register" type="button"
+                                               value="获取验证码" name="smsBtn" onclick="sendSms()">
+                                    </div>
+                                    <input class="btn btn-default btn-register" type="button" value="确认注册"
+                                           onclick="register()"
+                                           name="commit">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="forgot login-footer"><span><a href="javascript: showRegisterForm();">新账户注册</a></span>
+                    </div>
+                    <div class="forgot register-footer" style="display:none"><span>已注册账号？</span>
+                        <a href="javascript: showLoginForm();">登录</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="footer">
+    <footer class="footer">
+        <div class="container">
+            <nav class="pull-left">
+                <ul>
+                    <li>
+                        <a href="#">
+                            Creative Tim
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            About Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Blog
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Licenses
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="copyright pull-right">
+                &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by pyteam
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/login-register.js"></script>
+    <script>
+        function logout() {
+            if (confirm("确认退出登录?")) {
+                $.ajax({
+                    url: "/logout.html",
+                    type: "post",
+                    success: function (data) {
+                        if (data == true) {
+                            alert("成功退出登录!")
+                            window.location.replace("/index.html")
+                        } else {
+                            alert("您已退出登录")
+                            window.location.replace("/index.html")
+                        }
+                    }
+                })
+            }
+        }
+
+        function sendSms() {
+            var value = document.getElementById("mobile").value
+            $.ajax({
+                type: "post",
+                url: "/register/sms",
+                data: {"number": value},
+                success: function (result) {
+                    if (result.message === 'success') {
+                        alert("验证码已发送!")
+                    } else {
+                        alert("手机号已被注册")
+                    }
+                }
+            })
+        }
+
+        function register() {
+            var pwd1 = document.getElementsByName("pwd")[0].value
+            var pwd2 = document.getElementsByName("pwd2")[0].value
+            if (pwd1 !== pwd2) {
+                alert("密码不一致!")
+                return false;
+            }
+            var username = document.getElementsByName("username")[0].value
+            var number = document.getElementsByName("number")[0].value
+            var code = document.getElementsByName("code")[0].value
+            $.ajax({
+                type: "post",
+                url: "/register",
+                data: {
+                    "username": username,
+                    "password": pwd1,
+                    "number": number,
+                    "code": code
+                },
+                success: function (result) {
+                    if (result.message === 'success') {
+                        alert("注册成功!");
+                        // window.location.reload();
+                    } else if (result.message === "name") {
+                        alert("账号重复!")
+                    } else if (result.message === "code") {
+                        alert("验证码错误!")
+                    }
+                }
+            })
+        }
+    </script>
+</div>
+
+</body>
+</html>

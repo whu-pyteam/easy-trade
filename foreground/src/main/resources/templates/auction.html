@@ -1,44 +1,16 @@
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <title>拍卖</title>
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 
-    <title>Bootstrap 101 Template</title>
-
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/login-register.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
-    <style type="text/css">
-        .navbar-brand {
-            font-size: 18px;
-        }
-
-        .navbar-right > li > a, .dropdown-menu > li > a {
-            font-size: 12px;
-        }
-
-        .navbar {
-            min-height: 20px;
-        }
-
-        .navbar-nav > li > a, .navbar-header > a {
-            padding-top: 5px;
-            height: 30px;
-        }
-
-        .jumbotron {
-            padding-top: 20px;
-        }
-
-        .ssl {
-            padding-top: 20px;
-            padding-bottom: 20px;
-        }
-    </style>
-
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/material-kit.css?v=1.2.1" rel="stylesheet" />
 </head>
 
 <body>
@@ -47,136 +19,115 @@
 时间：2019-07-10
 描述：导航栏
 -->
-<div th:replace="header :: header(3)"></div>
-<!--
-    作者：2361991194@qq.com
-    时间：2019-07-10
-    描述：搜索栏
--->
-<div class="ssl">
+<div th:replace="auctionHeader :: header(3)"></div>
+
+<div class="page-header header-filter header-small" data-parallax="true" style="background-image: url('images/bg_auc.jpg');">
     <div class="container">
-        <div class="col-lg-4">
-            <div class="logo pull-left">
-                <a href="index.html"><img src="images/logo.jpg" height="45" width="260" alt=""/></a>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center">
+                <h1 class="title">竞拍</h1>
+                <h4>你可以在这里参与竞拍和出售物品</h4>
+                <a href="auctionLaunch.html" class="btn btn-warning btn-round btn-lg">
+                    发起拍卖
+                </a>
             </div>
-        </div>
-        <div class="col-lg-8">
-            <form class="navbar-form navbar-right" role="search" action="auctionSearch.html" method="post">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="searchValue" placeholder="Search">
-                    <button type="submit" class="btn btn-default">搜索</button>
-                </div>
-            </form>
+
         </div>
     </div>
 </div>
 
-<div class="zt">
+<div class="main main-raised">
     <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div id="slider-carousel" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#slider-carousel" data-slide-to="1"></li>
-                        <li data-target="#slider-carousel" data-slide-to="2"></li>
-                    </ol>
-
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <div class="col-sm-6">
-                                <h1><span>EasyTrade</span></h1>
-                                <h2>女神范儿</h2>
-                                <p th:text="${slideList.get(2).aad202}"></p>
-                                <a th:href="@{'auctionShow.html?aad201=' + ${slideList.get(2).aad201}}"><button type="button" class="btn btn-default get">马上参与>></button></a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a th:href="@{'auctionShow.html?aad201=' + ${slideList.get(2).aad201}}"><img th:src="${slideList.get(2).aad203}" class="slide_img img-responsive" alt=""/></a>
-                            </div>
+        <div class="section">
+            <div class="row">
+                <div class="col-md-3  col-md-offset-9">
+                    <form class="navbar-form navbar-right" role="search" style="position: absolute; top: -60px;">
+                        <div class="form-group form-white">
+                            <input type="text" class="form-control" placeholder="搜索">
                         </div>
-                        <div class="item">
-                            <div class="col-sm-6">
-                                <h1><span>EasyTrade</span></h1>
-                                <h2>宿舍装扮</h2>
-                                <p th:text="${slideList.get(1).aad202}"></p>
-                                <a th:href="@{'auctionShow.html?aad201=' + ${slideList.get(1).aad201}}"><button type="button" class="btn btn-default get">马上参与>></button></a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a th:href="@{'auctionShow.html?aad201=' + ${slideList.get(1).aad201}}"><img th:src="${slideList.get(1).aad203}" class="slide_img img-responsive" alt="" /></a>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="col-sm-6">
-                                <h1><span>EasyTrade</span></h1>
-                                <h2>精品手办</h2>
-                                <p th:text="${slideList.get(0).aad202}"></p>
-                                <a th:href="@{'auctionShow.html?aad201=' + ${slideList.get(0).aad201}}"><button type="button" class="btn btn-default get">马上参与>></button></a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a th:href="@{'auctionShow.html?aad201=' + ${slideList.get(0).aad201}}"><img th:src="${slideList.get(0).aad203}" class="slide_img img-responsive" alt="" /></a>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-                        <i class="glyphicon glyphicon-menu-left"></i>
-                    </a>
-                    <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
-                        <i class="glyphicon glyphicon-menu-right"></i>
-                    </a>
+                        <button type="submit" class="btn btn-white btn-raised btn-fab btn-fab-mini"><i class="material-icons">search</i></button>
+                    </form>
                 </div>
             </div>
-        </div>
-        <div class="row" style="padding-top: 20px">
-            <div class="col-sm-12">
-                <h3>近期拍卖</h3>
-                <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="title">近期拍卖</h3>
+                    <hr>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-10">
-                <div class="col-lg-3 col-md-4 col-sm-6" th:each="ad02:${ad02List}">
-                    <div class="thumbnail">
-                        <a th:href="@{'auctionShow.html?aad201=' + ${ad02.aad201}}" style="text-decoration:none;">
-                            <img th:src="${ad02.aad203}" style="height: 150px; width: 100%; object-fit: cover;"
-                                 alt="拍卖物品图片">
-                            <div class="caption">
-                                <h4 th:text="${ad02.aad202}"></h4>
-                                <p th:if="${ad02.aad205} == '1'">竞拍价：￥
-                                    <span th:if="${ad02.aad206} < 10000" th:text="${ad02.aad206}" style="font-size: 20px; color: red;"></span>
-                                    <span th:if="${ad02.aad206} >= 10000" th:text="${ad02.aad206 / 10000} + '万'" style="font-size: 20px; color: red;"></span>元
-                                </p>
-                                <p th:if="${ad02.aad205} == '2'">当前价：￥
-                                    <span th:if="${ad02.aad206} < 10000" th:text="${ad02.aad208}" style="font-size: 20px; color: red;"></span>
-                                    <span th:if="${ad02.aad206} >= 10000" th:text="${ad02.aad208 / 10000} + '万'" style="font-size: 20px; color: red;"></span>元
-                                </p>
-                                <p>竞拍方式：<span th:text="(${ad02.aad205} == '1')?'一口价竞拍':'加价竞拍'"></span></p>
-                                <p>截止时间：<span th:text="${#dates.format(ad02.aad211, 'MM月dd日 HH:mm')}"></span></p>
-                            </div>
-                        </a>
+            <div class="row">
+                <div class="col-md-3" th:each="ad02:${ad02List}">
+                    <div class="card card-pricing card-background" th:style="'background-image: url('+ ${ad02.aad203} + ')'">
+                        <div th:if="${ad02.aad205} == '1'" class="card-content">
+                            <h6 class="category text-info">竞拍价</h6>
+                            <h1 class="card-title"><small>￥</small>
+                                <span th:text="(${ad02.aad206} > 10000)?(${ad02.aad206 / 10000} + '万'):${ad02.aad206}"></span>
+                            </h1>
+                            <ul>
+                                <li><b>名称：</b><span th:text="${ad02.aad202}"></span></li>
+                                <li><b>方式：</b>一口价竞拍</li>
+                                <li><b>截止时间：</b><span th:text="${#dates.format(ad02.aad211, 'MM月dd日 HH:mm')}"></span></li>
+                                <li><b>最小加价：</b><span th:text="${ad02.aad207}"></span>元</li>
+                            </ul>
+                            <a th:href="'auctionShow.html?aad201=' + ${ad02.aad201}" class="btn btn-danger">
+                                查看
+                            </a>
+                        </div>
+                        <div th:if="${ad02.aad205} == '2'" class="card-content">
+                            <h6 class="category text-info">当前价</h6>
+                            <h1 class="card-title"><small>￥</small>
+                                <span th:text="(${ad02.aad208} > 10000)?(${ad02.aad208 / 10000}  + '万'):${ad02.aad208}"></span>
+                            </h1>
+                            <ul>
+                                <li><b>名称：</b><span th:text="${ad02.aad202}"></span></li>
+                                <li><b>方式：</b>加价竞拍</li>
+                                <li><b>截止时间：</b><span th:text="${#dates.format(ad02.aad211, 'MM月dd日 HH:mm')}"></span></li>
+                                <li><b>最小加价：</b><span th:text="${ad02.aad207}"></span>元</li>
+                            </ul>
+                            <a th:href="'auctionShow.html?aad201=' + ${ad02.aad201}" class="btn btn-danger">
+                                查看
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <ul class="pager">
-                        <li th:if="${!pre}" class="disabled"><span>上一页</span></li>
-                        <li th:if="${pre}"><a th:href="'auction.html?pageNum=' + ${pageNum - 1}">上一页</a></li>
-                        <li th:if="${next}"><a th:href="'auction.html?pageNum=' + ${pageNum + 1}">下一页</a></li>
-                        <li th:if="${!next}" class="disabled"><span>下一页</span></li>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <ul class="pagination pagination-info">
+                        <li><a href="javascript:void(0);">上一页</a></li>
+                        <li><a href="javascript:void(0);">下一页</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="col-sm-2">
-
-            </div>
         </div>
-
     </div>
 </div>
 
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/login-register.js"></script>
+<div th:replace="auctionHeader::footer"></div>
 </body>
+<!--   Core JS Files   -->
+<script src="js/jquery.min.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/material.min.js"></script>
+
+<!--    Plugin for Date Time Picker and Full Calendar Plugin   -->
+<script src="js/moment.min.js"></script>
+
+<!--	Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/   -->
+<script src="js/nouislider.min.js" type="text/javascript"></script>
+
+<!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker   -->
+<script src="js/bootstrap-datetimepicker.js" type="text/javascript"></script>
+
+<!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select   -->
+<script src="js/bootstrap-selectpicker.js" type="text/javascript"></script>
+
+<!--	Plugin for Tags, full documentation here: http://xoxco.com/projects/code/tagsinput/   -->
+<script src="js/bootstrap-tagsinput.js"></script>
+
+<!--	Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput   -->
+<script src="js/jasny-bootstrap.min.js"></script>
+
+<!--    Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc    -->
+<script src="js/material-kit.js?v=1.2.1" type="text/javascript"></script>
 </html>
