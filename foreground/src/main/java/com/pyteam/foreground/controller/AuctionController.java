@@ -1,14 +1,13 @@
 package com.pyteam.foreground.controller;
 
+import com.pyteam.db.mbg.entity.Ac05;
 import com.pyteam.db.mbg.entity.Ad02;
 import com.pyteam.db.mbg.entity.Ad06;
 import com.pyteam.db.mbg.entity.Ae05;
 import com.pyteam.foreground.dto.Ad02Dto;
-import com.pyteam.foreground.service.Ad02Service;
-import com.pyteam.foreground.service.Ad06Service;
-import com.pyteam.foreground.service.AuctionService;
-import com.pyteam.foreground.service.ConnectionService;
+import com.pyteam.foreground.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +39,89 @@ public class AuctionController
     @Autowired
     private AuctionService auctionService;
 
+    @Autowired
+    private OrderService orderService;
+
     private boolean isLogin;
+
+    @RequestMapping(value = "/deliverAuc", method = RequestMethod.GET)
+    @ResponseBody
+    public String deliverAuc(HttpServletRequest request, HttpServletResponse response, int aac501)
+    {
+        if(isLogin(request, response))
+        {
+            if(orderService.deliverAuc(aac501))
+            {
+                return "true";
+            }
+        }
+        return null;
+    }
+
+    @RequestMapping(value = "/takenAuc", method = RequestMethod.GET)
+    @ResponseBody
+    public String takenAuc(HttpServletRequest request, HttpServletResponse response, int aad201, int aac501)
+    {
+        if(isLogin(request, response))
+        {
+            int aab101 = Integer.parseInt(getCookies(request, "userId"));
+            if(orderService.takenAuc(aab101, aad201, aac501))
+            {
+                return "true";
+            }
+        }
+        return null;
+    }
+
+    @RequestMapping(value = "/auctionPart.html", method = RequestMethod.POST)
+    public String addOrder(HttpServletRequest request, HttpServletResponse response, Ac05 ac05, int aad201, int aad601, Model model)
+    {
+        isLogin = isLogin(request, response);
+        if(isLogin)
+        {
+            int aab101 = Integer.parseInt(getCookies(request, "userId"));
+            ac05.setAab101(aab101);
+            int res;
+            if(orderService.addAucOrder(ac05, aad201, aad601))
+            {
+                res = 1;
+            }
+            else
+            {
+                res = 2;
+            }
+            model.addAttribute("apartList", auctionService.selectAd06LeftAd02(aab101));
+            model.addAttribute("isLogin", isLogin);
+            model.addAttribute("res", res);
+            return "auctionPart";
+        }
+        else
+        {
+            model.addAttribute("isLogin", isLogin);
+            return "auction";
+        }
+    }
+
+    @RequestMapping(value = "/auctionOrder.html", method = RequestMethod.GET)
+    public String setOrder(HttpServletRequest request, HttpServletResponse response, int aad201, Model model)
+    {
+        isLogin = isLogin(request, response);
+        if(isLogin)
+        {
+            int aab101 = Integer.parseInt(getCookies(request, "userId"));
+            model.addAttribute("ac05", orderService.selectAc05Byaad201(aad201));
+            model.addAttribute("ad02", service.findById(aad201));
+            model.addAttribute("isBuy", service.isBuy(aab101, aad201));
+            model.addAttribute("isLogin", isLogin);
+            return "auctionOrder";
+        }
+        else
+        {
+            model.addAttribute("isLogin", isLogin);
+            return "auction";
+        }
+    }
+
 
     @RequestMapping(value = "/delPart", method = RequestMethod.GET)
     @ResponseBody
@@ -115,7 +196,8 @@ public class AuctionController
         if(isLogin)
         {
             int aab101 = Integer.parseInt(getCookies(request, "userId"));
-            model.addAttribute("ad02List", service.findByUserId(aab101));
+            List<Ad02> ad02List = service.findByUserId(aab101);
+            model.addAttribute("ad02List", orderService.myLauState(ad02List));
             model.addAttribute("isLogin", isLogin);
             return "auctionMyLau";
         }

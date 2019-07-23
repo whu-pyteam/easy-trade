@@ -49,10 +49,16 @@
                                     <p th:case="0">未审核</p>
                                     <p th:case="1">已通过</p>
                                     <p th:case="2">未通过</p>
-                                    <p th:case="3">已结束</p>
+                                    <p th:case="3">买家尚未填写订单</p>
+                                    <p th:case="5">待发货</p>
+                                    <p th:case="6">已发货</p>
+                                    <p th:case="7">已完成</p>
                                 </td>
                                 <td class="text-right">
-                                    <button type="button" rel="tooltip" class="btn btn-danger" th:onclick="delMyAuc([[${ad02.aad201}]])">取消发布</button>
+                                    <button th:if="${(ad02.aad209 == '0')||(ad02.aad209 == '1')||(ad02.aad209 == '2')}" type="button" rel="tooltip" class="btn btn-danger" th:onclick="delMyAuc([[${ad02.aad201}]])">取消发布</button>
+                                    <a th:if="${(ad02.aad209 == '5')||(ad02.aad209 == '6')||(ad02.aad209 == '7')}" th:href="'auctionOrder.html?aad201=' + ${ad02.aad201}">
+                                        <button type="button" rel="tooltip" class="btn btn-success">查看订单</button>
+                                    </a>
                                 </td>
                             </tr>
                             </tbody>

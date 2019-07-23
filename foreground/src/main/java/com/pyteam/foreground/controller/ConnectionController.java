@@ -77,7 +77,7 @@ public class ConnectionController
                 return "true";
             }
         }
-            return null;
+        return null;
     }
 
     @RequestMapping(value = "delAucConn", method = RequestMethod.GET)

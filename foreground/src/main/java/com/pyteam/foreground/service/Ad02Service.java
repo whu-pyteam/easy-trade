@@ -37,6 +37,19 @@ public class Ad02Service
     @Autowired
     private Ad06Mapper ad06Mapper;
 
+    public boolean isBuy(int aab101, int aad201)
+    {
+        Ad02 ad02 = ad02Mapper.selectByPrimaryKey(aad201);
+        if(ad02.getAab101().equals(aab101))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
     public List<Ad02> selectSlide()
     {
         Ad02Example ad02Example = new Ad02Example();

@@ -49,8 +49,7 @@
                                     <span th:case="4">卖家已取消竞拍</span>
                                 </td>
                                 <td class="text-right">
-                                    <a th:if="${aconn.aad209 == '1'}"
-                                       th:href="'auctionShow.html?aad201=' + ${aconn.aad201}">
+                                    <a th:if="${aconn.aad209 == '1'}" th:href="'auctionShow.html?aad201=' + ${aconn.aad201}">
                                         <button type="button" rel="tooltip" class="btn btn-success">查看</button>
                                     </a>
                                     <button type="button" rel="tooltip" class="btn btn-danger"

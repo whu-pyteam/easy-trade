@@ -27,7 +27,7 @@ public interface AuctionMapper
             "       from ad02 d \n" +
             "       right join ae05 e \n" +
             "       on d.aad201 = e.aad201 and e.aad401 = #{aad401}\n" +
-            "       where d.aad209='1' or d.aad209='3'")
+            "       where d.aad209='1' or d.aad209='3' or d.aad209='4'")
     List<Ad02> selectAd02RightAe05(@Param("aad401") int aad401);
 
     @Select("select m.aad201, m.aad202, m.aad203, m.aad205, m.aad206, m.aad208,\n" +
@@ -35,7 +35,7 @@ public interface AuctionMapper
             "    from ad06 n\n" +
             "    left join ad02 m\n" +
             "    on m.aad201 = n.aad201\n" +
-            "    where n.aab101 = #{aab101} and n.aad603 != '4' and n.aad603 != '6'")
+            "    where n.aab101 = #{aab101} and n.aad603 != '6'")
     List<AuctionPart> selectAd06LeftAd02(@Param("aab101") int aab101);
 
 }
