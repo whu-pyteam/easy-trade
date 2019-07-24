@@ -1,5 +1,6 @@
 package com.pyteam.foreground.controller;
 
+import com.pyteam.db.mbg.entity.Syscode;
 import com.pyteam.foreground.dto.Ac05Dto;
 import com.pyteam.foreground.service.Ac05Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +36,10 @@ public class OrderController
             ac05Dto.setAac506(request.getParameter("aac506"));
             ac05Dto.setAac507(request.getParameter("aac507"));
             ac05Dto.setAac509(request.getParameter("aac509"));
-            request.getParameter("aac510");
+            ac05Dto.setAac510(request.getParameter("aac510"));
             String[] ids = request.getParameter("aac101s").split(",");
             for(String id : ids)
             {
-                System.out.println(id);
                 ac05Service.createGoodOrder(ac05Dto,Integer.parseInt(id));
             }
             return true;

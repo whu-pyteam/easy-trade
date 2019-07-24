@@ -6,65 +6,59 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Bootstrap 101 Template</title>
-
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/main.css" rel="stylesheet">
-        <style type="text/css">
-            .navbar-brand {
-                font-size: 18px;
-            }
-
-            .navbar-right > li > a, .dropdown-menu > li > a {
-                font-size: 12px;
-            }
-
-            .navbar {
-                min-height: 20px;
-            }
-
-            .navbar-nav > li > a, .navbar-header > a {
-                padding-top: 5px;
-                height: 30px;
-            }
-
-            .jumbotron {
-                padding-top: 20px;
-            }
-
-            .ssl {
-                padding-top: 20px;
-                padding-bottom: 20px;
-            }
-        </style>
+        <title>我的出售</title>
     </head>
 
 <body>
 
 <div th:replace="header :: header(1)"></div>
-<div class="col-lg-2"></div>
-<div class="col-lg-8">
-    <div class="col-lg-3 col-md-4 col-sm-6" th:each="ac01:${ac01List}">
-        <div class="thumbnail">
-            <a th:href="@{'goodShow.html?id=' + ${ac01.aac101}}">
-                <img th:src="${ac01.aac106}" style="height: 150px; width: 100%; overflow: hidden"
-                     alt="商品图片">
-            </a>
-            <div class="caption">
-                <h3 th:text="${ac01.aac102}"></h3>
-                <p th:text="${ac01.aac103}"></p>
+<div class="page-header header-filter header-small" data-parallax="true" style="background-image: url('images/city.jpg');"></div>
+
+
+
+
+<div class="main main-raised">
+    <div class="section">
+        <div class="container">
+            <h2 class="section-title">我的出售记录</h2>
+            <h5 id="hint" style="display: none">没有发布任何商品...</h5>
+            <div class="row">
+                <div class="col-md-4" th:each="ac01:${ac01List}">
+                    <div class="card card-product card-plain">
+                        <div class="card-image">
+                            <a  href="#">
+                                <img th:src="${ac01.aac106}" alt="" style="height: 300px;width: 300px"/>
+                            </a>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title">
+                                <a th:href="@{'goodShow.html?id=' + ${ac01.aac101}}" th:text="${ac01.aac102}"></a>
+                            </h4>
+                            <p class="card-description" th:text="${ac01.aac103}"></p>
+                            <div class="footer">
+                                <div class="price-container">
+                                    <span class="price price-new" th:text="'¥'+${ac01.aac105}"> </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<div class="col-lg-2"></div>
+<h3 id="assist" th:value="${ac01List}" style="display: none"></h3>
 
 
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-</body>
-</html></title>
-</head>
-
+<div th:replace="header :: footer"></div>
+<script>
+    window.onload=function () {
+        if($("#assist").attr("value").length==2)
+        {
+            console.log("here")
+            $("#hint").css("display","block");
+        }
+    }
+</script>
 </body>
 </html>

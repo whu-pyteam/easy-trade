@@ -51,7 +51,6 @@ public class Ab01Service
         ab01.setAab113(new Date());
         ab01.setAab114(new Date());
         Integer res = ab01Mapper.insert(ab01);
-        System.out.println(res);
         return res.intValue() > 0;
     }
 
@@ -105,6 +104,7 @@ public class Ab01Service
         ab01.setAab104(ab01Dto.getAab104());
         ab01.setAab105(new SimpleDateFormat("yyyy-MM-dd").parse(ab01Dto.getAab105()));
 
+        /*
         SyscodeExample syscodeExample=new SyscodeExample();
         SyscodeExample.Criteria criteria=syscodeExample.createCriteria();
         criteria.andIdnameEqualTo(ab01Dto.getAab106());
@@ -117,7 +117,8 @@ public class Ab01Service
         {
             ab01.setAab106(1);
         }
-
+        */
+        ab01.setAab106(Integer.parseInt(ab01Dto.getAab106()));
         if(ab01Dto.getHasEdit().equals("0"))
         {
             ab01.setAab107(ab01Mapper.selectByPrimaryKey(aab101).getAab107());

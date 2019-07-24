@@ -5,104 +5,192 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 101 Template</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/login-register.css" rel="stylesheet">
-    <style type="text/css">
-        .navbar-nav > li > a {
-            padding-top: 4px;
-            padding-bottom: 0;
-            height: 30px;
-        }
-
-        .navbar-right > li > a,
-        .dropdown-menu > li > a {
-            font-size: 12px;
-        }
-
-        .navbar {
-            min-height: 20px;
-        }
-
-        .jumbotron {
-            padding-top: 20px;
-        }
-
-
-        img{
-            width: 300px;
-            height: 300px;
-        }
-    </style>
+    <title>商品详情</title>
 </head>
 
-<body>
+<body class="product-page">
 
-<div th:replace="header::header(${type})"></div>
+<div th:replace="header::header(1)"></div>
+
+<div class="page-header header-filter header-small" data-parallax="true" style="background-image: url('images/city.jpg');"></div>
 
 
-
-<div class="zt">
+<div class="section section-gray">
     <div class="container">
-        <div class="row" id="goodInfo" style="border: 1px solid #E8E8E8; padding-top: 15px; padding-bottom: 15px;">
-            <div class="col-lg-5">
-                <img th:src="${ac01.aac106}"
-                     style="height: 300px; width: 300px; overflow: hidden;" alt="啊咧，图片消失了"/>
-            </div>
-            <div class="col-lg-7">
-                <div class="caption">
-                    <h3 th:text="${ac01.aac102}"></h3>
-                    <a th:href="@{sellerInfo.html(id=${ac01.aab101})}"><p th:text="${aab103}"></p></a>
-                    <p th:text="'商品价格： '+${ac01.aac105}"></p>
-                    <p th:text="'商品分类： '+${aac202}"></p>
-                    <p th:text="'商品详情： '+${ac01.aac103}"></p>
+        <div class="main main-raised main-product">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
 
-                    <div id="otherPerson" style="display: none">
-                        <a href="#" class="btn btn-primary" role="button" th:onclick="|javascript:addToCart('${ac01.aac101}')|">加入购物车</a>
-                    </div>
+                    <img th:src="${ac01.aac106}"/>
+
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <h2 class="title" th:text="${ac01.aac102}"></h2>
+                    <h3 class="main-price" th:text="'¥'+${ac01.aac105}"></h3>
+                    <div id="acordeon">
+                        <div class="panel-group" id="accordion">
+                            <div class="panel panel-border panel-default">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <h4 class="panel-title">
+                                            商品描述
+                                            <i class="material-icons">keyboard_arrow_down</i>
+                                        </h4>
+                                    </a>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <h5>类别</h5>
+                                        <p th:text="'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+${aac202}"></p>
+                                        <h5>详情</h5>
+                                        <p th:text="'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+${ac01.aac103}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-border panel-default">
+                                <div class="panel-heading" role="tab" id="headingTwo">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-controls="collapseOne">
+                                        <h4 class="panel-title">
+                                            卖家信息
+                                            <i class="material-icons">keyboard_arrow_down</i>
+                                        </h4>
+                                    </a>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <h5>昵称</h5>
+                                        <a th:href="@{sellerInfo.html(id=${ac01.aab101})}"><p th:text="'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+${aab103}"></p></a>
+                                        <h5>签名</h5>
+                                        <p th:text="'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+${aab111}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--  end acordeon -->
+
+                    <div class="row text-right">
+                        <div id="otherPerson" style="display: none">
+                            <a href="#" class="btn btn-primary btn-round" role="button" th:onclick="|javascript:addToCart('${ac01.aac101}')|">加入购物车&nbsp;<i class="material-icons">shopping_cart</i></a>
+                        </div>
 
 
-                    <div id="buyer" style="display: none">
-                        <a href="#" id="receiveGood" class="btn btn-success" role="button" th:onclick="|javascript:receiveGood('${ac01.aac101}')|">确认收货</a>
-                    </div>
+                        <div id="buyer" style="display: none">
+                            <a href="#" id="receiveGood" class="btn btn-success btn-round" role="button" th:onclick="|javascript:receiveGood('${ac01.aac101}')|">确认收货</a>
+                        </div>
 
-                    <div id="sellman" style="display: none">
-                        <a href="#" id="sentGood" class="btn btn-primary" role="button" style="display: none" th:onclick="|javascript:sendGood('${ac01.aac101}')|">确认发货</a>
-                        <a href="#" id="deleteGood" class="btn btn-danger" role="button" style="display: none" th:onclick="|javascript:deleteGood('${ac01.aac101}')|">删除商品</a>
+                        <div id="sellman" style="display: none">
+                            <a href="#" id="sentGood" class="btn btn-primary btn-round" role="button" style="display: none" th:onclick="|javascript:sendGood('${ac01.aac101}')|">确认发货</a>
+                            <a href="#" id="deleteGood" class="btn btn-danger btn-round" role="button" style="display: none" th:onclick="|javascript:deleteGood('${ac01.aac101}')|">删除商品</a>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row" id="comment" style="display:none;">
+        <div class="features text-center">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="info">
+                        <div class="icon icon-info">
+                            <i class="material-icons">local_shipping</i>
+                        </div>
+                        <h4 class="info-title">快捷交易 </h4>
+                        <p>线下线上一键发货，您的包裹正在送达</p>
+                    </div>
+                </div>
 
-            <p id="commentBuyer"></p>
-            <p id="commentSeller"></p>
-            <form id="commentForm" onsubmit="return false" action="#" method="post" style="display: none;">
-                <div>
-                    <label>评论：</label>
-                    <input name="aad303" class="form-control" type="text">
+                <div class="col-md-4">
+                    <div class="info">
+                        <div class="icon icon-success">
+                            <i class="material-icons">verified_user</i>
+                        </div>
+                        <h4 class="info-title">在校师生</h4>
+                        <p>平台用户都是在校大学生哦，师门情谊，童叟无欺</p>
+                    </div>
                 </div>
-                <div>
-                    <label>给几颗星：</label>
-                    <input name="aad304" type="radio" value="5" checked>5
-                    <input name="aad304" type="radio" value="4">4
-                    <input name="aad304" type="radio" value="3">3
-                    <input name="aad304" type="radio" value="2">2
-                    <input name="aad304" type="radio" value="1">1
+
+                <div class="col-md-4">
+                    <div class="info">
+                        <div class="icon icon-rose">
+                            <i class="material-icons">favorite</i>
+                        </div>
+                        <h4 class="info-title">闲置物品</h4>
+                        <p>闲置物品放着不用太可惜，那就挂到EasyTrade赚取</p>
+                    </div>
                 </div>
-                <div>
-                    <input type="submit" class="btn btn-success" onclick="submitComment()">
+            </div>
+        </div>
+
+
+        <div class="card card-refine card-blog" id="commentForm" style="display: none">
+            <div class="col-md-8 col-md-offset-2">
+                <h3 class="text-center">发表评论<br><small>- - - - -</small></h3>
+                <div class="media media-post">
+                    <a class="pull-left author" href="#pablo">
+                        <div class="avatar">
+                            <img class="media-object" alt="biu..." th:src="${aab107}">
+                        </div>
+                    </a>
+                    <div class="media-body">
+                        <form onsubmit="return false" action="#" method="post">
+                            <textarea class="form-control" name="aad303" placeholder="留下您的评论吧..." rows="6"></textarea>
+                            <h5>您对本次交易满意吗？</h5>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="aad304" value="5" checked>
+                                    很满意
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="aad304" value="4">
+                                    满意
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="aad304" value="3">
+                                    还好
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="aad304" value="2">
+                                    不太满意
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="aad304" value="1">
+                                    很不满意
+                                </label>
+                            </div>
+
+
+                            <div class="media-footer">
+                                <a href="#pablo" class="btn btn-primary btn-wd pull-right" role="button" onclick="submitComment()">发表评论</a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </form>
+            </div>
+        </div>
+
+        <div class="card card-refine card-blog" id="comment" style="display: none">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="media-area" id="media-area">
+                    <h3 class="title text-center">评论</h3>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
+
 <p id="assist" th:value="${ac01.aac101}" style="display: none">
 
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/login-register.js"></script>
+<div th:replace="header::footer"></div>
 <script>
     var orderState;
     var username;
@@ -114,6 +202,10 @@
     var sellerComment;
     var buyerStar;
     var sellerStar;
+    var buyerName;
+    var sellerName;
+    var buyerImg;
+    var sellerImg;
 
     function getCookie(cname)
     {
@@ -128,11 +220,13 @@
     }
 
     function submitComment() {
+        console.log($('textarea[name="aad303"]').val()+"asdasd")
+        console.log($('input[name="aad304"]:checked').val()+"as")
         $.ajax({
             url:"submitComment.html",
             type: "post",
             data:{
-                "aad303":$('input[name="aad303"]').val(),
+                "aad303":$('textarea[name="aad303"]').val(),
                 "aad304":$('input[name="aad304"]:checked').val(),
                 "aab101":username,
                 "aac101":$("#assist").attr("value")
@@ -146,7 +240,6 @@
                 {
                     $("#sellerHasComment").attr("value","1");
                 }
-
                 window.location.reload();
             }
         })
@@ -158,11 +251,11 @@
             {id: productId},
             function (data) {
                 if (data == true) {
-                    window.location.replace("index.html");
+                    window.location.replace("index.html?pageIn-dex=1");
                 }
                 if (data == false) {
                     alert("删除失败")
-                    window.location.replace("index.html");
+                    window.location.replace("index.html?pageIndex=1");
                 }
             }
         );
@@ -237,7 +330,7 @@
             {id: productId},
             function (data) {
                 if (data == 0) {
-                    window.location.replace("cart.html");
+                    window.location.replace("/cart.html?pageIndex=1")
                 }
                 if (data == 1) {
                     alert("成功加入购物车");
@@ -278,10 +371,15 @@
                 sellerComment=ids[6];
                 buyerStar=ids[7];
                 sellerStar=ids[8];
+                buyerName=ids[9];
+                sellerName=ids[10];
+                buyerImg=ids[11];
+                sellerImg=ids[12];
 
+                console.log(sellerImg)
                 if(username == sellerId)
                 {
-                    $("#sellman").css("display","block");
+                    $("#sellman").css("display","inline-block");
 
                     if(orderState == "")
                     {
@@ -289,14 +387,19 @@
                     }
                     else{
                         $("#sentGood").css("display","inline-block");
+                        if(orderState == "1")
+                        {
+                            $("#sentGood").css("display","none");
+                        }
                         if(orderState == "2")
                         {
-                            $("#comment").css("display","block");
+                            $("#sentGood").css("display","none");
                             if(sellerhasComment == "0") {
-                                $("#commentForm").css("display", "block");
+                                $("#commentForm").css("display", "inline-block");
                             }
                             if(sellerhasComment == "1") {
                                 $("#commentForm").css("display", "none");
+                                $("#comment").css("display","inline-block");
                             }
                         }
                     }
@@ -305,28 +408,27 @@
                 {
                     if(username == buyerId)
                     {
-                        $("#buyer").css("display","block");
+                        $("#buyer").css("display","inline-block");
                         if(orderState == "2")
                         {
-                            $("#comment").css("display","block");
-                            console.log("here111")
+                            $("#buyer").css("display","none");
                             if(buyerhasComment == "0") {
-                                $("#commentForm").css("display", "block");
+                                $("#commentForm").css("display","inline-block");
                             }
                             if(buyerhasComment == "1") {
-                                console.log("here222")
                                 $("#commentForm").css("display", "none");
+                                $("#comment").css("display","inline-block");
                             }
                         }
                     }
                     else
                     {
                         if(buyerId=="") {
-                            $("#otherPerson").css("display", "block");
+                            $("#otherPerson").css("display", "inline-block");
                         }
                         if(orderState == "2")
                         {
-                            $("#comment").css("display","block");
+                            $("#comment").css("display","inline-block");
                         }
                     }
                 }
@@ -334,11 +436,98 @@
         })
         if(buyerhasComment==1)
         {
-            $("#commentBuyer").append("买家说："+buyerComment+" 给出了"+buyerStar+"星评价");
+            var eleMedia=document.createElement("div");
+            eleMedia.setAttribute("class","media");
+
+            var imgAEle=document.createElement("a");
+            imgAEle.setAttribute("class","pull-left");
+            imgAEle.setAttribute("href","sellerInfo.html?id="+buyerId);
+
+            var divAva=document.createElement("div")
+            divAva.setAttribute("class","avatar");
+
+            var imgEle=document.createElement("img");//图片
+            imgEle.setAttribute("src",buyerImg);
+            imgEle.setAttribute("class","media-object");
+            imgEle.setAttribute("alt","biu...");
+
+            divAva.appendChild(imgEle);
+            imgAEle.appendChild(divAva);
+
+            var mediaBodyEle=document.createElement("div");//评论体
+            mediaBodyEle.setAttribute("class","media-body");
+
+            var h4mdhd=document.createElement("h4");//用户名
+            h4mdhd.setAttribute("class","media-heading");
+            h4mdhd.innerText=buyerName;
+
+            var smalll=document.createElement("small")
+            smalll.innerText="评价了"+buyerStar+"星";
+
+            var h6text=document.createElement("h6")
+            h6text.setAttribute("class","text-muted");
+
+            mediaBodyEle.appendChild(h4mdhd);
+            mediaBodyEle.appendChild(smalll);
+            mediaBodyEle.appendChild(h6text);
+
+            eleMedia.appendChild(imgAEle);
+            eleMedia.appendChild(mediaBodyEle);
+
+            var buyersay = document.createElement("p")
+            buyersay.innerText=buyerComment;
+
+            mediaBodyEle.appendChild(buyersay);
+
+            document.getElementById("media-area").appendChild(eleMedia);
         }
         if(sellerhasComment==1)
         {
-            $("#commentSeller").append("卖家说："+sellerComment+" 给出了"+sellerStar+"星评价");
+            var eleMedia=document.createElement("div");
+            eleMedia.setAttribute("class","media");
+
+            var imgAEle=document.createElement("a");
+            imgAEle.setAttribute("class","pull-left");
+            imgAEle.setAttribute("href","sellerInfo.html?id="+sellerId);
+
+            var divAva=document.createElement("div")
+            divAva.setAttribute("class","avatar");
+
+            var imgEle=document.createElement("img");//图片
+            imgEle.setAttribute("src",sellerImg);
+            imgEle.setAttribute("class","media-object");
+            imgEle.setAttribute("alt","biu...");
+
+            divAva.appendChild(imgEle);
+            imgAEle.appendChild(divAva);
+
+            var mediaBodyEle=document.createElement("div");//评论体
+            mediaBodyEle.setAttribute("class","media-body");
+
+            var h4mdhd=document.createElement("h4");//用户名
+            h4mdhd.innerText = sellerName;
+            h4mdhd.setAttribute("class","media-heading");
+
+            var smalll=document.createElement("small")
+            smalll.innerText = "评价了"+buyerStar+"星";
+
+            var h6text=document.createElement("h6")
+            h6text.setAttribute("class","text-muted");
+
+            mediaBodyEle.appendChild(h4mdhd);
+            mediaBodyEle.appendChild(smalll);
+            mediaBodyEle.appendChild(h6text);
+
+
+            eleMedia.appendChild(imgAEle);
+            eleMedia.appendChild(mediaBodyEle);
+
+            var sellersay = document.createElement("p")
+            sellersay.innerText = sellerComment;
+
+            mediaBodyEle.appendChild(sellersay);
+
+            document.getElementById("media-area").appendChild(eleMedia);
         }
 
     }

@@ -1,8 +1,10 @@
 package com.pyteam.foreground.controller;
 
+import com.pyteam.db.mbg.entity.Ab01;
 import com.pyteam.db.mbg.entity.Ac01;
 import com.pyteam.db.mbg.entity.Ac05;
 import com.pyteam.db.mbg.entity.Ad03;
+import com.pyteam.foreground.service.Ab01Service;
 import com.pyteam.foreground.service.Ac01Service;
 import com.pyteam.foreground.service.Ac05Service;
 import com.pyteam.foreground.service.Ad03Service;
@@ -31,6 +33,8 @@ public class MyBelongings
     private Ac05Service ac05Service;
     @Autowired
     private Ad03Service ad03Service;
+    @Autowired
+    private Ab01Service ab01Service;
 
     @GetMapping("myGood.html")
     public String myGood(Model model, HttpServletRequest request, HttpServletResponse response)
@@ -90,10 +94,22 @@ public class MyBelongings
         String sellerComment="";
         String buyerStar="";
         String sellerStar="";
+        String buyerName="";
+        String sellerName="";
+        String buyerImg="";
+        String sellerImg="";
+
+        Ab01 seller=ab01Service.getMemberInfo(ac01.getAab101());
+        sellerName=seller.getAab103();
+        sellerImg=seller.getAab107();
         if(ac05!=null)
         {
-            System.out.println("buyid"+buyerId+" order"+orderState);
             buyerId=ac05.getAab101().toString();
+
+            Ab01 buyer=ab01Service.getMemberInfo(ac05.getAab101());
+            buyerName=buyer.getAab103();
+            buyerImg=buyer.getAab107();
+
             orderState=ac05.getAac503().toString();
         }
 
@@ -114,7 +130,7 @@ public class MyBelongings
             }
         }
 
-        return sellerId+"&"+buyerId+"&"+orderState+"&"+buyerhasComment+"&"+sellerhasComment+"&"+buyerComment+"&"+sellerComment+"&"+buyerStar+"&"+sellerStar;
+        return sellerId+"&"+buyerId+"&"+orderState+"&"+buyerhasComment+"&"+sellerhasComment+"&"+buyerComment+"&"+sellerComment+"&"+buyerStar+"&"+sellerStar+"&"+buyerName+"&"+sellerName+"&"+buyerImg+"&"+sellerImg;
     }
 
     @PostMapping("deleteGood.html")

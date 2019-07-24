@@ -20,6 +20,7 @@ public class CommentController
     @ResponseBody
     public boolean submitComment(HttpServletRequest request, HttpServletResponse response)
     {
+        System.out.println("here");
         String aad303 = request.getParameter("aad303");
         String aad304 = request.getParameter("aad304");
         String aab101 = request.getParameter("aab101");

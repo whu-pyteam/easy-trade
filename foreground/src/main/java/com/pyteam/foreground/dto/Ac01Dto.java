@@ -21,9 +21,9 @@ public class Ac01Dto
     private Integer aab101;
 
     /**
-     * 商品分类名称
+     * 商品分类流水号
      */
-    private String aac202;
+    private Integer aac201;
 
     /**
      * 商品名

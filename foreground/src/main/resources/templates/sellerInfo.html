@@ -1,101 +1,84 @@
 <!DOCTYPE html>
-        <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 
-        <head>
-            <meta charset="utf-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>卖家个人信息</title>
+</head>
 
-            <title>Bootstrap 101 Template</title>
+<body class="profile-page">
+    <div th:replace="header :: header(1)"></div>
+    <div class="page-header header-filter header-small" data-parallax="true" style="background-image: url('images/city.jpg');"></div>
+    <div class="main main-raised">
+        <div class="profile-content">
+            <div class="container">
 
-            <link href="css/bootstrap.min.css" rel="stylesheet">
-            <link href="css/main.css" rel="stylesheet">
-            <style type="text/css">
-                .navbar-brand {
-                    font-size: 18px;
-                }
-
-                .navbar-right > li > a, .dropdown-menu > li > a {
-                    font-size: 12px;
-                }
-
-                .navbar {
-                    min-height: 20px;
-                }
-
-                .navbar-nav > li > a, .navbar-header > a {
-                    padding-top: 5px;
-                    height: 30px;
-                }
-
-                .jumbotron {
-                    padding-top: 20px;
-                }
-
-                .ssl {
-                    padding-top: 20px;
-                    padding-bottom: 20px;
-                }
-
-                img {
-                    width: 200px;
-                    height: 200px;
-                }
-            </style>
-        </head>
-
-<body>
-
-<div th:replace="header :: header(1)"></div>
-<div class="row">
-    <div class="col-lg-2"></div>
-    <div class="col-lg-8">
-        <div id="info">
-            <h1>TA的个人信息</h1>
-            <div class="col-lg-3">
-                <img th:src="${aab107}">
-            </div>
-            <div class="col-lg-5">
-                <p th:text="'用户名: '+ ${aab102}"></p>
-
-                <p th:text="'昵称: '+ ${aab103}"></p>
-
-                <p th:text="'性别: '+ ${aab104}"></p>
-
-                <p th:text="'生日: '+ ${aab105}"></p>
-
-                <p th:text="'学校: '+ ${aab106}"></p>
-
-                <p th:text="'信誉积分: '+ ${aab109}"></p>
-
-                <p th:text="'个性签名: '+ ${aab111}"></p>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-2"></div>
-</div>
-<div class="row">
-    <div class="col-lg-2"></div>
-    <div class="col-lg-8">
-        <div id="good">
-            <h1>TA发布的商品</h1>
-            <div class="col-lg-3 col-md-4 col-sm-6" th:each="ac01:${ac01List}">
-                <div class="thumbnail">
-                    <a th:href="@{'goodShow.html?id=' + ${ac01.aac101}}">
-                        <img th:src="${ac01.aac106}" style="height: 150px; width: 100%; overflow: hidden"
-                             alt="商品图片">
-                    </a>
-                    <div class="caption">
-                        <h3 th:text="${ac01.aac102}"></h3>
-                        <p th:text="${ac01.aac103}"></p>
+                <div class="row">
+                    <div class="col-xs-6 col-xs-offset-3">
+                        <div class="profile">
+                            <div class="avatar">
+                                <img th:src="${aab107}" alt="Circle Image" class="img-circle img-responsive img-raised">
+                            </div>
+                            <div class="name">
+                                <h3 class="title" th:text="${aab103}"></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-2 follow">
+                        <button class="btn btn-fab btn-primary" rel="tooltip" title="Follow this user">
+                            <i class="material-icons">add</i>
+                        </button>
                     </div>
                 </div>
+
+
+                <div class="description text-center">
+                    <p th:text="'用户名: '+ ${aab102}"></p>
+
+                    <p th:text="'昵称: '+ ${aab103}"></p>
+
+                    <p th:text="'性别: '+ ${aab104}"></p>
+
+                    <p th:text="'生日: '+ ${aab105}"></p>
+
+                    <p th:text="'学校: '+ ${aab106}"></p>
+
+                    <p th:text="'信誉积分: '+ ${aab109}"></p>
+
+                    <p th:text="'个性签名: '+ ${aab111}"></p>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane active work" id="work">
+                        <div class="row">
+                            <div class="col-md-7 col-md-offset-1">
+                                <h4 class="title">Ta发布的商品</h4>
+                                <div class="row collections">
+                                    <div class="col-lg-3 col-md-4 col-sm-6" th:each="ac01:${ac01List}">
+                                        <div class="thumbnail">
+                                            <a th:href="@{'goodShow.html?id=' + ${ac01.aac101}}">
+                                                <img th:src="${ac01.aac106}" style="height: 150px; width: 100%; overflow: hidden"
+                                                     alt="商品图片">
+                                            </a>
+                                            <div class="caption">
+                                                <h3 th:text="${ac01.aac102}"></h3>
+                                                <p th:text="${ac01.aac103}"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-    <div class="col-lg-2"></div>
-</div>
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
+    <div th:replace="header :: footer"></div>
+
 </body>
 </html>
