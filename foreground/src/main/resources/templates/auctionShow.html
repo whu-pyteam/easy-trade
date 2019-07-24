@@ -84,7 +84,7 @@
                             <label for="yaad602" class="col-sm-2 control-label">出价：</label>
                             <div class="col-sm-10">
                                 <div class="input-group col-sm-3">
-                                    <input type="number" class="form-control" step="0.01" id="yaad602" name="aad602" th:value="${ad02.aad207 + ad02.aad206}" th:min="${ad02.aad207 + ad02.aad206}">
+                                    <input type="number" class="form-control" step="0.01" id="yaad602" name="aad602" th:placeholder="${ad02.aad207 + ad02.aad206}" th:min="${ad02.aad207 + ad02.aad206}" required>
                                     <div class="input-group-addon">元</div>
                                 </div>
                             </div>
@@ -93,12 +93,15 @@
                             <label for="jaad602" class="col-sm-2 control-label">出价：</label>
                             <div class="col-sm-10">
                                 <div class="input-group col-sm-3">
-                                    <input type="number" class="form-control" step="0.01" id="jaad602" name="aad602" th:value="${ad02.aad207 + ad02.aad208}" th:min="${ad02.aad207 + ad02.aad208}">
+                                    <input type="number" class="form-control" step="0.01" id="jaad602" name="aad602" th:placeholder="${ad02.aad207 + ad02.aad208}" th:min="${ad02.aad207 + ad02.aad208}" required>
                                     <div class="input-group-addon">元</div>
                                 </div>
                             </div>
                         </div>
                         <input type="text" class="hidden" name="aad201" th:value="${ad02.aad201}">
+                        <div class="form-group hidden">
+                            <input type="text" name="aad201" class="form-control" th:value="${ad02.aad201}">
+                        </div>
                         <div th:switch="${isLogin}" class="form-group" id="dobtn">
                             <div th:case="true" class="col-sm-offset-1">
                                 <a type="button" class="btn btn-primary" th:onclick="conn([[${ad02.aad201}]])" th:id="'conn'+${ad02.aad201}">

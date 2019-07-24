@@ -41,9 +41,12 @@
         <div class="section">
             <div class="row">
                 <div class="col-md-3  col-md-offset-9">
-                    <form class="navbar-form navbar-right" role="search" action="auctionSearch.html" method="post" style="position: absolute; top: -60px;">
+                    <form class="navbar-form navbar-right" role="search" action="auctionSearch.html" method="get" style="position: absolute; top: -60px;">
                         <div class="form-group form-white">
                             <input type="text" name="searchValue" class="form-control" placeholder="搜索">
+                        </div>
+                        <div class="form-group hidden">
+                            <input type="text" name="pageNum" class="form-control" value="1">
                         </div>
                         <button type="submit" class="btn btn-white btn-raised btn-fab btn-fab-mini"><i class="material-icons">search</i></button>
                     </form>
@@ -51,7 +54,8 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="title">近期拍卖</h3>
+                    <h3 th:if="${type == 1}" class="title">近期拍卖</h3>
+                    <h3 th:if="${type == 2}" class="title">搜索结果</h3>
                     <hr>
                 </div>
             </div>
@@ -91,11 +95,17 @@
                     </div>
                 </div>
             </div>
-            <div th:if="${type == 1}" class="row">
+            <div class="row">
                 <ul class="pager">
                     <li th:if="${!pre}" class="disabled"><span>上一页</span></li>
-                    <li th:if="${pre}"><a th:href="'auction.html?pageNum=' + ${pageNum - 1}">上一页</a></li>
-                    <li th:if="${next}"><a th:href="'auction.html?pageNum=' + ${pageNum + 1}">下一页</a></li>
+                    <li th:if="${pre}">
+                        <a th:if="${type == 1}" th:href="'auction.html?pageNum=' + ${pageNum - 1}">上一页</a>
+                        <a th:if="${type == 2}" th:href="'auctionSearch.html?searchValue='+${searchValue}+'&pageNum='+${pageNum - 1}">上一页</a>
+                    </li>
+                    <li th:if="${next}">
+                        <a th:if="${type == 1}" th:href="'auction.html?pageNum=' + ${pageNum + 1}">下一页</a>
+                        <a th:if="${type == 2}" th:href="'auctionSearch.html?searchValue='+${searchValue}+'&pageNum=' + ${pageNum + 1}">下一页</a>
+                    </li>
                     <li th:if="${!next}" class="disabled"><span>下一页</span></li>
                 </ul>
             </div>

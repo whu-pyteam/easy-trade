@@ -89,12 +89,12 @@
                                 <div th:if="${isBuy}" class="footer text-center">
                                     <button type="button" th:if="${ac05.aac503 == 0}" class="btn btn-primary btn-round">提醒发货</button>
                                     <button type="button" th:if="${ac05.aac503 == 1}" class="btn btn-primary btn-round" id="taken" th:onclick="takenAuc([[${ad02.aad201}]], [[${ac05.aac501}]])">确认收货</button>
-                                    <button type="button" th:if="${ac05.aac503 == 2}" class="btn btn-primary btn-round disabled">已收货</button>
+                                    <button type="button" th:if="${ac05.aac503 == 2}" class="btn btn-primary btn-round">已收货</button>
                                 </div>
                                 <div th:if="${!isBuy}" class="footer text-center">
-                                    <button type="button" th:if="${ac05.aac503 == 0}" class="btn btn-primary btn-round" id="taken" th:onclick="deliverAuc([[${ac05.aac501}]])">确认发货</button>
-                                    <button type="button" th:if="${ac05.aac503 == 1}" class="btn btn-primary btn-round disabled">已发货</button>
-                                    <button type="button" th:if="${ac05.aac503 == 2}" class="btn btn-primary btn-round disabled">已完成</button>
+                                    <button type="button" th:if="${ac05.aac503 == 0}" class="btn btn-primary btn-round" id="deliver" th:onclick="deliverAuc([[${ac05.aac501}]])">确认发货</button>
+                                    <button type="button" th:if="${ac05.aac503 == 1}" class="btn btn-primary btn-round">已发货</button>
+                                    <button type="button" th:if="${ac05.aac503 == 2}" class="btn btn-primary btn-round">已完成</button>
                                 </div>
                             </form>
                         </div>
@@ -147,7 +147,7 @@
             success: function ()
             {
                 document.getElementById("taken").innerText = "已收货";
-                document.getElementById("taken").classList.add("disabled");
+                document.getElementById("taken").onclick = null;
             },
             error: function ()
             {
@@ -166,8 +166,8 @@
             dataType: 'json',
             success: function ()
             {
-                document.getElementById("taken").innerText = "已收货";
-                document.getElementById("taken").classList.add("disabled");
+                document.getElementById("deliver").innerText = "已收货";
+                document.getElementById("deliver").onclick = null;
             },
             error: function ()
             {

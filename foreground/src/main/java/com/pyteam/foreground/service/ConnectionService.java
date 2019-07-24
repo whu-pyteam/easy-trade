@@ -59,11 +59,6 @@ public class ConnectionService
         return connMap;
     }
 
-    public List<AuctionConn> selectAd02LeftAe05(int aad401)
-    {
-        return auctionMapper.selectAd02LeftAe05(aad401);
-    }
-
     public boolean delByValue(Ae05 ae05)
     {
         Ae05Example ae05Example = new Ae05Example();

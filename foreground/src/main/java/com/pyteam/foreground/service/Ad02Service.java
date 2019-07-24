@@ -55,6 +55,7 @@ public class Ad02Service
         Ad02Example ad02Example = new Ad02Example();
         Criteria criteria = ad02Example.createCriteria();
         criteria.andAad209EqualTo("1");
+        ad02Example.setOrderByClause("aad201 desc");
         Page page = PageHelper.startPage(pageNum, pageSize);
         List<Ad02> ad02List = ad02Mapper.selectByExample(ad02Example);
         Map<String, Object> ad02Map = new HashMap<>();
@@ -124,6 +125,7 @@ public class Ad02Service
         Criteria criteria = ad02Example.createCriteria();
         criteria.andAab101EqualTo(aab101);
         criteria.andAad209Between("0", "3");
+        ad02Example.setOrderByClause("aad201 desc");
         Page page = PageHelper.startPage(pageNum, pageSize);
         List<Ad02> ad02List = ad02Mapper.selectByExample(ad02Example);
         Map<String, Object> ad02Map = new HashMap<>();
@@ -180,12 +182,19 @@ public class Ad02Service
      * @param value
      * @return
      */
-    public List<Ad02> findByValue(String value)
+    public Map<String, Object> findByValue(String value, int pageNum, int pageSize)
     {
-        Ad02Example example = new Ad02Example();
-        Criteria criteria = example.createCriteria();
+        Ad02Example ad02Example = new Ad02Example();
+        Criteria criteria = ad02Example.createCriteria();
         criteria.andAad202Like("%" + value + "%");
-        return ad02Mapper.selectByExample(example);
+        criteria.andAad209EqualTo("1");
+        ad02Example.setOrderByClause("aad201 desc");
+        Page page = PageHelper.startPage(pageNum, pageSize);
+        List<Ad02> ad02List = ad02Mapper.selectByExample(ad02Example);
+        Map<String, Object> ad02Map = new HashMap<>();
+        ad02Map.put("ad02List", ad02List);
+        ad02Map.put("pageCount", page.getPages());
+        return ad02Map;
     }
 
 }

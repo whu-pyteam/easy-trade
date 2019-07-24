@@ -7,12 +7,10 @@ import com.pyteam.db.mbg.entity.Ae05;
 import com.pyteam.foreground.dto.Ad02Dto;
 import com.pyteam.foreground.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +41,74 @@ public class AuctionController
     private OrderService orderService;
 
     private boolean isLogin;
+
+    @RequestMapping(value = "/auctionConn.html", method = RequestMethod.GET)
+    public String showConnection(HttpServletRequest request, HttpServletResponse response, int pageNum, Model model)
+    {
+        isLogin = isLogin(request, response);
+        if(isLogin)
+        {
+            int aad401 = Integer.parseInt(getCookies(request, "aad401_auc"));
+            Map<String, Object> connMap = connService.selectAd02RightAe05(aad401, pageNum, 8);
+            int pageCount = (int)connMap.get("pageCount");
+            boolean pre = true;
+            boolean next = true;
+            if(pageCount <= 1)
+            {
+                pre = false;
+                next = false;
+            }
+            else if(pageNum == 1)
+            {
+                pre = false;
+            }
+            else if(pageNum == pageCount)
+            {
+                next = false;
+            }
+            else
+            {
+                return "404";
+            }
+            model.addAttribute("aconnList", (List<Ad02>)connMap.get("ad02List"));
+            model.addAttribute("isLogin", isLogin);
+            model.addAttribute("pre", pre);
+            model.addAttribute("next", next);
+            model.addAttribute("pageNum", pageNum);
+            return "auctionConn";
+        }
+        return this.wel(request, response, 1, model);
+    }
+
+    @RequestMapping(value = "/addAucConn", method = RequestMethod.GET)
+    @ResponseBody
+    public String addAucConn(HttpServletRequest request, HttpServletResponse response, Ae05 ae05)
+    {
+        if(isLogin(request, response))
+        {
+            ae05.setAad401(Integer.parseInt(getCookies(request, "aad401_auc")));
+            if(connService.insert(ae05))
+            {
+                return "true";
+            }
+        }
+        return null;
+    }
+
+    @RequestMapping(value = "delAucConn", method = RequestMethod.GET)
+    @ResponseBody
+    public String delAucConn(HttpServletRequest request, HttpServletResponse response, Ae05 ae05)
+    {
+        if(isLogin(request, response))
+        {
+            ae05.setAad401(Integer.parseInt(getCookies(request, "aad401_auc")));
+            if(connService.delByValue(ae05))
+            {
+                return "true";
+            }
+        }
+        return null;
+    }
 
     @RequestMapping(value = "/deliverAuc", method = RequestMethod.GET)
     @ResponseBody
@@ -95,11 +161,7 @@ public class AuctionController
             model.addAttribute("res", res);
             return "auctionPart";
         }
-        else
-        {
-            model.addAttribute("isLogin", isLogin);
-            return "auction";
-        }
+        return this.wel(request, response, 1, model);
     }
 
     @RequestMapping(value = "/auctionOrder.html", method = RequestMethod.GET)
@@ -115,11 +177,7 @@ public class AuctionController
             model.addAttribute("isLogin", isLogin);
             return "auctionOrder";
         }
-        else
-        {
-            model.addAttribute("isLogin", isLogin);
-            return "auction";
-        }
+        return this.wel(request, response, 1, model);
     }
 
 
@@ -148,8 +206,7 @@ public class AuctionController
             model.addAttribute("isLogin", isLogin);
             return "auctionPart";
         }
-        model.addAttribute("isLogin", isLogin);
-        return "auction";
+        return this.wel(request, response, 1, model);
     }
 
     @RequestMapping(value = "/auctionOffer.html", method = RequestMethod.POST)
@@ -171,8 +228,7 @@ public class AuctionController
                 return "auction";
             }
         }
-        model.addAttribute("isLogin", isLogin);
-        return "auction";
+        return this.wel(request, response, 1, model);
     }
 
     @RequestMapping(value = "/delMyAuc", method = RequestMethod.GET)
@@ -225,8 +281,7 @@ public class AuctionController
             model.addAttribute("pageNum", pageNum);
             return "auctionMyLau";
         }
-        model.addAttribute("isLogin", isLogin);
-        return "auction";
+        return this.wel(request, response, 1, model);
     }
 
     @RequestMapping(value = "/auctionShow.html", method = RequestMethod.GET)
@@ -244,11 +299,36 @@ public class AuctionController
         return "auctionShow";
     }
 
-    @RequestMapping(value = "/auctionSearch.html", method = RequestMethod.POST)
-    public String searchByValue(HttpServletRequest request, HttpServletResponse response, String searchValue, Model model)
+    @RequestMapping(value = "/auctionSearch.html", method = RequestMethod.GET)
+    public String searchByValue(HttpServletRequest request, HttpServletResponse response, String searchValue, int pageNum, Model model)
     {
-        model.addAttribute("ad02List", service.findByValue(searchValue));
+        Map<String, Object> ad02Map = service.findByValue(searchValue, pageNum, 8);
+        int pageCount = (int)ad02Map.get("pageCount");
+        boolean pre = true;
+        boolean next = true;
+        if(pageCount <= 1)
+        {
+            pre = false;
+            next = false;
+        }
+        else if(pageNum == 1)
+        {
+            pre = false;
+        }
+        else if(pageNum == pageCount)
+        {
+            next = false;
+        }
+        else
+        {
+            return "404";
+        }
+        model.addAttribute("ad02List", (List<Ad02>)ad02Map.get("ad02List"));
         model.addAttribute("isLogin", isLogin(request, response));
+        model.addAttribute("pre", pre);
+        model.addAttribute("next", next);
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("searchValue", searchValue);
         model.addAttribute("type", 2);
         return "auction";
     }
@@ -263,8 +343,7 @@ public class AuctionController
             model.addAttribute("res", 0);
             return "auctionLaunch";
         }
-        model.addAttribute("isLogin", isLogin);
-        return "auction";
+        return this.wel(request, response, 1, model);
     }
 
     @RequestMapping(value = "/auctionLaunch.html", method = RequestMethod.POST)
@@ -288,8 +367,7 @@ public class AuctionController
             }
 
         }
-        model.addAttribute("isLogin", isLogin);
-        return "auction";
+        return this.wel(request, response, 1, model);
     }
 
 

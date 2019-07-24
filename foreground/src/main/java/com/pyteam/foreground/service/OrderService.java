@@ -36,18 +36,31 @@ public class OrderService
             if (ad02List.get(i).getAad209().equals("3"))
             {
                 Ac05 ac05 = this.selectAc05Byaad201(ad02List.get(i).getAad201());
-                if(ac05 != null)
+
+                if(ac05 == null)
+                {
+                    Ad06Example ad06Example = new Ad06Example();
+                    Ad06Example.Criteria criteria = ad06Example.createCriteria();
+                    criteria.andAad201EqualTo(ad02List.get(i).getAad201());
+                    criteria.andAad603EqualTo("3");
+                    List<Ad06> ad06List = ad06Mapper.selectByExample(ad06Example);
+                    if (!ad06List.isEmpty())
+                    {
+                        ad02List.get(i).setAad209("5"); //等待用户填写订单
+                    }
+                }
+                else
                 {
                     switch (ac05.getAac503())
                     {
                         case 0:
-                            ad02List.get(i).setAad209("5"); //待发货
+                            ad02List.get(i).setAad209("6"); //待发货
                             break;
                         case 1:
-                            ad02List.get(i).setAad209("6"); //已发货
+                            ad02List.get(i).setAad209("7"); //已发货
                             break;
                         case 2:
-                            ad02List.get(i).setAad209("7"); //已完成
+                            ad02List.get(i).setAad209("8"); //已完成
                             break;
                     }
                 }
