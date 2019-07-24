@@ -2,10 +2,13 @@ package com.pyteam.foreground.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
+import com.pyteam.db.mbg.entity.Ab01;
+import com.pyteam.db.mbg.entity.Ab01Example;
 import com.pyteam.db.mbg.entity.Ac01;
 import com.pyteam.db.mbg.entity.Ac04;
 import com.pyteam.foreground.dto.Ac04Dto;
 import com.pyteam.foreground.dto.CartItemDto;
+import com.pyteam.foreground.service.Ab01Service;
 import com.pyteam.foreground.service.Ac01Service;
 import com.pyteam.foreground.service.Ac03Service;
 import com.pyteam.foreground.service.Ac04Service;
@@ -32,13 +35,49 @@ public class CartController
     private Ac03Service ac03Service;
     @Autowired
     private Ac01Service ac01Service;
+    @Autowired
+    private Ab01Service ab01Service;
 
     @GetMapping("cart.html")
-    public String cartShow(HttpServletRequest request, HttpServletResponse response, Model model)
+    public String cartShow(HttpServletRequest request, HttpServletResponse response, Model model,int pageIndex)throws Exception
     {
         //判断用户是否登录
         if (isLogin(request,response))
         {
+            //从cookie中取出用户id
+            String username = getCookies(request,"userId");
+
+            //根据用户id获取购物车id
+            Integer cartId= ac03Service.getCartIdByUserId(Integer.parseInt(username));
+
+            //获取所有符合条件的商品列表
+            List<Ac04> totalList = ac04Service.getCartItemList(cartId);
+            int total=totalList.size();
+
+            //PageHelper进行分页，获取分页后的当前页面数据
+            PageHelper.startPage(pageIndex,10);
+            List<Ac04> ac04List = ac04Service.getCartItemList(cartId);
+
+            //通过已经得到的购物车项列表查询商品表获取相关数据,组成最终返回前端的数据列表
+            List<CartItemDto> cartItemDtoList=new ArrayList<>();
+            for (Ac04 item:ac04List)
+            {
+                int aac101 = item.getAac101();
+                Ac01 ac01 = ac01Service.findById(aac101);
+                CartItemDto cartItemDto = new CartItemDto();
+                cartItemDto.setAac101(ac01.getAac101());
+                cartItemDto.setAac102(ac01.getAac102());
+                cartItemDto.setAac105(ac01.getAac105());
+                cartItemDto.setAac106(ac01.getAac106());
+
+                Ab01 ab01=ab01Service.getMemberInfo(Integer.parseInt(username));
+                cartItemDto.setAab101(Integer.parseInt(username));
+                cartItemDto.setAab103(ab01.getAab103());
+                cartItemDtoList.add(cartItemDto);
+            }
+            model.addAttribute("total",total);
+            model.addAttribute("pageIndex",pageIndex);
+            model.addAttribute("ac01List",cartItemDtoList);
             model.addAttribute("type",1);
             model.addAttribute("isLogin", isLogin(request, response));
             return "cart";
@@ -53,7 +92,7 @@ public class CartController
      * @param pageSize
      * @param pageIndex
      * @return Json类型，包含total和rows
-     */
+     *//*
     @GetMapping("cartShow.html")
     @ResponseBody
     public JSONObject cartShow(int pageSize,int pageIndex,HttpServletRequest request) throws Exception
@@ -91,6 +130,7 @@ public class CartController
         json.put("rows",cartItemDtos);
         return json;
     }
+*/
 
     /**
      * 商品加入购物车

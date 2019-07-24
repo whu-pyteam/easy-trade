@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,7 +42,14 @@ public class Ac05Service
     {
         Ac05 ac05 = new Ac05();
         ac05.setAab101(ac05Dto.getAab101());
-        ac05.setAac502("123456789");//订单编号
+
+
+        int r=(int)(Math.random()*(9999-1000)+1000);
+        DateFormat dateFormat = new SimpleDateFormat("yyyyMMddhh");
+        String result = dateFormat.format(new Date()) + r;
+
+        ac05.setAac502(result);//订单编号
+
         ac05.setAac503(0);
         ac05.setAac504(ac05Dto.getAac504());
         ac05.setAac505(ac05Dto.getAac505());

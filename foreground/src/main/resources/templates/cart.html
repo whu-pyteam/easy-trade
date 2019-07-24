@@ -7,161 +7,521 @@
 
     <title>购物车</title>
 
-
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
-
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-table.css"/>
-
-    <link href="css/login-register.css" rel="stylesheet">
-
-    <style type="text/css">
-
-        .orderDisplay{
-            display: none;
-            position: absolute;
-            z-index: 10;
-        }
-    </style>
 </head>
 <body>
-<div th:replace="header :: header(${type})"></div>
-<script type="text/javascript" src="js/bootstrap.js"></script>
-<script type="text/javascript" src="js/bootstrap-table.js"></script>
-<!-- bootstrap table中文包 -->
-<script type="text/javascript" src="js/bootstrap-table-zh-CN.js"></script>
-<div class="container">
-    <div class="row" style="padding-top: 30px">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-8">
+<div th:replace="header :: header(1)"></div>
+
+<div class="page-header header-filter header-small" data-parallax="true" style="background-image: url('images/city.jpg');"></div>
+
+<div class="main main-raised">
+    <div class="profile-content">
+        <div class="container">
+
             <div class="row">
-                <div class="col-lg-8" style="padding-left: 0px;">
-                    <input class="btn btn-default" id="mybtn" type="button" value="批量删除" onclick="patchDelete()">
+                <div class="col-md-12">
+                    <h3>购物车</h3>
                 </div>
-                <div class="col-lg-2">
-                    <label id="totalMoney" >0</label>
-                </div>
-                <div class="col-lg-2" style="float: right;padding-right: 0px">
-                    <input class="btn btn-default" id="buyBtn" type="button" value="购买" onclick="buy()" style="float: right">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="table-responsive">
+                        <table class="table table-shopping">
+                            <thead>
+                            <tr>
+                                <th id="checkAll">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox">
+                                        </label>
+                                    </div>
+                                </th>
+                                <th class="text-center"></th>
+                                <th >商品信息</th>
+                                <th class="text-right">商品价格</th>
+                                <th><i class="material-icons">remove_shopping_cart</i></button></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:id="${ac01.aac101}" th:each="ac01:${ac01List}">
+                                    <td class="checkboxInput">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" th:value="${ac01.aac101}" name="optionsCheckbox">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="img-container">
+                                            <img th:src="${ac01.aac106}" alt="对方偷走了你的图片，并给了你一个吻~">
+                                        </div>
+                                    </td>
+                                    <td class="td-name">
+                                        <a th:href="@{goodShow.html(id=${ac01.aac101})}"><h4 th:text="${ac01.aac102}"></h4></a>
+                                        <br /><small th:text="${ac01.aab103}"></small>
+                                    </td>
+                                    <td class="td-number">
+                                        ¥ <small th:text="${ac01.aac105}"></small>
+                                    </td>
+                                    <td class="td-actions">
+                                        <button type="button" rel="tooltip" data-placement="left" title="点击删除" class="btn btn-simple" th:onclick="|javascript:oneDelete('${ac01.aac101}')|">
+                                            <i class="material-icons">close</i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-left"> <button type="button" class="btn btn-danger btn-round" onclick="patchDelete()">
+                                        删除
+                                        <i class="material-icons">keyboard_arrow_right</i></button>
+                                    </td>
+                                    <td colspan="1">
+                                    </td>
+                                    <td class="td-total">
+                                        总计
+                                    </td>
+                                    <td class="td-price" id="totalCharge">
+                                        ¥ <small>0</small>
+                                    </td>
+                                    <td colspan="3" class="text-right"> <button type="button" class="btn btn-info btn-round" onclick="buyAll()">
+                                        购买
+                                        <i class="material-icons">keyboard_arrow_right</i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+
+
             <div class="row">
-                <table id="table"></table>
-            </div>
-        </div>
-        <div class="col-lg-2">
-            <div class="orderDisplay">
-                <form class="orderForm" id="orderForm" onsubmit="return false" action="#" method="post">
-                    <div>
-                        <label>收货人姓名</label>
-                        <input type="text" class="form-control" name="aac506" required>
-                    </div>
-                    <div>
-                        <label>收货人电话</label>
-                        <input type="text" class="form-control" name="aac507" id="aac507" required>
-                    </div>
-                    <div>
-                        <label>交易方式</label>
-                        <input type="radio" name="aac504" value="1" checked>线下
-                        <input type="radio" name="aac504" value="2">快递
-                    </div>
-                    <div>
-                        <label>交易地址</label>
-                        <input type="text" class="form-control" name="aac509" id="aac509" required>
-                    </div>
-                    <div>
-                        <label>总金额</label>
-                        <input type="text" class="form-control" name="aac505" id="aac505" readonly>
-                    </div>
-                    <div>
-                        <label>备注</label>
-                        <input type="text" class="form-control" name="aac510" id="aac510">
-                    </div>
-                    <div>
-                        <input type="submit" class="btn btn-default"  value="提交订单" onclick="submitOrder()">
-                    </div>
-                </form>
+                <div class="col-md-8 col-md-offset-2 text-center">
+                    <ul class="pagination pagination-primary" id="pagniul">
+
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-signup">
+        <div class="modal-content">
+            <div class="card card-signup card-plain">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+                    <h2 class="modal-title card-title text-center" id="myModalLabel">订单</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-5 col-md-offset-1">
+                            <div class="info info-horizontal">
+                                <div class="icon icon-rose">
+                                    <i class="material-icons">timeline</i>
+                                </div>
+                                <div class="description">
+                                    <h4 class="info-title">订单填写</h4>
+                                    <p class="description">
+                                        请认真填写收货人姓名哦.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="info info-horizontal">
+                                <div class="icon icon-primary">
+                                    <i class="material-icons">code</i>
+                                </div>
+                                <div class="description">
+                                    <h4 class="info-title">交易方式</h4>
+                                    <p class="description">
+                                        线下交易or快递交易随心选.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="info info-horizontal">
+                                <div class="icon icon-info">
+                                    <i class="material-icons">group</i>
+                                </div>
+                                <div class="description">
+                                    <h4 class="info-title">温馨提示</h4>
+                                    <p class="description">
+                                        下单成功返送信誉积分哦.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="social text-center">
+                                <h4> 在这里填写信息<i class="material-icons">arrow_downward</i></h4>
+                            </div>
+
+                            <form class="form" onsubmit="return false">
+                                <div class="card-content">
+                                    <div class="input-group">
+										<span class="input-group-addon">
+											<i class="material-icons">face</i>
+										</span>
+                                        <input type="text" class="form-control" name="aac506" placeholder="姓名" required >
+                                    </div>
+
+                                    <div class="input-group">
+										<span class="input-group-addon">
+											<i class="material-icons">phone_in_talk</i>
+										</span>
+                                        <input type="text" class="form-control" name="aac507" placeholder="电话号码" required>
+                                    </div>
 
 
-<script type="text/javascript">
+                                    <div class="input-group">
+										<span class="input-group-addon">
+											<i class="material-icons">people</i>
+										</span>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio"  name="aac504" value="1" checked>
+                                                线下交易
+                                            </label>
+                                            <label>
+                                                <input type="radio"  name="aac504" value="2">
+                                                快递交易
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group">
+										<span class="input-group-addon">
+											<i class="material-icons">location_city</i>
+										</span>
+                                        <input type="text" class="form-control" name="aac509" placeholder="交易地址" required>
+                                    </div>
+
+                                    <div class="input-group">
+										<span class="input-group-addon">
+											<i class="material-icons">credit_card</i>
+										</span>
+                                        <input type="number" class="form-control" step="0.01" name="aac505" id="aac505" readonly>
+                                    </div>
+
+
+                                    <div class="input-group">
+										<span class="input-group-addon">
+											<i class="material-icons">note</i>
+										</span>
+                                        <textarea class="form-control" name="aac510" placeholder="每一条备注的背后，都有一份期待..." rows="5"></textarea>
+                                    </div>
+
+
+
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="optionsCheckboxes" checked>
+                                            我保证填写信息真实有效
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer text-center">
+                                    <a href="#pablo" class="btn btn-primary btn-round" onclick="submitOrder()">下单</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p id="assistTotal" th:name="${total}" style="display: none">
+<p id="assistIndex" th:name="${pageIndex}" style="display: none">
+
+<div th:replace="header :: footer"></div>
+<script>
+
+    // 全选
+    $("#checkAll div label input").click(function() {
+        console.log("checkAll here")
+        var flag = $(this).prop("checked");
+        if(flag) {
+            $(".checkboxInput label input").prop("checked", true);
+        } else {
+            $(".checkboxInput label input").prop("checked", false);
+        }
+        totalPrice();
+    });
+
+
+    //单选
+    $(".checkboxInput input").click(function() {
+        console.log("check here")
+        var CL = $(".checkboxInput div label input").length; //列表长度；
+        var CH = $(".checkboxInput div label input:checked").length; //列表中被选中的长度
+
+        if(CL == CH) {
+            $("#checkAll div label input").prop("checked", true);
+        } else {
+            $("#checkAll div label input").prop("checked", false);
+        }
+        totalPrice();
+    })
+
+    //总价格
+    totalPrice();
+
+    function totalPrice() {
+        var prices = 0;
+        $('.checkboxInput div label input:checked').each(function() {
+            prices += parseFloat($(this).parents("label").parents("div").parents("tr").find('.td-number small').text());
+        })
+        $('#totalCharge small').text(prices);
+    }
+
+    //单一实例删除
+    function oneDelete(id) {
+        $.ajax({
+            url: "cartItemDelete.html?id="+id,
+            type: "delete",
+            success: function (data)
+            {
+                if(data==0)
+                {
+                    alert("请登录");
+                }
+                if(data==1)
+                {
+                    alert("删除成功");
+                }
+                if(data==2)
+                {
+                    alert("删除失败");
+                }
+                window.location.replace("/cart.html?pageIndex=1")
+            }
+        });
+    }
+
+    //批量删除
+    function patchDelete() {
+        var opts = $('#table').bootstrapTable('getSelections');
+        if (opts == "") {
+            alert("请选择要删除的数据");
+        }
+        else {
+            var idArray = [];
+            for (var i = 0; i < opts.length; i++) {
+                idArray.push(opts[i].aac101);
+            }
+            if (confirm("确定删除商品id：" + idArray + "吗？")) {
+                deleteExecute(idArray);
+            }
+        }
+    }
+
+    function deleteExecute(idArray) {
+        console.log(idArray);
+        $.ajax({
+            url : "/patchDelete.html",
+            data : "ids="+idArray,
+            type : "post",
+            dataType : "json",
+            success: function (data) {
+                if(data==0)
+                {
+                    alert("请登录")
+                }
+                if(data==1)
+                {
+                    alert("批量删除成功")
+                }
+                if(data==2)
+                {
+                    alert("批量删除失败")
+                }
+                window.location.replace("/cart.html?pageIndex=1")
+            }
+        });
+    }
+
+
+    function buyAll() {
+        var number = '';
+        var checkboxes= $('input[name="optionsCheckbox"]:checked');
+        if(checkboxes.length==0)
+        {
+            alert("请选择购买的商品")
+        }
+        else
+        {
+            $("#aac505").val($('#totalCharge small').text())
+            $("#signupModal").modal();
+        }
+    }
+
+    function submitOrder() {
+        var aac101s='';
+        $('input[name="optionsCheckbox"]:checked').each(function(k){
+            if(k == 0){
+                aac101s = $(this).val();
+            }else{
+                aac101s += ','+$(this).val();
+            }
+        })
+
+        console.log(aac101s)
+        var data={
+            "aac504":$('input[name="aac504"]:checked').val(),
+            "aac505":$('input[name="aac505"]').val(),
+            "aac506":$('input[name="aac506"]').val(),
+            "aac507":$('input[name="aac507"]').val(),
+            "aac509":$('input[name="aac509"]').val(),
+            "aac510":$('textarea[name="aac510"]').val(),
+            "aac101s":aac101s
+        }
+
+        $.ajax({
+            url: "submitGoodOrder.html",
+            type:"post",
+            data: data,
+        })
+        buyExecute(aac101s);
+    }
+
+    function buyExecute(number)
+    {
+        var idArray=number.trim(",");
+        $.ajax({
+            url : "/patchDelete.html",
+            data : "ids="+idArray,
+            type : "post",
+            dataType : "json",
+            success: function (data) {
+                if(data==0)
+                {
+                    alert("请登录")
+                }
+                if(data==1)
+                {
+                    alert("购买成功")
+                }
+                if(data==2)
+                {
+                    alert("购买失败")
+                }
+                window.location.replace("/cart.html?pageIndex=1")
+            }
+        });
+    }
+
+
+    window.onload=function (ev) {
+        var total = $("#assistTotal").attr("name");
+        var curPageIndex = $("#assistIndex").attr("name");
+
+        var pageTotal;
+        var rest=total/10 - parseInt(total/10);
+        if(rest==0)
+        {
+            pageTotal=parseInt(total/10);
+        }
+        else
+        {
+            pageTotal=parseInt(total/10)+1;
+        }
+
+        console.log(curPageIndex)
+        var pagniul=document.getElementById("pagniul");
+        for(var i=0;i<pageTotal;i++)
+        {
+            var newli = document.createElement("li");
+            if(curPageIndex==(i+1))
+            {
+                console.log("heree")
+                newli.setAttribute("class","active");
+            }
+            var newa=document.createElement("a")
+            newa.setAttribute("href","cart.html?pageIndex="+(i+1))
+            newa.innerHTML=(i+1).toString();
+            newli.appendChild(newa)
+            pagniul.appendChild(newli);
+        }
+
+    }
+</script>
+<!--<script type="text/javascript">
     var _table = $('#table');
     //初始化bootstrap table ，并且启动它
     function init(){
         _table.bootstrapTable({
-            url: 'cartShow.html',
-            method: 'get',
-            striped: true,
-            cache: false,
-            height: getHeight(),
-            pagination: true,  //表格底部显示分页条
-            smartDisplay:false,
-            sidePagination: "server",
-            paginationDetailHAlign:"right",
-            escape:false, //启动转义字符
-            pageSize: 10, //每页显示多少条数据
-            pageNumber: 1, //初始化翻页的页码
-            pageList: [10, 15, 20, 25],
-            queryParamsType:'',//设置请求参数格式
-            queryParams:function queryParams(params) {   //设自定义查询参数
-                var param = {
-                    pageSize: params.pageSize,   //每页多少条数据
-                    pageIndex: params.pageNumber, // 页码
-                };
-                return param;
-            },
+                url: 'cartShow.html',
+                method: 'get',
+                striped: true,
+                cache: false,
+                height: getHeight(),
+                pagination: true,  //表格底部显示分页条
+                smartDisplay:false,
+                sidePagination: "server",
+                paginationDetailHAlign:"right",
+                escape:false, //启动转义字符
+                pageSize: 10, //每页显示多少条数据
+                pageNumber: 1, //初始化翻页的页码
+                pageList: [10, 15, 20, 25],
+                queryParamsType:'',//设置请求参数格式
+                queryParams:function queryParams(params) {   //设自定义查询参数
+                    var param = {
+                        pageSize: params.pageSize,   //每页多少条数据
+                        pageIndex: params.pageNumber, // 页码
+                    };
+                    return param;
+                },
 
-            columns: [{
-                field: 'state',
-                checkbox: true,
-                width: 20,
-                align: 'center',
-                valign: 'middle'
-            }, {
-                field: 'aac106',
-                title: '商品图片',
-                align: 'center',
-                formatter:function (value,row,index)
-                {
-                    return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
+                columns: [{
+                    field: 'state',
+                    checkbox: true,
+                    width: 20,
+                    align: 'center',
+                    valign: 'middle'
+                }, {
+                    field: 'aac106',
+                    title: '商品图片',
+                    align: 'center',
+                    formatter:function (value,row,index)
+                    {
+                        return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
+                    }
+                }, {
+                    field: 'aac102',
+                    title:'商品名称',
+                    align:'center'
+                },{
+                    field:'aac105',
+                    title:'商品价格',
+                    align:'center'
+                }, {
+                    field: 'operate',
+                    title: '删除',
+                    align: 'center',
+                    events: operateEvents,
+                    formatter: operateFormatter
+                }],
+                onCheck: function (row) {
+                    console.log(row.aac105.toString());
+                    var textMoney=$('#totalMoney').text().toString();
+                    console.log(textMoney);
+
+                    var money=parseFloat(textMoney)+parseFloat(row.aac105.toString());
+                    console.log(money)
+                    $('#totalMoney').text(money);
+                },
+                onUncheck: function (row) {
+                    console.log(row.aac105.toString());
+                    var textMoney=$('#totalMoney').text().toString();
+                    console.log(textMoney);
+
+                    var money=parseFloat(textMoney)-parseFloat(row.aac105.toString());
+                    console.log(money)
+                    $('#totalMoney').text(money);
                 }
-            }, {
-                field: 'aac102',
-                title:'商品名称',
-                align:'center'
-            },{
-                field:'aac105',
-                title:'商品价格',
-                align:'center'
-            }, {
-                field: 'operate',
-                title: '删除',
-                align: 'center',
-                events: operateEvents,
-                formatter: operateFormatter
-            }],
-            onCheck: function (row) {
-                console.log(row.aac105.toString());
-                var textMoney=$('#totalMoney').text().toString();
-                console.log(textMoney);
-
-                var money=parseFloat(textMoney)+parseFloat(row.aac105.toString());
-                console.log(money)
-                $('#totalMoney').text(money);
-            },
-            onUncheck: function (row) {
-                console.log(row.aac105.toString());
-                var textMoney=$('#totalMoney').text().toString();
-                console.log(textMoney);
-
-                var money=parseFloat(textMoney)-parseFloat(row.aac105.toString());
-                console.log(money)
-                $('#totalMoney').text(money);
             }
-        }
         );
     }
 
@@ -341,6 +701,6 @@
             }
         }
     }
-</script>
+</script>-->
 </body>
 </html>

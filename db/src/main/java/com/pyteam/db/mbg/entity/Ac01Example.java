@@ -1,5 +1,6 @@
 package com.pyteam.db.mbg.entity;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -545,7 +546,7 @@ public class Ac01Example {
             return (Criteria) this;
         }
 
-        public Criteria andAac105Between(Long value1, Long value2) {
+        public Criteria andAac105Between(BigDecimal value1, BigDecimal value2) {
             addCriterion("aac105 between", value1, value2, "aac105");
             return (Criteria) this;
         }

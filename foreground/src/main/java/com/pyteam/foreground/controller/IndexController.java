@@ -1,5 +1,6 @@
 package com.pyteam.foreground.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.pyteam.db.mbg.entity.Ab01;
 import com.pyteam.db.mbg.entity.Ac01;
 import com.pyteam.foreground.dto.Ac01Dto;
@@ -31,11 +32,40 @@ public class IndexController
     private Ab01Service ab01Service;
 
 
-    @RequestMapping(value = "/index.html", method = RequestMethod.GET)
-    public String wel(HttpServletRequest request, HttpServletResponse response, Model model)throws Exception
+    @RequestMapping(value = "/template.html", method = RequestMethod.GET)
+    public String template()
     {
-        model.addAttribute("ac01List", ac01Service.selectById());
+        return "template";
+    }
+
+    @RequestMapping(value = "/index.html", method = RequestMethod.GET)
+    public String getIndexPage(HttpServletRequest request, HttpServletResponse response, Model model,int pageIndex)throws Exception
+    {
+        List<Ac01> totalList=ac01Service.getUnsoldGoodList();
+        int total=totalList.size();
+
+        PageHelper.startPage(pageIndex,9);
+        List<Ac01> ac01List=ac01Service.getUnsoldGoodList();
+
+        List<Ac01> newList = new ArrayList<>();
+        if(total>0)
+        {
+            newList.add(totalList.get(totalList.size()-1));
+            if(total>1)
+            {
+                newList.add(totalList.get(totalList.size() - 2));
+                if(total>2)
+                {
+                    newList.add(totalList.get(totalList.size() - 3));
+                }
+            }
+        }
+
+        model.addAttribute("total",total);
+        model.addAttribute("pageIndex",pageIndex);
+        model.addAttribute("ac01List", ac01List);
         model.addAttribute("isLogin", isLogin(request, response));
+        model.addAttribute("newList",newList);
         return "index";
     }
 
@@ -50,19 +80,29 @@ public class IndexController
     {
         try
         {
-            Ac01 ac01=ac01Service.findById(id);
+            Ac01 ac01 = ac01Service.findById(id);
             model.addAttribute("ac01", ac01);
 
-            String name=ac02Service.getName(ac01.getAac201());
+            String name = ac02Service.getName(ac01.getAac201());
 
-            Ab01 ab01=ab01Service.getMemberInfo(ac01.getAab101());
-            model.addAttribute("aab103",ab01.getAab103());
-            model.addAttribute("aac202",name);
+            Ab01 ab01 = ab01Service.getMemberInfo(ac01.getAab101());
+            model.addAttribute("aab103", ab01.getAab103());
+            model.addAttribute("aab111", ab01.getAab111());
+            model.addAttribute("aac202", name);
             model.addAttribute("type", 1);
+
+            if(isLogin(request,response))
+            {
+                String username = getCookies(request,"userId");
+                Ab01 ab011=ab01Service.getMemberInfo(Integer.parseInt(username));
+                model.addAttribute("aab107", ab011.getAab107());
+            }
+
             model.addAttribute("isLogin", isLogin(request, response));
+
+
             return "goodShow";
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             e.printStackTrace();
             return "error/404";
@@ -75,14 +115,23 @@ public class IndexController
      * @param model
      * @return
      */
-    @RequestMapping(value = "/goodSearch.html", method = RequestMethod.POST)
-    public String searchByValue(@RequestParam(value = "searchValue") String value, Model model,HttpServletRequest request,HttpServletResponse response)
+
+    @GetMapping(value = "/goodSearch.html")
+    public String searchByVal(@RequestParam(value = "searchValue") String value,@RequestParam(value = "pageIndex")int pageIndex, Model model,HttpServletRequest request,HttpServletResponse response)
     {
-        System.out.println(value);
         try
         {
-            model.addAttribute("searchList", ac01Service.searchByValue(value));
+            List<Ac01> totalList=ac01Service.searchByValue(value);
+            int total=totalList.size();
+
+            PageHelper.startPage(pageIndex,9);
+            List<Ac01> ac01List=ac01Service.searchByValue(value);
+
+            model.addAttribute("ac01List", ac01List);
+            model.addAttribute("total",total);
+            model.addAttribute("searchValue",value);
             model.addAttribute("type", 1);
+            model.addAttribute("pageIndex",pageIndex);
             model.addAttribute("isLogin", isLogin(request, response));
             return "goodSearch";
         }
@@ -93,6 +142,61 @@ public class IndexController
         }
     }
 
+    @GetMapping("searchByPrice.html")
+    public String searchByPrice(@RequestParam(value = "maxprice") String maxp,@RequestParam(value = "minprice") String minp,@RequestParam(value = "pageIndex")int pageIndex, Model model,HttpServletRequest request,HttpServletResponse response)
+    {
+        try
+        {
+            List<Ac01> totalList=ac01Service.searchByPrice(Integer.parseInt(maxp),Integer.parseInt(minp));
+            int total=totalList.size();
+
+            PageHelper.startPage(pageIndex,9);
+            List<Ac01> ac01List=ac01Service.searchByPrice(Integer.parseInt(maxp),Integer.parseInt(minp));
+
+            model.addAttribute("ac01List", ac01List);
+            model.addAttribute("total",total);
+            model.addAttribute("maxprice",maxp);
+            model.addAttribute("minprice",minp);
+            model.addAttribute("type", 1);
+            model.addAttribute("pageIndex",pageIndex);
+            model.addAttribute("isLogin", isLogin(request, response));
+            return "goodSearchByPrice";
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return "error/404";
+        }
+    }
+
+    @GetMapping("searchByType.html")
+    public String searchByType(@RequestParam(value = "types") String types,@RequestParam(value = "pageIndex")int pageIndex, Model model,HttpServletRequest request,HttpServletResponse response)
+    {
+        try
+        {
+            String[] typeArr=types.split(",");
+            List<Ac01> totalList=ac01Service.searchByTypes(typeArr);
+            int total=totalList.size();
+
+            //PageHelper.startPage(pageIndex,9);
+            List<Ac01> ac01List=ac01Service.searchByTypes(typeArr);
+            List<Ac01> newList=ac01Service.pageClip(total,pageIndex,9,ac01List);
+
+
+            model.addAttribute("ac01List", newList);
+            model.addAttribute("total",total);
+            model.addAttribute("types",types);
+            model.addAttribute("type", 1);
+            model.addAttribute("pageIndex",pageIndex);
+            model.addAttribute("isLogin", isLogin(request, response));
+            return "goodSearchByType";
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return "error/404";
+        }
+    }
 
     /**
      * 添加商品页面
