@@ -1,65 +1,88 @@
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
     <title>收藏的拍卖</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-<div th:replace="header :: header(3)"></div>
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
 
-<div class="zt">
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/material-kit.css?v=1.2.1" rel="stylesheet"/>
+</head>
+<body class="product-page">
+<div th:replace="auctionHeader :: header(3)"></div>
+
+<div class="page-header header-filter header-small" data-parallax="true" style="background-image: url('images/bg_auc.jpg');"></div>
+
+<div class="section section-gray">
     <div class="container">
-        <div class="row">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <td>物品</td>
-                    <td></td>
-                    <td>当前最高价</td>
-                    <td>截止时间</td>
-                    <td></td>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="aconn:${aconnList}">
-                    <td><img th:src="${aconn.aad203}" style="height: 100px; width: 100px; overflow: hidden"></td>
-                    <td><h3 th:text="${aconn.aad202}"></h3></td>
-                    <td><p th:text="${aconn.aad208}"></p></td>
-                    <td th:switch="${aconn.aad209}">
-                        <p th:case="1" th:text="${#dates.format(aconn.aad211, 'yyyy年MM月dd日 HH:mm')}"></p>
-                        <p th:case="3">竞拍已结束</p>
-                        <p th:case="4">卖家已取消竞拍</p>
-                    </td>
-                    <td>
-                        <a class="btn btn-primary" th:onclick="connShow([[${aconn.aad201}]])">
-                            已收藏
-                        </a>
-                        <a th:if="${aconn.aad209 == '1'}" th:href="'auctionShow.html?aad201=' + ${aconn.aad201}">
-                            <button class="btn btn-info">查看</button>
-                        </a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="row">
-            <ul class="pager">
-                <li th:if="${!pre}" class="disabled"><span>上一页</span></li>
-                <li th:if="${pre}"><a th:href="'auctionConn.html?pageNum=' + ${pageNum - 1}">上一页</a></li>
-                <li th:if="${next}"><a th:href="'auctionConn.html?pageNum=' + ${pageNum + 1}">下一页</a></li>
-                <li th:if="${!next}" class="disabled"><span>下一页</span></li>
-            </ul>
+        <div class="main main-raised main-product">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <h3 class="card-title text-center">收藏的拍卖</h3>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>物品</th>
+                                <th></th>
+                                <th>竞拍方式</th>
+                                <th class="text-center">价格</th>
+                                <th class="text-center">截止时间</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="aconn:${aconnList}">
+                                <td><img th:src="${aconn.aad203}"
+                                         style="height: 100px; width: 100px; object-fit: cover;"></td>
+                                <td><h4 th:text="${aconn.aad202}"></h4></td>
+                                <td><span th:text="${aconn.aad205 == '1'}?'一口价竞拍':'加价竞拍'"></span></td>
+                                <td class="text-center"><span
+                                        th:text="${aconn.aad205 == '1'}?${aconn.aad206}:${aconn.aad208}"></span></td>
+                                <td class="text-center" th:switch="${aconn.aad209}">
+                                    <span th:case="1" th:text="${#dates.format(aconn.aad211, 'MM月dd日 HH:mm')}"></span>
+                                    <span th:case="3">竞拍已结束</span>
+                                    <span th:case="4">卖家已取消竞拍</span>
+                                </td>
+                                <td class="text-right">
+                                    <a th:if="${aconn.aad209 == '1'}" th:href="'auctionShow.html?aad201=' + ${aconn.aad201}">
+                                        <button type="button" rel="tooltip" class="btn btn-success btn-round">查看</button>
+                                    </a>
+                                    <button type="button" rel="tooltip" class="btn btn-danger btn-round"
+                                            th:onclick="connShow([[${aconn.aad201}]])">
+                                        <i class="material-icons">star_border</i>取消收藏
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <ul class="pager">
+                            <li th:if="${!pre}" class="disabled"><span>上一页</span></li>
+                            <li th:if="${pre}"><a th:href="'auctionConn.html?pageNum=' + ${pageNum - 1}">上一页</a></li>
+                            <li th:if="${next}"><a th:href="'auctionConn.html?pageNum=' + ${pageNum + 1}">下一页</a></li>
+                            <li th:if="${!next}" class="disabled"><span>下一页</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
+
+<div th:replace="auctionHeader::footer"></div>
+
+</body>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script>
-    function connShow(aad201)
-    {
+    function connShow(aad201) {
         var data = {aad201: aad201};
         $.ajax({
             url: 'delAucConn',
@@ -67,8 +90,7 @@
             data: data,
             contentType: 'application/json',
             dataType: 'json',
-            success: function ()
-            {
+            success: function () {
                 alert("取消成功！");
                 location.reload();
             },
@@ -79,5 +101,4 @@
         });
     }
 </script>
-</body>
 </html>

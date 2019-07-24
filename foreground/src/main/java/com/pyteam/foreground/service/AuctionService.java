@@ -2,8 +2,6 @@ package com.pyteam.foreground.service;
 
 import com.pyteam.db.entity.AuctionPart;
 import com.pyteam.db.mapper.AuctionMapper;
-import com.pyteam.db.mbg.entity.Ad02;
-import com.pyteam.db.mbg.mapper.Ad02Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
