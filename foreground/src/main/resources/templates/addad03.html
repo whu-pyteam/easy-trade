@@ -7,66 +7,136 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>添加评论</title>
 
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/fileinput.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
-    <link href="../css/theme.css" rel="stylesheet">
-    <link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-    <style type="text/css">
-        .fqxs {
-            padding-top: 60px;
-        }
-    </style>
+    <!--<link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <!--<link href="../css/fileinput.css" rel="stylesheet">-->
+    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">-->
+    <!--<link href="../css/theme.css" rel="stylesheet">-->
+    <!--<link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet">-->
+    <!--<style type="text/css">-->
+    <!--.fqxs {-->
+    <!--padding-top: 60px;-->
+    <!--}-->
+    <!--</style>-->
 </head>
 
 <body>
-<div class="container">
+<div th:replace="header::header(2)"></div>
+<div class="main main-raised">
+
     <div class="row">
-        <div class="col-lg-3"></div>
-        <div class="col-lg-6">
-            <form class="fqxs" th:action="@{/addad03}"  th:object="${ad03}"  method="post" enctype="multipart/form-data">
-
-
-
-                <div class="form-group">
-                    <label>星级:</label>
-                    <label><input type="radio" name="aad304" value="1" >一星级</label>
-                    <label><input type="radio" name="aad304" value="2">二星级</label>
-                    <label><input type="radio" name="aad304" value="3" >三星级</label>
-                    <label><input type="radio" name="aad304" value="4">四星级</label>
-                    <label><input type="radio" name="aad304" value="5" checked>五星级</label>
+        <div class="col-lg-2">
+            <div class="logo pull-left">
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <form class="navbar-form navbar-right" role="search" th:action="@{'/cxk'}" >
+                <div class="form-group form-white is-empty">
+                    <input type="text" class="form-control" name="notsure" id="notsure" placeholder="Search">
+                    <span class="material-icons"></span>
                 </div>
-
-                <div>
-                    <label>自己id</label>
-                    <input readonly="readonly" th:value="${aab101}" name="aab101">
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-lg-2">
-                        <label for="aad303">备注:</label>
-                    </div>
-                    <div class="col-lg-10">
-                        <textarea class="form-control" rows="6" name="aad303" id="aad303" placeholder="请限制在200字内..."
-                                  maxlength="200" onchange="this.value=this.value.substring(0, 200)" onkeydown="this.value=this.value.substring(0, 200)" onkeyup="this.value=this.value.substring(0, 200)"></textarea>
-                    </div>
-                </div>
-
-
-                <div class="form-group text-center">
-                    <input type="submit" class="btn btn-primary" value="提交">
-                </div>
+                <button type="submit" class="btn btn-success btn-raised btn-fab btn-fab-mini" >
+                    <i class="material-icons">search</i>
+                    <div class="ripple-container"></div>
+                </button>
             </form>
         </div>
-        <div class="col-lg-3"></div>
+        <div class="col-lg-2"></div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <form class="fqxs" th:action="@{/addad03}" th:object="${ad03}" method="post"
+                      enctype="multipart/form-data">
+
+
+                    <div class="form-group">
+                        <div class="col-lg-4">
+                            <label>星级:</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <div id="sliderRegular" class="slider" ></div>
+                            <input hidden="hidden" name="aad304" id="nno">
+                        </div>
+                        <div class="col-lg-4">
+
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="col-lg-2" style="text-align: left; padding: 0">
+                                1
+                            </div>
+                            <div class="col-lg-2" style="text-align: center;padding: 0">
+                               2
+                             </div>
+                            <div class="col-lg-2" style="text-align: right;padding: 0">
+                                3
+                             </div>
+                            <div class="col-lg-2" style="text-align: left;padding: 0">
+
+                            </div>
+                            <div class="col-lg-2"style="text-align: center;padding: 0">
+                                4
+                            </div><div class="col-lg-2"style="text-align: right;padding: 0">
+                                5
+                            </div>
+
+                        </div>
+                        <br/>
+                    <div class="form-group row">
+                        <div class="col-lg-3">
+                            <label for="aad303">评论内容:</label>
+                        </div>
+                        <div class="col-lg-9">
+                        <textarea class="form-control" rows="6" name="aad303" id="aad303" placeholder="请限制在200字内..."
+                                  maxlength="200" onchange="this.value=this.value.substring(0, 200)"
+                                  onkeydown="this.value=this.value.substring(0, 200)"
+                                  onkeyup="this.value=this.value.substring(0, 200)"></textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group text-center">
+                        <input type="submit" onclick="sidec()" class="btn btn-primary" value="提交">
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
     </div>
 </div>
 
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/fileinput.js"></script>
-<script src="js/theme.js"></script>
-<script src="js/locales/zh.js"></script>
-<script src="js/bootstrap-datetimepicker.min.js"></script>
-<script src="js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<div th:replace="header::footer"></div>
+
+<script>
+
+    var slider = document.getElementById('sliderRegular');
+
+    noUiSlider.create(slider, {
+        start: 5,
+        connect: [true,false],
+        range: {
+            min: 1,
+            max: 5
+        },
+        step: 1,
+        format: {
+            // 'to' the formatted value. Receives a number.
+            to: function (value) {
+                return value + '';
+            },
+            // 'from' the formatted value.
+            // Receives a string, should return a number.
+            from: function (value) {
+                return Number(value.replace(',-', ''));
+            }
+        }
+    });
+function sidec() {
+ document.getElementById("nno").value=slider.noUiSlider.get();
+    return true
+}
+
+
+</script>
 </body>

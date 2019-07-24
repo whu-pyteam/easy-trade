@@ -20,13 +20,14 @@ public interface Ad01NewMapper
     @Select("select aad101,aab101,aad103,aad104,aad105,aad106,aad107,aad108 from ad01 where aad105 like CONCAT('%',#{question},'%')and aad102=1")
     List<Ad01> moreQuery(String question);
 
+
     @Select("select aad101,aab101,aad103,aad104,aad105,aad106,aad107,aad108 from ad01 where aad102=1 and aad108 > NOW()")
     List<Ad01> listByAll();
 
     @Select("select count(aad101) from ad01 where aad102=1 and aad108 > NOW()")
     int  list();
 
-    @Select("select aad101,aab101,aad103,aad104,aad105,aad106,aad107,aad108 from ad01 where ad01.aad105 like CONCAT('%',#{question},'%') and ad01.aad102=1 union select aad101,aab101,aad103,aad104,aad105,aad106,aad107,aad108 from ad01 where ad01.aad103 like CONCAT('%',#{context},'%') and ad01.aad102=1 and aad108 > NOW()")
+    @Select("select aad101,aab101,aad103,aad104,aad105,aad106,aad107,aad108 from ad01 where aad105 like CONCAT('%',#{question},'%') and aad102=1 and aad108 >NOW() union select aad101,aab101,aad103,aad104,aad105,aad106,aad107,aad108 from ad01 where aad103 like CONCAT('%',#{context},'%') and aad102=1 and aad108 > NOW()")
     List<Ad01> notSure(String question, String context);
 
     @Insert("insert into ad01 (aab101,aad102,aad103,aad104,aad105,aad106,aad107,aad108) VALUES  " +

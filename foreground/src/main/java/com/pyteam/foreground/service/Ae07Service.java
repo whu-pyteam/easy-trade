@@ -81,4 +81,8 @@ public class Ae07Service
           ac05NewMapper.deletebyaac501(ac05);
      }
 
+     public int state(String aac502)
+     {
+          return ac05NewMapper.aac503(aac502);
+     }
 }

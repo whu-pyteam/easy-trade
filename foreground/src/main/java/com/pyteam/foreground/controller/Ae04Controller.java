@@ -1,7 +1,11 @@
 package com.pyteam.foreground.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.pyteam.db.mbg.entity.Ad01;
 import com.pyteam.db.mbg.entity.Ad04;
+import com.pyteam.foreground.dto.Ad01ac02Dto;
 import com.pyteam.foreground.service.Ad01Service;
 import com.pyteam.foreground.service.Ae04Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.util.List;
+import java.util.Map;
 
 import static com.pyteam.foreground.controller.LoginController.getCookies;
 import static com.pyteam.foreground.controller.LoginController.isLogin;
@@ -64,7 +71,7 @@ public class Ae04Controller
 
 
     @GetMapping("ad01list")
-    public String anvon(Model m, HttpServletRequest request, HttpServletResponse response)
+    public String anvon(Model m, HttpServletRequest request, HttpServletResponse response, @RequestParam(required = false,defaultValue = "1")Integer pn, Map<String,Object> map)
     {
         isLogin = isLogin(request, response);
         if (isLogin)
@@ -73,6 +80,7 @@ public class Ae04Controller
         }
         m.addAttribute("isLogin", isLogin);
 
+        List<Ad01ac02Dto> ad01ac02DtoList=ad01Service.listByAll();
         m.addAttribute("ad01", ad01Service.listByAll());
 
         return "ad01list";
