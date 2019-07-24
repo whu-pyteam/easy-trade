@@ -1,10 +1,13 @@
 package com.pyteam.foreground.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.pyteam.db.mbg.entity.Ac05;
 import com.pyteam.db.mbg.entity.Ad01;
 import com.pyteam.db.mbg.entity.Ae07;
 import com.pyteam.db.mbg.mapper.Ac05Mapper;
 import com.pyteam.db.mbg.mapper.Ae07Mapper;
+import com.pyteam.foreground.dto.Ad01ac02Dto;
 import com.pyteam.foreground.mapper.Ac05NewMapper;
 import com.pyteam.foreground.mapper.Ad01NewMapper;
 import com.pyteam.foreground.mapper.Ae07NewMapper;
@@ -32,6 +35,8 @@ public class Ae07Service
      private Ac05Mapper ac05Mapper;
      @Autowired
      private Ae07Mapper ae07Mapper;
+     @Autowired
+     private Ad01Service ad01Service;
 
 
      public void add(Ae07 ae07)
@@ -84,5 +89,15 @@ public class Ae07Service
      public int state(String aac502)
      {
           return ac05NewMapper.aac503(aac502);
+     }
+
+
+     public PageInfo<Ad01ac02Dto> nul(int pageNo, int pageSize)
+     {
+
+          PageHelper.startPage(pageNo,pageSize);
+          List<Ad01ac02Dto> ad01ac02DtoList=ad01Service.listByAll();
+          PageInfo <Ad01ac02Dto> pageInfo=new PageInfo<Ad01ac02Dto>(ad01ac02DtoList);
+          return pageInfo;
      }
 }

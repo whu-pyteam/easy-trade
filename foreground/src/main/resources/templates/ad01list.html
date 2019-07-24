@@ -61,10 +61,9 @@
 <div class="main main-raised">
     <div class="row">
         <div class="col-lg-2">
-            <div class="logo pull-left">
             </div>
-        </div>
-        <div class="col-sm-8">
+
+        <div class="col-lg-8">
             <form class="navbar-form navbar-right" role="search" th:action="@{'/cxk'}" >
                 <div class="form-group form-white is-empty">
                     <input type="text" class="form-control" name="notsure" id="notsure" placeholder="Search">
@@ -81,56 +80,56 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-2">
+            <div class="col-lg-1">
                 <div th:if="${isLogin}">
                 <div class="left-sidebar">
-                    <h2>目录</h2>
-                    <div class="panel-group category-products" id="accordian">
-                        <!--category-productsr-->
+                <h2>目录</h2>
+                <div class="panel-group category-products" id="accordian">
+                <!--category-productsr-->
 
 
 
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a th:href="@{/forklist}">收藏夹</a></h4>
-                            </div>
-                        </div>
+                <div class="panel panel-default">
+                <div class="panel-heading">
+                <h4 class="panel-title"><a th:href="@{/forklist}">收藏夹</a></h4>
+                </div>
+                </div>
 
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a th:href="@{/myOrder}">我的订单</a></h4>
-                            </div>
-                        </div>
+                <div class="panel panel-default">
+                <div class="panel-heading">
+                <h4 class="panel-title"><a th:href="@{/myOrder}">我的订单</a></h4>
+                </div>
+                </div>
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a th:href="@{/ad01Accept}">已接受悬赏</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a th:href="@{/edit}">我的悬赏区</a></h4>
-                            </div>
-                        </div>
+                <div class="panel panel-default">
+                <div class="panel-heading">
+                <h4 class="panel-title"><a th:href="@{/ad01Accept}">已接受悬赏</a></h4>
+                </div>
+                </div>
+                <div class="panel panel-default">
+                <div class="panel-heading">
+                <h4 class="panel-title"><a th:href="@{/edit}">我的悬赏区</a></h4>
+                </div>
+                </div>
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a th:href="@{/helpOrder}">待完成订单</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a th:href="@{/myComment}">悬赏评论</a></h4>
-                            </div>
-                        </div>
+                <div class="panel panel-default">
+                <div class="panel-heading">
+                <h4 class="panel-title"><a th:href="@{/helpOrder}">待完成订单</a></h4>
+                </div>
+                </div>
+                <div class="panel panel-default">
+                <div class="panel-heading">
+                <h4 class="panel-title"><a th:href="@{/myComment}">悬赏评论</a></h4>
+                </div>
+                </div>
 
 
-                    </div>
+                </div>
 
-                    </div>
-                    <!--/category-products-->
+                </div>
+                <!--/category-products-->
                 </div>
             </div>
 
@@ -219,6 +218,8 @@
                 </form>
 
             </div>
+
+            <div class="col-lg-1"></div>
         </div>
     </div>
 

@@ -1,6 +1,7 @@
 package com.pyteam.foreground.service;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.pyteam.db.mbg.entity.Ac02;
 import com.pyteam.db.mbg.entity.Ad01;
 import com.pyteam.db.mbg.entity.Ad05;
@@ -75,6 +76,7 @@ public class Ad01Service
         {
             return ad01NewMapper.findByPrimaryKey(id);
         }
+
 
 
         public List<Ad01ac02Dto> listByAll()

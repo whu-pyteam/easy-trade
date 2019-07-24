@@ -110,9 +110,6 @@
 
 <div th:replace="header::footer"></div>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/login-register.js"></script>
 </body>
 
 <script>
@@ -128,7 +125,7 @@
            url: 'addid',
            type: 'GET',
            data: data,
-           contentType: 'application/json',
+           // contentType: 'application/json',
            dataType: 'json',
            success: function (data){
                if(data==1)
