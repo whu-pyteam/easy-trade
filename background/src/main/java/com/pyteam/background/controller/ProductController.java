@@ -33,8 +33,11 @@ public class ProductController
     public CommonResponse<CommonPage<Ac01>> list(ProductQueryParam queryParam)
     {
         List<Ac01> ac01List = ac01Service.getAc01List(queryParam);
-
-        return CommonResponse.success(CommonPage.restPage(ac01List));
+        if(ac01List.size() > 0)
+        {
+            return CommonResponse.success(CommonPage.restPage(ac01List));
+        }
+        return CommonResponse.failed("查询失败, 没有满足条件的数据!");
     }
 
 
@@ -43,7 +46,7 @@ public class ProductController
     public CommonResponse<Ac01> getSingle(@PathVariable("id") Integer id)
     {
         Ac01 ac01 = ac01Service.getAc01(id);
-        return  CommonResponse.success(ac01);
+        return CommonResponse.success(ac01);
     }
 
 

@@ -16,4 +16,5 @@ public class TimeUtils
     {
         orderService.updateAd02AndAd06();
     }
+
 }

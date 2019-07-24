@@ -6,17 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>已经生成订单</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/login-register.css" rel="stylesheet">
-    <link href="css/fileinput.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
-    <link href="css/theme.css" rel="stylesheet">
-    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-    <style type="text/css">
-        .fqxs {
-            padding-top: 60px;
-        }
-    </style>
+
 </head>
 
 
@@ -24,134 +14,193 @@
 
 <div th:replace="header::header(${2})"></div>
 
-<div class="ssl">
-    <div class="container">
-        <div class="col-lg-4">
+<div class="main main-raised">
+    <div class="row">
+        <div class="col-lg-2">
             <div class="logo pull-left">
-                <a href="index.html?pageIndex=1"><img src="images/logo.jpg" height="45" width="260" alt=""/></a>
             </div>
         </div>
         <div class="col-sm-8">
             <form class="navbar-form navbar-right" role="search" th:action="@{'/cxk'}" >
-                <div class="form-group">
+                <div class="form-group form-white is-empty">
                     <input type="text" class="form-control" name="notsure" id="notsure" placeholder="Search">
-                    <button type="submit" class="btn btn-default">搜索</button>
+                    <span class="material-icons"></span>
                 </div>
+                <button type="submit" class="btn btn-success btn-raised btn-fab btn-fab-mini" >
+                    <i class="material-icons">search</i>
+                    <div class="ripple-container"></div>
+                </button>
             </form>
         </div>
+        <div class="col-lg-2"></div>
     </div>
-</div>
+    <div class="section section-basic">
+        <div class="container">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+            <div class="row">
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-3"></div>
-        <div class="col-lg-6">
-            <form class="fqxs" th:action="@{/myOrder}"  th:object="${ac05}" th:each="ac05:${ac05}" method="post" enctype="multipart/form-data">
-
-                <div class="form-group row">
-                    <div class="col-lg-2">
-                        <label for="aac502">订单号:</label>
-                    </div>
-                    <div class="col-lg-10">
-                        <input type="text" th:value="${ac05.aac502}" name="aac502" class="form-control"  id="aac502" readonly="readonly">
-                    </div>
-                </div>
-
-
-                <div class="form-group row">
-                    <div class="col-lg-2">
-                        <label for="03">金额:</label>
-                    </div>
-                    <div class="col-lg-10">
-                        <input type="number" class="form-control" step="0.01" th:value="${ac05.aac505}" name="aac505" id="03">
-                    </div>
-                </div>
-
-
-                <div class="form-group row">
-                    <div class="col-lg-2">
-                        <label for="aac503">订单状态:</label>
-                    </div>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" th:value="${ac05.aac503}" id="aac503" name="aac503" readonly >
-                    </div>
-                </div>
-
-
-                <div class="form-group row">
-                    <div class="col-lg-2">
-                        <label for="05">创建时间:</label>
-                    </div>
-                    <div class="col-lg-10">
-                        <div class="input-group date form_date">
-                            <input type="text" class="form-control" th:value="${#dates.format(ac05.aac511,'yyyy-MM-dd HH:mm:ss')}" id="05" name="aac511" readonly >
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                <form class="fqxs" th:action="@{/myOrder}"  th:object="${ac05}" th:each="ac05:${ac05}" method="post" >
+                    <div class="form-group row">
+                        <div class="col-lg-2">
+                            <label for="aac502">订单号:</label>
+                        </div>
+                        <div class="col-lg-10">
+                            <input type="text" th:value="${ac05.aac502}" name="aac502" class="form-control"  id="aac502" readonly="readonly">
                         </div>
                     </div>
-                </div>
 
 
-                <div class="form-group text-center">
-                    <input type="submit" class="btn btn-primary" value="修改订单" name="action">
-                    <!--<a th:href="@{ad01/delorder(aac502=${ac05.aac502})}" class="btn btn-primary" role="button" >取消</a>-->
-                    <input type="submit" class="btn btn-primary" value="取消订单" name="action">
-                    <input type="submit" class="btn btn-primary" value="完成订单" name="action">
+                    <div class="form-group row">
+                        <div class="col-lg-2">
+                            <label for="03">金额:</label>
+                        </div>
+                        <div class="col-lg-10">
+                            <input type="number" class="form-control" step="0.01" th:value="${ac05.aac505}" name="aac505" id="03">
+                        </div>
+                    </div>
 
-                    <a th:href="@{/addad03(aac502=${ac05.aac502})}" role="button" class="btn btn-primary" onclick="vue()">生成评论</a>
-                    <a  class="btn btn-primary" role="button">联系对方</a>
-                </div>
-            </form>
+
+                    <div class="form-group row">
+                        <div class="col-lg-2">
+                            <label for="aac503">订单状态:</label>
+                        </div>
+                        <div class="col-lg-10">
+                            <input type="hidden" class="form-control" th:value="${ac05.aac503}"  id="aac503" name="aac503" readonly  >
+
+                            <input  th:if="${ac05.aac503==0}" type="text" class="form-control"   id="aaac503" value="等待对方确认完成任务" readonly>
+                            <input  th:if="${ac05.aac503==1}" type="text" class="form-control"   id="aaac503" value="请你确认对方任务完成" readonly>
+                            <input  th:if="${ac05.aac503==2}" type="text" class="form-control"   id="aaac503" value="交易完成,请你评论" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-lg-2">
+                            <label for="aac506">收货人姓名:</label>
+                        </div>
+                        <div class="col-lg-10">
+                            <input type="text" th:value="${ac05.aac506}" class="form-control" name="aac506" id="aac506">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-lg-2">
+                            <label for="aac507">电话号码:</label>
+                        </div>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" th:value="${ac05.aac507}" name="aac507" id="aac507" onkeyup="value=value.replace(/[^\d]/g,'')" maxlength=11>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-lg-2">
+                            <label for="aac509">收货地址:</label>
+                        </div>
+                        <div class="col-lg-10">
+                        <textarea class="form-control" th:text="${ac05.aac509}" rows="3" name="aac509" id="aac509" placeholder="请限制在50字内..."
+                                  maxlength="50" onchange="this.value=this.value.substring(0, 50)" onkeydown="this.value=this.value.substring(0, 50)" onkeyup="this.value=this.value.substring(0, 50)"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-lg-2">
+                            <label for="aac510">备注:</label>
+                        </div>
+                        <div class="col-lg-10">
+                        <textarea class="form-control" th:text="${ac05.aac510}" rows="6" name="aac510" id="aac510" placeholder="请限制在200字内..."
+                                  maxlength="200" onchange="this.value=this.value.substring(0, 200)" onkeydown="this.value=this.value.substring(0, 200)" onkeyup="this.value=this.value.substring(0, 200)"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-lg-2">
+                            <label for="05">创建时间:</label>
+                        </div>
+                        <div class="col-lg-10">
+                            <div class="input-group date form_date">
+                                <input type="text" class="form-control" th:value="${#dates.format(ac05.aac511,'yyyy-MM-dd HH:mm:ss')}" id="05" name="aac511" readonly >
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group text-center">
+                        <input type="submit" class="btn btn-primary" value="修改订单" name="action">
+                        <!--<a th:href="@{ad01/delorder(aac502=${ac05.aac502})}" class="btn btn-primary" role="button" >取消</a>-->
+                        <input type="submit" class="btn btn-info" value="取消订单" name="action">
+                        <input th:if="${ac05.aac503==1}" type="submit" class="btn btn-success" value="完成订单" name="action">
+                        <!--th:href="@{/addad03(aac502=${ac05.aac502})}"-->
+                        <a th:if="${ac05.aac503==2}" th:href="@{/addad03(aac502=${ac05.aac502})}" role="button" class="btn btn-warning" >生成评论</a>
+                        <!--<a  class="btn btn-primary" role="button">联系对方</a>-->
+                    </div>
+                </form>
+
+
+            </div>
+            </div>
+            <div class="col-lg-3"></div>
         </div>
-        <div class="col-lg-3"></div>
     </div>
 </div>
 
 
 
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/login-register.js"></script>
-<script src="js/fileinput.js"></script>
-<script src="js/theme.js"></script>
-<script src="js/locales/zh.js"></script>
-<script src="js/bootstrap-datetimepicker.min.js"></script>
-<script src="js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+<div th:replace="header::footer"></div>
+
+
 </body>
 <script>
 
-    function vue()
-    {
-         var immm=document.getElementById("aac503").value;
-        if(immm !=2)
-        {
-            alert("抱歉,您的订单没有完成,无法生成评论")
-        }
-    }
+
+
+    // function vue(obj)
+    // {
+    //     var immm=obj;
+    //     aad(immm);
+    // }
+    // function aad(aac502) {
+    //     $.ajax({
+    //         type: "post",
+    //         url: '/ifaddad03',
+    //         data: {
+    //             "aac502":aac502
+    //         },
+    //         dataType:"json",
+    //         success:function (data) {
+    //             if(data==0)
+    //             {
+    //                 alert("等待对方确认");
+    //
+    //             }
+    //             if(data==1)
+    //             {
+    //                 alert("请你确认完成");
+    //             }
+    //             if(data==2)
+    //             {
+    //                 alert("欢迎评论");
+    //
+    //             }
+    //         }
+    //     })
+    // }
 
 
 
-    $("#kv-explorer").fileinput({
-        theme: 'explorer-fas',
-        uploadUrl: '#',
-        language: 'zh',
-        showUpload: false,
-//			showPreview: false,
-        allowedFileExtensions: ['jpg', 'png', 'gif'],
-        fileActionSettings: {
-            showUpload: false, // will be always false for resumable uploads
-            showZoom: false,
-        }
-    });
-    var date = new Date();
-    $('.form_date').datetimepicker({
-        language: 'zh-CN',
-        autoclose: true, //自动关闭
-        todayHighlight: 1, //高亮今日日期
-        startView: 2, //从日期视图开始
-        startDate: date,
-        forceParse: 0
 
-    });
+    // window.onload=nn
+    // var date = new Date();
+    // $('.form_date').datetimepicker({
+    //     language: 'zh-CN',
+    //     autoclose: true, //自动关闭
+    //     todayHighlight: 1, //高亮今日日期
+    //     startView: 2, //从日期视图开始
+    //     startDate: date,
+    //     forceParse: 0
+    //
+    // });
     function goBack()
     {
         window.history.back()

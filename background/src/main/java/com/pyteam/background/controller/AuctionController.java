@@ -21,7 +21,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/auction")
 @PreAuthorize("hasAnyAuthority('admin:auction', 'admin:emp')")
-
 public class AuctionController
 {
     @Autowired

@@ -1,48 +1,27 @@
-<!doctype html>
-<html lang="en">
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-    <title>Template HTML</title>
-
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-
 </head>
-
-
-<body class="profile-page">
-
+<body>
 <div th:fragment="header(type)">
-
-    <link href="css/login-register.css" rel="stylesheet">
-    <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
-
-    <!-- CSS Files -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/material-kit.css?v=1.2.1" rel="stylesheet"/>
-
-
-    <nav class="navbar narbar-default navbar-transparent navbar-fixed-top navbar-color-on-scroll">
+    <nav class="navbar navbar-inverse navbar-transparent navbar-absolute" role="navigation-demo">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html?pageIndex=1">Easy Trade</a>
+                <a class="navbar-brand" href="#pablo">EasyTrade</a>
             </div>
 
-            <div class="collapse navbar-collapse">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navigation-example-2">
                 <ul class="nav navbar-nav navbar-left">
                     <li>
-                        <a href="index.html?pageIndex=1">
+                        <a href="index.html">
                             <i class="material-icons">redeem</i> 首页
                         </a>
                     </li>
@@ -67,7 +46,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-with-icons">
                             <li>
-                                <a href="forklist">
+                                <a href="forklist.html">
                                     <i class="material-icons">star_border</i> 收藏的悬赏
                                 </a>
                             </li>
@@ -79,8 +58,8 @@
                         </ul>
                     </li>
                     <li th:if="${isLogin}">
-                        <a href="cart.html?pageIndex=1">
-                            <i class="material-icons">shopping_cart</i> 购物车
+                        <a href="cart.html">
+                            <i class="material-icons">add_shopping_cart</i> 购物车
                         </a>
                     </li>
                     <li class="dropdown" th:if="${isLogin}">
@@ -95,7 +74,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="add">
+                                <a href="add.html">
                                     <i class="material-icons">hearing</i> 悬赏
                                 </a>
                             </li>
@@ -110,12 +89,12 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="edit">
+                                <a href="edit.html">
                                     <i class="material-icons">hearing</i> 我的悬赏
                                 </a>
                             </li>
                             <li>
-                                <a href="auctionMyLau.html">
+                                <a href="auctionMyLau.html?pageNum=1">
                                     <i class="material-icons">gavel</i> 我的拍卖
                                 </a>
                             </li>
@@ -128,7 +107,8 @@
                     </li>
 
                     <li class="button-container" th:if="${!isLogin}">
-                        <a href="javascript:void(0)" target="_blank" class="btn btn-rose btn-round" onclick="openLoginModal();">
+                        <a href="javascript:void(0)" target="_blank" class="btn btn-rose btn-round"
+                           onclick="openLoginModal();">
                             <i class="material-icons">vpn_key</i> 登录
                         </a>
                     </li>
@@ -150,14 +130,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="ad01Accept">
-                                    <i class="material-icons">business</i> 悬赏记录
-                                </a>
-                            </li>
-
-
-                            <li>
-                                <a href="auctionPart.html">
+                                <a href="auctionPart.html?pageNum=1">
                                     <i class="material-icons">bubble_chart</i> 竞拍记录
                                 </a>
                             </li>
@@ -169,21 +142,19 @@
                         </ul>
                     </li>
                 </ul>
-                </ul>
             </div>
+            <!-- /.navbar-collapse -->
         </div>
+        <!-- /.container-->
     </nav>
 
     <div class="modal fade login" id="loginModal">
         <div class="modal-dialog login animated">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
-
-                    <div class="header header-primary text-center">
-                        <h4 class="card-title">登 录</h4>
-                    </div>
-                </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
+                    </button>
+                    <h4 class="modal-title">Login with</h4></div>
                 <div class="modal-body">
                     <div class="box">
                         <div class="content">
@@ -194,7 +165,7 @@
                                                                                              placeholder="账号"
                                                                                              name="email"><input
                                         class="form-control" type="password" placeholder="密码" name="password"><input
-                                        class="btn btn-warning btn-login" type="button" value="登录"
+                                        class="btn btn-default btn-login" type="button" value="登录"
                                         onclick="loginAjax()">
                                 </form>
                             </div>
@@ -234,9 +205,7 @@
             </div>
         </div>
     </div>
-
 </div>
-
 
 <div th:fragment="footer">
     <footer class="footer">
@@ -272,37 +241,6 @@
     </footer>
 
     <script src="js/login-register.js"></script>
-    <!--   Core JS Files   -->
-    <script src="js/jquery.min.js" type="text/javascript"></script>
-    <script src="js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="js/material.min.js"></script>
-
-    <!--    Plugin for Date Time Picker and Full Calendar Plugin   -->
-    <script src="js/moment.min.js"></script>
-
-    <!--	Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/   -->
-    <script src="js/nouislider.min.js" type="text/javascript"></script>
-
-    <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker   -->
-    <script src="js/bootstrap-datetimepicker.js" type="text/javascript"></script>
-
-    <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select   -->
-    <script src="js/bootstrap-selectpicker.js" type="text/javascript"></script>
-
-
-
-    <script src="js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
-
-    <script src="js/locales/bootstrap-datetimepicker.zh-CN.js" type="text/javascript"></script>
-    <!--	Plugin for Tags, full documentation here: http://xoxco.com/projects/code/tagsinput/   -->
-    <script src="js/bootstrap-tagsinput.js"></script>
-
-    <!--	Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput   -->
-    <script src="js/jasny-bootstrap.min.js"></script>
-
-    <!--    Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc    -->
-    <script src="js/material-kit.js?v=1.2.1" type="text/javascript"></script>
-
     <script>
         function logout() {
             if (confirm("确认退出登录?")) {
@@ -312,10 +250,10 @@
                     success: function (data) {
                         if (data == true) {
                             alert("成功退出登录!")
-                            window.location.replace("/index.html?pageIndex=1")
+                            window.location.replace("/index.html")
                         } else {
                             alert("您已退出登录")
-                            window.location.replace("/index.html?pageIndex=1")
+                            window.location.replace("/index.html")
                         }
                     }
                 })
@@ -371,6 +309,6 @@
         }
     </script>
 </div>
-</body>
 
+</body>
 </html>

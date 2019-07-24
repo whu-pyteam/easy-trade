@@ -7,20 +7,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>添加订单</title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/fileinput.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
-    <link href="css/theme.css" rel="stylesheet">
-    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
+    <!--<link href="css/fileinput.css" rel="stylesheet">-->
+    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">-->
+    <!--<link href="css/theme.css" rel="stylesheet">-->
+    <!--<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">-->
     <style type="text/css">
         .fqxs {
             padding-top: 60px;
         }
     </style>
 </head>
-
+<div th:replace="header::header(2)"></div>
 <body>
 <div class="container">
+    <div class="main main-raised">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="logo pull-left">
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <form class="navbar-form navbar-right" role="search" th:action="@{'/cxk'}" >
+                    <div class="form-group form-white is-empty">
+                        <input type="text" class="form-control" name="notsure" id="notsure" placeholder="Search">
+                        <span class="material-icons"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-raised btn-fab btn-fab-mini" >
+                        <i class="material-icons">search</i>
+                        <div class="ripple-container"></div>
+                    </button>
+                </form>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
     <div class="row">
         <div class="col-lg-3"></div>
         <div class="col-lg-6">
@@ -33,10 +53,10 @@
                         <!--<input type="text" class="form-control" name="aab101" id="01">-->
                     <!--</div>-->
                     <div class="col-lg-2">
-                    <label >买家流水号:</label>
+                    <label >买家昵称:</label>
                     </div>
 
-                    <select th:object="${ad05}" name="aab101">
+                    <select class="selectpicker" data-style="btn btn-primary btn-round" data-size="7" th:object="${ad05}" name="aab101">
                     <option th:each="ad05:${ad05}" th:value="${ad05.ad05.aab101}" th:text="${ad05.ab01.aab102}">选择</option>
                     </select>
                 </div>
@@ -44,8 +64,12 @@
 
                 <div class="form-group">
                         <label>交易方式:</label>
+                    <div class="radio">
                         <label><input type="radio" name="aac504" value="1" checked>线下</label>
+                    </div>
+                    <div class="radio">
                         <label><input type="radio" name="aac504" value="2">快递</label>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-2">
@@ -67,7 +91,7 @@
 
                 <div class="form-group row">
                     <div class="col-lg-2">
-                        <label for="aac506">电话号码:</label>
+                        <label for="aac507">电话号码:</label>
                     </div>
                     <div class="col-lg-10">
                         <input type="text" class="form-control" name="aac507" id="aac507" onkeyup="value=value.replace(/[^\d]/g,'')" maxlength=11>
@@ -76,9 +100,15 @@
 
                 <div class="form-group">
                     <label>订单类型：</label>
+                    <div class="radio">
                     <label><input type="radio" name="aac508" value="1" checked>商品</label>
+                    </div>
+                    <div class="radio">
                     <label><input type="radio" name="aac508" value="2">悬赏</label>
+                    </div>
+                    <div class="radio">
                     <label><input type="radio" name="aac508" value="3">拍卖</label>
+                    </div>
                 </div>
 
                 <div class="form-group row">
@@ -120,10 +150,10 @@
         </div>
         <div class="col-lg-3"></div>
     </div>
+    </div>
 </div>
 
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<div th:replace="header::footer"></div>
 <script src="js/fileinput.js"></script>
 <script src="js/theme.js"></script>
 <script src="js/locales/zh.js"></script>

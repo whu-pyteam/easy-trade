@@ -3,6 +3,7 @@ package com.pyteam.foreground.service;
 import com.pyteam.db.mbg.entity.Ac02;
 import com.pyteam.db.mbg.entity.Ad01;
 import com.pyteam.db.mbg.entity.Ae09;
+import com.pyteam.foreground.dto.Ad01ac02Dto;
 import com.pyteam.foreground.mapper.Ac02NewMapper;
 import com.pyteam.foreground.mapper.Ad01NewMapper;
 import com.pyteam.foreground.mapper.Ae09NewMapper;
@@ -22,6 +23,8 @@ public class Ae09Service
     @Autowired
     private Ae09NewMapper ae09NewMapper;
 
+    @Autowired
+    private Ae09Service ae09Service;
     @Autowired
     private Ac02NewMapper ac02NewMapper;
     @Autowired
@@ -105,8 +108,9 @@ public class Ae09Service
     }
 
 
-    public List<Ad01> sel(String aac202)
+    public List<Ad01ac02Dto> sel(String aac202)
     {
+        List<Ad01ac02Dto> ad01ac02DtoList=new ArrayList<>();
         Ac02 list=new Ac02();
         list.setAac202(aac202);
         Ac02 ac02=ac02NewMapper.selectac02(list);
@@ -124,9 +128,15 @@ public class Ae09Service
                 {
                     System.out.println(ad01NewMapper.findByPrimaryKey(aad101));
                     ad01List.add(i,ad01NewMapper.findByPrimaryKey(aad101).get(0));
+                    List<Ac02> ac02List = ae09Service.query(aad101);
+                    Ad01ac02Dto ad01ac02Dto = new Ad01ac02Dto();
+                    ad01ac02Dto.setAd01(ad01List.get(i));
+                    ad01ac02Dto.setAc02List(ac02List);
+                    ad01ac02DtoList.add(ad01ac02Dto);
                 }
             }
         }
-        return ad01List;
+
+        return ad01ac02DtoList;
     }
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -55,16 +56,18 @@ public class Ad01Controller
     }
 
     @PostMapping("/edit")
-    public void edit(@RequestParam("aad101")int aad101,@RequestParam("aad105")String aad105,
-            @RequestParam("aad103")String aad103,@RequestParam("aad104")long aad104 ,@RequestParam("aad107") Date aad107,
-            @RequestParam("aad108")Date aad108, HttpServletRequest request, HttpServletResponse response)
+    public void edit(@RequestParam("aad101")int aad101, @RequestParam("aad105")String aad105,
+                     @RequestParam("aad103")String aad103, @RequestParam("aad104") String aad104 , @RequestParam("aad107") Date aad107,
+                     @RequestParam("aad108")Date aad108, HttpServletRequest request, HttpServletResponse response)
     {
         System.out.println("kaishi");
         Ad01 ad01=new Ad01();
+        BigDecimal bg=new BigDecimal(aad104);
+        System.out.println(bg);
         ad01.setAad101(aad101);
         ad01.setAad105(aad105);
         ad01.setAad103(aad103);
-        ad01.setAad104(aad104);
+        ad01.setAad104(bg);
         ad01.setAad108(aad108);
         ad01.setAad107(aad107);
         ad01Service.edit(ad01);
@@ -110,9 +113,17 @@ public class Ad01Controller
             m.addAttribute("ad01", ae09Service.sel(aac202));
             return "select";
         }
+        m.addAttribute("ad01", ae09Service.sel(aac202));
         m.addAttribute("isLogin",isLogin);
         return "select";
     }
+
+    @GetMapping("/chon")
+    public void shuijiao(Model m,@RequestParam("aad101")int aad101)
+    {
+        m.addAttribute("ad01",ad01Service.findbyaad101(aad101));
+    }
+
 
     @PostMapping(value="/select")
     public String likeQuery(@RequestParam(value = "aad105" ,required=false) String question, HttpSession session, Model m)
@@ -128,16 +139,30 @@ public class Ad01Controller
     }
 
     @PostMapping ("/add")
-    public String add(@ModelAttribute (value = "ad01")Ad01 ad01,HttpServletRequest request, HttpServletResponse response)
+    public String add(@ModelAttribute (value = "ad01")Ad01 ad01,HttpServletRequest request, HttpServletResponse response,Model m)
     {
-        ad01.setAab101(Integer.parseInt(getCookies(request, "userId")));
-        ad01Service.add(ad01);
+        isLogin = isLogin(request, response);
+        if(isLogin)
+        {
+            m.addAttribute("isLogin",isLogin);
+            ad01.setAab101(Integer.parseInt(getCookies(request, "userId")));
+            ad01Service.add(ad01);
+            return "add";
+        }
+        m.addAttribute("isLogin",isLogin);
         return "add";
     }
     @GetMapping("add")
-    public String showadd()
+    public String showadd(Model m,HttpServletRequest request,HttpServletResponse response)
     {
-        return "add";
+        isLogin = isLogin(request, response);
+        if(isLogin)
+        {
+            m.addAttribute("isLogin",isLogin);
+            return "add";
+         }
+        m.addAttribute("isLogin",isLogin);
+        return "ad01list";
     }
 
     @PostMapping("/del")
@@ -155,11 +180,18 @@ public class Ad01Controller
         return "del";
     }
     @RequestMapping("/delad01")
-    public String delete(@RequestParam(value = "aad101",required = false) int id)
+    public String delete(@RequestParam(value = "aad101",required = false) int id,HttpServletResponse response ,HttpServletRequest request,Model m)
     {
-        System.out.println(id);
-        ad01Service.deleteById(id);
-        return "edit";
+        isLogin = isLogin(request, response);
+        if(isLogin)
+        {
+            m.addAttribute("isLogin", isLogin);
+            System.out.println(id);
+            ad01Service.deleteById(id);
+            return "edit";
+        }
+        m.addAttribute("isLogin",isLogin);
+        return "ad01list";
     }
 
     @RequestMapping("cxk")

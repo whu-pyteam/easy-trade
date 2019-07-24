@@ -87,7 +87,7 @@
   import {getAuctionList} from "@/api/auction";
 
   export default {
-    name: 'auction-list',
+      name: 'auction-list',
     data() {
       return {
         condition: {
@@ -115,6 +115,9 @@
         getAuctionList(params).then(res => {
           this.pageInfo.total = res.data.total
           this.tableData = res.data.list
+        }).catch( () => {
+          this.pageInfo.total = 0
+          this.tableData = []
         })
       },
       onSubmit() {

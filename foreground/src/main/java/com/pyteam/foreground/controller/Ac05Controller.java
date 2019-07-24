@@ -16,8 +16,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static com.pyteam.foreground.controller.LoginController.isLogin;
 
 /**
  * @author wjm
@@ -31,24 +35,38 @@ public class Ac05Controller
     private Ac05Service ac05Service;
     @Autowired
     private Ad05Service ad05Service;
-    @PostMapping("orderAdd")
-    public String view(@ModelAttribute("ac05")Ac05 ac05)
-    {
 
-        int aad101=ac05Service.ret();
-        ac05Service.add(ac05,aad101);
-        return "orderAdd";
+    private boolean isLogin;
+    @PostMapping("orderAdd")
+    public String view(@ModelAttribute("ac05")Ac05 ac05,Model m, HttpServletResponse response,HttpServletRequest request)
+    {
+        isLogin = isLogin(request, response);
+        if(isLogin)
+        {
+            m.addAttribute("isLogin",isLogin);
+            int aad101 = ac05Service.ret();
+            ac05Service.add(ac05, aad101);
+            return "orderAdd";
+        }
+        m.addAttribute("isLogin",isLogin);
+        return "ad01list";
     }
 
     @GetMapping("/orderAdd")
-    public String  select(@RequestParam(value="aad101")int aad101,Model m)
+    public String  select(@RequestParam(value="aad101")int aad101,Model m,HttpServletRequest request,HttpServletResponse response)
     {
 
-        int id=aad101;
-        m.addAttribute("ad05",ad05Service.selectbyaad101(id));
-        System.out.println(ad05Service.selectbyaab101(id));
-        ac05Service.save(id);
-        return"orderAdd";
+        isLogin = isLogin(request, response);
+        if(isLogin)
+        {
+            m.addAttribute("isLogin", isLogin);
+            int id = aad101;
+            m.addAttribute("ad05", ad05Service.selectbyaad101(id));
+            ac05Service.save(id);
+            return "orderAdd";
+        }
+        m.addAttribute("isLogin",isLogin);
+        return "ad01list";
     }
 
 

@@ -29,13 +29,13 @@ public class RewardController
     RewardService rewardService;
 
     @ApiOperation("悬赏分页查询")
-    @GetMapping
-    public CommonResponse<CommonPage<Ad01>> list(RewardQueryParam queryParam)
+    @PostMapping
+    public CommonResponse<CommonPage<Ad01>> list(@RequestBody RewardQueryParam queryParam)
     {
         List<Ad01> list = rewardService.list(queryParam);
         if(list.size() == 0)
         {
-            return CommonResponse.failed("没有满足条件的数据");
+            return CommonResponse.failed("查询失败, 没有满足条件的数据!");
         }
         return CommonResponse.success(CommonPage.restPage(list));
     }

@@ -1,26 +1,42 @@
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 101 Template</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <title>参与成功</title>
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/material-kit.css?v=1.2.1" rel="stylesheet"/>
 </head>
 
-<body>
-<div th:replace="header :: header(3)"></div>
+<body class="signup-page">
+<div th:replace="auctionHeader::header(3)"></div>
 
-<div class="text-center" style="margin-top: 10%;">
-    <img src="images/offer.png" alt="参与成功">
-    <h2>参与成功</h2>
+<div class="page-header header-filter" style="background-image: url('images/bg_auc.jpg'); background-size: cover; background-position: top center;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="card card-signup">
+                    <div class="row">
+                        <div class="col-md-2 col-md-offset-5 text-center">
+                            <img src="images/offer.png" alt="参与成功">
+                            <h3>参与成功</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
+<div th:replace="auctionHeader::footer"></div>
+
+</body>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
-</body>
-
 </html>

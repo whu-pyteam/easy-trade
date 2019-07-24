@@ -99,6 +99,7 @@
 <script>
   import {getLogDetail, getLogList} from "@/api/log"
   import {JSONView} from 'vue-json-component'
+  import {formatDate} from '@/utils/date'
 
   export default {
     name: 'feedback-list',
@@ -107,8 +108,8 @@
       return {
         condition: {
           aaf202: '',
-          dateBegin: '',
-          dateEnd: ''
+          dateBegin: null,
+          dateEnd: null
         },
         tableData: [],
         pageInfo: {
@@ -127,7 +128,9 @@
     methods: {
       fetchLogList() {
         let params = {
-          ...this.condition,
+          aaf202: this.condition.aaf202,
+          dateBegin: this.condition.dateBegin === null ? '' : formatDate(this.condition.dateBegin, "yyyy-MM-dd HH:mm:ss"),
+          dateEnd: this.condition.dateEnd === null ? '' : formatDate(this.condition.dateEnd, "yyyy-MM-dd HH:mm:ss"),
           pageNum: this.pageInfo.pageNum,
           pageSize: this.pageInfo.pageSize
         }
@@ -136,6 +139,9 @@
           console.log(res)
           this.pageInfo.total = res.data.total
           this.tableData = res.data.list
+        }).catch( () => {
+          this.pageInfo.total = 0
+          this.tableData = []
         })
       },
       onSubmit() {

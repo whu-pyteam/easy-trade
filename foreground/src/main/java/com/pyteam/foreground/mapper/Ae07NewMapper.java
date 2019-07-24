@@ -1,6 +1,7 @@
 package com.pyteam.foreground.mapper;
 
 import com.pyteam.db.mbg.entity.Ae07;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -24,6 +25,9 @@ public interface Ae07NewMapper
 
     @Select("select aac501 from ae07 where aad101=#{aad101}")
     List<Ae07> select(int aad101);
+
+    @Delete("delete from ae07 where aad101=#{aad101}")
+    void delByaad101(int aad101);
 
     @Select("select aae701 from ae07 where aac501=#{aac501}")
     Ae07 selectbyaac501(Ae07 ae07);

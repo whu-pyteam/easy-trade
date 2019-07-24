@@ -33,7 +33,7 @@ service.interceptors.response.use(
       Message({
         message: res.message,
         type: 'error',
-        duration: 3 * 1000
+        duration: 2500
       })
       // 403 没有权限, 回退一步
       if (res.code === 403) {

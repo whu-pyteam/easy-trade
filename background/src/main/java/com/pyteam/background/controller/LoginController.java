@@ -67,6 +67,7 @@ public class LoginController
         String username = principal.getName();
         Af02 af02 = af02Service.getEmpByUsername(username);
         Map<String, Object> info = new HashMap<>();
+        info.put("aaf201",af02.getAaf201());
         info.put("username", af02.getAaf202());
         info.put("nickname", af02.getAaf204());
         info.put("roles", af02Service.getRoleList(af02.getAaf201()));
