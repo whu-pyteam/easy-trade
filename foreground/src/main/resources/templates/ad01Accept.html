@@ -11,6 +11,12 @@
         .fqxs {
             padding-top: 60px;
         }
+
+        .conmm{
+            white-space: nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+        }
     </style>
 </head>
 
@@ -49,11 +55,11 @@
                         <input type="hidden" th:value="${ad01.aad101}" name="aad101" class="form-control"  id="aad101" readonly="readonly">
                     <p class="category"  th:text="${ad01.aad101}"  th:value="${ad01.aad101}"   readonly="readonly"></p>
 
-                    <h3 class="category"  th:text="${ad01.aad105}"    id="aad105" readonly="readonly"></h3>
+                    <h3 class="category conmm"  th:text="${ad01.aad105}"    id="aad105" readonly="readonly"></h3>
 
-                        <p class="card-description"    th:text="${ad01.aad103}"  id="02" readonly="readonly"></p>
+                        <p class="card-description conmm"    th:text="${ad01.aad103}"  id="02" readonly="readonly"></p>
 
-                        <h3 class="card-title"    th:text="${ad01.aad104}"  id="03" readonly="readonly"></h3>
+                        <h3 class="card-title conmm"    th:text="${ad01.aad104}"  id="03" readonly="readonly"></h3>
 
                         <p  class="card-description"  id="aad107"   th:text="${#dates.format(ad01.aad107, 'yyyy-MM-dd HH:mm:ss')}" readonly="readonly"></p>
 

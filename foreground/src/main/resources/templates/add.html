@@ -48,13 +48,18 @@
             <div class="row">
                 <div class="col-lg-3"></div>
                 <div class="col-lg-6">
-                    <form class="fqxs" th:action="@{/add}"  th:object="${ad01}" method="post" >
+                    <form class="fqxs" th:action="@{/add}"  th:object="${ad01}" method="post" enctype="multipart/form-data">
+                        <div class="card">
+                            <div class="card-title">
+                                <h3>发起悬赏</h3>
+                            </div>
+                            <div class="card-description">
                         <div class="form-group row">
                             <div class="col-lg-2">
                                 <label for="aad105">悬赏名称:</label>
                             </div>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" name="aad105" id="aad105">
+                                <input type="text" class="form-control" name="aad105" id="aad105" required="required">
                             </div>
                         </div>
 
@@ -63,7 +68,7 @@
                                 <label for="02">悬赏介绍:</label>
                             </div>
                             <div class="col-lg-10">
-                                <textarea class="form-control" rows="5" name="aad103" id="02"></textarea>
+                                <textarea class="form-control" rows="5" name="aad103" id="02" required="required"></textarea>
                             </div>
                         </div>
 
@@ -72,7 +77,7 @@
                                 <label for="03">悬赏价格:</label>
                             </div>
                             <div class="col-lg-10">
-                                <input type="number" class="form-control" step="0.01" name="aad104" id="03">
+                                <input type="number" class="form-control" step="0.01" name="aad104" id="03" required="required">
                             </div>
                         </div>
 
@@ -80,8 +85,11 @@
                             <div class="col-lg-2">
                             <label class="label-control" for="aad107">开始时间:</label>
                             </div>
-                            <div class="col-lg-10">
-                            <input type="datetime" class="form-control datetimepicker"  id="aad107" name="aad107" th:value="${#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd HH:mm:ss')}" >
+                            <div class="input-group date form_date">
+
+                            <input type="text" class="form-control"  id="aad107" name="aad107" th:value="${#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd HH:mm:ss')}" >
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+
                             </div>
                         </div>
 
@@ -93,13 +101,11 @@
 
                         <div class="form-group row">
                             <div class="col-lg-2">
-                            <label for="05">截止时间:</label>
+                                <label class="label-control" for="05">结束时间:</label>
                             </div>
-                            <div class="col-lg-10">
                             <div class="input-group date form_date">
-                            <input type="text" class="form-control datetimepicker" name="aad108" id="05" placeholder="请选择截止时间" readonly>
+                            <input type="text" class="form-control " name="aad108" id="05" placeholder="请选择截止时间" readonly required="required">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                            </div>
                             </div>
                             </div>
 
@@ -117,6 +123,9 @@
                         <div class="form-group text-center">
                             <input type="submit" class="btn btn-primary" value="提交">
                         </div>
+                        </div>
+
+                        </div>
                     </form>
                 </div>
                 <div class="col-lg-3"></div>
@@ -130,28 +139,41 @@
     </div>
 </div>
 
-<script src="js/bootstrap-datetimepicker.min.js"></script>
-<script src="js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
 <div th:replace="header::footer"></div>
 </body>
 
 <script>
 
-    $('.datetimepicker').datetimepicker({
-        icons: {
-            time: "fa fa-clock-o",
-            date: "fa fa-calendar",
-            up: "fa fa-chevron-up",
-            down: "fa fa-chevron-down",
-            previous: 'fa fa-chevron-left',
-            next: 'fa fa-chevron-right',
-            today: 'fa fa-screenshot',
-            clear: 'fa fa-trash',
-            close: 'fa fa-remove'
+    // $('.datetimepicker').datetimepicker({
+    //     icons: {
+    //         time: "fa fa-clock-o",
+    //         date: "fa fa-calendar",
+    //         up: "fa fa-chevron-up",
+    //         down: "fa fa-chevron-down",
+    //         previous: 'fa fa-chevron-left',
+    //         next: 'fa fa-chevron-right',
+    //         today: 'fa fa-screenshot',
+    //         clear: 'fa fa-trash',
+    //         close: 'fa fa-remove'
+    //     }
+    // });
+    $("#kv-explorer").fileinput({
+        theme: 'explorer-fas',
+        uploadUrl: '#',
+        language: 'zh',
+        showUpload: false,
+        allowedFileExtensions: ['jpg', 'png', 'gif'],
+        dropZoneEnabled: false,
+        maxFileCount: 1,
+        fileActionSettings: {
+            showUpload: false, // will be always false for resumable uploads
+            showZoom: false,
         }
     });
 
-    var eDate = new Date(sDate.getTime() + 1000*60*60*24*30);
+    var sDate = new Date();
+    var eDate = new Date(sDate.getTime() + 1000 * 60 * 60 * 24 * 30);
     $('.form_date').datetimepicker({
         language: 'zh-CN',
         autoclose: true, //自动关闭
@@ -160,8 +182,8 @@
         startDate: sDate,
         endDate: eDate,
         forceParse: 0
-
     });
 </script>
-
+<script src="js/moment.min.js"></script>
+<script src="js/bootstrap-datetimepicker.js" type="text/javascript"></script>
 </html>
