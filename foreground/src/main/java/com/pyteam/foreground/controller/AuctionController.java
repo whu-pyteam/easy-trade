@@ -51,29 +51,13 @@ public class AuctionController
             int aad401 = Integer.parseInt(getCookies(request, "aad401_auc"));
             Map<String, Object> connMap = connService.selectAd02RightAe05(aad401, pageNum, 8);
             int pageCount = (int)connMap.get("pageCount");
-            boolean pre = true;
-            boolean next = true;
-            if(pageCount <= 1)
+            if (pageCount == 0)
             {
-                pre = false;
-                next = false;
-            }
-            else if(pageNum == 1)
-            {
-                pre = false;
-            }
-            else if(pageNum == pageCount)
-            {
-                next = false;
-            }
-            else
-            {
-                return "404";
+                pageCount = 1;
             }
             model.addAttribute("aconnList", (List<Ad02>)connMap.get("ad02List"));
             model.addAttribute("isLogin", isLogin);
-            model.addAttribute("pre", pre);
-            model.addAttribute("next", next);
+            model.addAttribute("pageCount", pageCount);
             model.addAttribute("pageNum", pageNum);
             return "auctionConn";
         }
@@ -254,30 +238,14 @@ public class AuctionController
             int aab101 = Integer.parseInt(getCookies(request, "userId"));
             Map<String, Object> ad02Map = service.findByUserId(aab101, pageNum, 8);
             int pageCount = (int)ad02Map.get("pageCount");
-            boolean pre = true;
-            boolean next = true;
-            if(pageCount <= 1)
+            if (pageCount == 0)
             {
-                pre = false;
-                next = false;
-            }
-            else if(pageNum == 1)
-            {
-                pre = false;
-            }
-            else if(pageNum == pageCount)
-            {
-                next = false;
-            }
-            else
-            {
-                return "404";
+                pageCount = 1;
             }
             List<Ad02> ad02List = (List<Ad02>)ad02Map.get("ad02List");
             model.addAttribute("ad02List", orderService.myLauState(ad02List));
             model.addAttribute("isLogin", isLogin);
-            model.addAttribute("pre", pre);
-            model.addAttribute("next", next);
+            model.addAttribute("pageCount", pageCount);
             model.addAttribute("pageNum", pageNum);
             return "auctionMyLau";
         }
@@ -304,30 +272,14 @@ public class AuctionController
     {
         Map<String, Object> ad02Map = service.findByValue(searchValue, pageNum, 8);
         int pageCount = (int)ad02Map.get("pageCount");
-        boolean pre = true;
-        boolean next = true;
-        if(pageCount <= 1)
+        if(pageCount == 0)
         {
-            pre = false;
-            next = false;
-        }
-        else if(pageNum == 1)
-        {
-            pre = false;
-        }
-        else if(pageNum == pageCount)
-        {
-            next = false;
-        }
-        else
-        {
-            return "404";
+            pageCount = 1;
         }
         model.addAttribute("ad02List", (List<Ad02>)ad02Map.get("ad02List"));
         model.addAttribute("isLogin", isLogin(request, response));
-        model.addAttribute("pre", pre);
-        model.addAttribute("next", next);
         model.addAttribute("pageNum", pageNum);
+        model.addAttribute("pageCount", pageCount);
         model.addAttribute("searchValue", searchValue);
         model.addAttribute("type", 2);
         return "auction";
@@ -376,30 +328,14 @@ public class AuctionController
     {
         Map<String, Object> ad02Map = service.selectAll(pageNum, 8);
         int pageCount = (int)ad02Map.get("pageCount");
-        boolean pre = true;
-        boolean next = true;
-        if(pageCount <= 1)
+        if(pageCount == 0)
         {
-            pre = false;
-            next = false;
-        }
-        else if(pageNum == 1)
-        {
-            pre = false;
-        }
-        else if(pageNum == pageCount)
-        {
-            next = false;
-        }
-        else
-        {
-            return "404";
+            pageCount = 1;
         }
         model.addAttribute("ad02List", (List<Ad02>)ad02Map.get("ad02List"));
         model.addAttribute("isLogin", isLogin(request, response));
-        model.addAttribute("pre", pre);
-        model.addAttribute("next", next);
         model.addAttribute("pageNum", pageNum);
+        model.addAttribute("pageCount", pageCount);
         model.addAttribute("type", 1);
         return "auction";
     }
