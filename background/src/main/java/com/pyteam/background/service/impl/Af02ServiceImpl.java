@@ -61,25 +61,28 @@ public class Af02ServiceImpl implements Af02Service
     {
         PageHelper.startPage(queryParam.getPageNum(), queryParam.getPageSize());
         Af02Example af02Example = new Af02Example();
-        Af02Example.Criteria criteria1 = af02Example.createCriteria();
-        Af02Example.Criteria criteria2 = af02Example.createCriteria();
-        Af02Example.Criteria criteria3 = af02Example.createCriteria();
+        Af02Example.Criteria criteria = af02Example.createCriteria();
 
         if(!StringUtils.isEmpty(queryParam.getAaf202()))
         {
-            criteria1.andAaf202Like("%" + queryParam.getAaf202() + "%");
+            criteria.andAaf202Like("%" + queryParam.getAaf202() + "%");
         }
         if(!StringUtils.isEmpty(queryParam.getAaf204()))
         {
-            criteria2.andAaf204Like("%" + queryParam.getAaf204() + "%");
+            criteria.andAaf204Like("%" + queryParam.getAaf204() + "%");
         }
         if(!StringUtils.isEmpty(queryParam.getAaf207()))
         {
-            criteria3.andAaf207EqualTo(queryParam.getAaf207());
+            criteria.andAaf207EqualTo(queryParam.getAaf207());
         }
-
-        af02Example.or(criteria2);
-        af02Example.or(criteria3);
+        if(queryParam.getDateBegin() != null)
+        {
+            criteria.andAaf205GreaterThanOrEqualTo(queryParam.getDateBegin());
+        }
+        if(queryParam.getDateEnd() != null)
+        {
+            criteria.andAaf205LessThanOrEqualTo(queryParam.getDateEnd());
+        }
 
         return af02Mapper.selectByExample(af02Example);
     }
@@ -95,11 +98,9 @@ public class Af02ServiceImpl implements Af02Service
         staff.setAaf206(new Date());
         // 默认状态未禁用
         staff.setAaf207(0);
+
         //查询是否有相同用户名的用户
-        Af02Example example = new Af02Example();
-        example.createCriteria().andAaf202EqualTo(staff.getAaf202());
-        List<Af02> staffList = af02Mapper.selectByExample(example);
-        if(staffList.size() > 0)
+        if(this.getEmpByUsername(loginParam.getUsername()) !=  null)
         {
             return false;
         }

@@ -23,7 +23,6 @@ import java.util.List;
 @Api(tags = {"StaffController -- 员工管理"})
 @RestController
 @RequestMapping("/staff")
-@PreAuthorize("hasAuthority('admin:emp')")
 public class StaffController
 {
 
@@ -37,15 +36,22 @@ public class StaffController
     }
 
     @ApiOperation("分页查询员工列表")
-    @GetMapping("")
-    public CommonResponse<CommonPage<Af02>> list(StaffQueryParam queryParam)
+    @PostMapping("")
+    @PreAuthorize("hasAuthority('admin:emp')")
+    public CommonResponse<CommonPage<Af02>> list(@RequestBody StaffQueryParam queryParam)
     {
         List<Af02> list = af02Service.list(queryParam);
-        return CommonResponse.success(CommonPage.restPage(list));
+        if(list.size() > 0)
+        {
+            return CommonResponse.success(CommonPage.restPage(list));
+
+        }
+        return CommonResponse.failed("查询失败, 没有满足条件的数据!");
     }
 
     @ApiOperation("单例查询员工信息")
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('admin:emp')")
     public CommonResponse<Af02> getInfoById(@PathVariable("id") Integer id)
     {
         return CommonResponse.success(af02Service.getAf02ById(id));
@@ -62,13 +68,11 @@ public class StaffController
         if(af07Service.staffRoleRelation(staffRoleParam) && af02Service.updateInfo(af02) == 1)
         {
             return CommonResponse.success("更新成功");
-        }
-        else
+        } else
         {
             return CommonResponse.failed("操作失败");
         }
     }
-
 
 
     @ApiOperation("查询特定员工的角色")

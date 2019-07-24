@@ -28,13 +28,14 @@ public class RewardServiceImpl implements RewardService
         PageHelper.startPage(queryParam.getPageNum(), queryParam.getPageSize());
         Ad01Example ad01Example = new Ad01Example();
         Ad01Example.Criteria criteria = ad01Example.createCriteria();
-        if(!StringUtils.isEmpty(queryParam.getAad102()))
-        {
-            criteria.andAad102Like(queryParam.getAad102());
-        }
+
         if(!StringUtils.isEmpty(queryParam.getAad105()))
         {
-            criteria.andAad105EqualTo(queryParam.getAad105());
+            criteria.andAad105Like("%" + queryParam.getAad105().trim() + "%");
+        }
+        if(!StringUtils.isEmpty(queryParam.getAad102()))
+        {
+            criteria.andAad102EqualTo(queryParam.getAad102());
         }
 
         return ad01Mapper.selectByExample(ad01Example);

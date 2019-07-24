@@ -1,9 +1,11 @@
 <template>
   <div class="app-container">
+    <el-card>
+
     <h3>&nbsp;&nbsp;欢迎回来, {{username}}!</h3>
     <br>
     <el-form ref="form" :model="form" label-width="80px" style="width: 500px;">
-      <el-form-item label="我的名称">
+      <el-form-item label="我的账号">
         <el-input v-model="form.username" disabled></el-input>
       </el-form-item>
       <el-form-item label="我的昵称">
@@ -26,7 +28,6 @@
             ref="upload"
             :show-file-list="true"
             :before-upload="beforeUpload"
-            :on-success="handleUploadSuccess"
             drag>
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将图片拖到此处，或<em>点击上传</em></div>
@@ -38,16 +39,29 @@
           </span>
         </el-dialog>
       </el-form-item>
+      <el-form-item label="我的角色">
+        <el-select v-model="form.roles" disabled multiple value="">
+          <el-option
+            v-for="item in form.roles"
+            :key="item.aaf601"
+            :label="item.aaf602"
+            :value="item.aaf601"
+          selected>
+          </el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">保 存</el-button>
         <el-button @click="fetchInfo">重 置</el-button>
       </el-form-item>
     </el-form>
+    </el-card>
   </div>
 </template>
 
 <script>
   import {getInfo, updateInfo, uploadImg} from "@/api/login"
+  import {getStaffRoles} from '@/api/staff'
 
   export default {
     name: 'Info',
@@ -60,7 +74,8 @@
           nickname: '',
           avatarUrl: '#',
           role: '',
-          status: true
+          status: true,
+          roles: []
         },
         dialogVisible: false,
         img: new FormData()
@@ -73,10 +88,13 @@
       fetchInfo() {
         getInfo().then(res => {
           // console.log(res.data)
+          this.form.aaf201 = res.data.aaf201
           this.form.username = res.data.username
           this.form.nickname = res.data.nickname
           this.form.avatarUrl = res.data.avatarUrl
+          this.form.roles = res.data.roles
         })
+
       },
       onSubmit() {
         updateInfo(this.form).then((res) => {
