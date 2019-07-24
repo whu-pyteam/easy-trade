@@ -11,7 +11,7 @@
         </el-form-item>
         <el-form-item label="员工状态">
           <el-radio-group v-model="condition.aaf207">
-            <el-radio label=null>所有</el-radio>
+            <el-radio label="">所有</el-radio>
             <el-radio label="0">禁用</el-radio>
             <el-radio label="1">启用</el-radio>
           </el-radio-group>
@@ -135,18 +135,18 @@
           aaf202: this.condition.aaf202,
           aaf204: this.condition.aaf204,
           aaf207: this.condition.aaf207,
-          dateBegin: this.condition.dateBegin === null ? null : formatDate(this.condition.dateBegin, "yyyy-MM-dd HH:mm:ss"),
-          dateEnd: this.condition.dateEnd === null ? null : formatDate(this.condition.dateEnd, "yyyy-MM-dd HH:mm:ss"),
+          dateBegin: this.condition.dateBegin === null ? '' : formatDate(this.condition.dateBegin, "yyyy-MM-dd HH:mm:ss"),
+          dateEnd: this.condition.dateEnd === null ? '' : formatDate(this.condition.dateEnd, "yyyy-MM-dd HH:mm:ss"),
           pageNum: this.pageInfo.pageNum,
           pageSize: this.pageInfo.pageSize
         }
         console.log(params)
         queryStaffList(params).then(res => {
-          if (res.data.list.length === 0) {
-            this.$message.warning("没有满足条件的数据!")
-          }
           this.pageInfo.total = res.data.total
           this.tableData = res.data.list
+        }).catch( () => {
+          this.pageInfo.total = 0
+          this.tableData = []
         })
       },
       onSubmit() {

@@ -11,14 +11,11 @@ export function login(username, password) {
   })
 }
 
-export function regsiterStaff(username, password) {
+export function registerStaff(data) {
   return request({
     url: '/admin/register',
     method: 'post',
-    data: {
-      username,
-      password
-    }
+    data
   })
 }
 

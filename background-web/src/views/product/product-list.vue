@@ -117,7 +117,11 @@
           console.log(res)
           this.pageInfo.total = res.data.total
           this.tableData = res.data.list
+        }).catch( () => {
+          this.pageInfo.total = 0
+          this.tableData = []
         })
+
       },
       onSubmit() {
         this.fetchProductList()

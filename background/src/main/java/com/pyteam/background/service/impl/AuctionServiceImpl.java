@@ -37,7 +37,7 @@ public class AuctionServiceImpl implements AuctionService
         Ad02Example.Criteria criteria = example.createCriteria();
         if(!StringUtils.isEmpty(queryParam.getAad202()))
         {
-            criteria.andAad202Like(queryParam.getAad202());
+            criteria.andAad202Like("%" + queryParam.getAad202() + "%");
         }
         if(!StringUtils.isEmpty(queryParam.getAad209()))
         {

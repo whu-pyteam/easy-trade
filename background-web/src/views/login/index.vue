@@ -49,7 +49,7 @@
 
 <script>
   import {isvalidUsername} from '@/utils/validate'
-  import {regsiterStaff} from "@/api/login"
+  import {registerStaff} from '@/api/login'
 
   export default {
     name: 'login',
@@ -70,8 +70,8 @@
       };
       return {
         loginForm: {
-          username: 'admin',
-          password: '123456',
+          username: '',
+          password: '',
         },
         loginRules: {
           username: [{required: true, trigger: 'blur', validator: validateUsername}],
@@ -98,7 +98,7 @@
           if (valid) {
             this.loginLoading = true;
             this.$store.dispatch('Login', this.loginForm).then(() => {
-              this.loading = false;
+              this.loginLoading = false;
               this.$router.push({path: '/'})
             }).catch(() => {
               this.loginLoading = false
@@ -111,8 +111,10 @@
       },
       handleRegister() {
         this.registLoading = true
-        regsiterStaff(this.loginForm.username, this.loginForm.password).then(() => {
+        registerStaff(this.loginForm).then(() => {
           this.$message.success("注册成功")
+          this.registLoading = false
+        }).catch( () => {
           this.registLoading = false
         })
       }

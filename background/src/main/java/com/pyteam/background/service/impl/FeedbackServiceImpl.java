@@ -38,7 +38,7 @@ public class FeedbackServiceImpl implements FeedbackService
         Ab05Example.Criteria criteria = example.createCriteria();
         if(!StringUtils.isEmpty(queryParam.getAab503()))
         {
-            criteria.andAab503Like(queryParam.getAab503());
+            criteria.andAab503Like("%" + queryParam.getAab503() + "%");
         }
         if(!StringUtils.isEmpty(queryParam.getAab504()))
         {

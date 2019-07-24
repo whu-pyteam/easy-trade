@@ -56,7 +56,7 @@ public class WebLogAspect
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WebLogAspect.class);
 
-    @Pointcut("execution(public * com.pyteam.background.controller.*.*(..)) && !execution(public * com.pyteam.background.controller.LogController.*(..)))")
+    @Pointcut("execution(public * com.pyteam.background.controller.*.*(..)) && !execution(public * com.pyteam.background.controller.LogController.*(..)) && !execution(public * com.pyteam.background.controller.LoginController.register(..))")
     public void webLog()
     {
     }
