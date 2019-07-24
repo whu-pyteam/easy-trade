@@ -39,36 +39,61 @@
 
 <div th:replace="header::header(${2})"></div>
 
-<div class="ssl">
-    <div class="container">
-        <div class="col-lg-4">
+<!--<div class="ssl">-->
+    <!--<div class="row">-->
+        <!--<div class="col-lg-4">-->
+            <!--<div class="logo pull-left">-->
+
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-sm-8">-->
+            <!--<form class="navbar-form navbar-right" role="search" th:action="@{'/cxk'}" >-->
+                <!--<div class="form-group">-->
+                    <!--<input type="text" class="form-control" name="notsure" id="notsure" placeholder="Search">-->
+                    <!--<button type="submit" class="btn btn-default">搜索</button>-->
+                <!--</div>-->
+            <!--</form>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<div class="main main-raised">
+    <div class="row">
+        <div class="col-lg-2">
             <div class="logo pull-left">
-                <a href="index.html"><img src="../images/logo.jpg" height="45" width="260" alt=""/></a>
             </div>
         </div>
         <div class="col-sm-8">
             <form class="navbar-form navbar-right" role="search" th:action="@{'/cxk'}" >
-                <div class="form-group">
+                <div class="form-group form-white is-empty">
                     <input type="text" class="form-control" name="notsure" id="notsure" placeholder="Search">
-                    <button type="submit" class="btn btn-default">搜索</button>
+                    <span class="material-icons"></span>
                 </div>
+                <button type="submit" class="btn btn-success btn-raised btn-fab btn-fab-mini" >
+                    <i class="material-icons">search</i>
+                    <div class="ripple-container"></div>
+                </button>
             </form>
         </div>
+        <div class="col-lg-2"></div>
     </div>
-</div>
-
-<div class="zt">
     <div class="container">
         <div class="row" style="border: 1px solid #E8E8E8; padding-top: 15px; padding-bottom: 15px;">
             <div class="col-lg-5">
-                <div th:text="${ad01.aad103}"
+                <div class="card">
+                    <div class="card-content ">
+                    <h4 class="card-title">详情</h4>
+                     <p class="card-description" th:text="${ad01.aad103}"
                      style="height: 400px; width: 100%; overflow: hidden;" alt=""/>
+
+                    </div>
+                </div>
             </div>
             <div class="col-lg-7">
                 <div class="caption">
-                    <h3 th:text="标题  +${ad01.aad105}"></h3>
+                    <h3 th:text="${ad01.aad105}"></h3>
                     <p th:text="${ad01.aad101}" id="aad101"></p>
-                    <p th:text="价格 +${ad01.aad104}"></p>
+                    <p th:text="价格+'￥' +${ad01.aad104}"></p>
                     <p th:text="申请人数 +${ad01.aad106}"></p>
                     <p th:text="开始时间+  ${#dates.format(ad01.aad107,'yyyy-MM-dd HH:mm:ss')}"></p>
                     <p th:text="结束时间 +${#dates.format(ad01.aad108,'yyyy-MM-dd HH:mm:ss')}"></p>
@@ -83,6 +108,7 @@
     </div>
 </div>
 
+<div th:replace="header::footer"></div>
 
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.min.js"></script>

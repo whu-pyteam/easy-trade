@@ -7,41 +7,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>添加商品</title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/fileinput.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
     <link href="css/theme.css" rel="stylesheet">
-    <style type="text/css">
-        .fqxs {
-            padding-top: 60px;
-        }
-    </style>
+
 </head>
 
 <body>
 
-<div th:replace="header :: header(${type})"></div>
+<div th:replace="header :: header(1)"></div>
+<div class="page-header header-filter header-small" data-parallax="true" style="background-image: url('images/city.jpg');"></div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-3"></div>
-        <div class="col-lg-6">
-            <form id="form1" class="fqxs"  action="/goodSubmit.html" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="01">物品名称：</label>
-                    <input type="text" class="form-control" name="aac102" id="01" required>
+<div class="main main-raised">
+    <div class="profile-content">
+        <div class="container">
+            <form id="form1"  action="/goodSubmit.html" method="post" enctype="multipart/form-data">
+
+                <div class="col-lg-5">
+                    <div class="form-group">
+                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                        <div class="fileinput-new thumbnail img-raised">
+                            <img src="images/qiqiu.jpg" alt="...">
+                        </div>
+                        <div class="fileinput-preview fileinput-exists thumbnail img-raised"></div>
+                        <div>
+                            <span class="btn btn-raised btn-round btn-rose btn-file">
+                               <span class="fileinput-new">上传商品图片</span>
+                               <span class="fileinput-exists">更改商品图片</span>
+                               <input type="file" name="aac106" required/>
+                            </span>
+                            <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput">
+                                <i class="fa fa-times"></i> 删除当前图片</a>
+                        </div>
+                    </div>
+                    </div>
                 </div>
-                <div class="form-group">
+
+                <div class="col-lg-7">
+                    <div class="form-group form-success">
+                        <h5>商品名称</h5>
+                        <input type="text" class="form-control" name="aac102" id="01" required>
+                    </div>
+
+                    <div class="form-group form-info">
+                        <h5>商品简介</h5>
+                        <textarea class="form-control" rows="5" name="aac103" id="02" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <h5>商品种类</h5>
+                        <select class="selectpicker" data-style="btn btn-default btn-round" title="Single Select" data-size="17" name="aac201">
+                            <option disabled selected> 选择分类</option>
+                            <option value="8">图书</option>
+                            <option value="9">课本</option>
+                            <option value="10">资料</option>
+                            <option value="11">手机</option>
+                            <option value="12">电脑</option>
+                            <option value="13">数码</option>
+                            <option value="14">男装</option>
+                            <option value="15">女装</option>
+                            <option value="16">鞋类</option>
+                            <option value="17">食品</option>
+                            <option value="18">饮料</option>
+                            <option value="19">个护</option>
+                            <option value="20">化妆</option>
+                            <option value="21">日常用品</option>
+                            <option value="22">寝室神器</option>
+                            <option value="23">票券</option>
+                            <option value="24">充值服务</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group form-rose">
+                        <h5>商品价格(元)</h5>
+                        <input type="number" class="form-control" step="0.01" name="aac105" id="04" required>
+                    </div>
+
+
+
+                    <div class="form-group form-warning">
+                        <input type="submit" class="btn btn-success" value="提交">
+                        <input type="reset"  class="btn btn-info" value="重置">
+                    </div>-->
+                </div>
+                <!--<div class="form-group">
                     <label for="kv-explorer">物品图片：</label>
                     <input id="kv-explorer" type="file" name="aac106" required>
-                </div>
-                <div class="form-group">
+                </div>-->
+
+                <!--<div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                    <div class="fileinput-new thumbnail img-rounded img-raised">
+                        <img th:src="images/qiqiu.jpg" alt="...">
+                    </div>
+                    <div class="fileinput-preview fileinput-exists thumbnail img-rounded img-raised"></div>
+                    <div>
+                                <span class="btn btn-raised btn-round btn-rose btn-file">
+                                    <span class="fileinput-new">添加照片</span>
+                                <span class="fileinput-exists">修改照片</span>
+                                <input type="file" name="aac106" /></span>
+                        <br />
+                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> 删除照片</a>
+                    </div>
+                </div>-->
+
+               <!-- <div class="form-group form-info">
                     <label for="02">物品介绍：</label>
                     <textarea class="form-control" rows="5" name="aac103" id="02" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="03">物品类别：</label>
-                    <!--<input type="number" class="form-control" step="1" name="aac201" id="03" required>-->
+                    &lt;!&ndash;<input type="number" class="form-control" step="1" name="aac201" id="03" required>&ndash;&gt;
 
                     <input list="goodType" class="form-control" id="03" name="aac202" required>
                     <datalist id="goodType">
@@ -68,33 +143,13 @@
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" value="提交">
                     <input type="reset" value="重置">
-                </div>
+                </div>-->
             </form>
         </div>
-        <div class="col-lg-3"></div>
     </div>
 </div>
 
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/fileinput.js"></script>
-<script src="js/theme.js"></script>
-<script src="js/locales/zh.js"></script>
+<div th:replace="header :: footer"></div>
 </body>
-
-<script>
-    $("#kv-explorer").fileinput({
-        theme: 'explorer-fas',
-        uploadUrl: '#',
-        language: 'zh',
-        showUpload: false,
-//			showPreview: false,
-        allowedFileExtensions: ['jpg', 'png', 'gif'],
-        fileActionSettings: {
-            showUpload: false, // will be always false for resumable uploads
-            showZoom: false,
-        }
-    });
-</script>
 
 </html>

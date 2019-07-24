@@ -43,6 +43,84 @@ public class Ac01Service
         return ac01Mapper.selectByPrimaryKey(id);
     }
 
+    public List<Ac01> searchByPrice(int maxp,int minp)
+    {
+        Ac01Example ac01Example=new Ac01Example();
+        Ac01Example.Criteria criteria=ac01Example.createCriteria();
+        criteria.andAac104EqualTo("1");
+        criteria.andAac105Between(new BigDecimal(minp),new BigDecimal(maxp));
+        List<Ac01> ac01List = ac01Mapper.selectByExample(ac01Example);
+
+        Ae06Example ae06Example=new Ae06Example();
+        List<Ae06> ae06List=ae06Mapper.selectByExample(ae06Example);
+
+        Iterator<Ac01> ac01Iterator=ac01List.iterator();
+        while (ac01Iterator.hasNext())
+        {
+            Ac01 tempAc01=ac01Iterator.next();
+            for(int i=0;i<ae06List.size();i++)
+            {
+                if(tempAc01.getAac101().equals(ae06List.get(i).getAac101()))
+                {
+                    ac01Iterator.remove();
+                }
+            }
+        }
+        return ac01List;
+    }
+
+    public List<Ac01> searchByTypes(String[] typeArr)throws Exception
+    {
+        List<Ac01> allList = getUnsoldGoodList();
+        List<Ac01> ac01List=new ArrayList<>();
+
+        if(typeArr.length!=0)
+        {
+            if(typeArr[0].equals(""))
+            {
+                return allList;
+            }
+            else
+            {
+                for(Ac01 ac01:allList)
+                {
+                    for(String type:typeArr)
+                    {
+                        if(ac01.getAac201()==Integer.parseInt(type))
+                        {
+                            ac01List.add(ac01);
+                            continue;
+                        }
+                    }
+                }
+
+                return ac01List;
+            }
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+
+    public List<Ac01> pageClip(int total,int pageIndex,int pageSize,List<Ac01> ac01List)
+    {
+        int firstIndex = (pageIndex-1)*pageSize;
+        int lastIndex = pageIndex*pageSize-1;
+        if(total <= pageIndex*pageSize)
+        {
+            lastIndex=total-1;
+        }
+
+        List<Ac01> newList = new ArrayList<>();
+        for(int i=firstIndex;i<=lastIndex;i++)
+        {
+            newList.add(ac01List.get(i));
+        }
+         return newList;
+    }
+
     /**
      * 获取商品列表
      * @return
@@ -71,7 +149,6 @@ public class Ac01Service
 
         Ae06Example ae06Example=new Ae06Example();
         List<Ae06> ae06List=ae06Mapper.selectByExample(ae06Example);
-
 
         Iterator<Ac01> ac01Iterator=ac01List.iterator();
         while (ac01Iterator.hasNext())
@@ -126,8 +203,25 @@ public class Ac01Service
         Ac01Example.Criteria criteria = ac01Example.createCriteria();
         criteria.andAac102Like("%" + value + "%");
         criteria.andAac104EqualTo("1");
-        List<Ac01> ad02List = ac01Mapper.selectByExample(ac01Example);
-        return ad02List;
+        List<Ac01> ac01List = ac01Mapper.selectByExample(ac01Example);
+
+        Ae06Example ae06Example=new Ae06Example();
+        List<Ae06> ae06List=ae06Mapper.selectByExample(ae06Example);
+
+
+        Iterator<Ac01> ac01Iterator=ac01List.iterator();
+        while (ac01Iterator.hasNext())
+        {
+            Ac01 tempAc01=ac01Iterator.next();
+            for(int i=0;i<ae06List.size();i++)
+            {
+                if(tempAc01.getAac101().equals(ae06List.get(i).getAac101()))
+                {
+                    ac01Iterator.remove();
+                }
+            }
+        }
+        return ac01List;
     }
 
     /**
@@ -142,7 +236,7 @@ public class Ac01Service
 
         ac01.setAab101(ac01Dto.getAab101());
 
-        String aac202=ac01Dto.getAac202();
+        /*String aac202=ac01Dto.getAac202();
         Ac02Example ac02Example=new Ac02Example();
         Ac02Example.Criteria criteria=ac02Example.createCriteria();
         criteria.andAac202EqualTo(aac202);
@@ -154,6 +248,15 @@ public class Ac01Service
         else
         {
             ac01.setAac201(1);
+        }*/
+
+        if(ac01Dto.getAac201()==null)
+        {
+            ac01.setAac201(1);
+        }
+        else
+        {
+            ac01.setAac201(ac01Dto.getAac201());
         }
 
         ac01.setAac102(ac01Dto.getAac102());

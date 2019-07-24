@@ -1,10 +1,7 @@
 package com.pyteam.foreground.mapper;
 
 import com.pyteam.db.mbg.entity.Ae09;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -41,4 +38,8 @@ public interface Ae09NewMapper
 
     @Select("select aae901,aad101 from ae09 where aac201=#{aac201}")
     List<Ae09> selectaad101(int aac201);
+
+    @Delete("delete from ae09 where aad101=#{aad101}")
+    void delte (int aad101);
+
 }

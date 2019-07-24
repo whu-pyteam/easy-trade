@@ -7,9 +7,7 @@ import com.pyteam.db.mbg.entity.Ad05;
 import com.pyteam.db.mbg.mapper.Ad01Mapper;
 import com.pyteam.foreground.dto.Ad01Dto;
 import com.pyteam.foreground.dto.Ad01ac02Dto;
-import com.pyteam.foreground.mapper.Ad01NewMapper;
-import com.pyteam.foreground.mapper.Ad05NewMapper;
-import com.pyteam.foreground.mapper.Ae04NewMapper;
+import com.pyteam.foreground.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +35,13 @@ public class Ad01Service
         private Ae09Service ae09Service;
         @Autowired
         private Ae04NewMapper ae04NewMapper;
+        @Autowired
+        private Ae02NewMapper ae02NewMapper;
+        @Autowired
+        private Ae09NewMapper ae09NewMapper;
 
+        @Autowired
+        private Ae07NewMapper ae07NewMapper;
 
         public void add(Ad01 ad01)
         {
@@ -46,9 +50,24 @@ public class Ad01Service
 
         //不定条件查询
 
-        public List<Ad01> notSure(String question)
+        public List<Ad01ac02Dto> notSure(String question)
         {
-            return ad01NewMapper.notSure(question,question);
+            List<Ad01ac02Dto>ad01ac02DtoList=new ArrayList<>();
+            List<Ad01> ad01List = ad01NewMapper.notSure(question,question);
+            int n=ad01List.size();
+            for(int i=0;i<n;i++)
+            {
+                if(ad01List==null)
+                {
+                }
+                int aad101= ad01List.get(i).getAad101();
+                List<Ac02> ac02List = ae09Service.query(aad101);
+                Ad01ac02Dto ad01ac02Dto = new Ad01ac02Dto();
+                ad01ac02Dto.setAd01(ad01List.get(i));
+                ad01ac02Dto.setAc02List(ac02List);
+                ad01ac02DtoList.add(i,ad01ac02Dto);
+            }
+            return ad01ac02DtoList;
         }
         //根据订单号查询
 
@@ -58,16 +77,34 @@ public class Ad01Service
         }
 
 
-        public List<Ad01> listByAll()
+        public List<Ad01ac02Dto> listByAll()
         {
-            PageHelper.startPage(1,8);
-            return ad01NewMapper.listByAll();
+            List<Ad01ac02Dto>ad01ac02DtoList=new ArrayList<>();
+            List<Ad01> ad01List= ad01NewMapper.listByAll();
+            int count=ad01NewMapper.list();
+            for(int i=0;i<count;i++)
+            {
+                if(ad01List==null)
+                {
+                }
+                int aad101= ad01List.get(i).getAad101();
+                List<Ac02> ac02List = ae09Service.query(aad101);
+                Ad01ac02Dto ad01ac02Dto = new Ad01ac02Dto();
+                ad01ac02Dto.setAd01(ad01List.get(i));
+                ad01ac02Dto.setAc02List(ac02List);
+                ad01ac02DtoList.add(ad01ac02Dto);
+            }
+            return ad01ac02DtoList;
         }
 
 
         public void deleteById(int id)
         {
             ae04NewMapper.deleteany(id);
+            ae02NewMapper.delAdd101(id);
+            ae09NewMapper.delte(id);
+            ad05NewMapper.delAad101(id);
+            ae07NewMapper.delByaad101(id);
             ad01Mapper.deleteByPrimaryKey(id);
         }
 
@@ -89,7 +126,6 @@ public class Ad01Service
             List<Ad01ac02Dto>ad01ac02DtoList=new ArrayList<>();
             List<Ad01> ad01List=ad01NewMapper.findallById(id);
             int count=ad01NewMapper.count(id);
-            System.out.println(count);
 
             //审核情况可能导致数目不一样
             for(int i=0;i<count;i++)
@@ -150,6 +186,7 @@ public class Ad01Service
 
             return ad05List;
         }
+
 
 }
 

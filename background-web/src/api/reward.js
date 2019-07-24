@@ -3,8 +3,8 @@ import request from '@/utils/request'
 export function getRewardList(data) {
   return request({
     url: '/reward',
-    method: 'get',
-    params: data
+    method: 'post',
+    data: data
   })
 }
 

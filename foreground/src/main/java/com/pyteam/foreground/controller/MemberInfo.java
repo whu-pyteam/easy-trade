@@ -45,8 +45,8 @@ public class MemberInfo
             model.addAttribute("aab104",ab01.getAab104());
             model.addAttribute("aab105",new SimpleDateFormat("yyyy-MM-dd").format(ab01.getAab105()));
 
-            String schoolName = syscodeService.getSchoolName(ab01.getAab106());
-            model.addAttribute("aab106",schoolName);
+            //String schoolName = syscodeService.getSchoolName(ab01.getAab106());
+            model.addAttribute("aab106",ab01.getAab106());
             model.addAttribute("aab107",ab01.getAab107());
             model.addAttribute("aab111",ab01.getAab111());
             model.addAttribute("isLogin", isLogin(request, response));

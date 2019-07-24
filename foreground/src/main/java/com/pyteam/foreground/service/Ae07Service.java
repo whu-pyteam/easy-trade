@@ -38,7 +38,7 @@ public class Ae07Service
      {
           ae07NewMapper.addAe07(ae07);
      }
-     
+
      public List<Ac05> select(int id)
      {
           List<Ad01> ad01List=ad01NewMapper.order(id);
@@ -81,4 +81,8 @@ public class Ae07Service
           ac05NewMapper.deletebyaac501(ac05);
      }
 
+     public int state(String aac502)
+     {
+          return ac05NewMapper.aac503(aac502);
+     }
 }

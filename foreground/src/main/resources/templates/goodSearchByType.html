@@ -61,7 +61,7 @@
 <h3 id="assist" th:value="${ac01List}" style="display: none"></h3>
 <p id="assistTotal" th:name="${total}" style="display: none"></p>
 <p id="assistIndex" th:name="${pageIndex}" style="display: none"></p>
-<p id="assistValue" th:name="${searchValue}" style="display: none"></p>
+<p id="assistTypes" th:name="${types}" style="display: none"></p>
 
 <div th:replace="header :: footer"></div>
 <script>
@@ -90,7 +90,7 @@
     window.onload=function () {
         if($("#assist").attr("value").length==2)
         {
-            console.log("here")
+            console.log("here"+$("#assist").attr("value"))
             $("#hint").css("display","block");
         }
 
@@ -118,9 +118,8 @@
                 newli.setAttribute("class","active");
             }
             var newa=document.createElement("a")
-            var searchValue=$("#assistValue").attr("name");
-            console.log(searchValue+"ss");
-            newa.setAttribute("href","goodSearch.html?pageIndex="+(i+1)+"&searchValue="+searchValue);
+            var types=$("#assistTypes").attr("name");
+            newa.setAttribute("href","searchByType.html?pageIndex="+(i+1)+"&types="+types);
             newa.innerHTML=(i+1).toString();
             newli.appendChild(newa)
             pagniul.appendChild(newli);

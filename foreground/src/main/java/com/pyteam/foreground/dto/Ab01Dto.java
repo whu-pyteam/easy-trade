@@ -27,7 +27,7 @@ public class Ab01Dto
     private String aab105;
 
     /**
-     * 院校名称
+     * 院校代号
      */
     private String aab106;
 

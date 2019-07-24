@@ -19,4 +19,7 @@ public interface Ae02NewMapper
 
     @Delete("delete from ae02 where aad301=#{aad301}")
     void delAe02(int aad301);
+
+    @Delete("delete from ae02 where aad101=#{aad101}")
+    void delAdd101(int aad101);
 }

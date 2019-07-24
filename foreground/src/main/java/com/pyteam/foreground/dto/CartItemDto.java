@@ -27,4 +27,13 @@ public class CartItemDto
      */
     private BigDecimal aac105;
 
+    /**
+     * 卖家流水号
+     */
+    private Integer aab101;
+
+    /**
+     * 卖家昵称
+     */
+    private String aab103;
 }

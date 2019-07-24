@@ -61,4 +61,7 @@ public interface Ac05NewMapper
 
     @Select("select aab101 from ac05 where aac502=#{aac502}")
     int aab101(String aac502);
+
+    @Select("select aac503 from ac05 where aac502=#{aac502}")
+    int aac503(String aac502);
 }
