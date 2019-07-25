@@ -36,7 +36,7 @@ const user = {
           commit('SET_TOKEN', tokenStr)
           resolve()
         }).catch(error => {
-          reject(error)
+          reject("登录失败!")
         })
       })
     },

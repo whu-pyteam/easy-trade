@@ -40,7 +40,7 @@
           <el-card
             prefix-icon="el-icon-date"
             :disabled="true"
-            style="width: 200px;"
+            style="width: 250px;"
             shadow="never"
           >
             <el-switch
