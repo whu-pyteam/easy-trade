@@ -14,9 +14,10 @@
           <el-card v-for="(src, index) in  srcs"
                    :key="index"
                    :body-style="{ padding: '0px' }"
-                   style="width: 400px;"
                    shadow="never">
-            <img :src="src" alt="">
+            <img :src="src" alt=""
+                 style="height: 500px"
+            >
           </el-card>
         </el-form-item>
         <el-form-item label="拍卖详情:" style="width: 1000px;">
