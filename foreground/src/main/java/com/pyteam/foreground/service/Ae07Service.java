@@ -1,7 +1,9 @@
 package com.pyteam.foreground.service;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.pyteam.db.mbg.entity.Ac02;
 import com.pyteam.db.mbg.entity.Ac05;
 import com.pyteam.db.mbg.entity.Ad01;
 import com.pyteam.db.mbg.entity.Ae07;
@@ -16,7 +18,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author wjm
@@ -37,7 +41,8 @@ public class Ae07Service
      private Ae07Mapper ae07Mapper;
      @Autowired
      private Ad01Service ad01Service;
-
+     @Autowired
+     private Ae09Service ae09Service;
 
      public void add(Ae07 ae07)
      {
@@ -92,12 +97,29 @@ public class Ae07Service
      }
 
 
-     public PageInfo<Ad01ac02Dto> nul(int pageNo, int pageSize)
+     public Map<String,Object> nul(int pageNum, int pageSize)
      {
 
-          PageHelper.startPage(pageNo,pageSize);
-          List<Ad01ac02Dto> ad01ac02DtoList=ad01Service.listByAll();
-          PageInfo <Ad01ac02Dto> pageInfo=new PageInfo<Ad01ac02Dto>(ad01ac02DtoList);
-          return pageInfo;
+          Page page = PageHelper.startPage(pageNum, pageSize);
+          List<Ad01> ad01List=ad01NewMapper.listByAll();
+          System.out.println(ad01List);
+          List<Ad01ac02Dto> ad01ac02DtoList=new ArrayList<>();
+          int i =ad01List.size();
+         for(int n=0;n<i;n++)
+         {
+             if(ad01List==null)
+             {
+             }
+             int aad101= ad01List.get(n).getAad101();
+             List<Ac02> ac02List = ae09Service.query(aad101);
+             Ad01ac02Dto ad01ac02Dto = new Ad01ac02Dto();
+             ad01ac02Dto.setAd01(ad01List.get(n));
+             ad01ac02Dto.setAc02List(ac02List);
+             ad01ac02DtoList.add(ad01ac02Dto);
+         }
+          Map<String, Object> ad01map = new HashMap<>();
+          ad01map.put("ad01ac02DtoList",ad01ac02DtoList);
+          ad01map.put("pageCount",page.getPages());
+          return ad01map;
      }
 }

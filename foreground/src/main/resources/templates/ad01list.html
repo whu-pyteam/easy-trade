@@ -79,6 +79,7 @@
     </div>
 
     <div class="container">
+
         <div class="row">
             <div class="col-lg-1">
                 <div th:if="${isLogin}">
@@ -219,7 +220,22 @@
 
             <div class="col-lg-1"></div>
         </div>
-    </div>
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="pagination pagination-warning">
+                    <li th:if="${pageNum == 1}"><a>上一页</a></li>
+                    <li th:if="${pageNum != 1}"><a th:href="'ad01list?pageNum=' + ${pageNum - 1}">上一页</a></li>
+                    <li th:if="${pageNum - 2} > 0"><a th:href="'ad01list?pageNum=' + ${pageNum - 2}" th:text="${pageNum - 2}"></a></li>
+                    <li th:if="${pageNum - 1} > 0"><a th:href="'ad01list?pageNum=' + ${pageNum - 1}" th:text="${pageNum - 1}"></a></li>
+                    <li class="active"><a th:text="${pageNum}"></a></li>
+                    <li th:if="${pageNum + 1} <= ${pageCount}"><a th:href="'ad01list?pageNum=' + ${pageNum + 1}" th:text="${pageNum + 1}"></a></li>
+                    <li th:if="${pageNum + 2} <= ${pageCount}"><a th:href="'ad01list?pageNum=' + ${pageNum + 2}" th:text="${pageNum + 2}"></a></li>
+                    <li th:if="${pageNum != pageCount}"><a th:href="'ad01list?pageNum=' + ${pageNum + 1}">下一页</a></li>
+                    <li th:if="${pageNum == pageCount}"><a>下一页</a></li>
+                </ul>
+            </div>
+         </div>
 
 
 

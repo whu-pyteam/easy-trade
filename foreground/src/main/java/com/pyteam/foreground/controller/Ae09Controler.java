@@ -39,12 +39,4 @@ public class Ae09Controler
         return "addae09";
     }
 
-
-    @GetMapping("comeonbaby")
-    public String lailai(@RequestParam(value = "pageNo",defaultValue = "1")int pageNo, @RequestParam(value="pageSize",defaultValue="8")int pageSize, Model model)
-    {
-        PageInfo<Ad01ac02Dto>page=ae07Service.nul(pageNo,pageSize);
-        model.addAttribute("pageInfo",page);
-        return "lailailai.html";
-    }
 }
