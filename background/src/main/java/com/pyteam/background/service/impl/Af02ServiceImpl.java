@@ -162,8 +162,7 @@ public class Af02ServiceImpl implements Af02Service
     @Override
     public int updateInfo(Af02 af02)
     {
-        int res = af02Mapper.updateByPrimaryKeySelective(af02);
-        return res;
+        return af02Mapper.updateByPrimaryKeySelective(af02);
     }
 
     @Override
