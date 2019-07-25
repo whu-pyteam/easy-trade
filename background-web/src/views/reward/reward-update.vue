@@ -9,15 +9,7 @@
             {{data.aad105}}
           </el-card>
         </el-form-item>
-        <el-form-item label="图片展示:">
-          <el-card v-for="(src, index) in  srcs"
-                   :key="index"
-                   :body-style="{ padding: '0px' }"
-                   style="width: 400px;"
-                   shadow="never">
-            <img :src="src" alt="">
-          </el-card>
-        </el-form-item>
+
         <el-form-item label="悬赏详情:" style="width: 1000px;">
           <el-card
             rows="4"
