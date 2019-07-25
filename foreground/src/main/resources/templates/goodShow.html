@@ -343,6 +343,9 @@
                 if (data == 3) {
                     alert("购物车已经存在该商品");
                 }
+                if (data == 4) {
+                    alert("已经被捷足先登了");
+                }
             }
         );
     }
@@ -363,7 +366,7 @@
             async: false,
             success: function (data) {
                 console.log(data);
-                var ids = data.split("&");
+                var ids = data.split("&!");
                 sellerId=ids[0];
                 buyerId=ids[1];
                 orderState=ids[2];
@@ -378,7 +381,7 @@
                 buyerImg=ids[11];
                 sellerImg=ids[12];
 
-                console.log(sellerImg)
+                console.log("asdasd"+sellerImg)
                 if(username == sellerId)
                 {
                     $("#sellman").css("display","inline-block");

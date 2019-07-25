@@ -130,7 +130,7 @@ public class MyBelongings
             }
         }
 
-        return sellerId+"&"+buyerId+"&"+orderState+"&"+buyerhasComment+"&"+sellerhasComment+"&"+buyerComment+"&"+sellerComment+"&"+buyerStar+"&"+sellerStar+"&"+buyerName+"&"+sellerName+"&"+buyerImg+"&"+sellerImg;
+        return sellerId+"&!"+buyerId+"&!"+orderState+"&!"+buyerhasComment+"&!"+sellerhasComment+"&!"+buyerComment+"&!"+sellerComment+"&!"+buyerStar+"&!"+sellerStar+"&!"+buyerName+"&!"+sellerName+"&!"+buyerImg+"&!"+sellerImg;
     }
 
     @PostMapping("deleteGood.html")

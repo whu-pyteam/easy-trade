@@ -51,27 +51,12 @@ public class Ac01Service
         criteria.andAac105Between(new BigDecimal(minp),new BigDecimal(maxp));
         List<Ac01> ac01List = ac01Mapper.selectByExample(ac01Example);
 
-        Ae06Example ae06Example=new Ae06Example();
-        List<Ae06> ae06List=ae06Mapper.selectByExample(ae06Example);
-
-        Iterator<Ac01> ac01Iterator=ac01List.iterator();
-        while (ac01Iterator.hasNext())
-        {
-            Ac01 tempAc01=ac01Iterator.next();
-            for(int i=0;i<ae06List.size();i++)
-            {
-                if(tempAc01.getAac101().equals(ae06List.get(i).getAac101()))
-                {
-                    ac01Iterator.remove();
-                }
-            }
-        }
         return ac01List;
     }
 
     public List<Ac01> searchByTypes(String[] typeArr)throws Exception
     {
-        List<Ac01> allList = getUnsoldGoodList();
+        List<Ac01> allList = selectById();
         List<Ac01> ac01List=new ArrayList<>();
 
         if(typeArr.length!=0)
@@ -146,9 +131,11 @@ public class Ac01Service
         Ac01Example.Criteria criteria = ac01Example.createCriteria();
         criteria.andAac104EqualTo("1");
         List<Ac01> ac01List = ac01Mapper.selectByExample(ac01Example);
+        System.out.println(ac01List.size());
 
         Ae06Example ae06Example=new Ae06Example();
         List<Ae06> ae06List=ae06Mapper.selectByExample(ae06Example);
+        System.out.println(ae06List.size());
 
         Iterator<Ac01> ac01Iterator=ac01List.iterator();
         while (ac01Iterator.hasNext())

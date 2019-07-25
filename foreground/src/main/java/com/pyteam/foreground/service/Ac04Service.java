@@ -3,8 +3,11 @@ package com.pyteam.foreground.service;
 import com.github.pagehelper.Page;
 import com.pyteam.db.mbg.entity.Ac04;
 import com.pyteam.db.mbg.entity.Ac04Example;
+import com.pyteam.db.mbg.entity.Ae06;
+import com.pyteam.db.mbg.entity.Ae06Example;
 import com.pyteam.db.mbg.mapper.Ac04Mapper;
 
+import com.pyteam.db.mbg.mapper.Ae06Mapper;
 import com.pyteam.foreground.dto.Ac04Dto;
 import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,8 @@ public class Ac04Service
 {
     @Autowired
     private Ac04Mapper ac04Mapper;
+    @Autowired
+    private Ae06Mapper ae06Mapper;
 
     /**
      * 商品是否已经在购物车
@@ -41,6 +46,23 @@ public class Ac04Service
         }
         return false;
     }
+
+    public boolean isBought(Integer aac101)throws Exception
+    {
+        Ae06Example ae06Example=new Ae06Example();
+        Ae06Example.Criteria criteria=ae06Example.createCriteria();
+        criteria.andAac101EqualTo(aac101);
+        List<Ae06> ae06List=ae06Mapper.selectByExample(ae06Example);
+        if(ae06List.size()==0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
 
     /**
      * 将商品加入购物车

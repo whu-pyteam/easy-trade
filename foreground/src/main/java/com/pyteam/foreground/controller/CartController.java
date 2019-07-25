@@ -88,51 +88,6 @@ public class CartController
     }
 
     /**
-     * 购物车商品展示
-     * @param pageSize
-     * @param pageIndex
-     * @return Json类型，包含total和rows
-     *//*
-    @GetMapping("cartShow.html")
-    @ResponseBody
-    public JSONObject cartShow(int pageSize,int pageIndex,HttpServletRequest request) throws Exception
-    {
-        //从cookie中取出用户id
-        String username = getCookies(request,"userId");
-
-        //根据用户id获取购物车id
-        Integer cartId= ac03Service.getCartIdByUserId(Integer.parseInt(username));
-
-        //获取所有符合条件的商品列表
-        List<Ac04> list = ac04Service.getCartItemList(cartId);
-        int total=list.size();
-
-        //PageHelper进行分页，获取分页后的当前页面数据
-        PageHelper.startPage(pageIndex,pageSize);
-        List<Ac04> ac04List = ac04Service.getCartItemList(cartId);
-
-        //通过已经得到的购物车项列表查询商品表获取相关数据,组成最终返回前端的数据列表
-        List<CartItemDto> cartItemDtos = new ArrayList<>();
-        for (Ac04 item:ac04List)
-        {
-            int aac101 = item.getAac101();
-            Ac01 ac01 = ac01Service.findById(aac101);
-            CartItemDto cartItemDto = new CartItemDto();
-            cartItemDto.setAac101(ac01.getAac101());
-            cartItemDto.setAac102(ac01.getAac102());
-            cartItemDto.setAac105(ac01.getAac105());
-            cartItemDto.setAac106(ac01.getAac106());
-            cartItemDtos.add(cartItemDto);
-        }
-
-        JSONObject json=new JSONObject();
-        json.put("total",total);
-        json.put("rows",cartItemDtos);
-        return json;
-    }
-*/
-
-    /**
      * 商品加入购物车
      * @param id
      * @param request
@@ -155,6 +110,11 @@ public class CartController
             {
                 System.out.println("没有为用户创建购物车");
                 return 2;
+            }
+
+            if(ac04Service.isBought(id))
+            {
+                return 4;
             }
 
             if(ac04Service.isExist(cartId,id))

@@ -48,8 +48,6 @@ public class OrderController
             {
                 sellerId=id;
                 ac05Service.createGoodOrder(ac05Dto,Integer.parseInt(id));
-                ab01Service.giveCredit(Integer.parseInt(buyerId));
-                ab01Service.giveCredit(Integer.parseInt(sellerId));
             }
             return true;
         }

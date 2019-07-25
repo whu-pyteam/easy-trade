@@ -378,13 +378,16 @@
                     window.location.replace("/cart.html?pageIndex=1")
                 }
                 if (data == 1) {
-                    alerts();
+                    alerts("成功加入购物车");
                 }
                 if (data == 2) {
-                    alert("没有未用户创建购物车");
+                    alerts("没有未用户创建购物车");
                 }
                 if (data == 3) {
-                    alert("购物车已经存在该商品");
+                    alerts("购物车已经存在该商品");
+                }
+                if (data == 4) {
+                    alerts("已经被捷足先登了");
                 }
             }
         );

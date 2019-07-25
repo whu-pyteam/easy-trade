@@ -45,11 +45,11 @@ public class IndexController
     @RequestMapping(value = "/index.html", method = RequestMethod.GET)
     public String getIndexPage(HttpServletRequest request, HttpServletResponse response, Model model,int pageIndex)throws Exception
     {
-        List<Ac01> totalList=ac01Service.getUnsoldGoodList();
+        List<Ac01> totalList=ac01Service.selectById();
         int total=totalList.size();
 
         PageHelper.startPage(pageIndex,9);
-        List<Ac01> ac01List=ac01Service.getUnsoldGoodList();
+        List<Ac01> ac01List=ac01Service.selectById();
 
         List<Ac01> newList = new ArrayList<>();
         if(total>0)
@@ -245,7 +245,7 @@ public class IndexController
                     model.addAttribute("type", 1);
                     model.addAttribute("ac01List", ac01Service.selectById());
                     model.addAttribute("isLogin", isLogin(request, response));
-                    return "index";
+                    return "goodLaunch";
                 }
                 else
                 {
