@@ -97,6 +97,7 @@
             this.data.aac107 = res.data.aac107
             this.data.aac106 = res.data.aac106
             this.isCheck = res.data.aac104==='1'
+            this.srcs = [this.data.aac106]
           } else {
             this.$message.error("找不到数据!")
             window.setTimeout(this.cancelUpdate, 1200)

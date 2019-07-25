@@ -2,7 +2,7 @@
   <section class="app-main">
     <transition name="fade" mode="out-in">
       <!-- <router-view :key="key"></router-view> -->
-      <keep-alive :exclude="['auction-update', 'feedback-update','product-update','staff-update']">
+      <keep-alive :exclude="['auction-update', 'feedback-update','product-update','staff-update', 'log-manager']">
         <router-view></router-view>
       </keep-alive>
     </transition>

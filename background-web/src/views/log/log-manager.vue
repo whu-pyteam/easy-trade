@@ -56,7 +56,7 @@
           <template slot-scope="scope">
             <el-button
               icon="el-icon-search"
-              @click="handleDetail(scope.$index, scope.row)">查看
+              @click="handleDetail(scope.row)">查看
             </el-button>
           </template>
         </el-table-column>
@@ -140,8 +140,8 @@
       onSubmit() {
         this.fetchLogList()
       },
-      handleDetail(index, rowData) {
-        getLogDetail(rowData.aaf201).then(res => {
+      handleDetail(rowData) {
+        getLogDetail(rowData.aaf301).then(res => {
           this.logDetail = res.data
           console.log(this.logDetail)
           this.rowData = rowData

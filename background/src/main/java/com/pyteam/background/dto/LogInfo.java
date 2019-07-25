@@ -11,8 +11,8 @@ import java.util.Date;
 @Data
 public class LogInfo
 {
-    // 员工id
-    private Integer aaf201;
+    // 日志id
+    private Integer aaf301;
 
     // 操作时间
     private Date aaf303;
