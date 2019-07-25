@@ -2,6 +2,7 @@ package com.pyteam.foreground.controller;
 
 import com.pyteam.db.mbg.entity.Syscode;
 import com.pyteam.foreground.dto.Ac05Dto;
+import com.pyteam.foreground.service.Ab01Service;
 import com.pyteam.foreground.service.Ac05Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,8 @@ public class OrderController
 
     @Autowired
     Ac05Service ac05Service;
+    @Autowired
+    Ab01Service ab01Service;
 
     @PostMapping("submitGoodOrder.html")
     @ResponseBody
@@ -28,6 +31,9 @@ public class OrderController
     {
         if (isLogin(request,response))
         {
+            String buyerId=getCookies(request,"userId");
+            String sellerId="";
+
             Ac05Dto ac05Dto = new Ac05Dto();
             ac05Dto.setAab101(Integer.parseInt(getCookies(request,"userId")));
             ac05Dto.setAac503(0);
@@ -40,7 +46,10 @@ public class OrderController
             String[] ids = request.getParameter("aac101s").split(",");
             for(String id : ids)
             {
+                sellerId=id;
                 ac05Service.createGoodOrder(ac05Dto,Integer.parseInt(id));
+                ab01Service.giveCredit(Integer.parseInt(buyerId));
+                ab01Service.giveCredit(Integer.parseInt(sellerId));
             }
             return true;
         }

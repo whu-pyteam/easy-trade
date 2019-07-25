@@ -4,6 +4,7 @@ import com.pyteam.db.mbg.entity.Ab01;
 import com.pyteam.db.mbg.entity.Ac01;
 import com.pyteam.foreground.dto.Ab01Dto;
 import com.pyteam.foreground.service.Ab01Service;
+import com.pyteam.foreground.service.Ab06Service;
 import com.pyteam.foreground.service.Ac01Service;
 import com.pyteam.foreground.service.SyscodeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,11 +28,13 @@ import static com.pyteam.foreground.controller.LoginController.getCookies;
 public class MemberInfo
 {
     @Autowired
-    Ab01Service ab01Service;
+    private Ab01Service ab01Service;
     @Autowired
-    Ac01Service ac01Service;
+    private Ac01Service ac01Service;
     @Autowired
-    SyscodeService syscodeService;
+    private SyscodeService syscodeService;
+    @Autowired
+    private Ab06Service ab06Service;
 
     @GetMapping("memberInfo.html")
     public String memberInfo(Model model,HttpServletRequest request, HttpServletResponse response)throws Exception
@@ -39,7 +43,6 @@ public class MemberInfo
         {
             String username = getCookies(request,"userId");
             Ab01 ab01 = ab01Service.getMemberInfo(Integer.parseInt(username));
-
 
             model.addAttribute("aab103",ab01.getAab103());
             model.addAttribute("aab104",ab01.getAab104());
@@ -112,6 +115,7 @@ public class MemberInfo
             Integer syscodeid=ab01.getAab106();
             String schoolName = syscodeService.getSchoolName(syscodeid);
 
+            model.addAttribute("aab101", ab01.getAab101());
             model.addAttribute("aab102", ab01.getAab102());
             model.addAttribute("aab103", ab01.getAab103());
             model.addAttribute("aab104", sex);
@@ -130,6 +134,37 @@ public class MemberInfo
         {
             e.printStackTrace();
             return "error/404";
+        }
+    }
+
+    @GetMapping("following.html")
+    @ResponseBody
+    public int following(String aab101,HttpServletRequest request,HttpServletResponse response)
+    {
+        if(isLogin(request,response))
+        {
+            String userId = getCookies(request,"userId");
+            if(ab06Service.hasFollowed(Integer.parseInt(userId),Integer.parseInt(aab101)))
+            {
+                return 2;
+            }
+            else
+            {
+                if(userId.equals(aab101))
+                {
+                    return 4;
+                }
+                else
+                {
+                    ab06Service.addFollower(Integer.parseInt(userId),Integer.parseInt(aab101));
+                    return 1;
+                }
+
+            }
+        }
+        else
+        {
+            return 0;
         }
     }
 

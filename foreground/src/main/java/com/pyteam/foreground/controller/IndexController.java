@@ -3,8 +3,10 @@ package com.pyteam.foreground.controller;
 import com.github.pagehelper.PageHelper;
 import com.pyteam.db.mbg.entity.Ab01;
 import com.pyteam.db.mbg.entity.Ac01;
+import com.pyteam.foreground.dto.Ab05Dto;
 import com.pyteam.foreground.dto.Ac01Dto;
 import com.pyteam.foreground.service.Ab01Service;
+import com.pyteam.foreground.service.Ab05Service;
 import com.pyteam.foreground.service.Ac01Service;
 import com.pyteam.foreground.service.Ac02Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,8 @@ public class IndexController
     private Ac02Service ac02Service;
     @Autowired
     private Ab01Service ab01Service;
+    @Autowired
+    private Ab05Service ab05Service;
 
 
     @RequestMapping(value = "/template.html", method = RequestMethod.GET)
@@ -302,4 +306,35 @@ public class IndexController
         }
     }
 
+    @GetMapping("reflectShow.html")
+    public String reflectShow(Model model,HttpServletRequest request,HttpServletResponse response)
+    {
+        if (isLogin(request,response))
+        {
+            model.addAttribute("type", 1);
+            model.addAttribute("isLogin", isLogin(request, response));
+            return "reflect";
+        }
+        else
+        {
+            return "error/relogin";
+        }
+    }
+
+    @PostMapping("reflectSubmit.html")
+    @ResponseBody
+    public boolean reflectSubmit(Ab05Dto ab05Dto, Model model, HttpServletRequest request, HttpServletResponse response)
+    {
+        if(isLogin(request,response))
+        {
+            String aab101=getCookies(request,"userId");
+            ab05Dto.setAab101(Integer.parseInt(aab101));
+            ab05Service.addReflect(ab05Dto);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
