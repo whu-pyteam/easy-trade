@@ -73,8 +73,9 @@ public class Ae04Controller
 
 
     @GetMapping("ad01list")
-    public String anvon(Model m, HttpServletRequest request, HttpServletResponse response,int pageNum)
+    public String anvon(Model m, HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "pageNum",required = false, defaultValue = "1") int pageNum)
     {
+
         Map<String,Object> ad01map=ae07Service.nul(pageNum,8);
         int pageCount=(int)ad01map.get("pageCount");
         if(pageCount == 0)

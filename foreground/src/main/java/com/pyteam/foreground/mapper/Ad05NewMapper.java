@@ -1,10 +1,7 @@
 package com.pyteam.foreground.mapper;
 
 import com.pyteam.db.mbg.entity.Ad05;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -41,4 +38,5 @@ public interface Ad05NewMapper
 
     @Select("select count(aab101) from ad05 where aad101=#{aad101}")
     int countaad101(int aad101);
+
 }

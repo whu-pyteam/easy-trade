@@ -55,6 +55,11 @@ public class Ad05Controller
             ad05.setAab101(wantid);
             ad05.setAad101(aad101);
 
+            if(wantid==ad01Service.findbyaad101(aad101).getAab101())
+            {
+                return 4;
+            }
+
             Ad05 ad051 = ad05Service.aad501(ad05);
             if (ad051 == null)
             {
