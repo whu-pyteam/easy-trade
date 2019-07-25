@@ -56,15 +56,14 @@
 <body>
 <div th:replace="/header :: header(2)"></div>
 
-
+<div class="page-header header-filter header-small" data-parallax="true" style="background-image: url('images/ab.jpg');"></div>
 
 <div class="main main-raised">
     <div class="row">
         <div class="col-lg-2">
-            <div class="logo pull-left">
             </div>
-        </div>
-        <div class="col-sm-8">
+
+        <div class="col-lg-8">
             <form class="navbar-form navbar-right" role="search" th:action="@{'/cxk'}" >
                 <div class="form-group form-white is-empty">
                     <input type="text" class="form-control" name="notsure" id="notsure" placeholder="Search">
@@ -80,57 +79,58 @@
     </div>
 
     <div class="container">
+
         <div class="row">
-            <div class="col-lg-2">
+            <div class="col-lg-1">
                 <div th:if="${isLogin}">
                 <div class="left-sidebar">
-                    <h2>目录</h2>
-                    <div class="panel-group category-products" id="accordian">
-                        <!--category-productsr-->
+                <h2>目录</h2>
+                <div class="panel-group category-products" id="accordian">
+                <!--category-productsr-->
 
 
 
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a th:href="@{/forklist}">收藏夹</a></h4>
-                            </div>
-                        </div>
+                <div class="panel panel-default">
+                <div class="panel-heading">
+                <h4 class="panel-title"><a th:href="@{/forklist}">收藏夹</a></h4>
+                </div>
+                </div>
 
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a th:href="@{/myOrder}">我的订单</a></h4>
-                            </div>
-                        </div>
+                <div class="panel panel-default">
+                <div class="panel-heading">
+                <h4 class="panel-title"><a th:href="@{/myOrder}">我的订单</a></h4>
+                </div>
+                </div>
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a th:href="@{/ad01Accept}">已接受悬赏</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a th:href="@{/edit}">我的悬赏区</a></h4>
-                            </div>
-                        </div>
+                <div class="panel panel-default">
+                <div class="panel-heading">
+                <h4 class="panel-title"><a th:href="@{/ad01Accept}">已接受悬赏</a></h4>
+                </div>
+                </div>
+                <div class="panel panel-default">
+                <div class="panel-heading">
+                <h4 class="panel-title"><a th:href="@{/edit}">我的悬赏区</a></h4>
+                </div>
+                </div>
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a th:href="@{/helpOrder}">待完成订单</a></h4>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"><a th:href="@{/myComment}">悬赏评论</a></h4>
-                            </div>
-                        </div>
+                <div class="panel panel-default">
+                <div class="panel-heading">
+                <h4 class="panel-title"><a th:href="@{/helpOrder}">待完成订单</a></h4>
+                </div>
+                </div>
+                <div class="panel panel-default">
+                <div class="panel-heading">
+                <h4 class="panel-title"><a th:href="@{/myComment}">悬赏评论</a></h4>
+                </div>
+                </div>
 
 
-                    </div>
+                </div>
 
-                    </div>
-                    <!--/category-products-->
+                </div>
+                <!--/category-products-->
                 </div>
             </div>
 
@@ -166,12 +166,10 @@
 
                             <!-- Controls -->
                             <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
+                                <i class="material-icons">keyboard_arrow_left</i>
                             </a>
                             <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
+                                <i class="material-icons">keyboard_arrow_right</i>
                             </a>
                         </div>
                     </div>
@@ -219,8 +217,25 @@
                 </form>
 
             </div>
+
+            <div class="col-lg-1"></div>
         </div>
-    </div>
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="pagination pagination-warning">
+                    <li th:if="${pageNum == 1}"><a>上一页</a></li>
+                    <li th:if="${pageNum != 1}"><a th:href="'ad01list?pageNum=' + ${pageNum - 1}">上一页</a></li>
+                    <li th:if="${pageNum - 2} > 0"><a th:href="'ad01list?pageNum=' + ${pageNum - 2}" th:text="${pageNum - 2}"></a></li>
+                    <li th:if="${pageNum - 1} > 0"><a th:href="'ad01list?pageNum=' + ${pageNum - 1}" th:text="${pageNum - 1}"></a></li>
+                    <li class="active"><a th:text="${pageNum}"></a></li>
+                    <li th:if="${pageNum + 1} <= ${pageCount}"><a th:href="'ad01list?pageNum=' + ${pageNum + 1}" th:text="${pageNum + 1}"></a></li>
+                    <li th:if="${pageNum + 2} <= ${pageCount}"><a th:href="'ad01list?pageNum=' + ${pageNum + 2}" th:text="${pageNum + 2}"></a></li>
+                    <li th:if="${pageNum != pageCount}"><a th:href="'ad01list?pageNum=' + ${pageNum + 1}">下一页</a></li>
+                    <li th:if="${pageNum == pageCount}"><a>下一页</a></li>
+                </ul>
+            </div>
+         </div>
 
 
 

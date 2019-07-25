@@ -4,7 +4,9 @@
 </head>
 <body>
 <div th:fragment="header(type)">
-    <nav class="navbar navbar-inverse navbar-transparent navbar-absolute" role="navigation-demo">
+    <link href="css/login-register.css" rel="stylesheet">
+
+    <nav class="navbar navbar-default navbar-transparent navbar-fixed-top navbar-color-on-scroll" color-on-scroll="100" id="sectionsNav">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -21,7 +23,7 @@
             <div class="collapse navbar-collapse" id="navigation-example-2">
                 <ul class="nav navbar-nav navbar-left">
                     <li>
-                        <a href="index.html">
+                        <a href="index.html?pageIndex=1">
                             <i class="material-icons">redeem</i> 首页
                         </a>
                     </li>
@@ -46,7 +48,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-with-icons">
                             <li>
-                                <a href="forklist.html">
+                                <a href="forklist">
                                     <i class="material-icons">star_border</i> 收藏的悬赏
                                 </a>
                             </li>
@@ -58,8 +60,8 @@
                         </ul>
                     </li>
                     <li th:if="${isLogin}">
-                        <a href="cart.html">
-                            <i class="material-icons">add_shopping_cart</i> 购物车
+                        <a href="cart.html?pageIndex=1">
+                            <i class="material-icons">shopping_cart</i> 购物车
                         </a>
                     </li>
                     <li class="dropdown" th:if="${isLogin}">
@@ -74,7 +76,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="add.html">
+                                <a href="add">
                                     <i class="material-icons">hearing</i> 悬赏
                                 </a>
                             </li>
@@ -89,7 +91,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="edit.html">
+                                <a href="edit">
                                     <i class="material-icons">hearing</i> 我的悬赏
                                 </a>
                             </li>
@@ -130,6 +132,13 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="ad01Accept">
+                                    <i class="material-icons">business</i> 悬赏记录
+                                </a>
+                            </li>
+
+
+                            <li>
                                 <a href="auctionPart.html?pageNum=1">
                                     <i class="material-icons">bubble_chart</i> 竞拍记录
                                 </a>
@@ -152,9 +161,12 @@
         <div class="modal-dialog login animated">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
-                    </button>
-                    <h4 class="modal-title">Login with</h4></div>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+
+                    <div class="header header-primary text-center">
+                        <h4 class="card-title">登 录</h4>
+                    </div>
+                </div>
                 <div class="modal-body">
                     <div class="box">
                         <div class="content">
@@ -165,7 +177,7 @@
                                                                                              placeholder="账号"
                                                                                              name="email"><input
                                         class="form-control" type="password" placeholder="密码" name="password"><input
-                                        class="btn btn-default btn-login" type="button" value="登录"
+                                        class="btn btn-warning btn-login" type="button" value="登录"
                                         onclick="loginAjax()">
                                 </form>
                             </div>
@@ -250,10 +262,10 @@
                     success: function (data) {
                         if (data == true) {
                             alert("成功退出登录!")
-                            window.location.replace("/index.html")
+                            window.location.replace("/index.html?pageIndex=1")
                         } else {
                             alert("您已退出登录")
-                            window.location.replace("/index.html")
+                            window.location.replace("/index.html?pageIndex=1")
                         }
                     }
                 })

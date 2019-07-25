@@ -8,6 +8,7 @@ import com.pyteam.db.mbg.entity.Ad04;
 import com.pyteam.foreground.dto.Ad01ac02Dto;
 import com.pyteam.foreground.service.Ad01Service;
 import com.pyteam.foreground.service.Ae04Service;
+import com.pyteam.foreground.service.Ae07Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +34,8 @@ public class Ae04Controller
     private Ae04Service ae04Service;
     @Autowired
     private Ad01Service ad01Service;
-
+    @Autowired
+    private Ae07Service ae07Service;
     private boolean isLogin;
 
 
@@ -71,20 +73,30 @@ public class Ae04Controller
 
 
     @GetMapping("ad01list")
-    public String anvon(Model m, HttpServletRequest request, HttpServletResponse response, @RequestParam(required = false,defaultValue = "1")Integer pn, Map<String,Object> map)
+    public String anvon(Model m, HttpServletRequest request, HttpServletResponse response,int pageNum)
     {
+        Map<String,Object> ad01map=ae07Service.nul(pageNum,8);
+        int pageCount=(int)ad01map.get("pageCount");
+        if(pageCount == 0)
+        {
+            pageCount = 1;
+        }
         isLogin = isLogin(request, response);
         if (isLogin)
         {
             m.addAttribute("isLogin",isLogin);
         }
         m.addAttribute("isLogin", isLogin);
-
-        List<Ad01ac02Dto> ad01ac02DtoList=ad01Service.listByAll();
-        m.addAttribute("ad01", ad01Service.listByAll());
-
+        m.addAttribute("pageNum", pageNum);
+        m.addAttribute("pageCount", pageCount);
+        m.addAttribute("ad01",(List<Ad01ac02Dto>)ad01map.get("ad01ac02DtoList") );
         return "ad01list";
     }
+//    @PostMapping("ad01list")
+//    public String anvon(HttpServletRequest request, HttpServletResponse response,Model model)
+//    {
+//
+//    }
 
     @GetMapping("ad01list.html")
     public String showall0(Model m, HttpServletRequest request, HttpServletResponse response)
