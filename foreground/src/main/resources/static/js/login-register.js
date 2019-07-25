@@ -48,7 +48,6 @@ function loginAjax(){
     $.post( "login.html",{username:$("input[name='email']").val(),password:$("input[name='password']").val()}, function(data) {
         if(data==true)
         {
-            alert("登录成功！");
             window.location.reload();
         }
         else

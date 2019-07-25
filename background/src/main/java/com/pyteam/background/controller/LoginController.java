@@ -12,6 +12,7 @@ import javassist.expr.NewExpr;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -20,6 +21,7 @@ import java.util.Map;
 
 /**
  * 后台员工控制
+ *
  * @author tyc
  * @date 2019/7/6 11:13
  */
@@ -31,6 +33,9 @@ public class LoginController
 {
     @Autowired
     private Af02Service af02Service;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Value("${jwt.tokenHead}")
     private String tokenHead;
@@ -67,7 +72,7 @@ public class LoginController
         String username = principal.getName();
         Af02 af02 = af02Service.getEmpByUsername(username);
         Map<String, Object> info = new HashMap<>();
-        info.put("aaf201",af02.getAaf201());
+        info.put("aaf201", af02.getAaf201());
         info.put("username", af02.getAaf202());
         info.put("nickname", af02.getAaf204());
         info.put("roles", af02Service.getRoleList(af02.getAaf201()));
@@ -76,7 +81,6 @@ public class LoginController
         log.info("当前用户信息: " + info);
         return CommonResponse.success(info);
     }
-
 
 
     @ApiOperation("修改个人信息")
@@ -88,7 +92,11 @@ public class LoginController
         af02.setAaf201(af02Old.getAaf201());
         af02.setAaf204(userInfo.getNickname());
         af02.setAaf208(userInfo.getAvatarUrl());
-        System.out.println(af02);
+        if(userInfo.getPassword() != null && !"".equals(userInfo.getPassword()))
+        {
+            af02.setAaf203(passwordEncoder.encode(userInfo.getPassword()));
+        }
+        // System.out.println(af02);
         int res = af02Service.updateInfo(af02);
         log.info("修改个人信息: " + res);
         return CommonResponse.success(null, "修改成功");
@@ -102,8 +110,7 @@ public class LoginController
         if(af02Service.register(loginParam))
         {
             return CommonResponse.success("注册成功");
-        }
-        else
+        } else
         {
             return CommonResponse.failed("用户名重复");
         }

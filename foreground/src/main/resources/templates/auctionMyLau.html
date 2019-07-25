@@ -5,15 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
     <title>发起的竞拍</title>
-    <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
-
-    <link href="css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/material-kit.css?v=1.2.1" rel="stylesheet"/>
 </head>
 <body class="product-page">
-<div th:replace="auctionHeader :: header(3)"></div>
+<div th:replace="header :: header(3)"></div>
 
 <div class="page-header header-filter header-small" data-parallax="true" style="background-image: url('images/bg_auc.jpg');"></div>
 
@@ -38,6 +32,9 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <tr th:if="${ad02List.isEmpty()}">
+                                <td><h4>暂无发布信息</h4></td>
+                            </tr>
                             <tr th:each="ad02:${ad02List}">
                                 <td><img th:src="${ad02.aad203}" style="height: 100px; width: 100px; object-fit: cover;"></td>
                                 <td><h4 th:text="${ad02.aad202}"></h4></td>
@@ -87,11 +84,9 @@
     </div>
 </div>
 
-<div th:replace="auctionHeader::footer"></div>
+<div th:replace="header::footer"></div>
 
 </body>
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
 <script>
     function delMyAuc(aad201)
     {
@@ -103,11 +98,11 @@
             dataType: 'json',
             data: data,
             success: function () {
-                alert("取消成功！");
+                alerts("删除成功！");
                 location.reload();
             },
             error: function () {
-                alert("取消失败！");
+                alerts("删除成功！");
                 location.reload();
             }
         });

@@ -81,18 +81,11 @@
       width="60%">
 
       <el-form>
-        <el-form-item label="操作人名称" label-width="120px" style="width: 400px;">
-          <el-input v-model="rowData.aaf202" disabled=""></el-input>
-        </el-form-item>
-        <el-form-item label="操作日期" label-width="120px" style="width: 400px;">
-          {{rowData.aaf303}}
-        </el-form-item>
-        <el-form-item label="操作详情" label-width="120px" style="width: 60%">
+        <el-form-item label="" label-width="120px" style="width: 60%">
           <json-view :data="logDetail" style="text-align: left" rootKey="操作详情"></json-view>
         </el-form-item>
       </el-form>
     </el-dialog>
-
   </div>
 </template>
 

@@ -132,4 +132,12 @@ public class Ab01Service
         ab01Mapper.updateByPrimaryKeySelective(ab01);
         return true;
     }
+
+    public void giveCredit(Integer aab101)
+    {
+        Ab01 ab01=new Ab01();
+        ab01.setAab101(aab101);
+        ab01.setAab109(ab01Mapper.selectByPrimaryKey(aab101).getAab109()+1);
+        ab01Mapper.updateByPrimaryKeySelective(ab01);
+    }
 }

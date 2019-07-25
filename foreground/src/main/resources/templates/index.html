@@ -137,7 +137,7 @@
                                             <i class="material-icons">keyboard_arrow_down</i>
                                         </a>
                                     </div>
-                                    <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+                                    <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree" style="max-height: -webkit-fill-available">
                                         <div class="panel-body">
 
                                             <div class="checkbox">
@@ -348,7 +348,7 @@
         var slider2 = document.getElementById('sliderRefine');
 
         noUiSlider.create(slider2, {
-            start: [42, 880],
+            start: [88, 888],
             connect: true,
             range: {
                 'min': [0],
@@ -378,7 +378,7 @@
                     window.location.replace("/cart.html?pageIndex=1")
                 }
                 if (data == 1) {
-                    alert("成功加入购物车");
+                    alerts();
                 }
                 if (data == 2) {
                     alert("没有未用户创建购物车");

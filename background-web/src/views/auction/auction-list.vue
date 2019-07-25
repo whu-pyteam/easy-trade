@@ -92,7 +92,7 @@
       return {
         condition: {
           aad202: '',
-          aad209: ''
+          aad209: '0'
         },
         tableData: [],
         pageInfo: {
