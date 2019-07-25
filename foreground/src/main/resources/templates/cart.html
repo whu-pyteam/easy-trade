@@ -211,8 +211,6 @@
                                         <textarea class="form-control" name="aac510" placeholder="每一条备注的背后，都有一份期待..." rows="5"></textarea>
                                     </div>
 
-
-
                                     <div class="checkbox">
                                         <label>
                                             <input type="checkbox" name="optionsCheckboxes" checked>
@@ -221,7 +219,7 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer text-center">
-                                    <a href="#pablo" class="btn btn-primary btn-round" onclick="submitOrder()">下单</a>
+                                    <a href="#pablo" class="btn btn-primary btn-round" data-dismiss="modal" onclick="submitOrder()">下单</a>
                                 </div>
                             </form>
                         </div>
@@ -289,11 +287,11 @@
                 }
                 if(data==1)
                 {
-                    alerts();
+                    window.location.replace("cart.html?pageIndex=1");
                 }
                 if(data==2)
                 {
-                    alerts();
+                    window.location.replace("cart.html?pageIndex=1");
                 }
             }
         });
@@ -301,26 +299,32 @@
 
     //批量删除
     function patchDelete() {
-        var opts = $('#table').bootstrapTable('getSelections');
-        if (opts == "") {
-            alert("请选择要删除的数据");
-        }
-        else {
-            var idArray = [];
-            for (var i = 0; i < opts.length; i++) {
-                idArray.push(opts[i].aac101);
+        var aac101s='';
+        $('input[name="optionsCheckbox"]:checked').each(function(k){
+            if(k == 0){
+                aac101s = $(this).val();
+            }else{
+                aac101s += ','+$(this).val();
             }
-            if (confirm("确定删除商品id：" + idArray + "吗？")) {
-                deleteExecute(idArray);
+        })
+
+        if(aac101s=='')
+        {
+            alerts("请选择要批量删除的商品")
+        }
+        else
+        {
+            if (confirm("确定删除商品id：" + aac101s + "吗？")) {
+                deleteExecute(aac101s);
             }
         }
     }
 
-    function deleteExecute(idArray) {
-        console.log(idArray);
+    function deleteExecute(aac101s) {
+        console.log(aac101s);
         $.ajax({
             url : "/patchDelete.html",
-            data : "ids="+idArray,
+            data : {"ids":aac101s},
             type : "post",
             dataType : "json",
             success: function (data) {
@@ -330,11 +334,11 @@
                 }
                 if(data==1)
                 {
-                    alerts()
+                    window.location.replace("cart.html?pageIndex=1");
                 }
                 if(data==2)
                 {
-                    alerts()
+                    window.location.replace("cart.html?pageIndex=1");
                 }
             }
         });
@@ -342,7 +346,6 @@
 
 
     function buyAll() {
-        var number = '';
         var checkboxes= $('input[name="optionsCheckbox"]:checked');
         if(checkboxes.length==0)
         {
@@ -382,6 +385,7 @@
             data: data,
         })
         buyExecute(aac101s);
+
     }
 
     function buyExecute(number)
@@ -399,11 +403,11 @@
                 }
                 if(data==1)
                 {
-                    alerts()
+                    window.location.replace("cart.html?pageIndex=1");
                 }
                 if(data==2)
                 {
-                    alerts()
+                    window.location.replace("cart.html?pageIndex=1");
                 }
             }
         });

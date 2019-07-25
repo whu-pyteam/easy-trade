@@ -135,6 +135,8 @@ public class Ab01Service
 
     public void giveCredit(Integer aab101)
     {
+        System.out.println(aab101+"abb101");
+        System.out.println(ab01Mapper.selectByPrimaryKey(aab101).getAab109()+"aab109");
         Ab01 ab01=new Ab01();
         ab01.setAab101(aab101);
         ab01.setAab109(ab01Mapper.selectByPrimaryKey(aab101).getAab109()+1);

@@ -225,18 +225,18 @@
                             <div class="form">
                                 <form method="post" action="/register"
                                       accept-charset="UTF-8" id="register_form">
-                                    <input class="form-control" type="text" placeholder="用户名" name="username">
-                                    <input class="form-control" type="password" placeholder="密码" name="pwd">
-                                    <input class="form-control" type="password" placeholder="确认密码" name="pwd2">
-                                    <input class="form-control" type="text" placeholder="手机号" id="mobile" name="number">
+                                    <input class="form-control form-rose" type="text" placeholder="用户名" name="username">
+                                    <input class="form-control form-rose" type="password" placeholder="密码" name="pwd">
+                                    <input class="form-control form-rose" type="password" placeholder="确认密码" name="pwd2">
+                                    <input class="form-control form-rose" type="text" placeholder="手机号" id="mobile" name="number">
                                     <div class="col-lg-6">
-                                        <input class="form-control" type="text" placeholder="验证码" name="code">
+                                        <input class="form-control form-rose" type="text" placeholder="验证码" name="code">
                                     </div>
                                     <div class="col-lg-6">
-                                        <input class="btn btn-default btn-register" type="button"
+                                        <input class="btn btn-success btn-register" type="button"
                                                value="获取验证码" name="smsBtn" onclick="sendSms()">
                                     </div>
-                                    <input class="btn btn-default btn-register" type="button" value="确认注册"
+                                    <input class="btn btn-success btn-register" type="button" value="确认注册"
                                            onclick="register()"
                                            name="commit">
                                 </form>
@@ -278,30 +278,6 @@
 <div th:fragment="footer">
     <footer class="footer">
         <div class="container">
-            <nav class="pull-left">
-                <ul>
-                    <li>
-                        <a href="#">
-                            Creative Tim
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            About Us
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Blog
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Licenses
-                        </a>
-                    </li>
-                </ul>
-            </nav>
             <div class="copyright pull-right">
                 &copy;
                 <script>document.write(new Date().getFullYear())</script>
@@ -397,6 +373,7 @@
                 success: function (result) {
                     if (result.message === 'success') {
                         alert("注册成功!");
+                        showLoginForm();
                         // window.location.reload();
                     } else if (result.message === "name") {
                         alert("账号重复!")

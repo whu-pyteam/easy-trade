@@ -4,7 +4,10 @@ import com.pyteam.db.mbg.entity.Ab06;
 import com.pyteam.db.mbg.entity.Ab06Example;
 import com.pyteam.db.mbg.mapper.Ab06Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class Ab06Service
@@ -35,5 +38,22 @@ public class Ab06Service
         {
             return false;
         }
+    }
+
+    public List<Ab06> getFollowing(Integer aab101)
+    {
+        Ab06Example ab06Example=new Ab06Example();
+        Ab06Example.Criteria criteria=ab06Example.createCriteria();
+        criteria.andBaab101EqualTo(aab101);
+        return ab06Mapper.selectByExample(ab06Example);
+    }
+
+    public void unFollow(Integer baab101,Integer eaab101)
+    {
+        Ab06Example ab06Example=new Ab06Example();
+        Ab06Example.Criteria criteria=ab06Example.createCriteria();
+        criteria.andBaab101EqualTo(baab101);
+        criteria.andEaab101EqualTo(eaab101);
+        ab06Mapper.deleteByExample(ab06Example);
     }
 }

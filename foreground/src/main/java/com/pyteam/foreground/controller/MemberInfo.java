@@ -1,6 +1,7 @@
 package com.pyteam.foreground.controller;
 
 import com.pyteam.db.mbg.entity.Ab01;
+import com.pyteam.db.mbg.entity.Ab06;
 import com.pyteam.db.mbg.entity.Ac01;
 import com.pyteam.foreground.dto.Ab01Dto;
 import com.pyteam.foreground.service.Ab01Service;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.pyteam.foreground.controller.LoginController.isLogin;
@@ -168,4 +170,42 @@ public class MemberInfo
         }
     }
 
+    @GetMapping("followShow.html")
+    public String followShow(HttpServletRequest request,HttpServletResponse response,Model model)throws Exception
+    {
+        if(isLogin(request,response))
+        {
+            String userId=getCookies(request,"userId");
+            List<Ab06> ab06List = ab06Service.getFollowing(Integer.parseInt(userId));
+            List<Ab01> ab01List=new ArrayList<>();
+            for(Ab06 ab06:ab06List)
+            {
+                ab01List.add(ab01Service.getMemberInfo(ab06.getEaab101()));
+            }
+            model.addAttribute("ab01List",ab01List);
+            model.addAttribute("isLogin", isLogin(request, response));
+            model.addAttribute("type",1);
+            return "followShow";
+        }
+        else
+        {
+            return "error/relogin";
+        }
+    }
+
+    @GetMapping("unfollow.html")
+    @ResponseBody
+    public boolean unFollow(int aab101,HttpServletRequest request,HttpServletResponse response)
+    {
+        if(isLogin(request,response))
+        {
+            String userId=getCookies(request,"userId");
+            ab06Service.unFollow(Integer.parseInt(userId),aab101);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
