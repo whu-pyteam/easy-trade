@@ -92,6 +92,7 @@ public class OrderService
         Ad06Example.Criteria criteria = ad06Example.createCriteria();
         criteria.andAab101EqualTo(aab101);
         criteria.andAad201EqualTo(aad201);
+        criteria.andAad603EqualTo("4");
         List<Ad06> ad06List = ad06Mapper.selectByExample(ad06Example);
         if(ad06List.isEmpty())
         {
