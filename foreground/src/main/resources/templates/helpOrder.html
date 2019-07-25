@@ -22,6 +22,8 @@
 
 <div th:replace="header::header(2)"></div>
 
+<div class="page-header header-filter header-small" data-parallax="true" style="background-image: url('images/ab.jpg');"></div>
+
 <div class="main main-raised">
     <div class="row">
         <div class="col-lg-2">
@@ -73,7 +75,7 @@
                         <label for="10">订单状态:</label>
                     </div>
                     <div class="col-lg-10">
-                            <input type="text" class="form-control" th:value="${ac05.aac503}==0?'需要您确认':'需要对方确认'" id="10" name="aac503" readonly >
+                            <input type="text" class="form-control" th:value="${ac05.aac503}==0?'需要您确认完成订单':'需要对方确认'" id="10" name="aac503" readonly >
                     </div>
                 </div>
 
