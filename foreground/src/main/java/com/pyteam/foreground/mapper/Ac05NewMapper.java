@@ -59,6 +59,9 @@ public interface Ac05NewMapper
     @Update("update ac05 set aac503=2 where aac502=#{aac502}")
     void updatecc(String aac502);
 
+    @Update("update ac05 set aac503=4 where aac502=#{aac502}")
+    void updatecommit(String aac502);
+
     @Select("select aab101 from ac05 where aac502=#{aac502}")
     int aab101(String aac502);
 

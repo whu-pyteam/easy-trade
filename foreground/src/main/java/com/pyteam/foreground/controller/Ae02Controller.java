@@ -2,6 +2,7 @@ package com.pyteam.foreground.controller;
 
 import com.pyteam.db.mbg.entity.Ad03;
 import com.pyteam.foreground.dto.Ae02Dto;
+import com.pyteam.foreground.service.Ac05Service;
 import com.pyteam.foreground.service.Ad01Service;
 import com.pyteam.foreground.service.Ae02Service;
 import com.pyteam.foreground.service.Ae07Service;
@@ -31,6 +32,8 @@ public class Ae02Controller
     private Ae02Service ae02Service;
     @Autowired
     private Ae07Service ae07Service;
+    @Autowired
+    private Ac05Service ac05Service;
 
     private Boolean isLogin;
 
@@ -44,6 +47,7 @@ public class Ae02Controller
         {
             m.addAttribute("isLogin",isLogin);
             int i = Integer.parseInt(getCookies(request, "userId"));
+
             ae02Dto.setAac502(aac502);
             m.addAttribute("aab101", i);
             return "addad03";
@@ -67,6 +71,7 @@ public class Ae02Controller
         int i = Integer.parseInt(getCookies(request, "userId"));
         ad03.setAab101(i);
         String aac502=ae02Dto.getAac502();
+        ae07Service.updatecommit(aac502);
         ae02Service.insert(ad03,aac502);
         return "myComment";
     }

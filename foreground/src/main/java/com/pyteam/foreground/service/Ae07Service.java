@@ -122,4 +122,11 @@ public class Ae07Service
           ad01map.put("pageCount",page.getPages());
           return ad01map;
      }
+
+//        更新状态
+
+     public void updatecommit(String aac502)
+     {
+         ac05NewMapper.updatecommit(aac502);
+     }
 }

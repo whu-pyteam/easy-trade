@@ -83,9 +83,6 @@
                         <!--<div class="panel-group category-products" id="accordian">-->
                             <!--&lt;!&ndash;category-productsr&ndash;&gt;-->
 
-
-
-
                             <!--<div class="panel panel-default">-->
                                 <!--<div class="panel-heading">-->
                                     <!--<h4 class="panel-title"><a th:href="@{/forklist}">收藏夹</a></h4>-->
@@ -193,7 +190,7 @@
                                         <a th:href="@{/information(aad101=${ad01.ad01.aad101})}" class="btn btn-default" role="button">详情</a>
                                     </div>
 
-                                    <div class="cssnn">
+                                    <div class="cssnn" style="height: 30px">
                                         <span class="label label-success"  th:each="item:${ad01.ac02List}" th:text="${item.aac202}" th:value="${item.aac202}"   onclick="func(this.innerText)"></span>
                                     </div>
                                 </div>
