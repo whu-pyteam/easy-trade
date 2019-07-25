@@ -22,7 +22,7 @@
 
 <body>
 
-<div th:replace="header::header(2)"></div>
+<div th:replace="/header::header(2)"></div>
 
 <div class="page-header header-filter header-small" data-parallax="true" style="background-image: url('images/ab.jpg');"></div>
 
@@ -78,32 +78,8 @@
                 </div>
             </form>
 
-    <p th:text=" 每页${page.pageSize}条 当前页${page.size}条 ${page.pageNum}/${page.pages}页 总条数${page.total}
-    </p>
-    <th:if test="${page.isFirstPage==true}"><a>首页</a></th:if>
-    <th:if test="${page.isFirstPage==false}">
-        <a href="<%=basePath%>user/getAllUser.do?page=${page.firstPage}">首页</a>
-    </th:if>
 
-    <th:if test="${page.hasPreviousPage==true}">
-        <a href="<%=basePath%>user/getAllUser.do?page=${page.prePage}">上一页</a>
-    </th:if>
-    <th:if test="${page.hasPreviousPage==false}"><a>上一页</a></th:if>
-
-    <th:if test="${page.hasNextPage==true}">
-        <a href="<%=basePath%>user/getAllUser.do?page=${page.nextPage}">下一页</a>
-    </th:if>
-    <th:if test="${page.hasNextPage==false}"><a>下一页</a></th:if>
-
-    <th:if test="${page.isLastPage==true}"><a>末页</a></th:if>
-    <th:if test="${page.isLastPage==false}">
-        <a href="<%=basePath%>user/getAllUser.do?page=${page.lastPage}">末页</a>
-    </th:if>
-
-    </div>
 </div>
-
-
 
 <div th:replace="header::footer"></div>
 
