@@ -12,4 +12,5 @@ public class UserInfo
     private String username;
     private String nickname;
     private String avatarUrl;
+    private String password;
 }

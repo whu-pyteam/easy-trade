@@ -49,7 +49,8 @@ export function updateInfo(data) {
     data: {
       username: data.username,
       nickname: data.nickname,
-      avatarUrl: data.avatarUrl
+      avatarUrl: data.avatarUrl,
+      password: data.password
     }
 
   })

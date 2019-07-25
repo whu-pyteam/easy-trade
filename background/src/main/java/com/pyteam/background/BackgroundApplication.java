@@ -34,5 +34,4 @@ public class BackgroundApplication
         pageHelper.setProperties(properties);
         return pageHelper;
     }
-
 }

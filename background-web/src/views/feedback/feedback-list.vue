@@ -92,7 +92,7 @@
       return {
         condition: {
           aab503: '',
-          aab504: ''
+          aab504: '0'
         },
         tableData: [],
         pageInfo: {

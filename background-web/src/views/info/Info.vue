@@ -50,6 +50,16 @@
           </el-option>
         </el-select>
       </el-form-item>
+      <el-form-item label="修改密码">
+        <el-input name="password"
+                  :type="pwdType"
+                  v-model="form.password"
+                  placeholder="请输入新密码">
+          <span slot="suffix" @click="showPwd">
+            <svg-icon :icon-class="pwdIcon"></svg-icon>
+          </span>
+        </el-input>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">保 存</el-button>
         <el-button @click="fetchInfo">重 置</el-button>
@@ -75,16 +85,28 @@
           avatarUrl: '#',
           role: '',
           status: true,
-          roles: []
+          roles: [],
+          password: ''
         },
         dialogVisible: false,
-        img: new FormData()
+        img: new FormData(),
+        pwdType: 'password',
+        pwdIcon: 'eye'
       }
     },
     created() {
       this.fetchInfo()
     },
     methods: {
+      showPwd() {
+        if (this.pwdType === 'password') {
+          this.pwdType = ''
+          this.pwdIcon = 'eye-open'
+        } else {
+          this.pwdType = 'password'
+          this.pwdIcon = "eye"
+        }
+      },
       fetchInfo() {
         getInfo().then(res => {
           // console.log(res.data)
