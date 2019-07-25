@@ -98,15 +98,15 @@
                         </div>
                         <div th:switch="${isLogin}" class="form-group" id="dobtn">
                             <div th:case="true" class="col-sm-offset-1">
-                                <a type="button" class="btn btn-primary" th:onclick="conn([[${ad02.aad201}]])" th:id="'conn'+${ad02.aad201}">
+                                <a type="button" class="btn btn-primary btn-round" th:onclick="conn([[${ad02.aad201}]])" th:id="'conn'+${ad02.aad201}">
                                     <span th:if="${!isConn}">收藏</span>
                                     <span th:if="${isConn}">已收藏</span>
                                 </a>
-                                <button type="submit" class="btn btn-default">参与</button>
+                                <button type="submit" class="btn btn-default btn-round">参与</button>
                             </div>
                             <div th:case="false" class="col-sm-offset-1">
-                                <a class="btn btn-primary" onclick="openLoginModal();">收藏</a>
-                                <a class="btn btn-default" onclick="openLoginModal();">参与</a>
+                                <a class="btn btn-primary btn-round" onclick="openLoginModal();">收藏</a>
+                                <a class="btn btn-default btn-round" onclick="openLoginModal();">参与</a>
                             </div>
                         </div>
                     </form>

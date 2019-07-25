@@ -21,9 +21,10 @@
             <div class="col-md-6 col-md-offset-3 text-center">
                 <h1 class="title">竞拍</h1>
                 <h4>你可以在这里参与竞拍和出售物品</h4>
-                <a href="auctionLaunch.html" class="btn btn-warning btn-round btn-lg">
+                <a th:if="${isLogin}" href="auctionLaunch.html" class="btn btn-warning btn-round btn-lg">
                     发起拍卖
                 </a>
+                <a th:if="${!isLogin}" class="btn btn-warning btn-round btn-lg" onclick="openLoginModal();">发起拍卖</a>
             </div>
 
         </div>
@@ -92,6 +93,7 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <ul th:if="${type == 1}" class="pagination pagination-warning">
+                        <li><a th:href="'auction.html?pageNum=1'">首页</a></li>
                         <li th:if="${pageNum == 1}"><a>上一页</a></li>
                         <li th:if="${pageNum != 1}"><a th:href="'auction.html?pageNum=' + ${pageNum - 1}">上一页</a></li>
                         <li th:if="${pageNum - 2} > 0"><a th:href="'auction.html?pageNum=' + ${pageNum - 2}" th:text="${pageNum - 2}"></a></li>
@@ -101,6 +103,7 @@
                         <li th:if="${pageNum + 2} <= ${pageCount}"><a th:href="'auction.html?pageNum=' + ${pageNum + 2}" th:text="${pageNum + 2}"></a></li>
                         <li th:if="${pageNum != pageCount}"><a th:href="'auction.html?pageNum=' + ${pageNum + 1}">下一页</a></li>
                         <li th:if="${pageNum == pageCount}"><a>下一页</a></li>
+                        <li><a th:href="'auction.html?pageNum=' + ${pageCount}">尾页</a></li>
                     </ul>
                     <ul th:if="${type == 2}" class="pagination pagination-warning">
                         <li th:if="${pageNum == 1}"><a>上一页</a></li>
