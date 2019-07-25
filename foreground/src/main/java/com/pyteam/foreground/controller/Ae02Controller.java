@@ -59,15 +59,27 @@ public class Ae02Controller
 
     @PostMapping("ifaddad03")
     @ResponseBody
-    public int nno(@RequestParam("aac502")String aac502)
+    public int nno(@RequestParam("aac502")String aac502,Model m,HttpServletRequest request,HttpServletResponse response)
     {
+        isLogin = isLogin(request, response);
+        if(isLogin)
+        {
+         m.addAttribute("isLogin",isLogin);
+        }
+        m.addAttribute("isLogin",isLogin);
         int i=ae07Service.state(aac502);
         return i;
     }
 
     @PostMapping("addad03")
-    public String mo(@ModelAttribute("ad03") Ad03 ad03,HttpServletResponse response,HttpServletRequest request)
+    public String mo(@ModelAttribute("ad03") Ad03 ad03,Model m,HttpServletResponse response,HttpServletRequest request)
     {
+        isLogin = isLogin(request, response);
+        if(isLogin)
+        {
+            m.addAttribute("isLogin",isLogin);
+        }
+        m.addAttribute("isLogin",isLogin);
         int i = Integer.parseInt(getCookies(request, "userId"));
         ad03.setAab101(i);
         String aac502=ae02Dto.getAac502();
@@ -91,8 +103,14 @@ public class Ae02Controller
         return "ad01list";
     }
     @PostMapping("helpOrder")
-    public String wie(@RequestParam("aac503") String aac503,@RequestParam("aac502")String aac502, String action)
+    public String wie(@RequestParam("aac503") String aac503,Model m,@RequestParam("aac502")String aac502, String action,HttpServletRequest request,HttpServletResponse response)
     {
+        isLogin = isLogin(request, response);
+        if (isLogin)
+        {
+            m.addAttribute("isLogin",isLogin);
+        }
+        m.addAttribute("isLogin",isLogin);
         if(action.equals("确认订单"))
         {
             System.out.println(aac502);
@@ -100,7 +118,6 @@ public class Ae02Controller
         }
         else if(action.equals("取消接受"))
         {
-
         }
         return "helpOrder";
     }

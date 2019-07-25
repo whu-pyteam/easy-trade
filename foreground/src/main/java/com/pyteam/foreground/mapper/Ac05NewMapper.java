@@ -50,7 +50,7 @@ public interface Ac05NewMapper
 
     //根据接收方查询
 
-    @Select("select aac501,aab101,aac502,aac503,aac504,aac505,aac506,aac507,aac508,aac509,aac510,aac511 from ac05 where aab101=#{aab101}")
+    @Select("select aac501,aab101,aac502,aac503,aac504,aac505,aac506,aac507,aac508,aac509,aac510,aac511 from ac05 where aac503=0 and aab101=#{aab101}")
     List<Ac05> queryByAab101(int aab101);
 
     @Update("update ac05 set aac503=1 where aac502=#{aac502}")
